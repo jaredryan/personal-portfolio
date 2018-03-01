@@ -52,6 +52,10 @@ nav a:hover {
     text-shadow: none;
 }
 
+.seeMore, .aboutEmail {
+    text-decoration: none;
+}
+
 .homepageImg {
     background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("Images/homepageImg.jpg") no-repeat center center;
     filter: blur(8px);
