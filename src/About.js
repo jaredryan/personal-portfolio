@@ -6,7 +6,7 @@ class About extends Component {
     return (
         <div className="aboutPage">
             <div className="aboutBanner">
-                <h1>About <br/> Jared Ryan</h1>
+                <h1>About Me</h1>
                 <div className="aboutPageImg"></div>
             </div>
             <div className="introAndContact">
@@ -24,9 +24,11 @@ class About extends Component {
                         <a href="mailto:jryantennis@gmail.com?subject=Hi, Jared (from the Portfolio Website)" className="aboutEmail"><p><span>Email:</span>jryantennis@gmail.com</p></a>
                         <p><span>Cell:</span>559-348-3595</p>
                         <br/>
-                        <p>To see my projects, go <Link to="/projects">here</Link>.</p>
-                        <p>For my resume, go <Link to="/resume">here</Link>.</p>
-                        <p>Here is my <a href="https://github.com/jaredryan">Github</a> and <a href="https://www.linkedin.com/in/jared-m-ryan/">LinkedIn</a>.</p>
+                        <p>See <Link to="/projects">Projects</Link>.</p>
+                        <p>See <Link to="/resume">Resume</Link>.</p>
+                        <p>See <a href="https://github.com/jaredryan">Github</a>.
+                        </p>
+                        <p>See <a href="https://www.linkedin.com/in/jared-m-ryan/">LinkedIn</a>.</p>
                     </div>
                 </div>
             </div>

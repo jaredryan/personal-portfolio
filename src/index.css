@@ -34,10 +34,26 @@ nav ul {
     font-size: 17px;
 }
 
-nav li {
-    padding: 10px 5px;
+p, li {
+    font-size: 18px;
+    /* font-weight: 300; */
+    font-family: "Montserrat", sans-serif;
+    line-height: 28px;
+}
+
+
+
+.thumbnail a h5 {
+    line-height: 29px;
+}
+
+nav ul a li {
+    padding: 9.5px 12px;
     font-weight: 300;
     letter-spacing: 0.6px;
+    font-size: 17px;
+    font-family: "Muli", serif;
+    line-height: initial;
 }
 
 nav a {
@@ -706,7 +722,7 @@ footer ul li span {
 }
 
 .seeMore {
-    width: 260px;
+    width: 295px;
     margin-left: 20px;
 }
 
@@ -844,8 +860,9 @@ footer ul li span {
 .projectEntry h3 {
     margin-top: 10px;
     margin-bottom: 0px;
-    font-weight: 500;
     font-size: 24px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 300;
 }
 
 .projectEntry h3 a,
@@ -979,12 +996,17 @@ footer a:hover {
     color: grey;
 }
 
+.seeMore * {
+    font-family: "Montserrat", sans-serif;
+}
+
 @media (max-width: 1100px) {
     .gradPic,
     .softwareText,
     .profilePic,
     .seeMore {
         margin: auto;
+        width: 315px;
     }
 
     .softwareText {
@@ -1339,10 +1361,14 @@ footer a:hover {
         zoom: 40%;
     }
 
-    .seeMore {
-        font-size: 14px;
+    .row2 .seeMore {
         width: 210px;
         padding: 0;
+    }
+
+    .seeMore a, .seeMore p {
+        font-size: 18px;
+        line-height: 22px;
     }
 
     .softwareText {
