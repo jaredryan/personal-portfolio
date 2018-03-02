@@ -54,12 +54,14 @@ nav ul a li {
     font-size: 17px;
     font-family: "Muli", serif;
     line-height: initial;
+    text-align: center;
 }
 
 nav a {
     text-decoration: none;
     color: white;
     z-index: 10;
+    width: 25%;
 }
 
 nav a:hover {
@@ -583,21 +585,21 @@ footer ul li span {
     background: url("Images/nature.jpg") no-repeat center center;
     height: 720px;
     width: 960px;
-    zoom: 45%;
+    zoom: 55%;
 }
 
 .aboutPage .swedenPic {
     background: url("Images/sweden.jpg") no-repeat center center;
     height: 1357px;
     width: 2048px;
-    zoom: 20%;
+    zoom: 28%;
 }
 
 .aboutPage .valuesPic {
     background: url("Images/gradFamily.jpg") no-repeat center center;
     height: 640px;
     width: 960px;
-    zoom: 50%;
+    zoom: 60%;
     vertical-align: middle;
 }
 
@@ -877,7 +879,7 @@ footer ul li span {
 
 .projectEntry h5,
 .projectEntry li {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 400;
     font-family: "Montserrat", sans-serif;
 }
@@ -885,7 +887,7 @@ footer ul li span {
 .projectEntry h5 span {
     font-weight: 600;
     font-family: "Montserrat", sans-serif;
-    font-size: 16px;
+    font-size: 18px;
 }
 
 .projectEntry h6 {
@@ -1000,7 +1002,47 @@ footer a:hover {
     font-family: "Montserrat", sans-serif;
 }
 
+.mobile {
+    display: none;
+}
+
+.webResumePage h3 {
+    font-size: 24px;
+    line-height: 34px;
+}
+
+.webResumePage h4 {
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 28px;
+}
+
+.webResumePage h5 {
+    font-size: 18px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 300;
+    margin-top: 8px;
+}
+
+.objective, .education, .coursework, .workExperience {
+    padding-left: 9%;
+    padding-right: 9%;
+}
+
+@media (max-width: 1400px) {
+    .objective, .education, .coursework, .workExperience {
+        padding-left: 8%;
+        padding-right: 8%;
+    }
+}
+
 @media (max-width: 1100px) {
+    .objective, .education, .coursework, .workExperience {
+        padding-left: 7%;
+        padding-right: 7%;
+    }
+
     .gradPic,
     .softwareText,
     .profilePic,
@@ -1058,109 +1100,7 @@ footer a:hover {
     .softwareText {
         text-align: left;
     }
-}
 
-@media (max-width: 1050px) {
-    .aboutPageImg, .aboutBanner {
-        height: 450px;
-    }
-
-    .aboutBanner br {
-        display: block;
-    }
-
-    .aboutBanner h1 {
-        font-size: 90px;
-    }
-
-}
-
-@media (max-width: 950px) {
-    .homepageImg, header {
-        height: 500px;
-    }
-
-    .projectBanner, .projectPageImg {
-        height: 375px;
-    }
-
-    .projectBanner h1 {
-        font-size: 90px;
-    }
-}
-
-@media (max-width: 850px) {
-    .webBanner, .webPageImg {
-        height: 375px;
-    }
-
-    .webBanner h1 {
-        font-size: 85px;
-    }
-}
-
-@media (max-width: 800px) {
-    .homepageText h1 {
-        font-size: 80px;
-    }
-
-    .homepageText h2 {
-        font-size: 40px;
-    }
-
-    .homepageImg, header {
-        height: 450px;
-    }
-
-    .aboutPageImg, .aboutBanner {
-        height: 400px;
-    }
-
-    .aboutBanner h1 {
-        font-size: 80px;
-    }
-}
-
-@media (max-width: 779px) {
-    .resumeChoices {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-gap: 10px;
-    }
-
-    .resumeImg1 {
-        zoom: 71.875%;
-        border: 1px solid black;
-    }
-
-    .resumeImg2 {
-        width: 230px;
-        height: 230px;
-        zoom: 100%;
-        border: 1px solid black;
-        margin: auto;
-    }
-
-    .imageWrapper {
-        width: 230px;
-        height: 230px;
-        margin: auto;
-    }
-
-    .hoverWrapper h1 {
-        font-size: 28px;
-    }
-
-    .projectBanner, .projectPageImg {
-        height: 330px;
-    }
-
-    .projectBanner h1 {
-        font-size: 80px;
-    }
-}
-
-@media (max-width: 750px) {
     .aboutPage .myValues,
     .aboutPage .myInterests,
     .aboutPage .myBackground {
@@ -1234,16 +1174,160 @@ footer a:hover {
     }
 }
 
+@media (max-width: 1050px) {
+    .aboutPageImg, .aboutBanner {
+        height: 450px;
+    }
+
+    .aboutBanner br {
+        display: block;
+    }
+
+    .aboutBanner h1 {
+        font-size: 90px;
+    }
+
+}
+
+@media (max-width: 950px) {
+    .homepageImg, header {
+        height: 500px;
+    }
+
+    .projectBanner, .projectPageImg {
+        height: 375px;
+    }
+
+    .projectBanner h1 {
+        font-size: 90px;
+    }
+}
+
+@media (max-width: 900px) {
+    .objective, .education, .coursework, .workExperience {
+        padding-left: 6%;
+        padding-right: 6%;
+    }
+}
+
+@media (max-width: 850px) {
+    .webBanner, .webPageImg {
+        height: 375px;
+    }
+
+    .webBanner h1 {
+        font-size: 85px;
+    }
+}
+
+@media (max-width: 800px) {
+    .objective, .education, .coursework, .workExperience {
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+
+    .homepageText h1 {
+        font-size: 80px;
+    }
+
+    .homepageText h2 {
+        font-size: 40px;
+    }
+
+    .homepageImg, header {
+        height: 450px;
+    }
+
+    .aboutPageImg, .aboutBanner {
+        height: 400px;
+    }
+
+    .aboutBanner h1 {
+        font-size: 80px;
+    }
+}
+
+@media (max-width: 779px) {
+    .resumeChoices {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 10px;
+    }
+
+    .resumeImg1 {
+        zoom: 71.875%;
+        border: 1px solid black;
+    }
+
+    .resumeImg2 {
+        width: 230px;
+        height: 230px;
+        zoom: 100%;
+        border: 1px solid black;
+        margin: auto;
+    }
+
+    .imageWrapper {
+        width: 230px;
+        height: 230px;
+        margin: auto;
+    }
+
+    .hoverWrapper h1 {
+        font-size: 28px;
+    }
+
+    .projectBanner, .projectPageImg {
+        height: 330px;
+    }
+
+    .projectBanner h1 {
+        font-size: 80px;
+    }
+}
+
+@media (max-width: 750px) {
+    p,
+    li,
+    .projectEntry h5,
+    .projectEntry li,
+    .projectEntry h5 span {
+        font-size: 16px;
+        line-height: 26px;
+    }
+
+    .webResumePage h3 {
+        font-size: 22px;
+        line-height: 32px;
+    }
+
+    .webResumePage h4 {
+        font-size: 18px;
+        margin-top: 9px;
+        line-height: 26px;
+    }
+
+    .webResumePage h5 {
+        font-size: 16px;
+        margin-top: 7px;
+    }
+}
+
 @media (max-width: 700px) {
     .coursework h2 {
         width: 100%;
     }
-}
 
-@media (max-width: 655px) {
-    .resumeChoices {
-        grid-template-columns: 1fr;
-        grid-template-rows: repeat(auto, 2);
+    .aboutPage .swedenPic {
+        zoom: 20%;
+    }
+
+    .aboutPage .valuesPic {
+        zoom: 50%;
+    }
+
+    .aboutPage .naturePic {
+        zoom: 45%;
     }
 }
 
@@ -1279,6 +1363,13 @@ footer a:hover {
     .webBanner .downloadButton button {
         font-size: 22px;
         height: 38px;
+    }
+}
+
+@media (max-width: 655px) {
+    .resumeChoices {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(auto, 2);
     }
 }
 
@@ -1340,14 +1431,6 @@ footer a:hover {
         font-size: 20px;
         height: 35px;
     }
-}
-
-@media (max-width: 550px) {
-    nav ul {
-        justify-content: space-between;
-        margin-left: 10px;
-        margin-right: 10px;
-    }
 
     .row1,
     .row2 {
@@ -1366,9 +1449,12 @@ footer a:hover {
         padding: 0;
     }
 
-    .seeMore a, .seeMore p {
-        font-size: 18px;
-        line-height: 22px;
+    .mobile {
+        display: block;
+    }
+
+    .seeMore .gapEmailAndCell {
+        margin-top: 10px;
     }
 
     .softwareText {
@@ -1400,6 +1486,11 @@ footer a:hover {
 
     .projectImage {
         zoom: 30%;
+    }
+
+    p, li {
+        font-size: 16px;
+        line-height: 22px;
     }
 }
 

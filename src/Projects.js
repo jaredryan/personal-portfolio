@@ -7,7 +7,7 @@ class Projects extends Component {
           {
               title: "Fishackathon",
               subtitle: "First hackathon experience",
-              description: ["Full-stack CRUD application for adding and searching information on freshwater bodies of water through an API (which has since been shut down...)", "Secure user sign-up and login functionality", "Fully responsive for screens of all sizes", "Won local competition in Salt Lake City on Feb 10, 2018, currently awaiting results in the global competition"],
+              description: ["Full-stack CRUD application for adding and searching information on freshwater bodies of water through an API (which has since been shut down)", "Secure user sign-up and login functionality", "Fully responsive for screens of all sizes", "Won local competition in Salt Lake City on Feb 10, 2018, currently awaiting results in the global competition"],
               demo: "https://freshwaterfeed.herokuapp.com/",
               github: "https://github.com/jaredryan/fishackathon-slc-11",
               tech: ["Ruby on Rails", 'JavaScript', 'HTML', 'CSS'],

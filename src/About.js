@@ -21,7 +21,8 @@ class About extends Component {
                     <div className="profilePic"></div>
                     <div className="seeMore">
                         <h3>Contact Me!</h3>
-                        <a href="mailto:jryantennis@gmail.com?subject=Hi, Jared (from the Portfolio Website)" className="aboutEmail"><p><span>Email:</span>jryantennis@gmail.com</p></a>
+                        <a href="mailto:jryantennis@gmail.com?subject=Hi, Jared (from the Portfolio Website)" className="aboutEmail"><p><span>Email:</span><br className="mobile"/>jryantennis@gmail.com</p></a>
+                        <div className="gapEmailAndCell"></div>
                         <p><span>Cell:</span>559-348-3595</p>
                         <br/>
                         <p>See <Link to="/projects">Projects</Link>.</p>
