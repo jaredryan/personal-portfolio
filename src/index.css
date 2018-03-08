@@ -1,3 +1,86 @@
+#pokemon1 {
+    background-image: url("Images/pokemon1.png");
+}
+
+#pokemon2 {
+    background-image: url("Images/pokemon2.png");
+}
+
+#pokemon3 {
+    background-image: url("Images/pokemon3.png");
+}
+
+#fishackathon1 {
+    background-image: url("Images/fishackathon1.png");
+}
+
+#fishackathon2 {
+    background-image: url("Images/fishackathon2.png");
+}
+
+#openHouse1 {
+    background-image: url("Images/openHouse1.png");
+}
+
+#openHouse2 {
+    background-image: url("Images/openHouse2.png");
+}
+
+#openHouse3 {
+    background-image: url("Images/openHouse3.png");
+}
+
+#movieRecs1 {
+    background-image: url("Images/movieRecs1.png");
+}
+
+#movieRecs2 {
+    background-image: url("Images/movieRecs2.png");
+}
+
+#movieRecs3 {
+    background-image: url("Images/movieRecs3.png");
+}
+
+#kandj1 {
+    background-image: url("Images/kandj1.png");
+}
+
+#kandj2 {
+    background-image: url("Images/kandj2.png");
+}
+
+#kandj3 {
+    background-image: url("Images/kandj3.png");
+}
+
+#techJobPrep1 {
+    background-image: url("Images/techJobPrep1.png");
+}
+
+#marioPest1 {
+    background-image: url("Images/marioPest1.png");
+}
+
+#quiz1 {
+    background-image: url("Images/quiz1.png");
+}
+
+.projectsPage > h2 {
+    font-size: 55px;
+    text-align: center;
+    margin: 0;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    border-bottom: 2px solid black;
+    border-top: 2px solid black;
+    font-weight: 300;
+}
+
+.projectsPage .webDevHeader {
+    background-color: rgb(210, 210, 225);
+}
+
 * {
     box-sizing: border-box;
     font-family: "Muli", serif;
@@ -910,62 +993,6 @@ footer ul li span {
 .projectEntry:hover h6 {
     font-weight: bold;
     transition-duration: 100ms;
-}
-
-#pokemon1 {
-    background-image: url("Images/pokemon1.png");
-}
-
-#pokemon2 {
-    background-image: url("Images/pokemon2.png");
-}
-
-#pokemon3 {
-    background-image: url("Images/pokemon3.png");
-}
-
-#fishackathon1 {
-    background-image: url("Images/fishackathon1.png");
-}
-
-#fishackathon2 {
-    background-image: url("Images/fishackathon2.png");
-}
-
-#openHouse1 {
-    background-image: url("Images/openHouse1.png");
-}
-
-#openHouse2 {
-    background-image: url("Images/openHouse2.png");
-}
-
-#openHouse3 {
-    background-image: url("Images/openHouse3.png");
-}
-
-#movieRecs1 {
-    background-image: url("Images/movieRecs1.png");
-}
-
-#movieRecs2 {
-    background-image: url("Images/movieRecs2.png");
-}
-
-#movieRecs3 {
-    background-image: url("Images/movieRecs3.png");
-}
-
-#kandj1 {
-    background-image: url("Images/kandj1.png");
-}
-
-#kandj2 {
-    background-image: url("Images/kandj2.png");
-}
-
-#kandj3 {
-    background-image: url("Images/kandj3.png");
 }
 
 .projectImageContainer {

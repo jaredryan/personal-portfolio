@@ -19,7 +19,7 @@ const Project = props => {
                     <ul>
                         {props.descriptionList}
                     </ul>
-                    <h5><span>Technologies:</span> {props.techList}</h5>
+                    {props.techList && <h5><span>Technologies:</span> {props.techList}</h5>}
                     <div className="projectImages">
                         {props.imageList}
                     </div>

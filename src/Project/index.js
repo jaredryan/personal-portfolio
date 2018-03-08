@@ -23,23 +23,23 @@ class ProjectContainer extends Component {
         }
     }
 
-    render(){
+    render(){        
         const style = {
-            backgroundColor: this.props.index % 2 === 0
-                                ? "rgb(210, 210, 225)"
-                                : "white"
+            backgroundColor: (this.props.index + this.props.modifier) % 2 === 0
+                                ? "white"
+                                : "rgb(210, 210, 225)"
         }
 
         const descriptionList = this.props.description.map((bullet, index) => {
             return <li key={index + bullet}>{bullet}</li>;
         });
 
-        let techList = this.props.tech.reduce((total, elem) => {
+        let techList = this.props.tech && this.props.tech.reduce((total, elem) => {
             return total + elem + ", ";
         }, "");
         techList = techList.slice(0, techList.length - 2)
 
-        const imageList = this.props.pictures.map((image, index) => {
+        const imageList = this.props.pictures && this.props.pictures.map((image, index) => {
             return <ProjectImage
                         id={image.id}
                         caption={image.caption}

@@ -1,8 +1,8 @@
 {
-  "main.css": "static/css/main.50b7e1a9.css",
-  "main.css.map": "static/css/main.50b7e1a9.css.map",
-  "main.js": "static/js/main.6a2d639e.js",
-  "main.js.map": "static/js/main.6a2d639e.js.map",
+  "main.css": "static/css/main.9a3fde6f.css",
+  "main.css.map": "static/css/main.9a3fde6f.css.map",
+  "main.js": "static/js/main.2962a367.js",
+  "main.js.map": "static/js/main.2962a367.js.map",
   "static/media/aboutMeBackground.jpg": "static/media/aboutMeBackground.21c1f962.jpg",
   "static/media/aboutMeIcon.jpg": "static/media/aboutMeIcon.f5b1e29a.jpg",
   "static/media/fishackathon1.png": "static/media/fishackathon1.c21c4d8d.png",
@@ -13,6 +13,7 @@
   "static/media/kandj1.png": "static/media/kandj1.618509a8.png",
   "static/media/kandj2.png": "static/media/kandj2.5dc27e6e.png",
   "static/media/kandj3.png": "static/media/kandj3.c4666959.png",
+  "static/media/marioPest1.png": "static/media/marioPest1.d8a307ee.png",
   "static/media/movieRecs1.png": "static/media/movieRecs1.4148dd2c.png",
   "static/media/movieRecs2.png": "static/media/movieRecs2.7563fb1c.png",
   "static/media/movieRecs3.png": "static/media/movieRecs3.4c628d53.png",
@@ -25,7 +26,9 @@
   "static/media/pokemon3.png": "static/media/pokemon3.9db436e9.png",
   "static/media/profilePic.jpg": "static/media/profilePic.d2f56143.jpg",
   "static/media/projectsBackgroundImg.jpg": "static/media/projectsBackgroundImg.8a3df6e8.jpg",
+  "static/media/quiz1.png": "static/media/quiz1.c1a896c7.png",
   "static/media/resumeBackground.jpeg": "static/media/resumeBackground.56a0e840.jpeg",
   "static/media/resumeHomeIcon.png": "static/media/resumeHomeIcon.85f26847.png",
-  "static/media/sweden.jpg": "static/media/sweden.5f39fd0c.jpg"
+  "static/media/sweden.jpg": "static/media/sweden.5f39fd0c.jpg",
+  "static/media/techJobPrep1.png": "static/media/techJobPrep1.0d9e0c50.png"
 }
