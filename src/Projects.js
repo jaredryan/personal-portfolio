@@ -70,7 +70,30 @@ class Projects extends Component {
                       id: "openHouse3"
                   }
               ]
-          },{
+          },
+          {
+              title: "Design Replication",
+              subtitle: "Practice mimicking a site's design without copying code",
+              description: ["Original site for reference: http://kandjdiaries.com/", "Crash-course in how to make a well-designed website", "Without accessing the website's code, the experience was similar to that of making a website from mockups", "Fully responsive for all screen sizes", "Learned how to use font awesome for icons"],
+              demo: "https://jaredryan.github.io/site-replication/",
+              github: "https://github.com/jaredryan/site-replication",
+              tech: ['HTML', 'CSS'],
+              pictures: [
+                  {
+                      caption: "Blog Title",
+                      id: "kandj1"
+                  },
+                  {
+                      caption: "Blog Entry",
+                      id: "kandj2"
+                  },
+                  {
+                      caption: "Footer",
+                      id: "kandj3"
+                  }
+              ]
+          },
+          {
               title: "MovieRecs",
               subtitle: "First website made for fun",
               description: ["Performs a movie search using public APIs", "Interface allows user to create and edit a recommendation list as desired"],

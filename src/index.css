@@ -956,6 +956,18 @@ footer ul li span {
     background-image: url("Images/movieRecs3.png");
 }
 
+#kandj1 {
+    background-image: url("Images/kandj1.png");
+}
+
+#kandj2 {
+    background-image: url("Images/kandj2.png");
+}
+
+#kandj3 {
+    background-image: url("Images/kandj3.png");
+}
+
 .projectImageContainer {
     margin: auto;
     margin-top: 15px;
