@@ -158,7 +158,7 @@ class Projects extends Component {
               ]
           },
       ];
-      
+
       // Add software projects
       const softwareProjects = [
           {
@@ -193,10 +193,10 @@ class Projects extends Component {
                       modifier={0}
                  />
       });
-      
-      const modifier = (webProjects.length + 1) % 2;
-      const styleHeader = {backgroundColor: modifier === 0 ? "rgb(210, 210, 225)" : "white"};
-      
+
+      // const modifier = (webProjects.length + 1) % 2;
+      // const styleHeader = {backgroundColor: modifier === 0 ? "rgb(210, 210, 225)" : "white"};
+
       const mappedSoftwareProjects = softwareProjects.map((project, index) => {
           return <Project
                       title={project.title}
@@ -208,7 +208,7 @@ class Projects extends Component {
                       pictures={project.pictures}
                       key={project.title + index}
                       index={index}
-                      modifier={modifier}
+                      modifier={0}
                  />
       });
 
@@ -218,11 +218,11 @@ class Projects extends Component {
                 <h1>Projects</h1>
                 <div className="projectPageImg"></div>
             </div>
-            <h2 className="webDevHeader">Websites</h2>
+            <h2 className="devHeader">Websites</h2>
             <div className="projectsDiv">
                 {mappedWebProjects}
             </div>
-            <h2 style={styleHeader}>Software Development</h2>
+            <h2 className="devHeader">Software Development</h2>
             <div className="projectsDiv">
                 {mappedSoftwareProjects}
             </div>

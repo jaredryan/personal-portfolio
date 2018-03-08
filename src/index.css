@@ -70,15 +70,13 @@
     font-size: 55px;
     text-align: center;
     margin: 0;
-    padding-top: 50px;
-    padding-bottom: 50px;
-    border-bottom: 2px solid black;
-    border-top: 2px solid black;
-    font-weight: 300;
-}
-
-.projectsPage .webDevHeader {
-    background-color: rgb(210, 210, 225);
+    padding-top: 30px;
+    padding-bottom: 30px;
+    font-weight: 500;
+    background-color: rgb(208,157,85);
+    color: rgb(16,23,40);
+    /* border-top: 1px solid black;
+    border-bottom: 1px solid black; */
 }
 
 * {
@@ -90,7 +88,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  background-color: black;
+  background-color: rgb(46,53,70);
 }
 
 nav {
@@ -99,7 +97,7 @@ nav {
 }
 
 .overlay {
-    background-color: black;
+    background-color: rgb(46,53,70);
     opacity: 0.75;
     width: 100%;
     height: 40px;
@@ -128,6 +126,7 @@ p, li {
 
 .thumbnail a h5 {
     line-height: 29px;
+    color: rgb(46,53,70);
 }
 
 nav ul a li {
@@ -158,8 +157,8 @@ nav a:hover {
 }
 
 .homepageImg {
-    background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("Images/homepageImg.jpg") no-repeat center center;
-    filter: blur(8px);
+    background: linear-gradient(rgba(20,41,92, 0.3), rgba(20,41,92, 0.3)), url("Images/homepageImg.jpg") no-repeat center center;
+    /* filter: blur(8px); */
     z-index: 0;
     background-size: cover;
     height: 100%;
@@ -203,7 +202,7 @@ header h2 {
 
 footer {
     height: 105px;
-    background-color: black;
+    background-color: rgb(46,53,70);
     color: white;
     position: relative;
     padding-top: 1px;
@@ -282,7 +281,7 @@ footer ul li span {
 
 .threeThumbnails {
     margin-top: 0;
-    background-color: rgb(210, 210, 225);
+    background-color: white;
     margin-bottom: 0;
     padding: 0px 20px;
     display: flex;
@@ -307,6 +306,8 @@ footer ul li span {
 .threeThumbnails h3 {
     font-size: 38px;
     margin-bottom: 5px;
+    color: rgb(112,53,41);
+    font-weight: 400;
 }
 
 .thumbnail {
@@ -315,7 +316,7 @@ footer ul li span {
 }
 
 .thumbnail:hover {
-    background-color: white;
+    background-color: rgb(224, 221, 213);
     cursor: pointer;
     transition-duration: 500ms;
 }
@@ -373,7 +374,7 @@ footer ul li span {
 
 .aboutPage,
 .projectsPage {
-    background-color: rgb(210, 210, 225);
+    background-color: rgb(224, 221, 213);
     color: black;
     margin-top: 0;
     padding: 20px 30px;
@@ -391,7 +392,7 @@ footer ul li span {
     background-color: transparent;
     bottom: 50px;
     margin-bottom: -50px;
-    background-color: black;
+    background-color: rgb(46,53,70);
 }
 
 .webBanner h1 {
@@ -411,20 +412,19 @@ footer ul li span {
 }
 
 .webBanner .downloadButton button {
-    background-color: black;
-    opacity: 0.2;
+    background-color: rgb(224,221,213);
+    opacity: 0.7;
     border-radius: 0px;
-    color: white;
+    color: rgb(112,53,41);
     font-weight: 300;
     font-size: 25px;
     height: 40px;
 }
 
 .webBanner .downloadButton button:hover {
-    background-color: white;
-    opacity: 0.2;
-    color: black;
-    font-weight: 300;
+    background-color: rgb(100,50,30);
+    color: rgb(224,221,213);
+    font-weight: 200;
 }
 
 .objective, .skills, .education, .coursework, .workExperience {
@@ -438,9 +438,9 @@ footer ul li span {
 }
 
 .webPageImg {
-    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("Images/resumeBackground.jpeg") no-repeat center center;
+    background: linear-gradient(rgba(20,41,92, 0.3), rgba(20,41,92, 0.3)), url("Images/resumeBackground.jpeg") no-repeat center center;
     background-size: cover;
-    filter: blur(5px);
+    /* filter: blur(5px); */
     z-index: 0;
     height: 100%;
     width: 100%;
@@ -450,7 +450,7 @@ footer ul li span {
 }
 
 .webResumePage {
-    background-color: rgb(210, 210, 225);
+    background-color: rgb(224, 221, 213);
     color: black;
     margin: 0;
     padding: 0;
@@ -460,13 +460,14 @@ footer ul li span {
     text-align: center;
     margin-top: 0;
     font-size: 30px;
-    color: black;
+    color: rgb(112,53,41);
     font-weight: 800;
     border-bottom: 1px solid grey;
     width: 350px;
     margin: 0 auto;
     margin-bottom: 30px;
     padding-bottom: 5px;
+    font-weight: 400;
 }
 
 .skillsGrid div {
@@ -491,10 +492,12 @@ footer ul li span {
 .webResumePage h3, .webResumePage h4, .webResumePage h5 {
     margin-top: 5px;
     margin-bottom: 5px;
+    color: rgb(40,61,112)
 }
 
 .webResumePage h4 {
     font-weight: 600;
+    color: rgb(46,53,70);
 }
 
 .workExperience .work1,
@@ -525,22 +528,22 @@ footer ul li span {
     padding: 1px;
     margin-bottom: 0px;
     font-size: 30px;
-    color: black;
+    color: rgb(46,53,70);
     font-weight: 700;
 
 }
 
 .webResumePage button:hover {
     cursor: pointer;
-    background-color: rgb(60, 60, 60);
-    color: white;
-    border: 2px solid white;
+    background-color: rgb(112,53,41);
+    color: rgb(224,221,213);
+    border: 2px solid rgb(224,221,213);
     padding: 0px;
     font-weight: 600;
 }
 
 .resumePage {
-    background-color: rgb(210, 210, 225);
+    background-color: rgb(224, 221, 213);
     color: black;
     margin-top: 0;
     padding: 20px 30px;
@@ -736,7 +739,7 @@ footer ul li span {
 
 .aboutPage .myInterests,
 .aboutPage .myValues {
-    background-color: rgb(210, 210, 225);
+    background-color: rgb(224, 221, 213);
 }
 
 .aboutPage .myBackground > div, .aboutPage .myInterests > div,
@@ -813,16 +816,24 @@ footer ul li span {
 
 .softwareText h3, .seeMore h3 {
     margin-top: 0;
+    font-family: "Muli", sans-serif;
+}
+
+.aboutPage h3 {
+    color: rgb(112,53,41);
+    font-weight: 400;
+}
+
+.aboutPage * {
+    color: rgb(46,53,70);
 }
 
 
 
-
-
 .aboutPageImg {
-    background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("Images/aboutMeBackground.jpg") no-repeat center center;
+    background: linear-gradient(rgba(40,61,112, 0.3), rgba(40,61,112, 0.3)), url("Images/aboutMeBackground.jpg") no-repeat center center;
     background-size: cover;
-    filter: blur(6px);
+    /* filter: blur(6px); */
     z-index: 0;
     height: 100%;
     width: 100%;
@@ -838,24 +849,26 @@ footer ul li span {
     height: 500px;
     margin-top: -40px;
     display: flex;
-    background-color: black;
+    background-color: rgb(46,53,70);
     bottom: 20px;
     margin-bottom: -30px;
 }
 
-.aboutBanner h1 {
+.aboutBanner > h1 {
     z-index: 1;
     font-size: 100px;
     margin: 0px;
     text-align: center;
     font-weight: 700;
     text-shadow: 2px 2px black;
+    color: white;
+    /* font-weight: 300; */
 }
 
 .projectPageImg {
-    background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url("Images/projectsBackgroundImg.jpg") no-repeat center center;
+    background: linear-gradient(rgba(20,41,92, 0.4), rgba(20,41,92, 0.4)), url("Images/projectsBackgroundImg.jpg") no-repeat center center;
     background-size: cover;
-    filter: blur(6px);
+    /* filter: blur(6px); */
     z-index: 0;
     height: 100%;
     width: 100%;
@@ -876,7 +889,7 @@ footer ul li span {
     background-color: transparent;
     bottom: 20px;
     margin-bottom: -20px;
-    background-color: black;
+    background-color: rgb(46,53,70);
 }
 
 .projectBanner h1 {
@@ -915,8 +928,9 @@ footer ul li span {
 
 .projectEntry h2 a {
     padding: 5px 10px;
-    color: black;
     text-decoration: none;
+    color: rgb(112,53,41);
+    font-weight: 400;
 }
 
 .projectEntry h2 a:hover span,
@@ -924,22 +938,17 @@ footer ul li span {
     text-decoration: underline;
 }
 
-.projectEntry h2 a {
-    padding: 5px 10px;
-    color: black;
-    text-decoration: none;
-}
-
 .projectEntry h3 a {
-    color: black;
+    color: rgb(46,53,70);
     text-decoration: none;
 }
 
 .projectEntry h2 {
-    font-weight: 800;
     margin-top: 0px;
     margin-bottom: 0px;
     font-size: 30px;
+    color: rgb(112,53,41);
+    font-weight: 400;
 }
 
 .projectEntry h3 {
@@ -948,6 +957,7 @@ footer ul li span {
     font-size: 24px;
     font-family: "Montserrat", sans-serif;
     font-weight: 300;
+    color: rgb(46,53,70);
 }
 
 .projectEntry h3 a,
@@ -971,6 +981,7 @@ footer ul li span {
     font-weight: 600;
     font-family: "Montserrat", sans-serif;
     font-size: 18px;
+    color: rgb(40,61,112);
 }
 
 .projectEntry h6 {
@@ -1108,7 +1119,7 @@ footer a:hover {
 
     .profilePic {
         grid-area: p;
-        background-color: rgb(210, 210, 225);
+        background-color: rgb(224, 221, 213);
     }
 
     .softwareText, .seeMore {
@@ -1131,7 +1142,7 @@ footer a:hover {
     .row2 {
         grid-area: r2;
         width: 100%;
-        background-color: rgb(210, 210, 225);
+        background-color: rgb(224, 221, 213);
         display: grid;
         grid-template-columns: 1fr 2fr 2fr 1fr;
         grid-template-areas:

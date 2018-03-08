@@ -23,11 +23,11 @@ class ProjectContainer extends Component {
         }
     }
 
-    render(){        
+    render(){
         const style = {
             backgroundColor: (this.props.index + this.props.modifier) % 2 === 0
                                 ? "white"
-                                : "rgb(210, 210, 225)"
+                                : "rgb(224, 221, 213)"
         }
 
         const descriptionList = this.props.description.map((bullet, index) => {
