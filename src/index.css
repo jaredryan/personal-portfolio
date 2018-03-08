@@ -912,6 +912,18 @@ footer ul li span {
     transition-duration: 100ms;
 }
 
+#pokemon1 {
+    background-image: url("Images/pokemon1.png");
+}
+
+#pokemon2 {
+    background-image: url("Images/pokemon2.png");
+}
+
+#pokemon3 {
+    background-image: url("Images/pokemon3.png");
+}
+
 #fishackathon1 {
     background-image: url("Images/fishackathon1.png");
 }

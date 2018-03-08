@@ -5,6 +5,28 @@ class Projects extends Component {
   render() {
       const projects = [
           {
+              title: "Pokemon Team Builder",
+              subtitle: "React app done with redux and api integration",
+              description: ["Performs search on a Pokémon-based API using the Axios and Thunk packages", "Stores two lists, two slots, and search results using Redux", "Local state used for JavaScript manipulation", "Use of router and switch to change between pages and parts of the page", "Fully responsive for screens of all sizes"],
+              demo: "https://buildpokemonteam.herokuapp.com/",
+              github: "https://github.com/jaredryan/pokemon-team-builder",
+              tech: ["React", 'JavaScript', 'JSX', 'CSS'],
+              pictures: [
+                  {
+                      caption: "Home Page",
+                      id: "pokemon1"
+                  },
+                  {
+                      caption: "Pokédex Page",
+                      id: "pokemon2"
+                  },
+                  {
+                      caption: "Slots and Lists",
+                      id: "pokemon3"
+                  }
+              ]
+          },
+          {
               title: "Fishackathon",
               subtitle: "First hackathon experience",
               description: ["Full-stack CRUD application for adding and searching information on freshwater bodies of water through an API (which has since been shut down)", "Secure user sign-up and login functionality", "Fully responsive for screens of all sizes", "Won local competition in Salt Lake City on Feb 10, 2018, currently awaiting results in the global competition"],
