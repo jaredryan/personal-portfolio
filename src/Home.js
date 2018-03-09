@@ -7,15 +7,18 @@ class Home extends Component {
           {
               name: "Projects",
               description: "Check out a comprehensive list of my projects.",
-              path: "/projects"
+              path: "/projects",
+              imgURL: require("./Images/homepageProjects.png")
           },{
               name: "About",
               description: "Click here to learn more about what I'm like.",
-              path: "/about"
+              path: "/about",
+              imgURL: require("./Images/aboutMeIcon.jpg")
           },{
               name: "Resume",
               description: "See my qualifications in a simple or fun format.",
-              path: "/resume"
+              path: "/resume",
+              imgURL: require("./Images/resumeHomeIcon.png")
           }
       ];
 

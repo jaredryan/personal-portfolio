@@ -3,10 +3,14 @@ import { Link } from 'react-router-dom';
 
 class Thumbnail extends Component {
     render(){
+        console.log(this.props.imgURL);
+        // const imageUrl = require(this.props.imgUrl)
         return(
-            <div className="thumbnail" id={this.props.id}>
+            <div className="thumbnail">
                 <Link to={this.props.path}>
-                    <div className="thumbnailImg"></div>
+                    <div className="thumbnailImg">
+                        <img src={this.props.imgURL} alt=""/>
+                    </div>
                     <h3>{this.props.name}</h3>
                     <h5>{this.props.description}</h5>
                 </Link>
