@@ -582,7 +582,6 @@ footer ul li span {
     color: rgb(46,53,70);
     font-weight: 700;
     background-color: white;
-
 }
 
 .webResumePage button:hover {
@@ -716,39 +715,48 @@ footer ul li span {
 }
 
 .aboutPage .profilePic {
-    background: url("Images/profilePic.jpg") no-repeat center center;
-    height: 399px;
-    width: 239px;
-    zoom: 60%;
+    height: 240px;
+    width: 143.4px;
+}
+
+.aboutPage .profilePic img {
+    height: 240px;
+    width: 143.4px;
 }
 
 .aboutPage .gradPic {
-    background: url("Images/graduation.jpg") no-repeat center center;
-    height: 960px;
-    width: 641px;
-    zoom: 25%;
+    height: 240px;
+    width: 160.25px;
 }
 
-.aboutPage .naturePic {
-    background: url("Images/nature.jpg") no-repeat center center;
-    height: 720px;
-    width: 960px;
-    zoom: 55%;
+.aboutPage .gradPic img {
+    height: 240px;
+    width: 160.25px;
 }
 
-.aboutPage .swedenPic {
-    background: url("Images/sweden.jpg") no-repeat center center;
-    height: 1357px;
-    width: 2048px;
-    zoom: 28%;
+.aboutPage .naturePic,
+.aboutPage .naturePic img {
+    height: 396px;
+    width: 528px;
+    text-align: center;
+    margin: auto;
 }
 
-.aboutPage .valuesPic {
-    background: url("Images/gradFamily.jpg") no-repeat center center;
-    height: 640px;
-    width: 960px;
-    zoom: 60%;
+.aboutPage .swedenPic,
+.aboutPage .swedenPic img {
+    height: 379.96px;
+    width: 573.44px;
+    text-align: center;
+    margin: auto;
+}
+
+.aboutPage .valuesPic,
+.aboutPage .valuesPic img {
+    height: 384px;
+    width: 576px;
     vertical-align: middle;
+    margin: auto;
+    text-align: center;
 }
 
 .aboutPage h1 {
@@ -759,10 +767,6 @@ footer ul li span {
 
 .aboutPage .intro {
     vertical-align: top;
-}
-
-.gradPic, .softwareSection p {
-
 }
 
 .seeMore span {
@@ -1207,6 +1211,40 @@ footer a:hover {
     }
 }
 
+@media (max-width: 1300px) {
+    .aboutPage .valuesPic,
+    .aboutPage .valuesPic img {
+        height: 345.6px;
+        width: 518.4px;
+    }
+
+    .aboutPage .swedenPic,
+    .aboutPage .swedenPic img {
+        height: 341.964px;
+        width: 516.096px;
+    }
+}
+
+@media (max-width: 1150px) {
+    .aboutPage .valuesPic,
+    .aboutPage .valuesPic img {
+        height: 307.2px;
+        width: 460.8px;
+    }
+
+    .aboutPage .naturePic,
+    .aboutPage .naturePic img {
+        height: 344.52px;
+        width: 459.36px;
+    }
+
+    .aboutPage .swedenPic,
+    .aboutPage .swedenPic img {
+        height: 303.968px;
+        width: 458.752px;
+    }
+}
+
 @media (max-width: 1100px) {
     .objective, .education, .coursework, .workExperience {
         padding-left: 7%;
@@ -1293,14 +1331,6 @@ footer a:hover {
         margin: 0;
         padding-left: 10px;
         padding-right: 10px;
-    }
-
-    .valuesPic {
-        grid-area: vp;
-    }
-
-    .valuesText {
-        grid-area: vt;
     }
 
     .valuesPic {
@@ -1506,16 +1536,22 @@ footer a:hover {
         width: 100%;
     }
 
-    .aboutPage .swedenPic {
-        zoom: 20%;
+    .aboutPage .swedenPic,
+    .aboutPage .swedenPic img {
+        height: 271.4px;
+        width: 409.6px;
     }
 
-    .aboutPage .valuesPic {
-        zoom: 50%;
+    .aboutPage .valuesPic,
+    .aboutPage .valuesPic img {
+        height: 320px;
+        width: 480px;
     }
 
-    .aboutPage .naturePic {
-        zoom: 45%;
+    .aboutPage .naturePic,
+    .aboutPage .naturePic img {
+        height: 324px;
+        width: 432px;
     }
 }
 
@@ -1631,8 +1667,10 @@ footer a:hover {
             justify-content: space-around;
     }
 
-    .aboutPage .row2 .profilePic {
-        zoom: 40%;
+    .aboutPage .profilePic,
+    .aboutPage .profilePic img {
+        height: 159.6px;
+        width: 95.6px;
     }
 
     .row2 .seeMore {
@@ -1681,16 +1719,22 @@ footer a:hover {
 }
 
 @media (max-width: 530px) {
-    .aboutPage .swedenPic {
-        zoom: 19%;
+    .aboutPage .swedenPic,
+    .aboutPage .swedenPic img {
+        height: 225.283px;
+        width: 340px;
     }
 
-    .aboutPage .myBackground .naturePic {
-        zoom: 40%;
+    .aboutPage .naturePic,
+    .aboutPage .naturePic img {
+        height: 255px;
+        width: 340px;
     }
 
-    .aboutPage .valuesPic {
-        zoom: 40%;
+    .aboutPage .valuesPic,
+    .aboutPage .valuesPic img {
+        height: 227px;
+        width: 340px;
     }
 }
 

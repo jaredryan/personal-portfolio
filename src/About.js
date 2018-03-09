@@ -11,14 +11,18 @@ class About extends Component {
             </div>
             <div className="introAndContact">
                 <div className="row1">
-                    <div className="gradPic"></div>
+                    <div className="gradPic">
+                        <img src={require("./Images/graduation.jpg")} alt=""/>
+                    </div>
                     <div className="softwareText">
                         <h3>Why Software?</h3>
                         <p>I discovered my love for computer science midway through my bachelor’s degree as a Bioengineering student at UC Berkeley. To me, it feels like solving a logic puzzle with the resources of a computer, and I absolutely love it. The discovery of computer science reinvigorated my studies, and consequently, I decided to focus my electives on it. Now, I am pursuing a career in it.</p>
                     </div>
                 </div>
                 <div className="row2">
-                    <div className="profilePic"></div>
+                    <div className="profilePic">
+                        <img src={require("./Images/profilePic.jpg")} alt=""/>
+                    </div>
                     <div className="seeMore">
                         <h3>Contact Me!</h3>
                         <a href="mailto:jryantennis@gmail.com?subject=Hi, Jared (from the Portfolio Website)" className="aboutEmail"><p><span>Email:</span><br className="mobile"/>jryantennis@gmail.com</p></a>
@@ -35,7 +39,9 @@ class About extends Component {
             </div>
 
             <div className="myValues">
-                <div className="valuesPic"></div>
+                <div className="valuesPic">
+                    <img src={require("./Images/gradFamily.jpg")} alt=""/>
+                </div>
                 <div className="valuesText">
                     <h3>My Values</h3>
 
@@ -59,11 +65,15 @@ class About extends Component {
                     <p>At this point as a recent college graduate, I've been programming for a couple hours every day for the past two years, and that has intensified in the past 8 months once I decided that software is what I wanted to do for a living.</p>
                 </div>
 
-                <div className="naturePic"></div>
+                <div className="naturePic">
+                    <img src={require("./Images/nature.jpg")} alt=""/>
+                </div>
             </div>
 
             <div className="myInterests">
-                <div className="swedenPic"></div>
+                <div className="swedenPic">
+                    <img src={require("./Images/sweden.jpg")} alt=""/>
+                </div>
                 <div className="interestsText">
                     <h3>My Interests</h3>
                     <p>Growing up, I've been a very competitive person. I love games of all kinds: enjoy sports, video games, and board games. I'll take anyone on in a game of tennis, basketball, ping pong, Super Smash Bros., or Mario Kart. And I'll rarely turn down the chance to play any good board game with friends.</p>
