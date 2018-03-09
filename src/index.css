@@ -224,25 +224,42 @@ footer {
     padding-top: 1px;
 }
 
-footer legend {
+.border1 {
+    grid-area: s1;
+}
+
+.border2 {
+    grid-area: s2;
+}
+
+.border1, .border2 {
+    border-top: 1px solid white;
+    margin-top: 12.8px;
+}
+
+.footerGrid {
+    display: grid;
+    grid-template-columns: 1fr 210px 1fr;
+    grid-template-areas:
+        "s1 m s2";
+}
+
+footer h3 {
     text-align: center;
     padding-top: 0px;
-    margin-bottom: 0px;
+    margin-bottom: 15px;
     margin-top: 0;
     font-weight: bolder;
     letter-spacing: 0.7px;
     font-size: 20px;
-    border-left: none;
-    border-right: none;
-    border-bottom: none;
     padding-right: 17px;
     padding-left: 17px;
+    width: 210px;
+    grid-area: m;
+
 }
 
-footer fieldset {
-    border-left: none;
-    border-right: none;
-    border-bottom: none;
+footer > div {
     margin-top: 10px;
 }
 
