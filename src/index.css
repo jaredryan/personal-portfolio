@@ -81,7 +81,8 @@
 }
 
 * {
-    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
     font-family: "Muli", serif;
 }
 
@@ -109,8 +110,12 @@ nav {
 
 nav ul {
     list-style: none;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: space-evenly;
+    -webkit-box-pack: space-evenly;
+        -ms-flex-pack: space-evenly;
+            justify-content: space-evenly;
     margin: 0 0;
     padding: 0;
     font-size: 17px;
@@ -158,6 +163,7 @@ nav a:hover {
 }
 
 .homepageImg {
+    background: -webkit-gradient(linear, left top, left bottom, from(rgba(20,41,92, 0.3)), to(rgba(20,41,92, 0.3))), url("Images/homepageImg.jpg") no-repeat center center;
     background: linear-gradient(rgba(20,41,92, 0.3), rgba(20,41,92, 0.3)), url("Images/homepageImg.jpg") no-repeat center center;
     /* filter: blur(8px); */
     z-index: 0;
@@ -170,13 +176,22 @@ nav a:hover {
 header {
     position: relative;
     height: 600px;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
     color: white;
     text-shadow: 1px 1px black;
     height: 600px;
     margin-top: -40px;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     background-color: transparent;
 }
@@ -285,9 +300,13 @@ footer ul li span {
     background-color: white;
     margin-bottom: 0;
     padding: 0px 20px;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
 }
 
 .threeThumbnails a {
@@ -319,13 +338,15 @@ footer ul li span {
 .thumbnail:hover {
     background-color: rgb(208,157,85);
     cursor: pointer;
-    transition-duration: 500ms;
+    -webkit-transition-duration: 500ms;
+            transition-duration: 500ms;
 }
 
 #Projects:hover *,
 #About:hover *,
 #Resume:hover *  {
-    transition-duration: 300ms;
+    -webkit-transition-duration: 300ms;
+            transition-duration: 300ms;
     color: rgb(46,53,70);
 }
 
@@ -342,7 +363,6 @@ footer ul li span {
     height: 200px;
     width: 200px;
     zoom: 60%;
-    -moz-transform: scale(.6);
     border: 1.6666667px solid black;
     background-image: url("Images/homepageProjects.png")
 }
@@ -351,7 +371,6 @@ footer ul li span {
     height: 860px;
     width: 860px;
     zoom: 13.95349%;
-    -moz-transform: scale(.1395349);
     border: 7.1666658px solid black;
     background-image: url("Images/aboutMeIcon.jpg")
 }
@@ -360,7 +379,6 @@ footer ul li span {
     height: 512px;
     width: 512px;
     zoom: 23.4375%;
-    -moz-transform: scale(.234375);
     border: 4.26666667px solid black;
     background-image: url("Images/resumeHomeIcon.png")
 }
@@ -375,12 +393,21 @@ footer ul li span {
 
 .webBanner {
     position: relative;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
     color: white;
     height: 450px;
     margin-top: 0px;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     background-color: transparent;
     bottom: 50px;
@@ -431,6 +458,7 @@ footer ul li span {
 }
 
 .webPageImg {
+    background: -webkit-gradient(linear, left top, left bottom, from(rgba(20,41,92, 0.3)), to(rgba(20,41,92, 0.3))), url("Images/resumeBackground.jpeg") no-repeat center center;
     background: linear-gradient(rgba(20,41,92, 0.3), rgba(20,41,92, 0.3)), url("Images/resumeBackground.jpeg") no-repeat center center;
     background-size: cover;
     /* filter: blur(5px); */
@@ -471,9 +499,14 @@ footer ul li span {
 }
 
 .skillsGrid {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
     /* grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     grid-gap: 20px; */
 }
@@ -523,6 +556,7 @@ footer ul li span {
     font-size: 30px;
     color: rgb(46,53,70);
     font-weight: 700;
+    background-color: white;
 
 }
 
@@ -572,10 +606,15 @@ footer ul li span {
 }
 
 .resumeChoices {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: space-evenly;
+    -webkit-box-pack: space-evenly;
+        -ms-flex-pack: space-evenly;
+            justify-content: space-evenly;
     text-align: center;
-    flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
 }
 
 .resumeChoices a {
@@ -590,7 +629,8 @@ footer ul li span {
 
 .hoverWrapper:hover {
     background-color: white;
-    transition-duration: 500ms;
+    -webkit-transition-duration: 500ms;
+            transition-duration: 500ms;
     cursor: pointer;
 }
 
@@ -608,17 +648,20 @@ footer ul li span {
 }
 
 .hoverWrapper:hover .imageWrapper {
-    transition-duration: 300ms;
+    -webkit-transition-duration: 300ms;
+            transition-duration: 300ms;
     background-color: grey;
 }
 
 .viewResume .hoverWrapper:hover a {
-    transition-duration: 300ms;
+    -webkit-transition-duration: 300ms;
+            transition-duration: 300ms;
     color: rgb(0, 150, 200);
 }
 
 .downloadResume .hoverWrapper:hover a {
-    transition-duration: 300ms;
+    -webkit-transition-duration: 300ms;
+            transition-duration: 300ms;
     color: rgb(255, 60, 90);
 }
 
@@ -639,7 +682,8 @@ footer ul li span {
 }
 
 .resumePage button:hover {
-    transition-duration: 100ms;
+    -webkit-transition-duration: 100ms;
+            transition-duration: 100ms;
     cursor: pointer;
     color: white;
     background-color: grey;
@@ -650,7 +694,6 @@ footer ul li span {
     background: url("Images/profilePic.jpg") no-repeat center center;
     height: 399px;
     width: 239px;
-    -moz-transform: scale(.6);
     zoom: 60%;
 }
 
@@ -658,7 +701,6 @@ footer ul li span {
     background: url("Images/graduation.jpg") no-repeat center center;
     height: 960px;
     width: 641px;
-    -moz-transform: scale(.25);
     zoom: 25%;
 }
 
@@ -666,7 +708,6 @@ footer ul li span {
     background: url("Images/nature.jpg") no-repeat center center;
     height: 720px;
     width: 960px;
-    -moz-transform: scale(.55);
     zoom: 55%;
 }
 
@@ -674,7 +715,6 @@ footer ul li span {
     background: url("Images/sweden.jpg") no-repeat center center;
     height: 1357px;
     width: 2048px;
-    -moz-transform: scale(.28);
     zoom: 28%;
 }
 
@@ -682,7 +722,6 @@ footer ul li span {
     background: url("Images/gradFamily.jpg") no-repeat center center;
     height: 640px;
     width: 960px;
-    -moz-transform: scale(.6);
     zoom: 60%;
     vertical-align: middle;
 }
@@ -752,8 +791,12 @@ footer ul li span {
 .aboutPage .myValues,
 .aboutPage .myBackground,
 .aboutPage .myInterests {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    align-items: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
 }
 
 .aboutPage h3 {
@@ -780,19 +823,30 @@ footer ul li span {
 }
 
 .introAndContact {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     padding: 30px 20px;
     margin-top: 10px;
     margin-bottom: 0;
-    justify-content: space-around;
-    align-items: center;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
 }
 
 .row1,
 .row2 {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    align-items: center;
-    justify-content: space-evenly;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: space-evenly;
+        -ms-flex-pack: space-evenly;
+            justify-content: space-evenly;
 }
 
 .row1 {
@@ -829,6 +883,7 @@ footer ul li span {
 
 
 .aboutPageImg {
+    background: -webkit-gradient(linear, left top, left bottom, from(rgba(40,61,112, 0.3)), to(rgba(40,61,112, 0.3))), url("Images/aboutMeBackground.jpg") no-repeat center center;
     background: linear-gradient(rgba(40,61,112, 0.3), rgba(40,61,112, 0.3)), url("Images/aboutMeBackground.jpg") no-repeat center center;
     background-size: cover;
     /* filter: blur(6px); */
@@ -840,12 +895,21 @@ footer ul li span {
 
 .aboutBanner {
     position: relative;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
     color: white;
     height: 500px;
     margin-top: -40px;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     background-color: rgb(46,53,70);
     bottom: 20px;
@@ -864,6 +928,7 @@ footer ul li span {
 }
 
 .projectPageImg {
+    background: -webkit-gradient(linear, left top, left bottom, from(rgba(20,41,92, 0.4)), to(rgba(20,41,92, 0.4))), url("Images/projectsBackgroundImg.jpg") no-repeat center center;
     background: linear-gradient(rgba(20,41,92, 0.4), rgba(20,41,92, 0.4)), url("Images/projectsBackgroundImg.jpg") no-repeat center center;
     background-size: cover;
     /* filter: blur(6px); */
@@ -877,12 +942,21 @@ footer ul li span {
 
 .projectBanner {
     position: relative;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
     color: white;
     height: 450px;
     margin-top: -40px;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     background-color: transparent;
     bottom: 20px;
@@ -996,12 +1070,14 @@ footer ul li span {
 .projectEntry:hover h2 a,
 .projectEntry:hover h3 a {
     color: rgb(180, 110, 20);
-    transition-duration: 200ms;
+    -webkit-transition-duration: 200ms;
+            transition-duration: 200ms;
 }
 
 .projectEntry:hover h6 {
     font-weight: bold;
-    transition-duration: 100ms;
+    -webkit-transition-duration: 100ms;
+            transition-duration: 100ms;
 }
 
 .projectImageContainer {
@@ -1014,7 +1090,6 @@ footer ul li span {
     background-repeat: no-repeat;
     width: 1440px;
     height: 900px;
-    -moz-transform: scale(.4);
     zoom: 40%;
     margin-left: 30px;
     margin-right: 30px;
@@ -1027,9 +1102,14 @@ footer ul li span {
 }
 
 .projectImages {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
     margin-left: 10px;
     margin-right: 10px;
 }
@@ -1132,8 +1212,11 @@ footer a:hover {
     .row1 {
         grid-area: r1;
         width: 100%;
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
-        justify-content: space-around;
+        -ms-flex-pack: distribute;
+            justify-content: space-around;
         text-align: center;
         padding: 30px;
     }
@@ -1316,7 +1399,6 @@ footer a:hover {
     }
 
     .resumeImg1 {
-        -moz-transform: scale(.71875);
         zoom: 71.875%;
         border: 1px solid black;
     }
@@ -1324,7 +1406,6 @@ footer a:hover {
     .resumeImg2 {
         width: 230px;
         height: 230px;
-        -moz-transform: scale(1);
         zoom: 100%;
         border: 1px solid black;
         margin: auto;
@@ -1397,17 +1478,14 @@ footer a:hover {
     }
 
     .aboutPage .swedenPic {
-        -moz-transform: scale(.2);
         zoom: 20%;
     }
 
     .aboutPage .valuesPic {
-        -moz-transform: scale(.5);
         zoom: 50%;
     }
 
     .aboutPage .naturePic {
-        -moz-transform: scale(.45);
         zoom: 45%;
     }
 }
@@ -1486,7 +1564,6 @@ footer a:hover {
     .projectImage {
         width: 100%;
         margin-left: 0;
-        -moz-transform: scale(.35);
         zoom: 35%;
     }
 
@@ -1518,12 +1595,14 @@ footer a:hover {
     .row2 {
         padding-left: 10px;
         padding-right: 10px;
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
-        justify-content: space-around;
+        -ms-flex-pack: distribute;
+            justify-content: space-around;
     }
 
     .aboutPage .row2 .profilePic {
-        -moz-transform: scale(.4);
         zoom: 40%;
     }
 
@@ -1568,24 +1647,20 @@ footer a:hover {
     }
 
     .projectImage {
-        -moz-transform: scale(.3);
         zoom: 30%;
     }
 }
 
 @media (max-width: 530px) {
     .aboutPage .swedenPic {
-        -moz-transform: scale(.19);
         zoom: 19%;
     }
 
     .aboutPage .myBackground .naturePic {
-        -moz-transform: scale(.4);
         zoom: 40%;
     }
 
     .aboutPage .valuesPic {
-        -moz-transform: scale(.4);
         zoom: 40%;
     }
 }
@@ -1638,7 +1713,6 @@ footer a:hover {
     }
 
     .projectImage {
-        -moz-transform: scale(.28);
         zoom: 28%;
     }
 }
