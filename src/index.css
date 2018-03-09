@@ -171,6 +171,8 @@ nav a:hover {
     height: 100%;
     width: 100%;
     position: absolute;
+    top: 0;
+    left: 0;
 }
 
 header {
@@ -489,6 +491,8 @@ footer ul li span {
     padding: 0;
     margin: 0;
     position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .webResumePage {
@@ -912,6 +916,8 @@ footer ul li span {
     height: 100%;
     width: 100%;
     position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .aboutBanner {
@@ -959,6 +965,8 @@ footer ul li span {
     padding: 0;
     margin: 0;
     position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .projectBanner {
