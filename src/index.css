@@ -342,6 +342,7 @@ footer ul li span {
     height: 200px;
     width: 200px;
     zoom: 60%;
+    -moz-transform: scale(.6);
     border: 1.6666667px solid black;
     background-image: url("Images/homepageProjects.png")
 }
@@ -350,6 +351,7 @@ footer ul li span {
     height: 860px;
     width: 860px;
     zoom: 13.95349%;
+    -moz-transform: scale(.1395349);
     border: 7.1666658px solid black;
     background-image: url("Images/aboutMeIcon.jpg")
 }
@@ -358,6 +360,7 @@ footer ul li span {
     height: 512px;
     width: 512px;
     zoom: 23.4375%;
+    -moz-transform: scale(.234375);
     border: 4.26666667px solid black;
     background-image: url("Images/resumeHomeIcon.png")
 }
@@ -647,6 +650,7 @@ footer ul li span {
     background: url("Images/profilePic.jpg") no-repeat center center;
     height: 399px;
     width: 239px;
+    -moz-transform: scale(.6);
     zoom: 60%;
 }
 
@@ -654,6 +658,7 @@ footer ul li span {
     background: url("Images/graduation.jpg") no-repeat center center;
     height: 960px;
     width: 641px;
+    -moz-transform: scale(.25);
     zoom: 25%;
 }
 
@@ -661,6 +666,7 @@ footer ul li span {
     background: url("Images/nature.jpg") no-repeat center center;
     height: 720px;
     width: 960px;
+    -moz-transform: scale(.55);
     zoom: 55%;
 }
 
@@ -668,6 +674,7 @@ footer ul li span {
     background: url("Images/sweden.jpg") no-repeat center center;
     height: 1357px;
     width: 2048px;
+    -moz-transform: scale(.28);
     zoom: 28%;
 }
 
@@ -675,6 +682,7 @@ footer ul li span {
     background: url("Images/gradFamily.jpg") no-repeat center center;
     height: 640px;
     width: 960px;
+    -moz-transform: scale(.6);
     zoom: 60%;
     vertical-align: middle;
 }
@@ -1006,6 +1014,7 @@ footer ul li span {
     background-repeat: no-repeat;
     width: 1440px;
     height: 900px;
+    -moz-transform: scale(.4);
     zoom: 40%;
     margin-left: 30px;
     margin-right: 30px;
@@ -1307,6 +1316,7 @@ footer a:hover {
     }
 
     .resumeImg1 {
+        -moz-transform: scale(.71875);
         zoom: 71.875%;
         border: 1px solid black;
     }
@@ -1314,6 +1324,7 @@ footer a:hover {
     .resumeImg2 {
         width: 230px;
         height: 230px;
+        -moz-transform: scale(1);
         zoom: 100%;
         border: 1px solid black;
         margin: auto;
@@ -1386,14 +1397,17 @@ footer a:hover {
     }
 
     .aboutPage .swedenPic {
+        -moz-transform: scale(.2);
         zoom: 20%;
     }
 
     .aboutPage .valuesPic {
+        -moz-transform: scale(.5);
         zoom: 50%;
     }
 
     .aboutPage .naturePic {
+        -moz-transform: scale(.45);
         zoom: 45%;
     }
 }
@@ -1472,6 +1486,7 @@ footer a:hover {
     .projectImage {
         width: 100%;
         margin-left: 0;
+        -moz-transform: scale(.35);
         zoom: 35%;
     }
 
@@ -1508,6 +1523,7 @@ footer a:hover {
     }
 
     .aboutPage .row2 .profilePic {
+        -moz-transform: scale(.4);
         zoom: 40%;
     }
 
@@ -1552,20 +1568,24 @@ footer a:hover {
     }
 
     .projectImage {
+        -moz-transform: scale(.3);
         zoom: 30%;
     }
 }
 
 @media (max-width: 530px) {
     .aboutPage .swedenPic {
+        -moz-transform: scale(.19);
         zoom: 19%;
     }
 
     .aboutPage .myBackground .naturePic {
+        -moz-transform: scale(.4);
         zoom: 40%;
     }
 
     .aboutPage .valuesPic {
+        -moz-transform: scale(.4);
         zoom: 40%;
     }
 }
@@ -1618,6 +1638,7 @@ footer a:hover {
     }
 
     .projectImage {
+        -moz-transform: scale(.28);
         zoom: 28%;
     }
 }
