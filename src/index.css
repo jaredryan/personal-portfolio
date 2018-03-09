@@ -587,8 +587,8 @@ footer ul li span {
 
 .webResumePage button:hover {
     cursor: pointer;
-    background-color: rgb(112,53,41);
-    color: rgb(224,221,213);
+    background-color: #d09d55;
+    color: white;
     border: 2px solid rgb(224,221,213);
     padding: 0px;
     font-weight: 600;
