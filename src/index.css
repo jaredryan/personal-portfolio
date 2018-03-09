@@ -70,11 +70,12 @@
     font-size: 55px;
     text-align: center;
     margin: 0;
-    padding-top: 30px;
-    padding-bottom: 30px;
+    padding-top: 15px;
+    padding-bottom: 15px;
     font-weight: 500;
     background-color: rgb(208,157,85);
     color: rgb(16,23,40);
+
     /* border-top: 1px solid black;
     border-bottom: 1px solid black; */
 }
