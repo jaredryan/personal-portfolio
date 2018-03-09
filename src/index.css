@@ -1339,8 +1339,6 @@ footer a:hover {
 }
 
 @media (max-width: 750px) {
-    p,
-    li,
     .projectEntry h5,
     .projectEntry li,
     .projectEntry h5 span {
@@ -1362,6 +1360,23 @@ footer a:hover {
     .webResumePage h5 {
         font-size: 16px;
         margin-top: 7px;
+    }
+
+    p, li {
+        font-size: 16px;
+        line-height: 22px;
+    }
+
+    .projectsPage > h2 {
+        font-size: 32px;
+    }
+
+    .projectEntry h2 {
+        font-size: 22px;
+    }
+
+    .projectEntry h3 {
+        font-size: 18px;
     }
 }
 
@@ -1538,23 +1553,6 @@ footer a:hover {
 
     .projectImage {
         zoom: 30%;
-    }
-
-    p, li {
-        font-size: 16px;
-        line-height: 22px;
-    }
-
-    .projectsPage > h2 {
-        font-size: 32px;
-    }
-
-    .projectEntry h2 {
-        font-size: 22px;
-    }
-
-    .projectEntry h3 {
-        font-size: 18px;
     }
 }
 
