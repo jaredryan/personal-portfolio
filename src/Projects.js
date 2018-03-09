@@ -132,7 +132,7 @@ class Projects extends Component {
           {
               title: "Mario Pest Control",
               subtitle: "JavaScript and Design Refresher",
-              description: ["Takes user input to perform how much money Mario", "Total depends on amount of each type of enemy", "Fully responsive for screens of all sizes", "A silly site to remind myself of how to use CSS and JavaScript"],
+              description: ["Takes user input to determine how much money Mario has made", "Total depends on amount of each type of enemy", "Fully responsive for screens of all sizes", "A silly site to remind myself of how to use CSS and JavaScript"],
               demo: "https://jaredryan.github.io/basic-javascript-css-practice/",
               github: "https://github.com/jaredryan/basic-javascript-css-practice",
               tech: ['JavaScript', 'HTML', 'CSS'],
