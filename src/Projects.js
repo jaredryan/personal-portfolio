@@ -14,15 +14,15 @@ class Projects extends Component {
               pictures: [
                   {
                       caption: "Home Page",
-                      id: "pokemon1"
+                      id: require("./Images/pokemon1.png")
                   },
                   {
                       caption: "Pokédex Page",
-                      id: "pokemon2"
+                      id: require("./Images/pokemon2.png")
                   },
                   {
                       caption: "Slots and Lists",
-                      id: "pokemon3"
+                      id: require("./Images/pokemon3.png")
                   }
               ]
           },
@@ -36,11 +36,11 @@ class Projects extends Component {
               pictures: [
                   {
                       caption: "Home Page",
-                      id: "fishackathon1"
+                      id: require("./Images/fishackathon1.png")
                   },
                   {
                       caption: "Report Page",
-                      id: "fishackathon2"
+                      id: require("./Images/fishackathon2.png")
                   }
               ]
           },{
@@ -59,15 +59,15 @@ class Projects extends Component {
               pictures: [
                   {
                       caption: "Home Page",
-                      id: "openHouse1"
+                      id: require("./Images/openHouse1.png")
                   },
                   {
                       caption: "Results Page",
-                      id: "openHouse2"
+                      id: require("./Images/openHouse2.png")
                   },
                   {
                       caption: "Profile Page",
-                      id: "openHouse3"
+                      id: require("./Images/openHouse3.png")
                   }
               ]
           },
@@ -81,15 +81,15 @@ class Projects extends Component {
               pictures: [
                   {
                       caption: "Blog Title",
-                      id: "kandj1"
+                      id: require("./Images/kandj1.png")
                   },
                   {
                       caption: "Blog Entry",
-                      id: "kandj2"
+                      id: require("./Images/kandj2.png")
                   },
                   {
                       caption: "Footer",
-                      id: "kandj3"
+                      id: require("./Images/kandj3.png")
                   }
               ]
           },
@@ -103,15 +103,15 @@ class Projects extends Component {
               pictures: [
                   {
                       caption: "Home",
-                      id: "movieRecs1"
+                      id: require("./Images/movieRecs1.png")
                   },
                   {
                       caption: "Results",
-                      id: "movieRecs2"
+                      id: require("./Images/movieRecs2.png")
                   },
                   {
                       caption: "Wish List",
-                      id: "movieRecs3"
+                      id: require("./Images/movieRecs3.png")
                   }
               ]
           },
@@ -125,7 +125,7 @@ class Projects extends Component {
               pictures: [
                   {
                       caption: "Home",
-                      id: "techJobPrep1"
+                      id: require("./Images/techJobPrep1.png")
                   }
               ]
           },
@@ -139,7 +139,7 @@ class Projects extends Component {
               pictures: [
                   {
                       caption: "Home",
-                      id: "marioPest1"
+                      id: require("./Images/marioPest1.png")
                   }
               ]
           },
@@ -153,7 +153,7 @@ class Projects extends Component {
               pictures: [
                   {
                       caption: "Quiz Page",
-                      id: "quiz1"
+                      id: require("./Images/quiz1.png")
                   }
               ]
           },
