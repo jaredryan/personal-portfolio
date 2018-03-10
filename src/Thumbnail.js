@@ -6,7 +6,7 @@ class Thumbnail extends Component {
         console.log(this.props.imgURL);
         // const imageUrl = require(this.props.imgUrl)
         return(
-            <div className="thumbnail">
+            <div className="thumbnail" id={this.props.name}>
                 <Link to={this.props.path}>
                     <div className="thumbnailImg">
                         <img src={this.props.imgURL} id={this.props.name} alt=""/>
