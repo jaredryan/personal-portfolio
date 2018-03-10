@@ -290,6 +290,10 @@ footer ul li span {
             transition-duration: 500ms;
 }
 
+.thumbnail:hover div {
+    background-color: white;
+}
+
 #Projects:hover *,
 #About:hover *,
 #Resume:hover *  {
@@ -303,6 +307,7 @@ footer ul li span {
     width: 120px;
     height: 120px;
     position: relative;
+    border-radius: 50%;
 }
 
 .thumbnailImg img {
