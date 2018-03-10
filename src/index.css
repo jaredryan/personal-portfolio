@@ -1,14 +1,3 @@
-.projectsPage > h2 {
-    font-size: 55px;
-    text-align: center;
-    margin: 0;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    font-weight: 500;
-    background-color: rgb(208,157,85);
-    color: rgb(16,23,40);
-}
-
 * {
     -webkit-box-sizing: border-box;
             box-sizing: border-box;
@@ -316,6 +305,17 @@ footer ul li span {
     border-radius: 50%;
     border: 1px solid black;
     z-index: 2;
+}
+
+.projectsPage > h2 {
+    font-size: 55px;
+    text-align: center;
+    margin: 0;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-weight: 500;
+    background-color: rgb(208,157,85);
+    color: rgb(16,23,40);
 }
 
 #Projects {
@@ -1566,8 +1566,8 @@ footer a:hover {
 
     .row1,
     .row2 {
-        padding-left: 10px;
-        padding-right: 10px;
+        padding-left: 20px;
+        padding-right: 20px;
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
