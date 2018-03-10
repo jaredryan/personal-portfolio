@@ -9,7 +9,8 @@ class Thumbnail extends Component {
             <div className="thumbnail">
                 <Link to={this.props.path}>
                     <div className="thumbnailImg">
-                        <img src={this.props.imgURL} alt=""/>
+                        <img src={this.props.imgURL} id={this.props.name} alt=""/>
+                        <div className="thumbnailOverlay"></div>
                     </div>
                     <h3>{this.props.name}</h3>
                     <h5>{this.props.description}</h5>

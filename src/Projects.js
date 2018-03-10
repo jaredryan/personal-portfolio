@@ -5,7 +5,7 @@ class Projects extends Component {
   render() {
       const webProjects = [
           {
-              title: "Pokemon Team Builder",
+              title: "Pokeémon Team Builder",
               subtitle: "React app done with redux and api integration",
               description: ["Performs search on a Pokémon-based API using the Axios and Thunk packages", "Stores two lists, two slots, and search results using Redux", "Local state used for JavaScript manipulation", "Use of router and switch to change between pages and parts of the page", "Fully responsive for screens of all sizes"],
               demo: "http://buildpokemonteam.surge.sh/",

@@ -92,8 +92,8 @@ nav a:hover {
 }
 
 .homepageImg {
-    background: -webkit-gradient(linear, left top, left bottom, from(rgba(20,41,92, 0.3)), to(rgba(20,41,92, 0.3))), url("Images/homepageImg.jpg") no-repeat center center;
-    background: linear-gradient(rgba(20,41,92, 0.3), rgba(20,41,92, 0.3)), url("Images/homepageImg.jpg") no-repeat center center;
+    background: -webkit-gradient(linear, left top, left bottom, from(rgba(20,41,92, 0.5)), to(rgba(20,41,92, 0.5))), url("Images/homepageImage.jpeg") no-repeat center left;
+    background: linear-gradient(rgba(20,41,112, 0.4), rgba(20,41,112, 0.4)), url("Images/homepageImage.jpeg") no-repeat center center;
     /* filter: blur(8px); */
     z-index: 0;
     background-size: cover;
@@ -298,10 +298,11 @@ footer ul li span {
     color: rgb(46,53,70);
 }
 
-.thumbnail div {
+.thumbnailImg {
     margin: auto;
     width: 120px;
     height: 120px;
+    position: relative;
 }
 
 .thumbnailImg img {
@@ -309,7 +310,13 @@ footer ul li span {
     height: 100%;
     border-radius: 50%;
     border: 1px solid black;
+    z-index: 2;
 }
+
+#Projects {
+    opacity: 0.8;
+}
+
 
 .aboutPage,
 .projectsPage {
@@ -386,8 +393,8 @@ footer ul li span {
 }
 
 .webPageImg {
-    background: -webkit-gradient(linear, left top, left bottom, from(rgba(20,41,92, 0.3)), to(rgba(20,41,92, 0.3))), url("Images/resumeBackground.jpeg") no-repeat center center;
-    background: linear-gradient(rgba(20,41,92, 0.3), rgba(20,41,92, 0.3)), url("Images/resumeBackground.jpeg") no-repeat center center;
+    background: -webkit-gradient(linear, left top, left bottom, from(rgba(20,41,112, 0.3)), to(rgba(20,41,112, 0.3))), url("Images/resumeBackground.jpeg") no-repeat center center;
+    background: linear-gradient(rgba(20,41,132, 0.3), rgba(20,41,132, 0.3)), url("Images/resumeBackground.jpeg") no-repeat center center;
     background-size: cover;
     /* filter: blur(5px); */
     z-index: 0;
@@ -817,8 +824,8 @@ footer ul li span {
 
 
 .aboutPageImg {
-    background: -webkit-gradient(linear, left top, left bottom, from(rgba(40,61,112, 0.3)), to(rgba(40,61,112, 0.3))), url("Images/aboutMeBackground.jpg") no-repeat center center;
-    background: linear-gradient(rgba(40,61,112, 0.3), rgba(40,61,112, 0.3)), url("Images/aboutMeBackground.jpg") no-repeat center center;
+    background: -webkit-gradient(linear, left top, left bottom, from(rgba(40,61,162, 0.3)), to(rgba(40,61,162, 0.3))), url("Images/aboutMeBackground.jpg") no-repeat center center;
+    background: linear-gradient(rgba(40,61,162, 0.3), rgba(40,61,162, 0.3)), url("Images/aboutMeBackground.jpg") no-repeat center center;
     background-size: cover;
     /* filter: blur(6px); */
     z-index: 0;
@@ -864,8 +871,8 @@ footer ul li span {
 }
 
 .projectPageImg {
-    background: -webkit-gradient(linear, left top, left bottom, from(rgba(20,41,92, 0.4)), to(rgba(20,41,92, 0.4))), url("Images/projectsBackgroundImg.jpg") no-repeat center center;
-    background: linear-gradient(rgba(20,41,92, 0.4), rgba(20,41,92, 0.4)), url("Images/projectsBackgroundImg.jpg") no-repeat center center;
+    background: -webkit-gradient(linear, left top, left bottom, from(rgba(20,41,122, 0.4)), to(rgba(20,41,122, 0.4))), url("Images/projectsBackgroundImg.jpg") no-repeat 50% 75%;
+    background: linear-gradient(rgba(20,41,122, 0.4), rgba(20,41,122, 0.4)), url("Images/projectsBackgroundImg.jpg") no-repeat 50% 75%;
     background-size: cover;
     /* filter: blur(6px); */
     z-index: 0;
