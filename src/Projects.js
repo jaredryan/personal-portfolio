@@ -5,12 +5,35 @@ class Projects extends Component {
   render() {
       const webProjects = [
           {
+              title: "We, the Issues",
+              subtitle: "First fullstack application with React and Node.js",
+              description: ["Fullstack JavaScript application with an internal server used for API calls",
+                            "MongoDB maintains the list of issues and their comments in the database",
+                            "Utilizes redux to keep track of the list of issues and their respective comments in the local state",
+                            "Forms make it easy to create, edit, or remove issues or comments on an issue",
+                            "Issues can be upvoted or downvoted",
+                            "Fully responsive for screens of all sizes"],
+              demo: "https://wetheissues.herokuapp.com/",
+              github: "https://github.com/jaredryan/we-the-issues",
+              tech: ['React', 'Express', 'MongoDB', 'Node.js', 'JavaScript', 'JSX', 'CSS'],
+              pictures: [
+                  {
+                      caption: "Banner and New Issue Form",
+                      id: require("./Images/weTheIssues1.png")
+                  },
+                  {
+                      caption: "Issue",
+                      id: require("./Images/weTheIssues2.png")
+                  },
+              ]
+          },
+          {
               title: "Pokémon Team Builder",
               subtitle: "React app done with redux and api integration",
               description: ["Performs search on a Pokémon-based API using the Axios and Thunk packages", "Stores two lists, two slots, and search results using Redux", "Local state used for JavaScript manipulation", "Use of router and switch to change between pages and parts of the page", "Fully responsive for screens of all sizes"],
               demo: "http://buildpokemonteam.surge.sh/",
               github: "https://github.com/jaredryan/pokemon-team-builder",
-              tech: ["React", 'JavaScript', 'JSX', 'CSS'],
+              tech: ['React', 'JavaScript', 'JSX', 'CSS'],
               pictures: [
                   {
                       caption: "Home Page",
