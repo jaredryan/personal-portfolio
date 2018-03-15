@@ -10,7 +10,7 @@ class Projects extends Component {
               description: ["Fullstack JavaScript application with an internal server used for API calls",
                             "MongoDB maintains the list of issues and their comments in the database",
                             "Utilizes redux to keep track of the list of issues and their respective comments in the local state",
-                            "Forms make it easy to create, edit, or remove issues or comments on an issue",
+                            "Forms make it easy to create, edit, or remove issues as well as comments on an issue",
                             "Issues can be upvoted or downvoted",
                             "Fully responsive for screens of all sizes"],
               demo: "https://wetheissues.herokuapp.com/",
