@@ -5,6 +5,49 @@ class Projects extends Component {
   render() {
       const webProjects = [
           {
+              title: "Negotiation Feedback",
+              subtitle: "Fullstack application with complex backend",
+              description: ["Fullstack JavaScript application with an internal server used for API calls",
+                            "MongoDB maintains all students, teachers, schools, reviews, and assignments",
+                            "Utilizes redux to keep track of all necessary information for the current user",
+                            "User authentication allows for security and appropriate filtering to display relevant information",
+                            "Allows for creating of new surveys, assignments, and reviews, which are selectively available to other users",
+                            "Teachers may edit their students' information and reviews as required",
+                            "Users may submit feedback, which the administrator may view in the site, then set up to fire off an email to that user as a response",
+                            "Utilizes the Stripe package to charge users",
+                            "Students can see their grades through Victory's data visualization package",
+                            "Fully responsive for screens of all sizes"],
+              demo: "https://negotiationfeedback.herokuapp.com/",
+              github: "https://github.com/jaredryan/peer-review",
+              tech: ['React', 'Express', 'MongoDB', 'Node.js', 'JavaScript', 'JSX', 'CSS'],
+              pictures: [
+                  {
+                      caption: "Main Page",
+                      id: require("./Images/NRMainPage.png")
+                  },
+                  {
+                      caption: "Dashboard",
+                      id: require("./Images/Dashboard.png")
+                  },
+                  {
+                      caption: "New Assignment",
+                      id: require("./Images/NRNewAssignment.png")
+                  },
+                  {
+                      caption: "Student Review",
+                      id: require("./Images/NRStudentReview.png")
+                  },
+                  {
+                      caption: "Teacher Review",
+                      id: require("./Images/NRTeacherReview.png")
+                  },
+                  {
+                      caption: "Feedback",
+                      id: require("./Images/NRFeedback.png")
+                  },
+              ]
+          },
+          {
               title: "We, the Issues",
               subtitle: "First fullstack application with React and Node.js",
               description: ["Fullstack JavaScript application with an internal server used for API calls",
