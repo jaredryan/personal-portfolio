@@ -5,17 +5,48 @@ class Projects extends Component {
   render() {
       const webProjects = [
           {
-              title: "Negotiation Feedback",
+              title: "Nest Invaders",
+              subtitle: "A 2D shooting game built in a fullstack website",
+              description: ["Made game from scratch using JSX, CSS, and JavaScript",
+                            "Game comes with a simple UI, several levels, and several waves of different types for each level",
+                            "Has a full authentication package, complete with hashed passwords and an ability to safely reset your password if you forget it",
+                            "Utilizes redux to keep track of the current user's current level and scores and current",
+                            "MongoDB and the backend maintains scores and uers",
+                            "Fully responsive for screens of all sizes"],
+              demo: "http://nestinvaders.herokuapp.com/",
+              github: "https://github.com/jaredryan/best-class-side-scroller",
+              tech: ['React', 'Express', 'MongoDB', 'Node.js', 'JavaScript', 'JSX', 'CSS'],
+              pictures: [
+                  {
+                      caption: "Home Page",
+                      id: require("./Images/NIMainPage.png")
+                  },
+                  {
+                      caption: "Game",
+                      id: require("./Images/NIGame.png")
+                  },
+                  {
+                      caption: "Levels, Instructions, and Scores",
+                      id: require("./Images/NIScoresAndLevels.png")
+                  },
+                  {
+                      caption: "Profile Page",
+                      id: require("./Images/NIProfileForms.png")
+                  },
+              ]
+          },
+          {
+              title: "Negotiation Feedback (In Progress)",
               subtitle: "Fullstack application with complex backend",
               description: ["Fullstack JavaScript application with an internal server used for API calls",
                             "MongoDB maintains all students, teachers, schools, reviews, and assignments",
                             "Utilizes redux to keep track of all necessary information for the current user",
-                            "User authentication allows for security and appropriate filtering to display relevant information",
+                            "User authentication allows for security and appropriate filtering to display relevant information (in progress)",
                             "Allows for creating of new surveys, assignments, and reviews, which are selectively available to other users",
                             "Teachers may edit their students' information and reviews as required",
                             "Users may submit feedback, which the administrator may view in the site, then set up to fire off an email to that user as a response",
-                            "Utilizes the Stripe package to charge users",
-                            "Students can see their grades through Victory's data visualization package",
+                            "Utilizes the Stripe package to charge users (in progress)",
+                            "Students can see their grades through Victory's data visualization package (in progress)",
                             "Fully responsive for screens of all sizes"],
               demo: "https://negotiationfeedback.herokuapp.com/",
               github: "https://github.com/jaredryan/peer-review",
