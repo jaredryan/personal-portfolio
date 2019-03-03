@@ -531,6 +531,42 @@ footer ul li span {
             transition-duration: 150ms;
 }
 
+.resumePage {
+    background-color: rgb(224, 221, 213);
+    color: black;
+    margin-top: 0;
+    padding: 20px 30px;
+}
+
+.topResume {
+    width: 310px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.bottomResume {
+    width: 310px;
+    margin-top: 30px;
+    margin-bottom: 0;
+}
+
+.topResume button,
+.bottomResume button {
+    background-color: rgb(90, 0, 0);
+    color: white;
+    border: 1px solid white;
+    font-size: 28px;
+    font-weight: 400;
+}
+
+.topResume button:hover,
+.bottomResume button:hover {
+    background-color: white;
+    color: grey;
+    border: 2px solid silver;
+    font-weight: 400;
+}
+
 .resumeChoices {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -548,6 +584,22 @@ footer ul li span {
     text-decoration: none;
 }
 
+.hoverWrapper {
+    padding: 20px;
+    padding-bottom: 30px;
+}
+
+.hoverWrapper:hover {
+    background-color: white;
+    -webkit-transition-duration: 500ms;
+            transition-duration: 500ms;
+    cursor: pointer;
+}
+
+.hoverWrapper h1 {
+    margin-top: 0;
+}
+
 .viewResume .imageWrapper {
     background-color: white;
     border-radius: 50%;
@@ -555,6 +607,49 @@ footer ul li span {
 
 .downloadResume .imageWrapper {
     border-radius: 50%;
+}
+
+.hoverWrapper:hover .imageWrapper {
+    -webkit-transition-duration: 300ms;
+            transition-duration: 300ms;
+    background-color: grey;
+}
+
+.viewResume .hoverWrapper:hover a {
+    -webkit-transition-duration: 300ms;
+            transition-duration: 300ms;
+    color: rgb(0, 150, 200);
+}
+
+.downloadResume .hoverWrapper:hover a {
+    -webkit-transition-duration: 300ms;
+            transition-duration: 300ms;
+    color: rgb(255, 60, 90);
+}
+
+.resumePage button {
+    width: 230px;
+    font-size: 22px;
+    font-weight: 600;
+    height: 50px;
+    border-radius: 15px;
+    border: 1px solid black;
+    margin: 30px auto 20px;
+    display: block;
+}
+
+.resumePage > a {
+    text-decoration: none;
+    color: black;
+}
+
+.resumePage button:hover {
+    -webkit-transition-duration: 100ms;
+            transition-duration: 100ms;
+    cursor: pointer;
+    color: white;
+    background-color: grey;
+    border: 1px solid white;
 }
 
 .aboutPage .profilePic {
@@ -1023,7 +1118,7 @@ footer a {
 }
 
 footer a:hover {
-    color: rgb(208,157,85);
+    color: grey;
 }
 
 .seeMore * {
@@ -1316,6 +1411,10 @@ footer a:hover {
         width: 230px;
         height: 230px;
         margin: auto;
+    }
+
+    .hoverWrapper h1 {
+        font-size: 28px;
     }
 
     .projectBanner, .projectPageImg {

@@ -1,34 +1,17 @@
 {
-  "name": "personal-portfolio-server",
-  "version": "1.0.0",
-  "description": "",
-  "main": "server.js",
+  "name": "personal-portfolio",
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
-    "dotenv": "^6.2.0",
-    "express": "^4.16.4",
-    "heroku-ssl-redirect": "^0.0.4",
-    "morgan": "^1.9.1"
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "1.1.1"
   },
-  "engines": {
-    "node": "11.10.1",
-    "npm": "6.7.0"
-  },
-  "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
-    "build": "npm install",
-    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jaredryan/personal-portfolio.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/jaredryan/personal-portfolio/issues"
-  },
-  "homepage": "https://jaredryan.herokuapp.com"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
 }
