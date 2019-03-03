@@ -6,12 +6,12 @@ const Project = props => {
             <h2>{props.title}
                 {
                     props.demo !== "" &&
-                    <a href={props.demo} target="_blank" id="ignoreToggle">(<span id="ignoreToggle">Demo</span>)</a>
+                    <a href={props.demo} target="_blank" id="ignoreToggle" rel="noopener noreferrer">(<span id="ignoreToggle">Demo</span>)</a>
                 }
             </h2>
             <h3>{props.subtitle}
                 {
-                    props.github !== "" && <a href={props.github} target="_blank" id="ignoreToggle">(<span id="ignoreToggle">Github</span>)</a>
+                    props.github !== "" && <a href={props.github} target="_blank" id="ignoreToggle" rel="noopener noreferrer">(<span id="ignoreToggle">Github</span>)</a>
                 }
             </h3>
             {props.clicked ?
