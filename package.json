@@ -1,7 +1,7 @@
 {
   "name": "personal-portfolio-server",
   "version": "1.0.0",
-  "description": "jared ryan's portfolio website",
+  "description": "",
   "main": "server.js",
   "dependencies": {
     "dotenv": "^6.2.0",
