@@ -1,5 +1,5 @@
 {
-  "name": "personal-portfolio",
+  "name": "personal-portfolio-server",
   "version": "1.0.0",
   "description": "jared ryan's portfolio website",
   "main": "server.js",
@@ -25,5 +25,5 @@
   "bugs": {
     "url": "https://github.com/jaredryan/personal-portfolio/issues"
   },
-  "homepage": "https://github.com/jaredryan/personal-portfolio#readme"
+  "homepage": "https://jaredryan.herokuapp.com"
 }
