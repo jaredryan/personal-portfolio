@@ -581,8 +581,9 @@ footer ul li span {
 .aboutPage .naturePic img {
     height: 396px;
     width: 528px;
-    text-align: center;
+    vertical-align: middle;
     margin: auto;
+    text-align: center;
 }
 
 .aboutPage .swedenPic,
@@ -683,9 +684,9 @@ footer ul li span {
     padding-bottom: 0px;
 }
 
-.myBackground .naturePic {
+.myValues .naturePic {
     display: inline-block;
-    float: right;
+    float: left;
 }
 
 .myBackground .swedenPic,
@@ -1194,16 +1195,12 @@ footer a:hover {
         padding-right: 10px;
     }
 
-    .valuesPic {
+    .naturePic {
         grid-area: vp;
     }
 
     .valuesText {
         grid-area: vt;
-    }
-
-    .naturePic {
-        grid-area: bp;
     }
 
     .backgroundText {
