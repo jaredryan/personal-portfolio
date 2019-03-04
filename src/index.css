@@ -11,34 +11,6 @@ body {
     background-color: rgb(46,53,70);
 }
 
-nav {
-    height: 40px;
-    text-shadow: 1px 1px black;
-}
-
-.overlay {
-    background-color: rgb(46,53,70);
-    opacity: 0.75;
-    width: 100%;
-    height: 40px;
-    position: absolute;
-    top: 0px;
-    z-index: 9;
-}
-
-nav ul {
-    list-style: none;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: space-evenly;
-        -ms-flex-pack: space-evenly;
-            justify-content: space-evenly;
-    margin: 0 0;
-    padding: 0;
-    font-size: 17px;
-}
-
 p, li {
     font-size: 18px;
     /* font-weight: 300; */
@@ -46,34 +18,9 @@ p, li {
     line-height: 28px;
 }
 
-
-
 .thumbnail a h5 {
     line-height: 29px;
     color: rgb(46,53,70);
-}
-
-nav ul a li {
-    padding: 9.5px 12px;
-    font-weight: 300;
-    letter-spacing: 0.6px;
-    font-size: 17px;
-    font-family: "Muli", serif;
-    line-height: initial;
-    text-align: center;
-}
-
-nav a {
-    text-decoration: none;
-    color: white;
-    z-index: 10;
-    width: 25%;
-}
-
-nav a:hover {
-    background-color: white;
-    color: black;
-    text-shadow: none;
 }
 
 .homepageImg {
@@ -134,84 +81,10 @@ header h2 {
     text-shadow: 2px 2px black;
 }
 
-footer {
-    height: 105px;
-    background-color: rgb(46,53,70);
-    color: white;
-    position: relative;
-    padding-top: 1px;
-}
-
-.border1 {
-    grid-area: s1;
-}
-
-.border2 {
-    grid-area: s2;
-}
-
-.border1, .border2 {
-    border-top: 1px solid white;
-    margin-top: 12.8px;
-}
-
-.footerGrid {
-    display: grid;
-    grid-template-columns: 1fr 210px 1fr;
-    grid-template-areas:
-        "s1 m s2";
-}
-
-footer h3 {
-    text-align: center;
-    padding-top: 0px;
-    margin-bottom: 15px;
-    margin-top: 0;
-    font-weight: bolder;
-    letter-spacing: 0.7px;
-    font-size: 20px;
-    padding-right: 17px;
-    padding-left: 17px;
-    width: 210px;
-    grid-area: m;
-
-}
-
-footer > div {
-    margin-top: 10px;
-}
-
-footer ul {
-    list-style: none;
-    padding: 0px;
-    font-size: 16px;
-    margin-bottom: 10px;
-    margin-top: 10px;
-}
-
-footer li {
-    padding: 2px 5px;
-    margin-top: 0px;
-    margin-bottom: 0px;
-    font-family: "Montserrat", sans-serif;
-    font-weight: 300;
-}
-
-footer a {
-    margin-bottom: 0px;
-}
-
 .info {
     position: absolute;
     left: 10px;
     top: 35px;
-}
-
-footer ul li span {
-    margin-right: 10px;
-    text-decoration: underline;
-    font-family: "Montserrat", sans-serif;
-    font-weight: 500;
 }
 
 .links {
@@ -554,27 +427,6 @@ footer ul li span {
             justify-content: space-between;
     margin-left: 10px;
     margin-right: 10px;
-}
-
-footer {
-    text-align: center;
-    font-size: 30px;
-}
-
-footer i {
-    text-align: center;
-    font-size: 30px;
-    padding: 3px;
-}
-
-footer a {
-    color: white;
-    margin-left: 7px;
-    margin-right: 7px;
-}
-
-footer a:hover {
-    color: rgb(208,157,85);
 }
 
 .mobile {
