@@ -6,17 +6,14 @@ class Home extends Component {
       const thumbnails = [
           {
               name: "Projects",
-              description: "Check out a comprehensive list of my projects.",
               path: "/projects",
               imgURL: require("./Images/homepageProjects.png")
           },{
               name: "About",
-              description: "Click here to learn more about what I'm like.",
               path: "/about",
               imgURL: require("./Images/aboutMeIcon.jpg")
           },{
               name: "Resume",
-              description: "See my qualifications in a simple or fun format.",
               path: "/resume",
               imgURL: require("./Images/resumeHomeIcon.png")
           }
@@ -25,7 +22,6 @@ class Home extends Component {
       const thumbnailList = thumbnails.map((thumbnail, index) => {
         return <Thumbnail
                     name={thumbnail.name}
-                    description={thumbnail.description}
                     imgURL={thumbnail.imgURL}
                     key={index + thumbnail.name}
                     id={thumbnail.name}
@@ -38,7 +34,8 @@ class Home extends Component {
             <header>
                 <div className="homepageText">
                     <h1>Jared Ryan</h1>
-                    <h2>Software and Web Developer</h2>
+                    <h2 style={{marginBottom: "10px", marginTop: "30px"}}>IBM Software Developer</h2>
+                    <h2 style={{marginBottom: "0px", marginTop: "10px"}}>Freelance Web Developer</h2>
                 </div>
                 <div className="homepageImg"></div>
             </header>

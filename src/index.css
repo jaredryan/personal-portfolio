@@ -254,19 +254,11 @@ footer ul li span {
     text-align: center;
 }
 
-.threeThumbnails h5 {
-    margin-bottom: 0;
-    font-size: 20px;
-    font-weight: 300;
-    font-family: "Montserrat", sans-serif;
-    margin-top: 15px;
-}
-
 .threeThumbnails h3 {
     font-size: 38px;
-    margin-bottom: 5px;
+    margin-bottom: 0px;
     color: rgb(112,53,41);
-    font-weight: 400;
+    font-weight: 300;
 }
 
 .thumbnail {
