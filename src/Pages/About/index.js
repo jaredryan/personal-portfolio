@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import './index.css';
 
 class About extends Component {
   render() {
@@ -12,7 +13,7 @@ class About extends Component {
             <div className="introAndContact">
                 <div className="row1">
                     <div className="gradPic">
-                        <img src={require("./Images/graduation.jpg")} alt=""/>
+                        <img src={require("../../Images/graduation.jpg")} alt=""/>
                     </div>
                     <div className="softwareText">
                         <h3>My Experience</h3>
@@ -25,7 +26,7 @@ class About extends Component {
                 </div>
                 <div className="row2">
                     <div className="profilePic">
-                        <img src={require("./Images/profilePic.jpg")} alt=""/>
+                        <img src={require("../../Images/profilePic.jpg")} alt=""/>
                     </div>
                     <div className="seeMore">
                         <h3>Contact Me!</h3>
@@ -35,8 +36,7 @@ class About extends Component {
                         <br/>
                         <p>See <Link to="/projects">Projects</Link>.</p>
                         <p>See <Link to="/resume">Resume</Link>.</p>
-                        <p>See <a href="https://github.com/jaredryan">Github</a>.
-                        </p>
+                        <p>See <a href="https://github.com/jaredryan">Github</a>.</p>
                         <p>See <a href="https://www.linkedin.com/in/jared-m-ryan/">LinkedIn</a>.</p>
                     </div>
                 </div>
@@ -44,7 +44,7 @@ class About extends Component {
 
             <div className="myValues">
                 <div className="naturePic">
-                    <img src={require("./Images/nature.jpg")} alt=""/>
+                    <img src={require("../../Images/nature.jpg")} alt=""/>
                 </div>
                 <div className="valuesText">
                     <h3>What I'm About</h3>

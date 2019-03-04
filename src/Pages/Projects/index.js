@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Project from './Project';
+import './index.css';
 
 class Projects extends Component {
   render() {
@@ -19,19 +20,19 @@ class Projects extends Component {
               pictures: [
                   {
                       caption: "Home Page",
-                      id: require("./Images/NIMainPage.png")
+                      id: require("../../Images/NIMainPage.png")
                   },
                   {
                       caption: "Game",
-                      id: require("./Images/NIGame.png")
+                      id: require("../../Images/NIGame.png")
                   },
                   {
                       caption: "Levels, Instructions, and Scores",
-                      id: require("./Images/NIScoresAndLevels.png")
+                      id: require("../../Images/NIScoresAndLevels.png")
                   },
                   {
                       caption: "Profile Page",
-                      id: require("./Images/NIProfileForms.png")
+                      id: require("../../Images/NIProfileForms.png")
                   },
               ]
           },
@@ -54,27 +55,27 @@ class Projects extends Component {
               pictures: [
                   {
                       caption: "Main Page",
-                      id: require("./Images/NRMainPage.png")
+                      id: require("../../Images/NRMainPage.png")
                   },
                   {
                       caption: "Dashboard",
-                      id: require("./Images/Dashboard.png")
+                      id: require("../../Images/Dashboard.png")
                   },
                   {
                       caption: "New Assignment",
-                      id: require("./Images/NRNewAssignment.png")
+                      id: require("../../Images/NRNewAssignment.png")
                   },
                   {
                       caption: "Student Review",
-                      id: require("./Images/NRStudentReview.png")
+                      id: require("../../Images/NRStudentReview.png")
                   },
                   {
                       caption: "Teacher Review",
-                      id: require("./Images/NRTeacherReview.png")
+                      id: require("../../Images/NRTeacherReview.png")
                   },
                   {
                       caption: "Feedback",
-                      id: require("./Images/NRFeedback.png")
+                      id: require("../../Images/NRFeedback.png")
                   },
               ]
           },
@@ -93,11 +94,11 @@ class Projects extends Component {
               pictures: [
                   {
                       caption: "Banner and New Issue Form",
-                      id: require("./Images/weTheIssues1.png")
+                      id: require("../../Images/weTheIssues1.png")
                   },
                   {
                       caption: "Issue",
-                      id: require("./Images/weTheIssues2.png")
+                      id: require("../../Images/weTheIssues2.png")
                   },
               ]
           },
@@ -111,15 +112,15 @@ class Projects extends Component {
               pictures: [
                   {
                       caption: "Home Page",
-                      id: require("./Images/pokemon1.png")
+                      id: require("../../Images/pokemon1.png")
                   },
                   {
                       caption: "Pokédex Page",
-                      id: require("./Images/pokemon2.png")
+                      id: require("../../Images/pokemon2.png")
                   },
                   {
                       caption: "Slots and Lists",
-                      id: require("./Images/pokemon3.png")
+                      id: require("../../Images/pokemon3.png")
                   }
               ]
           },
@@ -133,11 +134,11 @@ class Projects extends Component {
               pictures: [
                   {
                       caption: "Home Page",
-                      id: require("./Images/fishackathon1.png")
+                      id: require("../../Images/fishackathon1.png")
                   },
                   {
                       caption: "Report Page",
-                      id: require("./Images/fishackathon2.png")
+                      id: require("../../Images/fishackathon2.png")
                   }
               ]
           },{
@@ -156,15 +157,15 @@ class Projects extends Component {
               pictures: [
                   {
                       caption: "Home Page",
-                      id: require("./Images/openHouse1.png")
+                      id: require("../../Images/openHouse1.png")
                   },
                   {
                       caption: "Results Page",
-                      id: require("./Images/openHouse2.png")
+                      id: require("../../Images/openHouse2.png")
                   },
                   {
                       caption: "Profile Page",
-                      id: require("./Images/openHouse3.png")
+                      id: require("../../Images/openHouse3.png")
                   }
               ]
           },
@@ -178,15 +179,15 @@ class Projects extends Component {
               pictures: [
                   {
                       caption: "Blog Title",
-                      id: require("./Images/kandj1.png")
+                      id: require("../../Images/kandj1.png")
                   },
                   {
                       caption: "Blog Entry",
-                      id: require("./Images/kandj2.png")
+                      id: require("../../Images/kandj2.png")
                   },
                   {
                       caption: "Footer",
-                      id: require("./Images/kandj3.png")
+                      id: require("../../Images/kandj3.png")
                   }
               ]
           },
@@ -200,15 +201,15 @@ class Projects extends Component {
               pictures: [
                   {
                       caption: "Home",
-                      id: require("./Images/movieRecs1.png")
+                      id: require("../../Images/movieRecs1.png")
                   },
                   {
                       caption: "Results",
-                      id: require("./Images/movieRecs2.png")
+                      id: require("../../Images/movieRecs2.png")
                   },
                   {
                       caption: "Wish List",
-                      id: require("./Images/movieRecs3.png")
+                      id: require("../../Images/movieRecs3.png")
                   }
               ]
           },
@@ -222,7 +223,7 @@ class Projects extends Component {
               pictures: [
                   {
                       caption: "Home",
-                      id: require("./Images/techJobPrep1.png")
+                      id: require("../../Images/techJobPrep1.png")
                   }
               ]
           },
@@ -236,7 +237,7 @@ class Projects extends Component {
               pictures: [
                   {
                       caption: "Home",
-                      id: require("./Images/marioPest1.png")
+                      id: require("../../Images/marioPest1.png")
                   }
               ]
           },
@@ -250,7 +251,7 @@ class Projects extends Component {
               pictures: [
                   {
                       caption: "Quiz Page",
-                      id: require("./Images/quiz1.png")
+                      id: require("../../Images/quiz1.png")
                   }
               ]
           },
@@ -290,9 +291,6 @@ class Projects extends Component {
                       modifier={0}
                  />
       });
-
-      // const modifier = (webProjects.length + 1) % 2;
-      // const styleHeader = {backgroundColor: modifier === 0 ? "rgb(210, 210, 225)" : "white"};
 
       const mappedSoftwareProjects = softwareProjects.map((project, index) => {
           return <Project

@@ -1,10 +1,9 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import './index.css';
 
 class Thumbnail extends Component {
-    render(){
-        console.log(this.props.imgURL);
-        // const imageUrl = require(this.props.imgUrl)
+    render() {
         return(
             <div className="thumbnail" id={this.props.name}>
                 <Link to={this.props.path}>

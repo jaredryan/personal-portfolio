@@ -1,0 +1,475 @@
+/* Page */
+
+.aboutPage {
+    color: black;
+    margin-top: 0;
+    background-color: rgb(224, 221, 213);
+    margin: 0;
+    padding: 20px 0;
+}
+
+.aboutPage h1 {
+    font-size: 40px;
+    text-align: center;
+    margin-top: 5px;
+}
+
+.aboutPage h3 {
+    text-align: center;
+    font-size: 28px;
+    margin-top: 10px;
+    color: rgb(112,53,41);
+    font-weight: 400;
+}
+
+.aboutPage * {
+    color: rgb(46,53,70);
+}
+
+@media (max-width: 1100px) {
+    .aboutPage h3 {
+        margin-top: 0;
+    }
+}
+
+/* Banner */
+
+.aboutPage .aboutBanner {
+    position: relative;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    color: white;
+    height: 500px;
+    margin-top: -40px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    background-color: rgb(46,53,70);
+    bottom: 20px;
+    margin-bottom: -30px;
+}
+
+.aboutPage .aboutBanner > h1 {
+    z-index: 1;
+    font-size: 100px;
+    margin: 0px;
+    text-align: center;
+    font-weight: 700;
+    text-shadow: 2px 2px black;
+    color: white;
+}
+
+.aboutPage .aboutBanner br {
+    display: none;
+}
+
+.aboutPage .aboutPageImg {
+    background: -webkit-gradient(linear, left top, left bottom, from(rgba(40,61,162, 0.3)), to(rgba(40,61,162, 0.3))), url("../../Images/aboutMeBackground.jpg") no-repeat center center;
+    background: linear-gradient(rgba(40,61,162, 0.3), rgba(40,61,162, 0.3)), url("../../Images/aboutMeBackground.jpg") no-repeat center center;
+    background-size: cover;
+    /* filter: blur(6px); */
+    z-index: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    -webkit-box-shadow: 0px 1px 5px 1px black;
+            box-shadow: 0px 1px 5px 1px black;
+}
+
+@media (max-width: 1050px) {
+    .aboutPage .aboutPageImg,
+    .aboutPage .aboutBanner {
+        height: 450px;
+    }
+
+    .aboutPage .aboutBanner br {
+        display: block;
+    }
+
+    .aboutPage .aboutBanner h1 {
+        font-size: 90px;
+    }
+}
+
+@media (max-width: 800px) {
+    .aboutPage .aboutPageImg,
+    .aboutPage .aboutBanner {
+        height: 400px;
+    }
+
+    .aboutPage .aboutBanner h1 {
+        font-size: 80px;
+    }
+}
+
+@media (max-width: 655px) {
+    .aboutPage .resumeChoices {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(auto, 2);
+    }
+}
+
+@media (max-width: 650px) {
+    .aboutPage .aboutPageImg,
+    .aboutPage .aboutBanner {
+        height: 350px;
+    }
+
+    .aboutPage .aboutBanner h1 {
+        font-size: 70px;
+    }
+}
+
+@media (max-width: 650px) {
+    .aboutPage .aboutPageImg,
+    .aboutPage .aboutBanner {
+        height: 350px;
+    }
+
+    .aboutPage .aboutBanner h1 {
+        font-size: 70px;
+    }
+}
+
+@media (max-width: 480px) {
+    .aboutPage .aboutPageImg,
+    .aboutPage .aboutBanner {
+        height: 300px;
+    }
+
+    .aboutPage .aboutBanner h1 {
+        font-size: 50px;
+    }
+}
+
+/* Section Formatting */
+
+.aboutPage .myValues {
+    width: 95%;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    vertical-align: top;
+    clear: both;
+}
+
+.aboutPage .myValues,
+.aboutPage .introAndContact {
+    background-color: white;
+    width: 100%;
+    height: auto;
+}
+
+.aboutPage .myValues {
+    background-color: rgb(224, 221, 213);
+}
+
+.aboutPage .myValues > div {
+    width: 45%;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.aboutPage .myValues {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+}
+
+/* Intro/Contact */
+
+.aboutPage .introAndContact {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    padding: 30px 20px;
+    margin-top: 10px;
+    margin-bottom: 0;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+}
+
+.aboutPage .softwareText {
+    width: 60%;
+}
+
+.aboutPage .seeMore {
+    width: 295px;
+    margin-left: 20px;
+}
+
+.aboutPage .seeMore,
+.aboutPage .aboutEmail {
+    text-decoration: none;
+}
+
+.aboutPage .seeMore span {
+    margin-right: 10px;
+    text-decoration: underline;
+}
+
+.aboutPage .seeMore p {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.aboutPage .seeMore a {
+    color: black;
+}
+
+.aboutPage .seeMore a:hover {
+    font-weight: 700;
+}
+
+.aboutPage .seeMore * {
+    font-family: "Montserrat", sans-serif;
+}
+
+.aboutPage .softwareText h3,
+.aboutPage .seeMore h3 {
+    margin-top: 0;
+    font-family: "Muli", sans-serif;
+}
+
+.aboutPage .row1,
+.aboutPage .row2 {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: space-evenly;
+        -ms-flex-pack: space-evenly;
+            justify-content: space-evenly;
+}
+
+.aboutPage .row1 {
+    width: 60%;
+}
+
+.aboutPage .row2 {
+    width: 40%;
+}
+
+@media (max-width: 1100px) {
+    .aboutPage .introAndContact {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "r2"
+            "r1";
+        padding: 0px 0px;
+    }
+
+    .aboutPage .softwareText,
+    .aboutPage .seeMore {
+        padding-left: 20px;
+    }
+
+    .aboutPage .softwareText {
+        width: 70%;
+        text-align: left;
+    }
+
+    .aboutPage .seeMore {
+        grid-area: m;
+    }
+
+    .aboutPage .row1 {
+        grid-area: r1;
+        width: 100%;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-pack: distribute;
+            justify-content: space-around;
+        text-align: center;
+        padding: 30px;
+    }
+
+    .aboutPage .row2 {
+        grid-area: r2;
+        width: 100%;
+        background-color: rgb(224, 221, 213);
+        display: grid;
+        grid-template-columns: 1fr 2fr 2fr 1fr;
+        grid-template-areas:
+            ". p m .";
+        padding: 30px;
+    }
+}
+
+@media (max-width: 550px) {
+    .aboutPage .row1,
+    .aboutPage .row2 {
+        padding-left: 20px;
+        padding-right: 20px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-pack: distribute;
+            justify-content: space-around;
+    }
+
+    .aboutPage .row1 {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "s"
+            "g";
+        grid-gap: 30px;
+    }
+
+    .aboutPage .row2 .seeMore {
+        width: 210px;
+        padding: 0;
+    }
+}
+
+/* My Values */
+
+@media (max-width: 1100px) {
+    .aboutPage .myValues {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-gap: 30px;
+    }
+
+    .aboutPage .myValues > div {
+        width: 100%;
+        margin: 0;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .aboutPage .valuesText {
+        grid-area: vt;
+    }
+}
+
+/* Pictures */
+
+.aboutPage .profilePic {
+    height: 240px;
+    width: 143.4px;
+}
+
+.aboutPage .profilePic img {
+    height: 240px;
+    width: 143.4px;
+}
+
+.aboutPage .gradPic {
+    height: 240px;
+    width: 160.25px;
+}
+
+.aboutPage .gradPic img {
+    height: 240px;
+    width: 160.25px;
+}
+
+.aboutPage .naturePic,
+.aboutPage .naturePic img {
+    height: 396px;
+    width: 528px;
+    vertical-align: middle;
+    margin: auto;
+    text-align: center;
+}
+
+.aboutPage .myValues .naturePic {
+    display: inline-block;
+    float: left;
+}
+
+@media (max-width: 1150px) {
+    .aboutPage .naturePic,
+    .aboutPage .naturePic img {
+        height: 344.52px;
+        width: 459.36px;
+    }
+}
+
+@media (max-width: 1100px) {
+    .aboutPage .gradPic,
+    .aboutPage .softwareText,
+    .aboutPage .profilePic,
+    .aboutPage .seeMore {
+        margin: auto;
+        width: 315px;
+    }
+
+    .aboutPage .profilePic {
+        grid-area: p;
+        background-color: rgb(224, 221, 213);
+    }
+
+    .aboutPage .myValues {
+        grid-template-areas:
+            "vt"
+            "vp";
+    }
+
+    .aboutPage .naturePic {
+        grid-area: vp;
+    }
+}
+
+@media (max-width: 700px) {
+    .aboutPage .naturePic,
+    .aboutPage .naturePic img {
+        height: 324px;
+        width: 432px;
+    }
+}
+
+@media (max-width: 550px) {
+    .aboutPage .profilePic,
+    .aboutPage .profilePic img {
+        height: 159.6px;
+        width: 95.6px;
+    }
+
+    .aboutPage .softwareText {
+        grid-area: s;
+        width: 100%;
+        padding-left: 0;
+    }
+
+    .aboutPage .seeMore .gapEmailAndCell {
+        margin-top: 10px;
+    }
+
+    .aboutPage .gradPic {
+        grid-area: g;
+    }
+}
+
+@media (max-width: 530px) {
+    .aboutPage .naturePic,
+    .aboutPage .naturePic img {
+        height: 255px;
+        width: 340px;
+    }
+}

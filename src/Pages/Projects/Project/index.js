@@ -13,7 +13,6 @@ class ProjectContainer extends Component {
     }
 
     handleClick(e) {
-        console.dir(e.target);
         if (e.target.id !== "ignoreToggle") {
             this.setState(prevState => {
                 return {
@@ -37,7 +36,7 @@ class ProjectContainer extends Component {
         let techList = this.props.tech && this.props.tech.reduce((total, elem) => {
             return total + elem + ", ";
         }, "");
-        techList = techList.slice(0, techList.length - 2)
+        techList = techList.slice(0, techList.length - 2);   // remove last ", "
 
         const imageList = this.props.pictures && this.props.pictures.map((image, index) => {
             return <ProjectImage

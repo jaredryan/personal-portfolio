@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Thumbnail from './Thumbnail';
+import './index.css';
 
 class Home extends Component {
   render() {
@@ -7,15 +8,15 @@ class Home extends Component {
           {
               name: "Projects",
               path: "/projects",
-              imgURL: require("./Images/homepageProjects.png")
+              imgURL: require("../../Images/homepageProjects.png")
           },{
               name: "About",
               path: "/about",
-              imgURL: require("./Images/aboutMeIcon.jpg")
+              imgURL: require("../../Images/aboutMeIcon.jpg")
           },{
               name: "Resume",
               path: "/resume",
-              imgURL: require("./Images/resumeHomeIcon.png")
+              imgURL: require("../../Images/resumeHomeIcon.png")
           }
       ];
 

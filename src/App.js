@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import Navbar from './Navbar';
-import Footer from './Footer';
-import Home from './Home';
-import About from './About';
-import Projects from './Projects';
-import Resume from './Resume';
+import Navbar from './Components/Navbar';
+import Footer from './Components/Footer';
+import Home from './Pages/Home';
+import About from './Pages/About';
+import Projects from './Pages/Projects';
+import Resume from './Pages/Resume';
 
 class App extends Component {
 

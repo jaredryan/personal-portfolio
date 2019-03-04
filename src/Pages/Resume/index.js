@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './index.css';
 
 const Resume = () => {
     return (
@@ -13,7 +14,7 @@ const Resume = () => {
                 <h2>Objective</h2>
                 <p>Recent engineering UC Berkeley graduate with computer science emphasis who also learned frontend and full stack web development skills. Looking to apply computer science and web development training as a software developer or web developer.</p>
             </div>
-            
+
             <div className="skills">
                 <h2>Skills</h2>
                 <div className="skillsGrid">
@@ -55,23 +56,23 @@ const Resume = () => {
                     </div>
                 </div>
             </div>
-            
+
             <Link to="/projects" className="goToProjects"><button>See Projects</button></Link>
-            
+
             <div className="education">
                 <h2>Education</h2>
-                <div className="educationEntry edu1">
+                <div className="edu1">
                     <h3>V School</h3>
                     <h4>Full Stack JavaScript Web Development (MERN Stack)</h4>
                     <h5>April 2018</h5>
                 </div>
-                <div className="educationEntry edu2">
+                <div className="edu2">
                     <h3>University of California, Berkeley—College of Engineering</h3>
                     <h4>B.S. Bioengineering with Computer Science Emphasis</h4>
                     <h5>December 2017</h5>
                 </div>
             </div>
-            
+
             <div className="coursework">
                 <h2>Relevant University Coursework</h2>
                 <ul>
@@ -86,10 +87,10 @@ const Resume = () => {
                     <li>Numerical Analysis, Multivariable Calculus, and Linear Algebra</li>
                 </ul>
             </div>
-            
+
             <div className="workExperience">
                 <h2>Work Experience</h2>
-                <div className="workEntry work1">
+                <div className="work1">
                     <h3>Full-time Volunteer Public Representative, Trainer, and Manager: April 2013—March 2015</h3>
                     <h4>The Church of Jesus Christ of Latter Day Saints – Rio Grande do Sul, Brazil</h4>
                     <ul>
@@ -98,7 +99,7 @@ const Resume = () => {
                         <li>Achieved fluency in Portuguese in writing, reading, and speaking</li>
                     </ul>
                 </div>
-                <div className="workEntry work2">
+                <div className="work2">
                     <h3>Messenger and Receptionist: January 2012—April 2012</h3>
                     <h4>Motschiedler, Michaelides, Wishon, Brewer & Ryan, LLP - Fresno, California</h4>
                     <ul>
@@ -107,7 +108,7 @@ const Resume = () => {
                     </ul>
                 </div>
             </div>
-        </div>    
+        </div>
     );
 }
 

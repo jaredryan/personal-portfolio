@@ -76,10 +76,6 @@ nav a:hover {
     text-shadow: none;
 }
 
-.seeMore, .aboutEmail {
-    text-decoration: none;
-}
-
 .homepageImg {
     background: -webkit-gradient(linear, left top, left bottom, from(rgba(20,41,112, 0.4)), to(rgba(20,41,112, 0.4))), url("Images/homepageImage.jpeg") no-repeat center center;
     background: linear-gradient(rgba(20,41,112, 0.4), rgba(20,41,112, 0.4)), url("Images/homepageImage.jpeg") no-repeat center center;
@@ -327,200 +323,14 @@ footer ul li span {
 }
 
 
-.aboutPage,
 .projectsPage {
     color: black;
     margin-top: 0;
     padding: 20px 30px;
 }
 
-.aboutPage {
-    background-color: rgb(224, 221, 213);
-}
-
 .projectsPage {
     background-color: white;
-}
-
-.webBanner {
-    position: relative;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    color: white;
-    height: 450px;
-    margin-top: 0px;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    background-color: transparent;
-    bottom: 50px;
-    margin-bottom: -50px;
-    background-color: rgb(46,53,70);
-}
-
-.webBanner h1 {
-    z-index: 1;
-    font-size: 100px;
-    margin: 0px;
-    text-align: center;
-    font-weight: 700;
-    text-shadow: 2px 2px black;
-    position: relative;
-    top: 5%;
-}
-
-.webBanner .downloadButton {
-    z-index: 1;
-    width: 250px;
-}
-
-.webBanner .downloadButton button {
-    background-color: rgb(224,221,213);
-    opacity: 0.7;
-    border-radius: 0px;
-    color: rgb(112,53,41);
-    font-weight: 300;
-    font-size: 25px;
-    height: 40px;
-}
-
-.webBanner .downloadButton button:hover {
-    background-color: rgb(100,50,30);
-    color: rgb(224,221,213);
-    font-weight: 200;
-}
-
-.objective, .skills, .education, .coursework, .workExperience {
-    margin-top: 0;
-    margin-bottom: 0;
-    padding: 30px 20px;
-}
-
-.skills, .education, .workExperience {
-    background-color: white;
-}
-
-.webPageImg {
-    background: -webkit-gradient(linear, left top, left bottom, from(rgba(20,41,132, 0.3)), to(rgba(20,41,132, 0.3))), url("Images/resumeBackground.jpeg") no-repeat center center;
-    background: linear-gradient(rgba(20,41,132, 0.3), rgba(20,41,132, 0.3)), url("Images/resumeBackground.jpeg") no-repeat center center;
-    background-size: cover;
-    /* filter: blur(5px); */
-    z-index: 0;
-    height: 100%;
-    width: 100%;
-    padding: 0;
-    margin: 0;
-    position: absolute;
-    top: 0;
-    left: 0;
-    -webkit-box-shadow: 0px 1px 5px 1px black;
-            box-shadow: 0px 1px 5px 1px black;
-}
-
-.webResumePage {
-    background-color: rgb(224, 221, 213);
-    color: black;
-    margin: 0;
-    padding: 0;
-}
-
-.webResumePage h2 {
-    text-align: center;
-    margin-top: 0;
-    font-size: 30px;
-    color: rgb(112,53,41);
-    font-weight: 800;
-    border-bottom: 1px solid grey;
-    width: 350px;
-    margin: 0 auto;
-    margin-bottom: 30px;
-    padding-bottom: 5px;
-    font-weight: 400;
-}
-
-.skillsGrid div {
-    width: 170px;
-    padding-left: 10px;
-    padding-right: 10px;
-    margin: 0px auto;
-}
-
-.skillsGrid {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
-    -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
-    /* grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    grid-gap: 20px; */
-}
-
-.coursework h2 {
-    width: 600px;
-}
-
-.webResumePage h3, .webResumePage h4, .webResumePage h5 {
-    margin-top: 5px;
-    margin-bottom: 5px;
-    color: rgb(40,61,112)
-}
-
-.webResumePage h4 {
-    font-weight: 600;
-    color: rgb(46,53,70);
-}
-
-.workExperience .work1,
-.education .edu1 {
-    margin-bottom: 30px;
-}
-
-.workExperience .work2,
-.education .edu2 {
-    margin-top: 30px;
-}
-
-.webResumePage h5 {
-    font-weight: 400;
-}
-
-.goToProjects {
-    width: 260px;
-    display: block;
-    margin: 20px auto;
-}
-
-.webResumePage button {
-    height: 50px;
-    width: 100%;
-    border-radius: 10px;
-    border: 2px solid rgb(180, 180, 180);
-    padding: 1px;
-    margin-bottom: 0px;
-    font-size: 30px;
-    color: rgb(46,53,70);
-    font-weight: 700;
-    background-color: white;
-}
-
-.webResumePage button:hover {
-    cursor: pointer;
-    background-color: #d09d55;
-    color: white;
-    border: 2px solid rgb(46,53,70);
-    -webkit-transition-duration: 150ms;
-            transition-duration: 150ms;
 }
 
 .resumeChoices {
@@ -549,251 +359,12 @@ footer ul li span {
     border-radius: 50%;
 }
 
-.aboutPage .profilePic {
-    height: 240px;
-    width: 143.4px;
-}
 
-.aboutPage .profilePic img {
-    height: 240px;
-    width: 143.4px;
-}
 
-.aboutPage .gradPic {
-    height: 240px;
-    width: 160.25px;
-}
-
-.aboutPage .gradPic img {
-    height: 240px;
-    width: 160.25px;
-}
-
-.aboutPage .naturePic,
-.aboutPage .naturePic img {
-    height: 396px;
-    width: 528px;
-    vertical-align: middle;
-    margin: auto;
-    text-align: center;
-}
-
-.aboutPage .swedenPic,
-.aboutPage .swedenPic img {
-    height: 379.96px;
-    width: 573.44px;
-    text-align: center;
-    margin: auto;
-}
-
-.aboutPage .valuesPic,
-.aboutPage .valuesPic img {
-    height: 384px;
-    width: 576px;
-    vertical-align: middle;
-    margin: auto;
-    text-align: center;
-}
-
-.aboutPage h1 {
-    font-size: 40px;
-    text-align: center;
-    margin-top: 5px;
-}
-
-.aboutPage .intro {
-    vertical-align: top;
-}
-
-.seeMore span {
-    margin-right: 10px;
-    text-decoration: underline;
-}
-
-.seeMore p {
-    margin-top: 0;
-}
-
-.seeMore a {
-    color: black;
-}
-
-.aboutPage .myBackground,
-.aboutPage .myInterests,
-.aboutPage .myValues {
-    width: 95%;
-    padding-left: 2.5%;
-    padding-right: 2.5%;
-    padding-top: 30px;
-    padding-bottom: 30px;
-    vertical-align: top;
-    clear: both;
-}
-
-.aboutPage .myBackground,
-.aboutPage .myInterests,
-.aboutPage .myValues,
-.aboutPage .introAndContact {
-    background-color: white;
-    width: 100%;
-    height: auto;
-}
-
-.aboutPage .myInterests,
-.aboutPage .myValues {
-    background-color: rgb(224, 221, 213);
-}
-
-.aboutPage .myBackground > div, .aboutPage .myInterests > div,
-.aboutPage .myValues > div {
-    width: 45%;
-    margin-left: 2.5%;
-    margin-right: 2.5%;
-    display: inline-block;
-    vertical-align: middle;
-}
-
-.aboutPage .myValues,
-.aboutPage .myBackground,
-.aboutPage .myInterests {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-}
-
-.aboutPage h3 {
-    text-align: center;
-    font-size: 28px;
-    margin-top: 10px;
-}
-
-.aboutPage, .projectsPage {
+.projectsPage {
     margin: 0;
     padding: 20px 0;
     padding-bottom: 0px;
-}
-
-.myValues .naturePic {
-    display: inline-block;
-    float: left;
-}
-
-.myBackground .swedenPic,
-.myValues .valuesPic  {
-    display: inline-block;
-    float: left;
-}
-
-.introAndContact {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    padding: 30px 20px;
-    margin-top: 10px;
-    margin-bottom: 0;
-    -ms-flex-pack: distribute;
-        justify-content: space-around;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-}
-
-.row1,
-.row2 {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    -webkit-box-pack: space-evenly;
-        -ms-flex-pack: space-evenly;
-            justify-content: space-evenly;
-}
-
-.row1 {
-    width: 60%;
-}
-
-.row2 {
-    width: 40%;
-}
-
-.softwareText {
-    width: 60%;
-}
-
-.seeMore {
-    width: 295px;
-    margin-left: 20px;
-}
-
-.softwareText h3, .seeMore h3 {
-    margin-top: 0;
-    font-family: "Muli", sans-serif;
-}
-
-.aboutPage h3 {
-    color: rgb(112,53,41);
-    font-weight: 400;
-}
-
-.aboutPage * {
-    color: rgb(46,53,70);
-}
-
-
-
-.aboutPageImg {
-    background: -webkit-gradient(linear, left top, left bottom, from(rgba(40,61,162, 0.3)), to(rgba(40,61,162, 0.3))), url("Images/aboutMeBackground.jpg") no-repeat center center;
-    background: linear-gradient(rgba(40,61,162, 0.3), rgba(40,61,162, 0.3)), url("Images/aboutMeBackground.jpg") no-repeat center center;
-    background-size: cover;
-    /* filter: blur(6px); */
-    z-index: 0;
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    -webkit-box-shadow: 0px 1px 5px 1px black;
-            box-shadow: 0px 1px 5px 1px black;
-}
-
-.aboutBanner {
-    position: relative;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    color: white;
-    height: 500px;
-    margin-top: -40px;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    background-color: rgb(46,53,70);
-    bottom: 20px;
-    margin-bottom: -30px;
-}
-
-.aboutBanner > h1 {
-    z-index: 1;
-    font-size: 100px;
-    margin: 0px;
-    text-align: center;
-    font-weight: 700;
-    text-shadow: 2px 2px black;
-    color: white;
-    /* font-weight: 300; */
 }
 
 .projectPageImg {
@@ -844,15 +415,6 @@ footer ul li span {
     text-align: center;
     font-weight: 700;
     text-shadow: 2px 2px black;
-}
-
-.seeMore p {
-    margin-top: 0;
-    margin-bottom: 0;
-}
-
-.seeMore a:hover {
-    font-weight: 700;
 }
 
 .projectsDiv {
@@ -994,10 +556,6 @@ footer ul li span {
     margin-right: 10px;
 }
 
-.aboutBanner br {
-    display: none;
-}
-
 footer {
     text-align: center;
     font-size: 30px;
@@ -1019,43 +577,8 @@ footer a:hover {
     color: rgb(208,157,85);
 }
 
-.seeMore * {
-    font-family: "Montserrat", sans-serif;
-}
-
 .mobile {
     display: none;
-}
-
-.webResumePage h3 {
-    font-size: 24px;
-    line-height: 34px;
-}
-
-.webResumePage h4 {
-    margin-top: 10px;
-    font-size: 20px;
-    font-weight: 400;
-    line-height: 28px;
-}
-
-.webResumePage h5 {
-    font-size: 18px;
-    font-family: "Montserrat", sans-serif;
-    font-weight: 300;
-    margin-top: 8px;
-}
-
-.objective, .education, .coursework, .workExperience {
-    padding-left: 9%;
-    padding-right: 9%;
-}
-
-@media (max-width: 1400px) {
-    .objective, .education, .coursework, .workExperience {
-        padding-left: 8%;
-        padding-right: 8%;
-    }
 }
 
 @media (max-width: 1200px) {
@@ -1065,136 +588,7 @@ footer a:hover {
     }
 }
 
-@media (max-width: 1300px) {
-    .aboutPage .valuesPic,
-    .aboutPage .valuesPic img {
-        height: 345.6px;
-        width: 518.4px;
-    }
-
-    .aboutPage .swedenPic,
-    .aboutPage .swedenPic img {
-        height: 341.964px;
-        width: 516.096px;
-    }
-}
-
-@media (max-width: 1150px) {
-    .aboutPage .valuesPic,
-    .aboutPage .valuesPic img {
-        height: 307.2px;
-        width: 460.8px;
-    }
-
-    .aboutPage .naturePic,
-    .aboutPage .naturePic img {
-        height: 344.52px;
-        width: 459.36px;
-    }
-
-    .aboutPage .swedenPic,
-    .aboutPage .swedenPic img {
-        height: 303.968px;
-        width: 458.752px;
-    }
-}
-
 @media (max-width: 1100px) {
-    .objective, .education, .coursework, .workExperience {
-        padding-left: 7%;
-        padding-right: 7%;
-    }
-
-    .gradPic,
-    .softwareText,
-    .profilePic,
-    .seeMore {
-        margin: auto;
-        width: 315px;
-    }
-
-    .softwareText {
-        width: 70%;
-    }
-
-    .profilePic {
-        grid-area: p;
-        background-color: rgb(224, 221, 213);
-    }
-
-    .softwareText, .seeMore {
-        padding-left: 20px;
-    }
-
-    .seeMore {
-        grid-area: m;
-    }
-
-    .row1 {
-        grid-area: r1;
-        width: 100%;
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        -ms-flex-pack: distribute;
-            justify-content: space-around;
-        text-align: center;
-        padding: 30px;
-    }
-
-    .row2 {
-        grid-area: r2;
-        width: 100%;
-        background-color: rgb(224, 221, 213);
-        display: grid;
-        grid-template-columns: 1fr 2fr 2fr 1fr;
-        grid-template-areas:
-            ". p m .";
-        padding: 30px;
-    }
-
-    .introAndContact {
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-template-areas:
-            "r2"
-            "r1";
-        padding: 0px 0px;
-    }
-
-    .softwareText {
-        text-align: left;
-    }
-
-    .aboutPage .myValues,
-    .aboutPage .myInterests,
-    .aboutPage .myBackground {
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-gap: 30px;
-    }
-
-    .aboutPage h3 {
-        margin-top: 0;
-    }
-
-    .aboutPage .myValues > div,
-    .aboutPage .myInterests > div,
-    .aboutPage .myBackground > div {
-        width: 100%;
-        margin: 0;
-        padding-left: 10px;
-        padding-right: 10px;
-    }
-
-    .naturePic {
-        grid-area: vp;
-    }
-
-    .valuesText {
-        grid-area: vt;
-    }
-
     .backgroundText {
         grid-area: bt;
     }
@@ -1206,40 +600,6 @@ footer a:hover {
     .interestsText {
         grid-area: it;
     }
-
-
-    .myValues {
-        grid-template-areas:
-            "vt"
-            "vp";
-    }
-
-    .myInterests {
-        grid-template-areas:
-            "it"
-            "ip";
-    }
-
-    .myBackground {
-        grid-template-areas:
-            "bt"
-            "bp";
-    }
-}
-
-@media (max-width: 1050px) {
-    .aboutPageImg, .aboutBanner {
-        height: 450px;
-    }
-
-    .aboutBanner br {
-        display: block;
-    }
-
-    .aboutBanner h1 {
-        font-size: 90px;
-    }
-
 }
 
 @media (max-width: 950px) {
@@ -1256,29 +616,7 @@ footer a:hover {
     }
 }
 
-@media (max-width: 900px) {
-    .objective, .education, .coursework, .workExperience {
-        padding-left: 6%;
-        padding-right: 6%;
-    }
-}
-
-@media (max-width: 850px) {
-    .webBanner, .webPageImg {
-        height: 375px;
-    }
-
-    .webBanner h1 {
-        font-size: 85px;
-    }
-}
-
 @media (max-width: 800px) {
-    .objective, .education, .coursework, .workExperience {
-        padding-left: 5%;
-        padding-right: 5%;
-    }
-
     .homepageText h1 {
         font-size: 80px;
     }
@@ -1289,14 +627,6 @@ footer a:hover {
 
     .homepageImg, header {
         height: 450px;
-    }
-
-    .aboutPageImg, .aboutBanner {
-        height: 400px;
-    }
-
-    .aboutBanner h1 {
-        font-size: 80px;
     }
 }
 
@@ -1324,22 +654,6 @@ footer a:hover {
         line-height: 26px;
     }
 
-    .webResumePage h3 {
-        font-size: 22px;
-        line-height: 32px;
-    }
-
-    .webResumePage h4 {
-        font-size: 18px;
-        margin-top: 9px;
-        line-height: 26px;
-    }
-
-    .webResumePage h5 {
-        font-size: 16px;
-        margin-top: 7px;
-    }
-
     p, li {
         font-size: 16px;
         line-height: 22px;
@@ -1358,30 +672,6 @@ footer a:hover {
     }
 }
 
-@media (max-width: 700px) {
-    .coursework h2 {
-        width: 100%;
-    }
-
-    .aboutPage .swedenPic,
-    .aboutPage .swedenPic img {
-        height: 271.4px;
-        width: 409.6px;
-    }
-
-    .aboutPage .valuesPic,
-    .aboutPage .valuesPic img {
-        height: 320px;
-        width: 480px;
-    }
-
-    .aboutPage .naturePic,
-    .aboutPage .naturePic img {
-        height: 324px;
-        width: 432px;
-    }
-}
-
 @media (max-width: 679px) {
     .threeThumbnails {
         padding: 0;
@@ -1397,23 +687,6 @@ footer a:hover {
 
     #About:hover {
         background-color: rgb(208,157,85);
-    }
-
-    .webBanner, .webPageImg {
-        height: 325px;
-    }
-
-    .webBanner h1 {
-        font-size: 75px;
-    }
-
-    .webBanner .downloadButton {
-        width: 210px;
-    }
-
-    .webBanner .downloadButton button {
-        font-size: 22px;
-        height: 38px;
     }
 }
 
@@ -1437,14 +710,6 @@ footer a:hover {
         height: 350px;
     }
 
-    .aboutPageImg, .aboutBanner {
-        height: 350px;
-    }
-
-    .aboutBanner h1 {
-        font-size: 70px;
-    }
-
     .projectBanner, .projectPageImg {
         height: 300px;
     }
@@ -1466,70 +731,8 @@ footer a:hover {
 
 
 @media (max-width: 550px) {
-    .webBanner, .webPageImg {
-        height: 300px;
-    }
-
-    .webBanner h1 {
-        font-size: 65px;
-    }
-
-    .webBanner .downloadButton {
-        width: 200px;
-    }
-
-    .webBanner .downloadButton button {
-        font-size: 20px;
-        height: 35px;
-    }
-
-    .row1,
-    .row2 {
-        padding-left: 20px;
-        padding-right: 20px;
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        -ms-flex-pack: distribute;
-            justify-content: space-around;
-    }
-
-    .aboutPage .profilePic,
-    .aboutPage .profilePic img {
-        height: 159.6px;
-        width: 95.6px;
-    }
-
-    .row2 .seeMore {
-        width: 210px;
-        padding: 0;
-    }
-
     .mobile {
         display: block;
-    }
-
-    .seeMore .gapEmailAndCell {
-        margin-top: 10px;
-    }
-
-    .softwareText {
-        grid-area: s;
-        width: 100%;
-        padding-left: 0;
-    }
-
-    .gradPic {
-        grid-area: g;
-    }
-
-    .row1 {
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-template-areas:
-            "s"
-            "g";
-        grid-gap: 30px;
     }
 
     .projectEntry ul {
@@ -1543,26 +746,6 @@ footer a:hover {
     .projectImage, .projectImage img {
         height: 243.75px;
         width: 390px;
-    }
-}
-
-@media (max-width: 530px) {
-    .aboutPage .swedenPic,
-    .aboutPage .swedenPic img {
-        height: 225.283px;
-        width: 340px;
-    }
-
-    .aboutPage .naturePic,
-    .aboutPage .naturePic img {
-        height: 255px;
-        width: 340px;
-    }
-
-    .aboutPage .valuesPic,
-    .aboutPage .valuesPic img {
-        height: 227px;
-        width: 340px;
     }
 }
 
@@ -1587,24 +770,12 @@ footer a:hover {
         font-size: 20px;
     }
 
-    .aboutPageImg, .aboutBanner {
-        height: 300px;
-    }
-
-    .aboutBanner h1 {
-        font-size: 50px;
-    }
-
     .projectBanner, .projectPageImg {
         height: 250px;
     }
 
     .projectBanner h1 {
         font-size: 60px;
-    }
-
-    .webResumePage h2 {
-        width: 100%;
     }
 }
 
