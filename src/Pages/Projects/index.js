@@ -7,7 +7,7 @@ class Projects extends Component {
       const webProjects = [
           {
               title: "Negotiation Feedback",
-              subtitle: "Fullstack on-going application with complex frontend and backend",
+              subtitle: "Complex, actively-used, fullstack application with on-going development",
               description: ["Fullstack JavaScript application with an internal server used for API calls",
                             "MongoDB maintains all students, teachers, schools, reviews, and assignments",
                             "Utilizes redux to keep track of and display all necessary information for the current user",
