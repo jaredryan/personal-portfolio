@@ -1,0 +1,166 @@
+/* Done */
+/*
+
+ */
+
+ /* ToDo */
+ /*
+ mainPage
+
+
+
+
+  */
+
+
+.mainPage header {
+    position: relative;
+    height: 600px;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+    color: white;
+    text-shadow: 1px 1px black;
+    height: 600px;
+    margin-top: -40px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    background-color: transparent;
+}
+
+
+.mainPage .homepageImg {
+    background: -webkit-gradient(linear, left top, left bottom, from(rgba(20,41,112, 0.4)), to(rgba(20,41,112, 0.4))), url("../../Images/homepageImage.jpeg") no-repeat center center;
+    background: linear-gradient(rgba(20,41,112, 0.4), rgba(20,41,112, 0.4)), url("../../Images/homepageImage.jpeg") no-repeat center center;
+    /* filter: blur(8px); */
+    z-index: 0;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    -webkit-box-shadow: 0px 1px 5px 1px black;
+        box-shadow: 0px 1px 5px 1px black;
+}
+
+@media (max-width: 950px) {
+    .mainPage .homepageImg,
+    .mainPage header {
+        height: 500px;
+    }
+}
+
+@media (max-width: 800px) {
+    .mainPage .homepageImg,
+    .mainPage header {
+        height: 450px;
+    }
+}
+
+@media (max-width: 650px) {
+    .mainPage .homepageImg,
+    .mainPage header {
+        height: 350px;
+    }
+}
+
+@media (max-width: 480px) {
+    .mainPage .homepageImg,
+    .mainPage header {
+        height: 300px;
+    }
+}
+
+.mainPage .homepageText {
+    z-index: 1;
+}
+
+.mainPage header h1 {
+    font-size: 110px;
+    margin: 0px;
+    text-align: center;
+    font-weight: 700;
+    text-shadow: 2px 2px black;
+}
+
+.mainPage header h2 {
+    font-size: 55px;
+    text-align: center;
+    font-weight: 400;
+    margin-top: 20px;
+    text-shadow: 2px 2px black;
+}
+
+@media (max-width: 800px) {
+    .mainPage .homepageText h1 {
+        font-size: 80px;
+    }
+
+    .mainPage .homepageText h2 {
+        font-size: 40px;
+    }
+}
+
+@media (max-width: 650px) {
+    .mainPage .homepageText h1 {
+        font-size: 60px;
+    }
+
+    .mainPage .homepageText h2 {
+        font-size: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .mainPage .homepageText h1 {
+        font-size: 45px;
+    }
+
+    .mainPage .homepageText h2 {
+        font-size: 24px;
+    }
+}
+
+/* Thumbnail Formatting */
+
+.mainPage .threeThumbnails {
+    margin-top: 0;
+    background-color: white;
+    margin-bottom: 0;
+    padding: 0px 20px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+}
+
+.mainPage .threeThumbnails a {
+    color: black;
+    text-decoration: none;
+    text-align: center;
+}
+
+.mainPage .threeThumbnails h3 {
+    font-size: 38px;
+    margin-bottom: 0px;
+    color: rgb(112,53,41);
+    font-weight: 300;
+}
+
+@media (max-width: 679px) {
+    .mainPage .threeThumbnails {
+        padding: 0;
+    }
+}

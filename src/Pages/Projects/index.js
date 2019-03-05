@@ -313,11 +313,11 @@ class Projects extends Component {
                 <h1>Projects</h1>
                 <div className="projectPageImg"></div>
             </div>
-            <h2 className="devHeader">Websites</h2>
+            <h2>Websites</h2>
             <div className="projectsDiv">
                 {mappedWebProjects}
             </div>
-            <h2 className="devHeader">Software Development</h2>
+            <h2>Software Development</h2>
             <div className="projectsDiv">
                 {mappedSoftwareProjects}
             </div>

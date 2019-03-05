@@ -244,6 +244,10 @@
     font-family: "Montserrat", sans-serif;
 }
 
+.aboutPage .mobile {
+    display: none;
+}
+
 .aboutPage .softwareText h3,
 .aboutPage .seeMore h3 {
     margin-top: 0;
@@ -343,6 +347,10 @@
     .aboutPage .row2 .seeMore {
         width: 210px;
         padding: 0;
+    }
+
+    .aboutPage .mobile {
+        display: block;
     }
 }
 
