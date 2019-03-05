@@ -6,49 +6,21 @@ class Projects extends Component {
   render() {
       const webProjects = [
           {
-              title: "Nest Invaders",
-              subtitle: "A 2D shooting game built in a fullstack website",
-              description: ["Made game from scratch using JSX, CSS, and JavaScript",
-                            "Game comes with a simple UI, several levels, and several waves of different types for each level",
-                            "Has a full authentication package, complete with hashed passwords and an ability to safely reset your password if you forget it",
-                            "Utilizes redux to keep track of the current user's current level and scores and current",
-                            "MongoDB and the backend maintains scores and uers",
-                            "Fully responsive for screens of all sizes"],
-              demo: "http://nestinvaders.herokuapp.com/",
-              github: "https://github.com/jaredryan/best-class-side-scroller",
-              tech: ['React', 'Express', 'MongoDB', 'Node.js', 'JavaScript', 'JSX', 'CSS'],
-              pictures: [
-                  {
-                      caption: "Home Page",
-                      id: require("../../Images/NIMainPage.png")
-                  },
-                  {
-                      caption: "Game",
-                      id: require("../../Images/NIGame.png")
-                  },
-                  {
-                      caption: "Levels, Instructions, and Scores",
-                      id: require("../../Images/NIScoresAndLevels.png")
-                  },
-                  {
-                      caption: "Profile Page",
-                      id: require("../../Images/NIProfileForms.png")
-                  },
-              ]
-          },
-          {
-              title: "Negotiation Feedback (In Progress)",
-              subtitle: "Fullstack application with complex backend",
+              title: "Negotiation Feedback",
+              subtitle: "Fullstack on-going application with complex frontend and backend",
               description: ["Fullstack JavaScript application with an internal server used for API calls",
                             "MongoDB maintains all students, teachers, schools, reviews, and assignments",
-                            "Utilizes redux to keep track of all necessary information for the current user",
-                            "User authentication allows for security and appropriate filtering to display relevant information (in progress)",
-                            "Allows for creating of new surveys, assignments, and reviews, which are selectively available to other users",
-                            "Teachers may edit their students' information and reviews as required",
-                            "Users may submit feedback, which the administrator may view in the site, then set up to fire off an email to that user as a response",
-                            "Utilizes the Stripe package to charge users (in progress)",
-                            "Students can see their grades through Victory's data visualization package (in progress)",
-                            "Fully responsive for screens of all sizes"],
+                            "Utilizes redux to keep track of and display all necessary information for the current user",
+                            "User authentication allows for security and displays 1 of 3 dashboards, depending on whether the user is a student, teacher, or admin",
+                            "Students can join as many classes as they need, submit anonymous evaluations about their peers, receive feedback from teachers, revise evaluations and resubmit, and receive reports of their peers' feedback.",
+                            "Student reports allow them to their grades and statistics through Victory's data visualization package, as well as anonymous peer feedback",
+                            "Teachers create classes, sprints (grouping of assignments used to generate feedback reports), and assignments to generate evaluations and reports for their students",
+                            "Teachers can also submit feedback on students' evaluations (sorting and filtering the feedback as needed) release their feedback to the students, and regrade their feedback",
+                            "Teachers can also see the roster of their students for each class",
+                            "Adminstrators manage the schools of the site, and they may view (and delete, if needed) all teachers and classes on the site",
+                            "A Contact page allows anyone to contact the Administrator about the site, and the Administrator, from their dashboard, can see and respond to their feedback.",
+                            "An FAQ has been thoughtfully constructed to make the site more user-friendly",
+                            "This site has gone through two design iterations, with the latest designs coming first in the images below"],
               demo: "https://negotiationfeedback.herokuapp.com/",
               github: "https://github.com/jaredryan/peer-review",
               tech: ['React', 'Express', 'MongoDB', 'Node.js', 'JavaScript', 'JSX', 'CSS'],
@@ -80,6 +52,37 @@ class Projects extends Component {
               ]
           },
           {
+              title: "Nest Invaders",
+              subtitle: "A 2D shooting game built in a fullstack website with secure login",
+              description: ["Made game from scratch using JSX, CSS, and JavaScript",
+                            "Game comes with a simple UI, several levels, and several waves of different types for each level",
+                            "Has a full authentication package, complete with hashed passwords and an ability to safely reset your password if you forget it",
+                            "Utilizes redux to keep track of the current user's current level and scores and current",
+                            "MongoDB and the backend maintains scores and uers",
+                            "Fully responsive for screens of all sizes"],
+              demo: "http://nestinvaders.herokuapp.com/",
+              github: "https://github.com/jaredryan/best-class-side-scroller",
+              tech: ['React', 'Express', 'MongoDB', 'Node.js', 'JavaScript', 'JSX', 'CSS'],
+              pictures: [
+                  {
+                      caption: "Home Page",
+                      id: require("../../Images/NIMainPage.png")
+                  },
+                  {
+                      caption: "Game",
+                      id: require("../../Images/NIGame.png")
+                  },
+                  {
+                      caption: "Levels, Instructions, and Scores",
+                      id: require("../../Images/NIScoresAndLevels.png")
+                  },
+                  {
+                      caption: "Profile Page",
+                      id: require("../../Images/NIProfileForms.png")
+                  },
+              ]
+          },
+          {
               title: "We, the Issues",
               subtitle: "First fullstack application with React and Node.js",
               description: ["Fullstack JavaScript application with an internal server used for API calls",
@@ -104,7 +107,7 @@ class Projects extends Component {
           },
           {
               title: "Pokémon Team Builder",
-              subtitle: "React app done with redux and api integration",
+              subtitle: "First React app with Redux",
               description: ["Performs search on a Pokémon-based API using the Axios and Thunk packages", "Stores two lists, two slots, and search results using Redux", "Local state used for JavaScript manipulation", "Use of router and switch to change between pages and parts of the page", "Fully responsive for screens of all sizes"],
               demo: "http://buildpokemonteam.surge.sh/",
               github: "https://github.com/jaredryan/pokemon-team-builder",
@@ -168,93 +171,93 @@ class Projects extends Component {
                       id: require("../../Images/openHouse3.png")
                   }
               ]
-          },
-          {
-              title: "Design Replication",
-              subtitle: "Practice mimicking a site's design without copying code",
-              description: ["Original site for reference: http://kandjdiaries.com/", "Crash-course in how to make a well-designed website", "Without accessing the website's code, the experience was similar to that of making a website from mockups", "Fully responsive for all screen sizes", "Learned how to use font awesome for icons"],
-              demo: "https://jaredryan.github.io/site-replication/",
-              github: "https://github.com/jaredryan/site-replication",
-              tech: ['HTML', 'CSS'],
-              pictures: [
-                  {
-                      caption: "Blog Title",
-                      id: require("../../Images/kandj1.png")
-                  },
-                  {
-                      caption: "Blog Entry",
-                      id: require("../../Images/kandj2.png")
-                  },
-                  {
-                      caption: "Footer",
-                      id: require("../../Images/kandj3.png")
-                  }
-              ]
-          },
-          {
-              title: "MovieRecs",
-              subtitle: "First website",
-              description: ["Performs a movie search using public APIs", "Interface allows user to create and edit a recommendation list as desired"],
-              demo: "https://jaredryan.github.io/movie_recs/",
-              github: "https://github.com/jaredryan/movie_recs",
-              tech: ['JavaScript', 'HTML', 'CSS'],
-              pictures: [
-                  {
-                      caption: "Home",
-                      id: require("../../Images/movieRecs1.png")
-                  },
-                  {
-                      caption: "Results",
-                      id: require("../../Images/movieRecs2.png")
-                  },
-                  {
-                      caption: "Wish List",
-                      id: require("../../Images/movieRecs3.png")
-                  }
-              ]
-          },
-          {
-              title: "Tech JobPrep",
-              subtitle: "First multipage website",
-              description: ["A static website with multiple pages", "Design choices based off of matching a text editor", "Fully responsive for screens of all sizes, with my first collapsible navbar", "Content based on information I've gathered about getting a job in the tech industry"],
-              demo: "https://jaredryan.github.io/tech-jobprep/index.html",
-              github: "https://github.com/jaredryan/tech-jobprep",
-              tech: ['JavaScript', 'HTML', 'CSS'],
-              pictures: [
-                  {
-                      caption: "Home",
-                      id: require("../../Images/techJobPrep1.png")
-                  }
-              ]
-          },
-          {
-              title: "Mario Pest Control",
-              subtitle: "JavaScript and Design Refresher",
-              description: ["Takes user input to determine how much money Mario has made", "Total depends on amount of each type of enemy", "Fully responsive for screens of all sizes", "A silly site to remind myself of how to use CSS and JavaScript"],
-              demo: "https://jaredryan.github.io/basic-javascript-css-practice/",
-              github: "https://github.com/jaredryan/basic-javascript-css-practice",
-              tech: ['JavaScript', 'HTML', 'CSS'],
-              pictures: [
-                  {
-                      caption: "Home",
-                      id: require("../../Images/marioPest1.png")
-                  }
-              ]
-          },
-          {
-              title: "Tennis Quiz",
-              subtitle: "First interactive quiz application",
-              description: ["Gets user input to determine if the answer is correct", "Keeps track of the current score and progress on the quiz", "The questions and answers are shuffled on each round"],
-              demo: "https://jaredryan.github.io/build-your-quiz/",
-              github: "https://github.com/jaredryan/build-your-quiz",
-              tech: ['JavaScript', 'HTML', 'CSS'],
-              pictures: [
-                  {
-                      caption: "Quiz Page",
-                      id: require("../../Images/quiz1.png")
-                  }
-              ]
-          },
+          }
+          // {
+          //     title: "Design Replication",
+          //     subtitle: "Practice mimicking a site's design without copying code",
+          //     description: ["Original site for reference: http://kandjdiaries.com/", "Crash-course in how to make a well-designed website", "Without accessing the website's code, the experience was similar to that of making a website from mockups", "Fully responsive for all screen sizes", "Learned how to use font awesome for icons"],
+          //     demo: "https://jaredryan.github.io/site-replication/",
+          //     github: "https://github.com/jaredryan/site-replication",
+          //     tech: ['HTML', 'CSS'],
+          //     pictures: [
+          //         {
+          //             caption: "Blog Title",
+          //             id: require("../../Images/kandj1.png")
+          //         },
+          //         {
+          //             caption: "Blog Entry",
+          //             id: require("../../Images/kandj2.png")
+          //         },
+          //         {
+          //             caption: "Footer",
+          //             id: require("../../Images/kandj3.png")
+          //         }
+          //     ]
+          // },
+          // {
+          //     title: "MovieRecs",
+          //     subtitle: "First website",
+          //     description: ["Performs a movie search using public APIs", "Interface allows user to create and edit a recommendation list as desired"],
+          //     demo: "https://jaredryan.github.io/movie_recs/",
+          //     github: "https://github.com/jaredryan/movie_recs",
+          //     tech: ['JavaScript', 'HTML', 'CSS'],
+          //     pictures: [
+          //         {
+          //             caption: "Home",
+          //             id: require("../../Images/movieRecs1.png")
+          //         },
+          //         {
+          //             caption: "Results",
+          //             id: require("../../Images/movieRecs2.png")
+          //         },
+          //         {
+          //             caption: "Wish List",
+          //             id: require("../../Images/movieRecs3.png")
+          //         }
+          //     ]
+          // },
+          // {
+          //     title: "Tech JobPrep",
+          //     subtitle: "First multipage website",
+          //     description: ["A static website with multiple pages", "Design choices based off of matching a text editor", "Fully responsive for screens of all sizes, with my first collapsible navbar", "Content based on information I've gathered about getting a job in the tech industry"],
+          //     demo: "https://jaredryan.github.io/tech-jobprep/index.html",
+          //     github: "https://github.com/jaredryan/tech-jobprep",
+          //     tech: ['JavaScript', 'HTML', 'CSS'],
+          //     pictures: [
+          //         {
+          //             caption: "Home",
+          //             id: require("../../Images/techJobPrep1.png")
+          //         }
+          //     ]
+          // },
+          // {
+          //     title: "Mario Pest Control",
+          //     subtitle: "JavaScript and Design Refresher",
+          //     description: ["Takes user input to determine how much money Mario has made", "Total depends on amount of each type of enemy", "Fully responsive for screens of all sizes", "A silly site to remind myself of how to use CSS and JavaScript"],
+          //     demo: "https://jaredryan.github.io/basic-javascript-css-practice/",
+          //     github: "https://github.com/jaredryan/basic-javascript-css-practice",
+          //     tech: ['JavaScript', 'HTML', 'CSS'],
+          //     pictures: [
+          //         {
+          //             caption: "Home",
+          //             id: require("../../Images/marioPest1.png")
+          //         }
+          //     ]
+          // },
+          // {
+          //     title: "Tennis Quiz",
+          //     subtitle: "First interactive quiz application",
+          //     description: ["Gets user input to determine if the answer is correct", "Keeps track of the current score and progress on the quiz", "The questions and answers are shuffled on each round"],
+          //     demo: "https://jaredryan.github.io/build-your-quiz/",
+          //     github: "https://github.com/jaredryan/build-your-quiz",
+          //     tech: ['JavaScript', 'HTML', 'CSS'],
+          //     pictures: [
+          //         {
+          //             caption: "Quiz Page",
+          //             id: require("../../Images/quiz1.png")
+          //         }
+          //     ]
+          // },
       ];
 
       // Add software projects
