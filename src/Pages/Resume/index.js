@@ -75,7 +75,6 @@ const Resume = () => {
                             <li>Angular</li>
                             <li>SQL</li>
                             <li>Jenkins</li>
-                            <li>MIPS</li>
                         </ul>
                     </div>
                 </div>
