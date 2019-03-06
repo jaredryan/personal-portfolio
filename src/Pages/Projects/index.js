@@ -14,34 +14,46 @@ class Projects extends Component {
                             "Student reports allow them to their grades and statistics through Victory's data visualization package, as well as anonymous peer feedback",
                             "Teachers create classes, manage rosters, create sprints (grouping of assignments used to generate feedback reports), and create assignments to generate evaluations and reports for their students",
                             "Teachers can also submit feedback on students' evaluations (sorting and filtering the feedback as needed) release their feedback to the students, and regrade their feedback",
-                            "Adminstrators manage the schools of the site, and they may view (and delete, if needed) all teachers and classes on the site"
+                            "Adminstrators manage the schools of the site, and they may view (and delete, if needed) all teachers and classes on the site"],
               demo: "https://negotiationfeedback.herokuapp.com/",
               github: "https://github.com/jaredryan/peer-review",
               tech: ['React', 'Express', 'MongoDB', 'Node.js', 'JavaScript', 'JSX', 'CSS'],
               pictures: [
                   {
-                      caption: "Main Page",
+                      caption: "Signup Page",
+                      id: require("../../Images/newDashboard.png")
+                  },
+                  {
+                      caption: "Student Dashboard",
+                      id: require("../../Images/studentDashboard.png")
+                  },
+                  {
+                      caption: "Student Evaluation",
+                      id: require("../../Images/studentEvaluation.png")
+                  },
+                  {
+                      caption: "Teacher Dashboard 1",
+                      id: require("../../Images/teacherDashboard1.png")
+                  },
+                  {
+                      caption: "Teacher Dashboard 1",
+                      id: require("../../Images/teacherDashboard2.png")
+                  },
+                  {
+                      caption: "Grading",
+                      id: require("../../Images/grading.png")
+                  },
+                  {
+                      caption: "Reports",
+                      id: require("../../Images/report.png")
+                  },
+                  {
+                      caption: "Old Main Page",
                       id: require("../../Images/NRMainPage.png")
                   },
                   {
-                      caption: "Dashboard",
-                      id: require("../../Images/Dashboard.png")
-                  },
-                  {
-                      caption: "New Assignment",
-                      id: require("../../Images/NRNewAssignment.png")
-                  },
-                  {
-                      caption: "Student Review",
-                      id: require("../../Images/NRStudentReview.png")
-                  },
-                  {
-                      caption: "Teacher Review",
+                      caption: "Old Teacher Review",
                       id: require("../../Images/NRTeacherReview.png")
-                  },
-                  {
-                      caption: "Feedback",
-                      id: require("../../Images/NRFeedback.png")
                   },
               ]
           },
