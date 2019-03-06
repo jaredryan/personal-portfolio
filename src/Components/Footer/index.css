@@ -28,7 +28,7 @@ footer .border2 {
 
 footer .footerGrid {
     display: grid;
-    grid-template-columns: 1fr 210px 1fr;
+    grid-template-columns: 1fr 110px 1fr;
     grid-template-areas:
         "s1 m s2";
 }
@@ -43,7 +43,7 @@ footer h3 {
     font-size: 20px;
     padding-right: 17px;
     padding-left: 17px;
-    width: 210px;
+    width: 110px;
     grid-area: m;
 }
 

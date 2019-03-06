@@ -57,7 +57,7 @@ const Resume = () => {
                 </div>
             </div>
 
-            <Link to="/projects" className="goToProjects"><button>See Projects</button></Link>
+            <Link to="/projects" className="goToProjects"><button>Projects</button></Link>
 
             <div className="education">
                 <h2>Education</h2>

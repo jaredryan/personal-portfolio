@@ -75,6 +75,9 @@
     font-size: 15px;
     margin-top: 10px;
     margin-bottom: 0;
+    display: none;
+    font-weight: 600;
+    color: rgb(180, 110, 20);
 }
 
 .projectEntry:hover h2,
@@ -91,9 +94,7 @@
 }
 
 .projectEntry:hover h6 {
-    font-weight: bold;
-    -webkit-transition-duration: 100ms;
-            transition-duration: 100ms;
+    display: block;
 }
 
 @media (max-width: 750px) {

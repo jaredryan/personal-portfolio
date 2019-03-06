@@ -1,17 +1,4 @@
-/* Done */
-/*
-
- */
-
- /* ToDo */
- /*
- mainPage
-
-
-
-
-  */
-
+/* Main Page */
 
 .mainPage header {
     position: relative;
@@ -35,7 +22,6 @@
     display: flex;
     background-color: transparent;
 }
-
 
 .mainPage .homepageImg {
     background: -webkit-gradient(linear, left top, left bottom, from(rgba(20,41,112, 0.4)), to(rgba(20,41,112, 0.4))), url("../../Images/homepageImage.jpeg") no-repeat center center;
@@ -88,8 +74,8 @@
     font-size: 110px;
     margin: 0px;
     text-align: center;
-    font-weight: 700;
-    text-shadow: 2px 2px black;
+    font-weight: 500;
+    text-shadow: 3px 3px 5px black;
 }
 
 .mainPage header h2 {
@@ -97,7 +83,7 @@
     text-align: center;
     font-weight: 400;
     margin-top: 20px;
-    text-shadow: 2px 2px black;
+    text-shadow: 3px 3px 5px black;
 }
 
 @media (max-width: 800px) {

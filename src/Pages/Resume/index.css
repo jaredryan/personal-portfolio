@@ -49,28 +49,6 @@
     margin-top: 8px;
 }
 
-.webResumePage button {
-    height: 50px;
-    width: 100%;
-    border-radius: 10px;
-    border: 2px solid rgb(180, 180, 180);
-    padding: 1px;
-    margin-bottom: 0px;
-    font-size: 30px;
-    color: rgb(46,53,70);
-    font-weight: 700;
-    background-color: white;
-}
-
-.webResumePage button:hover {
-    cursor: pointer;
-    background-color: #d09d55;
-    color: white;
-    border: 2px solid rgb(46,53,70);
-    -webkit-transition-duration: 150ms;
-            transition-duration: 150ms;
-}
-
 @media (max-width: 750px) {
     .webResumePage h3 {
         font-size: 22px;
@@ -126,8 +104,8 @@
     font-size: 100px;
     margin: 0px;
     text-align: center;
-    font-weight: 700;
-    text-shadow: 2px 2px black;
+    font-weight: 500;
+    text-shadow: 3px 3px 5px black;
     position: relative;
     top: 5%;
 }
@@ -145,6 +123,7 @@
     font-weight: 300;
     font-size: 25px;
     height: 40px;
+    border: none;
 }
 
 .webResumePage .webBanner .downloadButton button:hover {
@@ -323,9 +302,30 @@
 /* Projects Section */
 
 .webResumePage .goToProjects {
-    width: 260px;
+    max-width: 260px;
+    width: 90%;
     display: block;
     margin: 20px auto;
+}
+
+.webResumePage button {
+    height: 50px;
+    width: 100%;
+    border-radius: 0px;
+    border: 1px solid rgb(180, 180, 180);
+    padding: 1px;
+    margin-bottom: 0px;
+    background-color: white;
+    font-size: 30px;
+    color: rgb(112,53,41);
+    font-weight: 400;
+}
+
+.webResumePage button:hover {
+    cursor: pointer;
+    opacity: 0.65;
+    -webkit-transition-duration: 150ms;
+            transition-duration: 150ms;
 }
 
 /* Education Section */
