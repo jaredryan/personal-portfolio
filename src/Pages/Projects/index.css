@@ -64,8 +64,8 @@
 }
 
 .projectsPage .projectPageImg {
-    background: -webkit-gradient(linear, left top, left bottom, from(rgba(20,41,122, 0.4)), to(rgba(20,41,122, 0.4))), url("../../Images/projectsBackgroundImg.jpg") no-repeat 50% 75%;
-    background: linear-gradient(rgba(20,41,122, 0.4), rgba(20,41,122, 0.4)), url("../../Images/projectsBackgroundImg.jpg") no-repeat 50% 75%;
+    background: -webkit-gradient(linear, left top, left bottom, from(rgba(20,41,122, 0.4)), to(rgba(20,41,122, 0.8))), url("../../Images/projectsBackgroundImg.jpg") no-repeat 50% 75%;
+    background: linear-gradient(rgba(20,41,122, 0.4), rgba(20,41,122, 0.8)), url("../../Images/projectsBackgroundImg.jpg") no-repeat 50% 75%;
     background-size: cover;
     /* filter: blur(6px); */
     z-index: 0;

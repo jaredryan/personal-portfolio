@@ -133,8 +133,8 @@
 }
 
 .webResumePage .webPageImg {
-    background: -webkit-gradient(linear, left top, left bottom, from(rgba(20,41,132, 0.3)), to(rgba(20,41,132, 0.3))), url("../../Images/resumeBackground.jpeg") no-repeat center center;
-    background: linear-gradient(rgba(20,41,132, 0.3), rgba(20,41,132, 0.3)), url("../../Images/resumeBackground.jpeg") no-repeat center center;
+    background: -webkit-gradient(linear, left top, left bottom, from(rgba(20,41,132, 0.4)), to(rgba(20,41,132, 0.7))), url("../../Images/resumeBackground.jpeg") no-repeat center center;
+    background: linear-gradient(rgba(20,41,132, 0.4), rgba(20,41,132, 0.7)), url("../../Images/resumeBackground.jpeg") no-repeat center center;
     background-size: cover;
     /* filter: blur(5px); */
     z-index: 0;
