@@ -12,9 +12,29 @@ const Resume = () => {
             </div>
             <div className="objective">
                 <h2>Objective</h2>
-                <p>Recent engineering UC Berkeley graduate with computer science emphasis who also learned frontend and full stack web development skills. Looking to apply computer science and web development training as a software developer or web developer.</p>
+                <p>IBM developer looking to develop programming, design, management, and business skills.</p>
             </div>
-
+            <div className="workExperience">
+                <h2>Work Experience</h2>
+                <div className="work1">
+                    <h3>Software Developer: June 2018-Present</h3>
+                    <h4>IBM - Austin, Texas</h4>
+                    <ul>
+                        <li>Works with AppID, a cloud security application featuring frontend, backend, and security technologies</li>
+                        <li>Design, program, review, and test code in an Agile environment</li>
+                        <li>Technologies used include Node.js, Angular.js, Java, Android, Swift, Kubernetes, Docker, Jenkins, Github, and Zenhub</li>
+                    </ul>
+                </div>
+                <div className="work2">
+                    <h3>Full-time Volunteer Public Representative, Trainer, and Manager: April 2013—March 2015</h3>
+                    <h4>The Church of Jesus Christ of Latter Day Saints – Rio Grande do Sul, Brazil</h4>
+                    <ul>
+                        <li>Presented messages to groups anywhere from 1-100 individuals</li>
+                        <li>Improved performance by 150% by leading 20 fellow volunteers through coaching, interviews, as well as weekly trainings and discussions</li>
+                        <li>Achieved fluency in Portuguese in writing, reading, and speaking</li>
+                    </ul>
+                </div>
+            </div>
             <div className="skills">
                 <h2>Skills</h2>
                 <div className="skillsGrid">
@@ -50,14 +70,20 @@ const Resume = () => {
                     <div>
                         <h3>Familiarity</h3>
                         <ul>
-                            <li>MIPS</li>
+                            <li>Android</li>
+                            <li>Swift</li>
+                            <li>Angular</li>
                             <li>SQL</li>
+                            <li>Jenkins</li>
+                            <li>MIPS</li>
                         </ul>
                     </div>
                 </div>
             </div>
 
-            <Link to="/projects" className="goToProjects"><button>Projects</button></Link>
+            <div className="projects">
+                <Link to="/projects" className="goToProjects"><button>Projects</button></Link>
+            </div>
 
             <div className="education">
                 <h2>Education</h2>
@@ -81,32 +107,8 @@ const Resume = () => {
                     <li>Data Structures</li>
                     <li>Structure and Interpretation of Computer Programs</li>
                     <li>Machine Structures</li>
-                    <li>Discrete Mathematics and Probability Theory</li>
-                    <li>Introduction to Computational Biology</li>
                     <li>Engineering Design Process and Project</li>
-                    <li>Numerical Analysis, Multivariable Calculus, and Linear Algebra</li>
                 </ul>
-            </div>
-
-            <div className="workExperience">
-                <h2>Work Experience</h2>
-                <div className="work1">
-                    <h3>Full-time Volunteer Public Representative, Trainer, and Manager: April 2013—March 2015</h3>
-                    <h4>The Church of Jesus Christ of Latter Day Saints – Rio Grande do Sul, Brazil</h4>
-                    <ul>
-                        <li>Presented messages to groups anywhere from 1-100 individuals</li>
-                        <li>Improved performance by 150% by leading 20 fellow volunteers through coaching, interviews, as well as weekly trainings and discussions</li>
-                        <li>Achieved fluency in Portuguese in writing, reading, and speaking</li>
-                    </ul>
-                </div>
-                <div className="work2">
-                    <h3>Messenger and Receptionist: January 2012—April 2012</h3>
-                    <h4>Motschiedler, Michaelides, Wishon, Brewer & Ryan, LLP - Fresno, California</h4>
-                    <ul>
-                        <li>Organized and delivered legal documents of multi-million dollar cases</li>
-                        <li>Professional telephone and interpersonal communication skills</li>
-                    </ul>
-                </div>
             </div>
         </div>
     );

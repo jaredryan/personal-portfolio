@@ -205,7 +205,8 @@
 .webResumePage .objective,
 .webResumePage .education,
 .webResumePage .coursework,
-.webResumePage .workExperience {
+.webResumePage .workExperience,
+.webResumePage .projects {
     padding-left: 9%;
     padding-right: 9%;
     margin-top: 0;
@@ -213,9 +214,9 @@
     padding: 30px 20px;
 }
 
-.webResumePage .skills,
-.webResumePage .education,
-.webResumePage .workExperience {
+.webResumePage .workExperience,
+.webResumePage .coursework,
+.webResumePage .projects {
     background-color: white;
 }
 
@@ -302,7 +303,7 @@
 /* Projects Section */
 
 .webResumePage .goToProjects {
-    max-width: 260px;
+    max-width: 350px;
     width: 90%;
     display: block;
     margin: 20px auto;
@@ -312,7 +313,7 @@
     height: 50px;
     width: 100%;
     border-radius: 0px;
-    border: 1px solid rgb(180, 180, 180);
+    border: 1px solid grey;
     padding: 1px;
     margin-bottom: 0px;
     background-color: white;
@@ -323,7 +324,8 @@
 
 .webResumePage button:hover {
     cursor: pointer;
-    opacity: 0.65;
+    opacity: 0.7;
+    background-color: rgb(249, 246, 239);
     -webkit-transition-duration: 150ms;
             transition-duration: 150ms;
 }
