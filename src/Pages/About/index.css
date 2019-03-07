@@ -215,6 +215,7 @@
 .aboutPage .seeMore {
     width: 295px;
     margin-left: 20px;
+    text-align: center;
 }
 
 .aboutPage .seeMore,
@@ -222,30 +223,33 @@
     text-decoration: none;
 }
 
-.aboutPage .seeMore span {
-    margin-right: 10px;
-    text-decoration: underline;
+.aboutPage .seeMore h3 {
+    margin-bottom: 50px;
 }
 
 .aboutPage .seeMore p {
     margin-top: 0;
     margin-bottom: 0;
-}
-
-.aboutPage .seeMore a {
-    color: black;
-}
-
-.aboutPage .seeMore a:hover {
-    font-weight: 700;
-}
-
-.aboutPage .seeMore * {
     font-family: "Montserrat", sans-serif;
 }
 
-.aboutPage .mobile {
-    display: none;
+.aboutPage .fontAwesomeLogos a {
+    margin-bottom: 0px;
+    color: black;
+    margin-left: 7px;
+    margin-right: 7px;
+    text-align: center;
+}
+
+.aboutPage .fontAwesomeLogos i:hover {
+    -webkit-transition-duration: 300ms;
+            transition-duration: 300ms;
+    color: rgb(208,157,85);
+}
+
+.aboutPage .fontAwesomeLogos i {
+    font-size: 30px;
+    padding: 3px;
 }
 
 .aboutPage .softwareText h3,

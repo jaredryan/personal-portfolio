@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import './index.css';
 
 class About extends Component {
@@ -30,14 +29,14 @@ class About extends Component {
                     </div>
                     <div className="seeMore">
                         <h3>Contact Me</h3>
-                        <p><span>Email:</span><br className="mobile"/>jryantennis@gmail.com</p>
+                        <p>jryantennis@gmail.com</p>
                         <div className="gapEmailAndCell"></div>
                         <br/>
-                        <a href="mailto:jryantennis@gmail.com?subject=Hi, Jared (from the Portfolio Website)" className="aboutEmail"><p><span>Send Email</span></p></a>
-                        <p>See <a href="https://www.linkedin.com/in/jared-m-ryan/">LinkedIn</a>.</p>
-                        <p>See <a href="https://github.com/jaredryan">Github</a>.</p>
-                        <p>See <Link to="/projects">Projects</Link>.</p>
-                        <p>See <Link to="/resume">Resume</Link>.</p>
+                        <div className="fontAwesomeLogos">
+                            <a href="https://github.com/jaredryan"><i className="fa fa-github" style={{fontSize: "32px", fontWeight: 100}}></i></a>
+                            <a href="https://www.linkedin.com/in/jared-m-ryan/"><i className="fa fa-linkedin" style={{fontSize: "32px", fontWeight: 100}}></i></a>
+                            <a href="mailto:jryantennis@gmail.com?subject=Hi, Jared (from the Portfolio Website)"><i className="fa fa-envelope" style={{fontSize: "32px", fontWeight: 100}}></i></a>
+                        </div>
                     </div>
                 </div>
             </div>

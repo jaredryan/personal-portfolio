@@ -55,6 +55,8 @@ footer a {
 }
 
 footer a:hover {
+    -webkit-transition-duration: 300ms;
+            transition-duration: 300ms;
     color: rgb(208,157,85);
 }
 
