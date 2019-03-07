@@ -36,7 +36,7 @@ class Projects extends Component {
                       id: require("../../Images/teacherDashboard1.png")
                   },
                   {
-                      caption: "Teacher Dashboard 1",
+                      caption: "Teacher Dashboard 2",
                       id: require("../../Images/teacherDashboard2.png")
                   },
                   {
@@ -111,51 +111,53 @@ class Projects extends Component {
                   },
               ]
           },
+          // {
+          //     title: "Pokémon Team Builder",
+          //     subtitle: "First React app with Redux",
+          //     description: ["Performs search on a Pokémon-based API using the Axios and Thunk packages", "Stores two lists, two slots, and search results using Redux", "Local state used for JavaScript manipulation", "Use of router and switch to change between pages and parts of the page", "Fully responsive for screens of all sizes"],
+          //     demo: "http://buildpokemonteam.surge.sh/",
+          //     github: "https://github.com/jaredryan/pokemon-team-builder",
+          //     tech: ['React', 'JavaScript', 'JSX', 'CSS'],
+          //     pictures: [
+          //         {
+          //             caption: "Home Page",
+          //             id: require("../../Images/pokemon1.png")
+          //         },
+          //         {
+          //             caption: "Pokédex Analysis",
+          //             id: require("../../Images/pokemon2.png")
+          //         },
+          //         {
+          //             caption: "Search Pokémon Page",
+          //             id: require("../../Images/pokemon3.png")
+          //         }
+          //     ]
+          // },
+          // {
+          //     title: "Fishackathon",
+          //     subtitle: "First hackathon experience",
+          //     description: ["Full-stack CRUD application for adding and searching information on freshwater bodies of water through an API (which has since been shut down)", "Secure user sign-up and login functionality", "Fully responsive for screens of all sizes", "Won local competition in Salt Lake City on Feb 10, 2018, currently awaiting results in the global competition"],
+          //     demo: "https://freshwaterfeed.herokuapp.com/",
+          //     github: "https://github.com/jaredryan/fishackathon-slc-11",
+          //     tech: ["Ruby on Rails", 'JavaScript', 'HTML', 'CSS'],
+          //     pictures: [
+          //         {
+          //             caption: "Home Page",
+          //             id: require("../../Images/fishackathon1.png")
+          //         },
+          //         {
+          //             caption: "Report Page",
+          //             id: require("../../Images/fishackathon2.png")
+          //         }
+          //     ]
+          // },
           {
-              title: "Pokémon Team Builder",
-              subtitle: "First React app with Redux",
-              description: ["Performs search on a Pokémon-based API using the Axios and Thunk packages", "Stores two lists, two slots, and search results using Redux", "Local state used for JavaScript manipulation", "Use of router and switch to change between pages and parts of the page", "Fully responsive for screens of all sizes"],
-              demo: "http://buildpokemonteam.surge.sh/",
-              github: "https://github.com/jaredryan/pokemon-team-builder",
-              tech: ['React', 'JavaScript', 'JSX', 'CSS'],
-              pictures: [
-                  {
-                      caption: "Home Page",
-                      id: require("../../Images/pokemon1.png")
-                  },
-                  {
-                      caption: "Pokédex Page",
-                      id: require("../../Images/pokemon2.png")
-                  },
-                  {
-                      caption: "Slots and Lists",
-                      id: require("../../Images/pokemon3.png")
-                  }
-              ]
-          },
-          {
-              title: "Fishackathon",
-              subtitle: "First hackathon experience",
-              description: ["Full-stack CRUD application for adding and searching information on freshwater bodies of water through an API (which has since been shut down)", "Secure user sign-up and login functionality", "Fully responsive for screens of all sizes", "Won local competition in Salt Lake City on Feb 10, 2018, currently awaiting results in the global competition"],
-              demo: "https://freshwaterfeed.herokuapp.com/",
-              github: "https://github.com/jaredryan/fishackathon-slc-11",
-              tech: ["Ruby on Rails", 'JavaScript', 'HTML', 'CSS'],
-              pictures: [
-                  {
-                      caption: "Home Page",
-                      id: require("../../Images/fishackathon1.png")
-                  },
-                  {
-                      caption: "Report Page",
-                      id: require("../../Images/fishackathon2.png")
-                  }
-              ]
-          },{
               title: "OpenHouse",
               subtitle: "First experience working with a startup",
               description: [
+                  "College project working with startup and student team -- on the student team, worked as project manager and one of three primary developers"
                   "Full-stack CRUD application for searching, adding, editing, and removing information to allow users to rent home offices",
-                  "Integrates search in its database with Google Maps API to display results on a map",
+                  "Integrated search in its database with Google Maps API to display results on a map",
                   "Implemented a messaging system to allow users to discuss renting a space",
                   "Secure user sign-up and login functionality",
                   "Thoroughly tested with Cucumber and RSpec"
