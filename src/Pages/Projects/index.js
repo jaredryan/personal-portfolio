@@ -155,7 +155,7 @@ class Projects extends Component {
               title: "OpenHouse",
               subtitle: "First experience working with a startup",
               description: [
-                  "College project working with startup and student team -- on the student team, worked as project manager and one of three primary developers"
+                  "College project working with startup and student team -- on the student team, worked as project manager and one of three primary developers",
                   "Full-stack CRUD application for searching, adding, editing, and removing information to allow users to rent home offices",
                   "Integrated search in its database with Google Maps API to display results on a map",
                   "Implemented a messaging system to allow users to discuss renting a space",
