@@ -207,11 +207,9 @@
 .webResumePage .coursework,
 .webResumePage .workExperience,
 .webResumePage .projects {
-    padding-left: 9%;
-    padding-right: 9%;
     margin-top: 0;
     margin-bottom: 0;
-    padding: 30px 20px;
+    padding: 30px 9%;
 }
 
 .webResumePage .workExperience,
