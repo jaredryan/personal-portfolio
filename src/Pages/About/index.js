@@ -20,7 +20,7 @@ class About extends Component {
 
                         <p>IBM Software Cloud Security Developer since June 2018.</p>
                         <p>Freelance web developer since April 2018.</p>
-                        <p>UC Berkeley Bioengineering Major with Computer Science Emphasis</p>
+                        <p>UC Berkeley Bioengineering Major with Computer Science Emphasis.</p>
                         <p>Lead, managed, trained, and coached teams of up to 20 people for a year.</p>
                     </div>
                 </div>
