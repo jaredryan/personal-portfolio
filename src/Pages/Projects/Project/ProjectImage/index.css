@@ -38,25 +38,8 @@
 
     .projectImageContainer .projectImage,
     .projectImageContainer .projectImage img {
-        width: 504px;
-        height: 315px;
+        width: 100%;
+        height: auto;
         margin: auto;
-    }
-}
-
-
-@media (max-width: 550px) {
-    .projectImageContainer .projectImage,
-    .projectImageContainer .projectImage img {
-        height: 243.75px;
-        width: 390px;
-    }
-}
-
-@media (max-width: 450px) {
-    .projectImageContainer .projectImage,
-    .projectImageContainer .projectImage img {
-        width: 340px;
-        height: 212.5px;
     }
 }
