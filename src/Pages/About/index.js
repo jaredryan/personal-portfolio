@@ -30,14 +30,14 @@ class About extends Component {
                     </div>
                     <div className="seeMore">
                         <h3>Contact Me</h3>
-                        <a href="mailto:jryantennis@gmail.com?subject=Hi, Jared (from the Portfolio Website)" className="aboutEmail"><p><span>Email:</span><br className="mobile"/>jryantennis@gmail.com</p></a>
+                        <p><span>Email:</span><br className="mobile"/>jryantennis@gmail.com</p>
                         <div className="gapEmailAndCell"></div>
-                        <p><span>Cell:</span>559-348-3595</p>
                         <br/>
+                        <a href="mailto:jryantennis@gmail.com?subject=Hi, Jared (from the Portfolio Website)" className="aboutEmail"><p><span>Send Email</span></p></a>
+                        <p>See <a href="https://www.linkedin.com/in/jared-m-ryan/">LinkedIn</a>.</p>
+                        <p>See <a href="https://github.com/jaredryan">Github</a>.</p>
                         <p>See <Link to="/projects">Projects</Link>.</p>
                         <p>See <Link to="/resume">Resume</Link>.</p>
-                        <p>See <a href="https://github.com/jaredryan">Github</a>.</p>
-                        <p>See <a href="https://www.linkedin.com/in/jared-m-ryan/">LinkedIn</a>.</p>
                     </div>
                 </div>
             </div>
