@@ -18,10 +18,10 @@ class About extends Component {
                     <div className="softwareText">
                         <h3>My Experience</h3>
 
-                        <p>Spent two years in Brazil volunteering, working as a manager for the second year.</p>
-                        <p>UC Berkeley Bioengineering with Computer Science Emphasis B.S.</p>
+                        <p>IBM Software Cloud Security Developer since June 2018.</p>
                         <p>Freelance web developer since April 2018.</p>
-                        <p>IBMer in Cloud Security since June 2018.</p>
+                        <p>UC Berkeley Bioengineering Major with Computer Science Emphasis</p>
+                        <p>Lead, managed, trained, and coached teams of up to 20 people for a year.</p>
                     </div>
                 </div>
                 <div className="row2">
@@ -29,7 +29,7 @@ class About extends Component {
                         <img src={require("../../Images/profilePic.jpg")} alt=""/>
                     </div>
                     <div className="seeMore">
-                        <h3>Contact Me!</h3>
+                        <h3>Contact Me</h3>
                         <a href="mailto:jryantennis@gmail.com?subject=Hi, Jared (from the Portfolio Website)" className="aboutEmail"><p><span>Email:</span><br className="mobile"/>jryantennis@gmail.com</p></a>
                         <div className="gapEmailAndCell"></div>
                         <p><span>Cell:</span>559-348-3595</p>
