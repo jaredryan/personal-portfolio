@@ -7,7 +7,7 @@ const Resume = () => {
         <div className="webResumePage">
             <div className="webBanner">
                 <h1>Resume</h1>
-                <a href="Ryan_Jared_Resume.pdf" download="Ryan_Jared_Resume.pdf" className="goToProjects downloadButton"><button>Download</button></a>
+                <a href="Ryan_Jared_Resume.pdf" download="Ryan_Jared_Resume.pdf" className="downloadButton"><button>Download</button></a>
                 <div className="webPageImg"></div>
             </div>
             <div className="objective">
