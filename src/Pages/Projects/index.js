@@ -64,7 +64,7 @@ class Projects extends Component {
                             "Game comes with a simple UI, several levels, and several waves of different types for each level",
                             "Has a full authentication package, complete with hashed passwords and an ability to safely reset your password if you forget it",
                             "Utilizes redux to keep track of the current user's current level and scores and current",
-                            "MongoDB and the backend maintains scores and uers",
+                            "MongoDB and the backend maintains scores and users",
                             "Fully responsive for screens of all sizes"],
               demo: "http://nestinvaders.herokuapp.com/",
               github: "https://github.com/jaredryan/best-class-side-scroller",
