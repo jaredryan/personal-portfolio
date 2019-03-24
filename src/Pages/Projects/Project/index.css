@@ -85,8 +85,8 @@
 .projectEntry:hover h2 a,
 .projectEntry:hover h3 a {
     color: rgb(180, 110, 20);
-    -webkit-transition-duration: 200ms;
-            transition-duration: 200ms;
+    -webkit-transition-duration: 300ms;
+            transition-duration: 300ms;
 }
 
 .projectEntry:hover {

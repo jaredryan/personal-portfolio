@@ -65,8 +65,8 @@
  .threeThumbnails #Projects:hover *,
  .threeThumbnails #About:hover *,
  .threeThumbnails #Resume:hover *  {
-     -webkit-transition-duration: 300ms;
-             transition-duration: 300ms;
+     -webkit-transition-duration: 500ms;
+             transition-duration: 500ms;
      color: rgb(46,53,70);
  }
 

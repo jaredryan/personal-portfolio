@@ -11,26 +11,31 @@ nav ul {
     -webkit-box-pack: space-evenly;
         -ms-flex-pack: space-evenly;
             justify-content: space-evenly;
+            align-items: center;
     margin: 0 0;
     padding: 0;
     font-size: 17px;
+    height: 40px;
 }
 
-nav a {
-    text-decoration: none;
-    color: white;
+nav li {
     z-index: 10;
     width: 25%;
+    text-align: center;
 }
 
 nav a:hover {
+    -webkit-transition-duration: 300ms;
+            transition-duration: 300ms;
     background-color: white;
     color: rgb(40, 61, 112);
     text-shadow: none;
 }
 
-nav ul a li {
-    padding: 9.5px 0px;
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 9.5px 19px;
     font-weight: 300;
     letter-spacing: 0.6px;
     font-size: 17px;
@@ -48,4 +53,11 @@ nav .overlay {
     position: absolute;
     top: 0px;
     z-index: 9;
+}
+
+@media (max-width: 425px) {
+    nav a {
+        padding: 11px 10px;
+        font-size: 14px;
+    }
 }

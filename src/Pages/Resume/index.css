@@ -171,13 +171,8 @@
         font-size: 75px;
     }
 
-    .webResumePage .webBanner .downloadButton {
-        width: 210px;
-    }
-
     .webResumePage .webBanner .downloadButton button {
         font-size: 22px;
-        height: 38px;
     }
 }
 
@@ -191,13 +186,8 @@
         font-size: 65px;
     }
 
-    .webResumePage .webBanner .downloadButton {
-        width: 200px;
-    }
-
     .webResumePage .webBanner .downloadButton button {
         font-size: 20px;
-        height: 35px;
     }
 }
 
