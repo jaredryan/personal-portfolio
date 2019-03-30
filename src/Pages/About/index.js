@@ -49,7 +49,7 @@ class About extends Component {
                     <h3>What I'm About</h3>
 
                     <p>Self-improvement, organization, optimism, and teamwork.</p>
-                    <p>Having something to work towards: right now, that's studying design thinking, visual design, and management.</p>
+                    <p>Having something to work towards: right now, that's studying development, design thinking, visual design, business, and management.</p>
                     <p>Work hard, but don't take yourself too seriously.</p>
                     <p>Games: sports, video games, board games, etc. Love them.</p>
                     <p>If I'm not planning, studying, or playing something, I'm probably relaxing with Netflix.</p>
