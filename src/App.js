@@ -1,33 +1,28 @@
-import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import React from 'react'
 
-import Navbar from './Components/Navbar';
-import Footer from './Components/Footer';
-import Home from './Pages/Home';
-import About from './Pages/About';
-import Projects from './Pages/Projects';
-import Resume from './Pages/Resume';
+import Navbar from './Components/Navbar'
+import Intro from './Sections/Intro'
+import WhyMe from './Sections/WhyMe'
+import Resume from './Sections/Resume'
+import Projects from './Sections/Projects'
 
-class App extends Component {
+const App = () => {
 
-    componentDidUpdate() {
-        window.scrollTo(0,0);
-    }
+    // <div>
+    //     <Navbar />
+    //     <Intro />
+    //     <WhyMe />
+    //     <Resume />
+    //     <Projects />
+    // </div>
 
-  render() {
     return (
         <div>
             <Navbar />
-            <Switch>
-                <Route exact path="/" component={Home}/>
-                <Route path="/about" component={About}/>
-                <Route path="/projects" component={Projects}/>
-                <Route path="/resume" component={Resume}/>
-            </Switch>
-            <Footer />
+            <Intro />
+            <WhyMe />
         </div>
-    );
-  }
+    )
 }
 
 export default App;

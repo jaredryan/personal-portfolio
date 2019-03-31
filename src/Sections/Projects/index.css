@@ -1,0 +1,131 @@
+/* Projects Page */
+
+.projectsPage {
+    color: black;
+    padding: 20px 30px;
+    background-color: white;
+    margin: 0;
+    padding: 20px 0;
+    padding-bottom: 0px;
+}
+
+.projectsPage > h2 {
+    font-size: 55px;
+    text-align: center;
+    margin: 0;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-weight: 500;
+    background-color: rgb(208,157,85);
+    color: rgb(16,23,40);
+    -webkit-box-shadow: 0px 2px 5px 0px black;
+            box-shadow: 0px 2px 5px 0px black;
+    z-index: 3;
+    margin-bottom: 5px;
+}
+
+@media (max-width: 750px) {
+    .projectsPage > h2 {
+        font-size: 32px;
+    }
+}
+
+.projectsPage .projectBanner {
+    position: relative;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    color: white;
+    height: 450px;
+    margin-top: -40px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    background-color: transparent;
+    bottom: 20px;
+    margin-bottom: -20px;
+    background-color: rgb(46,53,70);
+}
+
+.projectsPage .projectBanner h1 {
+    z-index: 1;
+    font-size: 100px;
+    margin: 0px;
+    text-align: center;
+    font-weight: 500;
+    text-shadow: 3px 3px 5px black;
+}
+
+.projectsPage .projectPageImg {
+    background: -webkit-gradient(linear, left top, left bottom, from(rgba(20,41,122, 0.4)), to(rgba(20,41,122, 0.8))), url("../../Images/projectsBackgroundImg.jpg") no-repeat 50% 75%;
+    background: linear-gradient(rgba(20,41,122, 0.4), rgba(20,41,122, 0.8)), url("../../Images/projectsBackgroundImg.jpg") no-repeat 50% 75%;
+    background-size: cover;
+    /* filter: blur(6px); */
+    z-index: 0;
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    -webkit-box-shadow: 0px 1px 5px 1px black;
+            box-shadow: 0px 1px 5px 1px black;
+}
+
+@media (max-width: 950px) {
+    .projectsPage .projectBanner,
+    .projectsPage .projectPageImg {
+        height: 375px;
+    }
+
+    .projectsPage .projectBanner h1 {
+        font-size: 90px;
+    }
+}
+
+@media (max-width: 779px) {
+    .projectsPage .projectBanner,
+    .projectsPage .projectPageImg {
+        height: 330px;
+    }
+
+    .projectsPage .projectBanner h1 {
+        font-size: 80px;
+    }
+}
+
+@media (max-width: 650px) {
+    .projectsPage .projectBanner,
+    .projectsPage .projectPageImg {
+        height: 300px;
+    }
+
+    .projectsPage .projectBanner h1 {
+        font-size: 70px;
+    }
+}
+
+@media (max-width: 480px) {
+    .projectsPage .projectBanner,
+    .projectsPage .projectPageImg {
+        height: 250px;
+    }
+
+    .projectBanner h1 {
+        font-size: 60px;
+    }
+}
+
+.projectsPage .projectsDiv {
+    margin-bottom: 0;
+    padding: 0px;
+    background-color: pink;
+}

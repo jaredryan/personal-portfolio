@@ -1,0 +1,99 @@
+/* Page */
+
+.whyMe {
+    height: 100vh;
+    min-height: 846px;
+    width: 100%;
+    background-color: rgb(0, 158, 212);
+    margin: 0;
+    padding: 80px 5%;
+    color: grey;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.whyMe .flex {
+    margin: auto;
+    max-width: 1000px;
+    display: flex;
+}
+
+.whyMe .whyMeText {
+    margin: 0;
+}
+
+.whyMe .contactMe {
+    margin: 0;
+    width: 33.33%;
+}
+
+.whyMe h1 {
+    margin: 0;
+    background-color: rgb(49, 69, 86);
+    text-align: center;
+    padding-top: 11px;
+    padding-bottom: 11px;
+    color: white;
+    font-weight: 300;
+}
+
+.whyMe .seeMore h1 {
+    margin-top: -1px;
+    background-color: rgb(49, 69, 86);
+}
+
+.whyMe .whyMeText ul {
+    margin: 0;
+    padding: 39.5px 60px;
+}
+
+.whyMe .whyMeText ul,
+.whyMe .seeMore {
+    background-color: white;
+}
+
+.whyMe .fontAwesomeLogos {
+    height: 262px;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.whyMe .whyMeText,
+.whyMe .fontAwesomeLogos i {
+    color: rgb(45, 33, 25);
+}
+
+.whyMe .fontAwesomeLogos i:hover {
+    color: rgb(249, 107, 99);
+    transition-duration: 300ms;
+}
+
+/* Pictures */
+
+.whyMe .whyMeText .pics {
+    display: flex;
+}
+
+.whyMe .whyMeText .pics div {
+    width: 50%;
+}
+
+.whyMe .whyMeText img {
+    height: auto;
+    width: 100%;
+}
+
+.whyMe .profilePic {
+    height: 360px;
+    width: 215.1px;
+}
+
+.whyMe .profilePic img {
+    height: auto;
+    width: 100%;
+}

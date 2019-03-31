@@ -1,0 +1,338 @@
+/* Page */
+
+.webResumePage {
+    background-color: rgb(224, 221, 213);
+    color: black;
+    margin: 0;
+    padding: 0;
+}
+
+.webResumePage h2 {
+    text-align: center;
+    margin-top: 0;
+    font-size: 30px;
+    color: rgb(112,53,41);
+    font-weight: 800;
+    border-bottom: 1px solid grey;
+    width: 350px;
+    margin: 0 auto;
+    margin-bottom: 30px;
+    padding-bottom: 5px;
+    font-weight: 400;
+}
+
+.webResumePage h3,
+.webResumePage h4,
+.webResumePage h5 {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color: rgb(40,61,112)
+}
+
+.webResumePage h3 {
+    font-size: 24px;
+    line-height: 34px;
+}
+
+.webResumePage h4 {
+    color: rgb(46,53,70);
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 28px;
+}
+
+.webResumePage h5 {
+    font-size: 18px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 300;
+    margin-top: 8px;
+}
+
+@media (max-width: 750px) {
+    .webResumePage h3 {
+        font-size: 22px;
+        line-height: 32px;
+    }
+
+    .webResumePage h4 {
+        font-size: 18px;
+        margin-top: 9px;
+        line-height: 26px;
+    }
+
+    .webResumePage h5 {
+        font-size: 16px;
+        margin-top: 7px;
+    }
+}
+
+@media (max-width: 480px) {
+    .webResumePage h2 {
+        width: 100%;
+    }
+}
+
+/* Banner */
+
+.webResumePage .webBanner {
+    position: relative;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    color: white;
+    height: 450px;
+    margin-top: 0px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    background-color: transparent;
+    bottom: 50px;
+    margin-bottom: -50px;
+    background-color: rgb(46,53,70);
+}
+
+.webResumePage .webBanner h1 {
+    z-index: 1;
+    font-size: 100px;
+    margin: 0px;
+    text-align: center;
+    font-weight: 500;
+    text-shadow: 2px 2px 4px black;
+    position: relative;
+    top: 5%;
+}
+
+.webResumePage .webBanner .downloadButton {
+    z-index: 1;
+}
+
+.webResumePage .webBanner .downloadButton button {
+    background-color: rgb(224,221,213);
+    opacity: 0.7;
+    border-radius: 0px;
+    color: rgb(112,53,41);
+    font-weight: 300;
+    font-size: 25px;
+    border: none;
+    padding: 8px 16px;
+    height: auto;
+    margin-top: 20px;
+}
+
+.webResumePage .webBanner .downloadButton button:hover {
+    -webkit-transition-duration: 300ms;
+            transition-duration: 300ms;
+    opacity: 1;
+}
+
+.webResumePage .webPageImg {
+    background: -webkit-gradient(linear, left top, left bottom, from(rgba(20,41,132, 0.4)), to(rgba(20,41,132, 0.7))), url("../../Images/resumeBackground.jpeg") no-repeat center center;
+    background: linear-gradient(rgba(20,41,132, 0.4), rgba(20,41,132, 0.7)), url("../../Images/resumeBackground.jpeg") no-repeat center center;
+    background-size: cover;
+    /* filter: blur(5px); */
+    z-index: 0;
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    -webkit-box-shadow: 0px 1px 5px 1px black;
+            box-shadow: 0px 1px 5px 1px black;
+}
+
+@media (max-width: 850px) {
+    .webResumePage .webBanner,
+    .webPageImg {
+        height: 375px;
+    }
+
+    .webResumePage .webBanner h1 {
+        font-size: 85px;
+    }
+}
+
+@media (max-width: 679px) {
+    .webResumePage .webBanner,
+    .webPageImg {
+        height: 325px;
+    }
+
+    .webResumePage .webBanner h1 {
+        font-size: 75px;
+    }
+
+    .webResumePage .webBanner .downloadButton button {
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 550px) {
+    .webResumePage .webBanner,
+    .webPageImg {
+        height: 300px;
+    }
+
+    .webResumePage .webBanner h1 {
+        font-size: 65px;
+    }
+
+    .webResumePage .webBanner .downloadButton button {
+        font-size: 20px;
+    }
+}
+
+/* Section Formatting */
+
+.webResumePage .objective,
+.webResumePage .education,
+.webResumePage .coursework,
+.webResumePage .workExperience,
+.webResumePage .projects {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 30px 9%;
+}
+
+.webResumePage .workExperience,
+.webResumePage .coursework,
+.webResumePage .projects {
+    background-color: white;
+}
+
+.webResumePage .workExperience .work1,
+.webResumePage .education .edu1 {
+    margin-bottom: 30px;
+}
+
+.webResumePage .workExperience .work2,
+.webResumePage .education .edu2 {
+    margin-top: 30px;
+}
+
+@media (max-width: 1400px) {
+    .webResumePage .objective,
+    .webResumePage .education,
+    .webResumePage .coursework,
+    .webResumePage .workExperience {
+        padding-left: 8%;
+        padding-right: 8%;
+    }
+}
+
+@media (max-width: 1100px) {
+    .webResumePage .objective,
+    .webResumePage .education,
+    .webResumePage .coursework,
+    .webResumePage .workExperience {
+        padding-left: 7%;
+        padding-right: 7%;
+    }
+}
+
+@media (max-width: 900px) {
+    .webResumePage .objective,
+    .webResumePage .education,
+    .webResumePage .coursework,
+    .webResumePage .workExperience {
+        padding-left: 6%;
+        padding-right: 6%;
+    }
+}
+
+@media (max-width: 800px) {
+    .webResumePage .objective,
+    .webResumePage .education,
+    .webResumePage .coursework,
+    .webResumePage .workExperience {
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+}
+
+/* Objective Section */
+
+
+
+/* Skills Section */
+
+.webResumePage .skills {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 30px 20px;
+}
+
+.webResumePage .skillsGrid div {
+    width: 170px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 0px auto;
+}
+
+.webResumePage .skillsGrid {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+}
+
+/* Projects Section */
+
+.webResumePage .goToProjects {
+    max-width: 350px;
+    width: 90%;
+    display: block;
+    margin: 20px auto;
+}
+
+.webResumePage button {
+    height: 50px;
+    width: 100%;
+    border-radius: 0px;
+    border: 1px solid grey;
+    padding: 1px;
+    margin-bottom: 0px;
+    background-color: white;
+    font-size: 30px;
+    color: rgb(112,53,41);
+    font-weight: 400;
+}
+
+.webResumePage button:hover {
+    cursor: pointer;
+    opacity: 0.7;
+    background-color: rgb(249, 246, 239);
+    -webkit-transition-duration: 300ms;
+            transition-duration: 300ms;
+}
+
+/* Education Section */
+
+
+
+/* Coursework Section */
+
+.webResumePage .coursework h2 {
+    width: 600px;
+}
+
+@media (max-width: 700px) {
+    .webResumePage .coursework h2 {
+        width: 100%;
+    }
+}
+
+/* Work Experience Section */

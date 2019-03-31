@@ -1,0 +1,45 @@
+/* Project Image Formatting */
+.projectImageContainer {
+    margin: auto;
+    margin-top: 15px;
+}
+
+.projectImageContainer .projectImage {
+    text-align: center;
+    margin: auto;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+.projectImageContainer .projectImage,
+.projectImageContainer .projectImage img {
+    width: 576px;
+    height: 360px;
+}
+
+.projectImageContainer h5 {
+    text-align: center;
+    margin-top: 20px;
+    font-weight: 500;
+    padding-left: 0;
+}
+
+@media (max-width: 1200px) {
+    .projectImageContainer .projectImage {
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
+
+@media (max-width: 650px) {
+    .projectImageContainer {
+        width: 100%;
+    }
+
+    .projectImageContainer .projectImage,
+    .projectImageContainer .projectImage img {
+        width: 100%;
+        height: auto;
+        margin: auto;
+    }
+}
