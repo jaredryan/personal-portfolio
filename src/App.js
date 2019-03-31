@@ -21,6 +21,7 @@ const App = () => {
             <Navbar />
             <Intro />
             <WhyMe />
+            <Resume />
         </div>
     )
 }

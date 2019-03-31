@@ -1,19 +1,129 @@
 /* Page */
 
-.webResumePage {
-    background-color: rgb(224, 221, 213);
-    color: black;
+.resume {
+    background-color: rgb(0, 173, 164);
+    /* background-color: rgb(249, 107, 99); */
+    /* background-color: rgb(235, 222, 215); */
     margin: 0;
-    padding: 0;
+    min-height: 100vh;
+    height: 1000px;
+    /* min-height: 1000px; */
+    width: 100%;
+    padding: 80px 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
 }
 
-.webResumePage h2 {
+.resume .banner {
+    background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 173, 164, 0.6)), to(rgba(0, 173, 164, 0.4))), url("../../Images/resume.jpg") no-repeat center center;
+    background: linear-gradient(rgba(0, 173, 164, 0.6), rgba(0, 173, 164, 0.4)), url("../../Images/resume.jpg") no-repeat center center;
+    z-index: 0;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.resume .flex {
+    margin: auto;
+    z-index: 1;
+}
+
+.resume .flex .info {
+    /* background-color: white; */
+    /* color: rgb(65, 53, 45); */
+    max-width: 1000px;
+    margin: auto;
+    /* box-shadow: 0px 1px 5px 1.5px rgb(65, 53, 45); */
+    /* border-radius: 8px; */
+    background-color: white;
+    z-index: 1;
+}
+
+.resume .flex .container {
+    /* background-color: white; */
+    /* color: rgb(65, 53, 45); */
+    max-width: 1000px;
+    margin: auto;
+    padding: 39.5px 60px;
+    padding-top: 0;
+    /* background-color: rgb(235, 222, 215); */
+    /* border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px; */
+}
+
+.resume .flex .container ul {
+    padding-left: 20px;
+}
+
+.resume .flex .tabs {
+    display: flex;
+    justify-content: space-around;
+    /* background-color: rgb(0, 158, 212); */
+    background-color: rgb(249, 107, 99);
+}
+
+.resume .flex .tabs button {
+    font-size: 24px;
+    /* background-color: rgb(0, 158, 212); */
+    background-color: rgb(249, 107, 99);
+    border: none;
+    text-align: center;
+    width: 33.33%;
+    padding: 10px;
+    color: rgb(46, 53, 70);
+    cursor: pointer;
+}
+
+.resume .flex .tabs button:hover {
+    opacity: 0.6;
+    background-color: rgb(255, 167, 159);
+}
+
+.resume .flex .dots {
+    display: flex;
+    justify-content: center;
+}
+
+.resume .flex .dots i {
+    font-size: 24px;
+    /* background-color: rgb(0, 158, 212); */
+    text-align: center;
+    width: 20px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.resume .flex .dots i:hover {
+    color: rgb(95, 83, 75);
+}
+
+.resume h1 {
+    margin: 0;
+    background-color: rgb(49, 69, 86);
+    /* background-color: rgb(249, 107, 99); */
+    text-align: center;
+    padding-top: 11px;
+    padding-bottom: 11px;
+    color: white;
+    font-weight: 300;
+    font-size: 32px;
+    width: 100%;
+    /* border-top-left-radius: 8px;
+    border-top-right-radius: 8px; */
+}
+
+.resume h2 {
     text-align: center;
     margin-top: 0;
     font-size: 30px;
-    color: rgb(112,53,41);
+    color: rgb(112, 53, 41);
     font-weight: 800;
-    border-bottom: 1px solid grey;
+    /* border-bottom: 1px solid grey; */
     width: 350px;
     margin: 0 auto;
     margin-bottom: 30px;
@@ -21,264 +131,85 @@
     font-weight: 400;
 }
 
-.webResumePage h3,
-.webResumePage h4,
-.webResumePage h5 {
+.resume h3,
+.resume h4,
+.resume h5 {
     margin-top: 5px;
     margin-bottom: 5px;
-    color: rgb(40,61,112)
+    color: rgb(249, 107, 99);
+    font-weight: 400;
 }
 
-.webResumePage h3 {
+.resume h3 {
     font-size: 24px;
     line-height: 34px;
+    padding-top: 50px;
 }
 
-.webResumePage h4 {
-    color: rgb(46,53,70);
+.resume h4 {
+    color: rgb(46, 53, 70);
     margin-top: 10px;
     font-size: 20px;
     font-weight: 400;
     line-height: 28px;
 }
 
-.webResumePage h5 {
+.resume h5 {
     font-size: 18px;
     font-family: "Montserrat", sans-serif;
-    font-weight: 300;
+    font-weight: 400;
+    color: rgb(65, 53, 45);
     margin-top: 8px;
 }
 
+.resume li {
+    color: rgb(65, 53, 45);
+}
+
 @media (max-width: 750px) {
-    .webResumePage h3 {
+    .resume h3 {
         font-size: 22px;
         line-height: 32px;
     }
 
-    .webResumePage h4 {
+    .resume h4 {
         font-size: 18px;
         margin-top: 9px;
         line-height: 26px;
     }
 
-    .webResumePage h5 {
+    .resume h5 {
         font-size: 16px;
         margin-top: 7px;
     }
 }
 
 @media (max-width: 480px) {
-    .webResumePage h2 {
+    .resume h2 {
         width: 100%;
     }
 }
 
-/* Banner */
-
-.webResumePage .webBanner {
-    position: relative;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    color: white;
-    height: 450px;
-    margin-top: 0px;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    background-color: transparent;
-    bottom: 50px;
-    margin-bottom: -50px;
-    background-color: rgb(46,53,70);
-}
-
-.webResumePage .webBanner h1 {
-    z-index: 1;
-    font-size: 100px;
-    margin: 0px;
-    text-align: center;
-    font-weight: 500;
-    text-shadow: 2px 2px 4px black;
-    position: relative;
-    top: 5%;
-}
-
-.webResumePage .webBanner .downloadButton {
-    z-index: 1;
-}
-
-.webResumePage .webBanner .downloadButton button {
-    background-color: rgb(224,221,213);
-    opacity: 0.7;
-    border-radius: 0px;
-    color: rgb(112,53,41);
-    font-weight: 300;
-    font-size: 25px;
-    border: none;
-    padding: 8px 16px;
-    height: auto;
-    margin-top: 20px;
-}
-
-.webResumePage .webBanner .downloadButton button:hover {
-    -webkit-transition-duration: 300ms;
-            transition-duration: 300ms;
-    opacity: 1;
-}
-
-.webResumePage .webPageImg {
-    background: -webkit-gradient(linear, left top, left bottom, from(rgba(20,41,132, 0.4)), to(rgba(20,41,132, 0.7))), url("../../Images/resumeBackground.jpeg") no-repeat center center;
-    background: linear-gradient(rgba(20,41,132, 0.4), rgba(20,41,132, 0.7)), url("../../Images/resumeBackground.jpeg") no-repeat center center;
-    background-size: cover;
-    /* filter: blur(5px); */
-    z-index: 0;
-    height: 100%;
-    width: 100%;
-    padding: 0;
-    margin: 0;
-    position: absolute;
-    top: 0;
-    left: 0;
-    -webkit-box-shadow: 0px 1px 5px 1px black;
-            box-shadow: 0px 1px 5px 1px black;
-}
-
-@media (max-width: 850px) {
-    .webResumePage .webBanner,
-    .webPageImg {
-        height: 375px;
-    }
-
-    .webResumePage .webBanner h1 {
-        font-size: 85px;
-    }
-}
-
-@media (max-width: 679px) {
-    .webResumePage .webBanner,
-    .webPageImg {
-        height: 325px;
-    }
-
-    .webResumePage .webBanner h1 {
-        font-size: 75px;
-    }
-
-    .webResumePage .webBanner .downloadButton button {
-        font-size: 22px;
-    }
-}
-
-@media (max-width: 550px) {
-    .webResumePage .webBanner,
-    .webPageImg {
-        height: 300px;
-    }
-
-    .webResumePage .webBanner h1 {
-        font-size: 65px;
-    }
-
-    .webResumePage .webBanner .downloadButton button {
-        font-size: 20px;
-    }
-}
 
 /* Section Formatting */
 
-.webResumePage .objective,
-.webResumePage .education,
-.webResumePage .coursework,
-.webResumePage .workExperience,
-.webResumePage .projects {
-    margin-top: 0;
-    margin-bottom: 0;
-    padding: 30px 9%;
+.resume .skills,
+.resume .work,
+.resume .education {
+    margin: 0;
+    padding: 0;
 }
-
-.webResumePage .workExperience,
-.webResumePage .coursework,
-.webResumePage .projects {
-    background-color: white;
-}
-
-.webResumePage .workExperience .work1,
-.webResumePage .education .edu1 {
-    margin-bottom: 30px;
-}
-
-.webResumePage .workExperience .work2,
-.webResumePage .education .edu2 {
-    margin-top: 30px;
-}
-
-@media (max-width: 1400px) {
-    .webResumePage .objective,
-    .webResumePage .education,
-    .webResumePage .coursework,
-    .webResumePage .workExperience {
-        padding-left: 8%;
-        padding-right: 8%;
-    }
-}
-
-@media (max-width: 1100px) {
-    .webResumePage .objective,
-    .webResumePage .education,
-    .webResumePage .coursework,
-    .webResumePage .workExperience {
-        padding-left: 7%;
-        padding-right: 7%;
-    }
-}
-
-@media (max-width: 900px) {
-    .webResumePage .objective,
-    .webResumePage .education,
-    .webResumePage .coursework,
-    .webResumePage .workExperience {
-        padding-left: 6%;
-        padding-right: 6%;
-    }
-}
-
-@media (max-width: 800px) {
-    .webResumePage .objective,
-    .webResumePage .education,
-    .webResumePage .coursework,
-    .webResumePage .workExperience {
-        padding-left: 5%;
-        padding-right: 5%;
-    }
-}
-
-/* Objective Section */
-
-
 
 /* Skills Section */
 
-.webResumePage .skills {
-    margin-top: 0;
-    margin-bottom: 0;
-    padding: 30px 20px;
-}
-
-.webResumePage .skillsGrid div {
+.resume .skillsGrid div {
     width: 170px;
     padding-left: 10px;
     padding-right: 10px;
     margin: 0px auto;
 }
 
-.webResumePage .skillsGrid {
+.resume .skillsGrid {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -289,50 +220,9 @@
             justify-content: space-between;
 }
 
-/* Projects Section */
-
-.webResumePage .goToProjects {
-    max-width: 350px;
-    width: 90%;
-    display: block;
-    margin: 20px auto;
-}
-
-.webResumePage button {
-    height: 50px;
-    width: 100%;
-    border-radius: 0px;
-    border: 1px solid grey;
-    padding: 1px;
-    margin-bottom: 0px;
-    background-color: white;
-    font-size: 30px;
-    color: rgb(112,53,41);
-    font-weight: 400;
-}
-
-.webResumePage button:hover {
-    cursor: pointer;
-    opacity: 0.7;
-    background-color: rgb(249, 246, 239);
-    -webkit-transition-duration: 300ms;
-            transition-duration: 300ms;
-}
 
 /* Education Section */
 
 
-
-/* Coursework Section */
-
-.webResumePage .coursework h2 {
-    width: 600px;
-}
-
-@media (max-width: 700px) {
-    .webResumePage .coursework h2 {
-        width: 100%;
-    }
-}
 
 /* Work Experience Section */

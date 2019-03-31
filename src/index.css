@@ -20,7 +20,7 @@ p, li {
     line-height: 28px;
 }
 
-h1, h2 {
+h1, h2, h3, button {
     font-family: 'Roboto Slab', serif;
 }
 

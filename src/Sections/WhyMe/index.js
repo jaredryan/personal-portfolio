@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
-import './index.css';
+import React from 'react'
+import './index.css'
 
-class About extends Component {
-  render() {
+const WhyMe = () => {
     return (
         <div className="whyMe" id="whyMe">
             <div className="flex">
@@ -40,7 +39,6 @@ class About extends Component {
             </div>
         </div>
     );
-  }
 }
 
-export default About;
+export default WhyMe;
