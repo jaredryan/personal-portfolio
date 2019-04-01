@@ -96,6 +96,7 @@ class Resume extends Component {
         return (
             <div className="resume" id="resume">
                 <div className="banner"></div>
+                <div className="overlay"></div>
                 <div className="flex">
 
                     <div className="info">

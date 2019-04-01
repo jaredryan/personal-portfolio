@@ -7,21 +7,13 @@ import Resume from './Sections/Resume'
 import Projects from './Sections/Projects'
 
 const App = () => {
-
-    // <div>
-    //     <Navbar />
-    //     <Intro />
-    //     <WhyMe />
-    //     <Resume />
-    //     <Projects />
-    // </div>
-
     return (
         <div>
             <Navbar />
             <Intro />
             <WhyMe />
             <Resume />
+            <Projects />
         </div>
     )
 }

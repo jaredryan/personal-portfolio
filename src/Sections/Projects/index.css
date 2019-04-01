@@ -1,15 +1,16 @@
 /* Projects Page */
 
-.projectsPage {
+.projects {
     color: black;
     padding: 20px 30px;
     background-color: white;
     margin: 0;
     padding: 20px 0;
     padding-bottom: 0px;
+    background-color: rgb(249, 107, 99);
 }
 
-.projectsPage > h2 {
+.projects > h2 {
     font-size: 55px;
     text-align: center;
     margin: 0;
@@ -25,12 +26,12 @@
 }
 
 @media (max-width: 750px) {
-    .projectsPage > h2 {
+    .projects > h2 {
         font-size: 32px;
     }
 }
 
-.projectsPage .projectBanner {
+.projects .projectBanner {
     position: relative;
     -webkit-box-pack: center;
         -ms-flex-pack: center;
@@ -54,7 +55,7 @@
     background-color: rgb(46,53,70);
 }
 
-.projectsPage .projectBanner h1 {
+.projects .projectBanner h1 {
     z-index: 1;
     font-size: 100px;
     margin: 0px;
@@ -63,7 +64,7 @@
     text-shadow: 3px 3px 5px black;
 }
 
-.projectsPage .projectPageImg {
+.projects .projectPageImg {
     background: -webkit-gradient(linear, left top, left bottom, from(rgba(20,41,122, 0.4)), to(rgba(20,41,122, 0.8))), url("../../Images/projectsBackgroundImg.jpg") no-repeat 50% 75%;
     background: linear-gradient(rgba(20,41,122, 0.4), rgba(20,41,122, 0.8)), url("../../Images/projectsBackgroundImg.jpg") no-repeat 50% 75%;
     background-size: cover;
@@ -81,41 +82,41 @@
 }
 
 @media (max-width: 950px) {
-    .projectsPage .projectBanner,
-    .projectsPage .projectPageImg {
+    .projects .projectBanner,
+    .projects .projectPageImg {
         height: 375px;
     }
 
-    .projectsPage .projectBanner h1 {
+    .projects .projectBanner h1 {
         font-size: 90px;
     }
 }
 
 @media (max-width: 779px) {
-    .projectsPage .projectBanner,
-    .projectsPage .projectPageImg {
+    .projects .projectBanner,
+    .projects .projectPageImg {
         height: 330px;
     }
 
-    .projectsPage .projectBanner h1 {
+    .projects .projectBanner h1 {
         font-size: 80px;
     }
 }
 
 @media (max-width: 650px) {
-    .projectsPage .projectBanner,
-    .projectsPage .projectPageImg {
+    .projects .projectBanner,
+    .projects .projectPageImg {
         height: 300px;
     }
 
-    .projectsPage .projectBanner h1 {
+    .projects .projectBanner h1 {
         font-size: 70px;
     }
 }
 
 @media (max-width: 480px) {
-    .projectsPage .projectBanner,
-    .projectsPage .projectPageImg {
+    .projects .projectBanner,
+    .projects .projectPageImg {
         height: 250px;
     }
 
@@ -124,7 +125,7 @@
     }
 }
 
-.projectsPage .projectsDiv {
+.projects .projectsDiv {
     margin-bottom: 0;
     padding: 0px;
     background-color: pink;

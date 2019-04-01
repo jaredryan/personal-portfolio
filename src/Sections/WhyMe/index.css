@@ -4,18 +4,32 @@
     height: 100vh;
     min-height: 846px;
     width: 100%;
-    background-color: rgb(0, 158, 212);
+    /* background-color: rgb(0, 158, 212); */
     margin: 0;
     padding: 80px 5%;
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+}
+
+.whyMe .banner {
+    background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 158, 212, 0.7)), to(rgba(0, 158, 212, 0.7))), url("../../Images/whyMeBackground.jpg") no-repeat center center;
+    background: linear-gradient(rgba(0, 158, 212, 0.7), rgba(0, 158, 212, 0.7)), url("../../Images/whyMeBackground.jpg") no-repeat center center;
+    z-index: 0;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .whyMe .flex {
     margin: auto;
     max-width: 1000px;
     display: flex;
+    z-index: 1;
 }
 
 .whyMe .whyMeText {

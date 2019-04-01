@@ -319,11 +319,8 @@ class Projects extends Component {
       });
 
     return (
-        <div className="projectsPage">
-            <div className="projectBanner">
-                <h1>Projects</h1>
-                <div className="projectPageImg"></div>
-            </div>
+        <div className="projects" id="projects">
+            <h1>Projects</h1>
             <h2>Websites</h2>
             <div className="projectsDiv">
                 {mappedWebProjects}

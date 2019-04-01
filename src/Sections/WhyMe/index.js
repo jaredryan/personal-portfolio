@@ -4,6 +4,7 @@ import './index.css'
 const WhyMe = () => {
     return (
         <div className="whyMe" id="whyMe">
+            <div className="banner"></div>
             <div className="flex">
                 <div className="whyMeText">
                     <h1>Why Me?</h1>
