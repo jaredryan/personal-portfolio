@@ -64,7 +64,7 @@
 
 .whyMe .whyMeText ul,
 .whyMe .seeMore {
-    background-color: white;
+    background-color: rgb(235, 223, 215);
 }
 
 .whyMe .fontAwesomeLogos {
@@ -85,6 +85,30 @@
 .whyMe .fontAwesomeLogos i:hover {
     color: rgb(249, 107, 99);
     transition-duration: 300ms;
+}
+
+.whyMe .whyMeText,
+.whyMe .whyMeText h1 {
+    border-top-left-radius: 10px;
+}
+
+.whyMe .whyMeText,
+.whyMe .whyMeText .pics,
+.whyMe .whyMeText .pics .whyMePic.left,
+.whyMe .whyMeText .pics .whyMePic.left img {
+    border-bottom-left-radius: 10px;
+}
+
+.whyMe .contactMe,
+.whyMe .contactMe .profilePic,
+.whyMe .contactMe .profilePic img {
+    border-top-right-radius: 10px;
+}
+
+.whyMe .contactMe,
+.whyMe .contactMe .seeMore,
+.whyMe .contactMe .seeMore .fontAwesomeLogos {
+    border-bottom-right-radius: 10px;
 }
 
 /* Pictures */

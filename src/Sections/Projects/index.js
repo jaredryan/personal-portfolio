@@ -1,8 +1,20 @@
-import React, { Component } from 'react';
-import Project from './Project';
-import './index.css';
+import React, { Component } from 'react'
+import Project from './Project'
+import './index.css'
 
 class Projects extends Component {
+    constructor() {
+        super()
+        this.state = {
+            projectType: "web",
+            projectIsOpen: false
+        }
+    }
+
+    handleProjectType = (projectType) => {
+        this.setState({projectType})
+    }
+
   render() {
       const webProjects = [
           {
@@ -318,16 +330,110 @@ class Projects extends Component {
                  />
       });
 
+      const web = [
+          {
+              title: 'Front-end',
+              listItems: [
+                  'JavaScript',
+                  'React',
+                  'HTML/CSS',
+                  'jQuery'
+              ]
+          },
+          {
+              title: 'Back-end',
+              listItems: [
+                  'Ruby on Rails',
+                  'NodeJS',
+                  'Express',
+                  'Mongoose',
+                  'MongoDB'
+              ]
+          },
+          {
+              title: 'Other',
+              listItems: [
+                  'Python',
+                  'Java',
+                  'C',
+                  'Linux',
+                  'Git'
+              ]
+          },
+          {
+              title: 'Familiarity',
+              listItems: [
+                  'Android',
+                  'Swift',
+                  'Angular',
+                  'SQL',
+                  'Jenkins'
+              ]
+          }
+      ]
+
+      const work = [
+          {
+              title: 'Software Developer',
+              date: 'June 2018-Present',
+              location: 'IBM - Austin, Texas',
+              listItems: [
+                  'Works with AppID, a cloud security application featuring frontend, backend, and security technologies',
+                  'Design, program, review, and test code in an Agile environment',
+                  'Technologies used include Node.js, Angular.js, Java, Android, Swift, Kubernetes, Docker, Jenkins, Github, and Zenhub'
+              ]
+          },
+          {
+              title: 'Full-time Volunteer Public Representative, Trainer, and Manager',
+              date: 'April 2013—March 2015',
+              location: 'The Church of Jesus Christ of Latter Day Saints – Rio Grande do Sul, Brazil',
+              listItems: [
+                  'Presented messages to groups anywhere from 1-100 individuals',
+                  'Improved performance by 150% by leading 20 fellow volunteers through coaching, interviews, as well as weekly trainings and discussions',
+                  'Achieved fluency in Portuguese in writing, reading, and speaking'
+              ]
+          }
+      ]
+
+      const projectIsOpen = this.state.projectIsOpen === false;
+
     return (
         <div className="projects" id="projects">
-            <h1>Projects</h1>
-            <h2>Websites</h2>
-            <div className="projectsDiv">
-                {mappedWebProjects}
-            </div>
-            <h2>Software Development</h2>
-            <div className="projectsDiv">
-                {mappedSoftwareProjects}
+            <div className="banner"></div>
+            <div className="overlay"></div>
+            <div className="flex">
+                <div className="info">
+                    <div className="leftContainer">
+                        <div className="container">
+                            {
+                                this.state.projectType === "web" &&
+                                    <div className="projectsDiv">
+                                        {mappedWebProjects}
+                                    </div>
+                            }
+                            {
+                                this.state.projectType === "software" &&
+                                    <div className="projectsDiv">
+                                        {mappedSoftwareProjects}
+                                    </div>
+                            }
+                        </div>
+                        <div className="dots">
+                            <i className="fa fa-circle" onClick={() => this.handleProjectType("web")} style={{fontSize: "10px", fontWeight: 100, color: this.state.projectType === "web" ? "rgb(0, 158, 212)" : "rgb(65, 53, 45)"}}></i>
+                            <i className="fa fa-circle" onClick={() => this.handleProjectType("software")} style={{fontSize: "10px", fontWeight: 100, color: this.state.projectType === "software" ? "rgb(0, 158, 212)" : "rgb(65, 53, 45)"}}></i>
+                        </div>
+                    </div>
+                    {
+                        projectIsOpen &&
+                            <div className="rightContainer">
+                                <h1>Projects</h1>
+                                <div className="tabs">
+                                    <button onClick={() => this.handleProjectType("web")}><i className="fa fa-circle" style={{fontSize: "22px", fontWeight: 100, color: this.state.projectType === "web" ? "rgb(0, 158, 212)" : "rgb(65, 53, 45)"}}></i>Web</button>
+                                    <button onClick={() => this.handleProjectType("software")}><i className="fa fa-circle" style={{fontSize: "22px", fontWeight: 100, color: this.state.projectType === "software" ? "rgb(0, 158, 212)" : "rgb(65, 53, 45)"}}></i>Software</button>
+                                </div>
+                            </div>
+                    }
+                </div>
             </div>
         </div>
     );

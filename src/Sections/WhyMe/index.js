@@ -16,10 +16,10 @@ const WhyMe = () => {
                         <li>From these experiences, in addition to developing these skills, I've come to embrace goal-setting, optimism, and humor.</li>
                     </ul>
                     <div className="pics">
-                        <div className="whyMePic">
+                        <div className="whyMePic left">
                             <img src={require("../../Images/whyMe.jpg")} alt=""/>
                         </div>
-                        <div className="whyMePic">
+                        <div className="whyMePic right">
                             <img src={require("../../Images/whyMeForest.jpg")} alt=""/>
                         </div>
                     </div>
