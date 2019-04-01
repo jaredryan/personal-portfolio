@@ -2,11 +2,10 @@
 
 .resume {
     background-color: rgb(0, 173, 164);
-    /* background-color: rgb(249, 107, 99); */
+    /* background-color: rgb(0, 186, 255); */
     /* background-color: rgb(235, 222, 215); */
     margin: 0;
     min-height: 100vh;
-    height: 1000px;
     /* min-height: 1000px; */
     width: 100%;
     position: relative;
@@ -21,6 +20,7 @@
     position: absolute;
     top: 0;
     left: 0;
+    background-attachment: fixed;
 }
 
 .resume .overlay {
@@ -28,7 +28,7 @@
     height: 100%;
     width: 100%;
     position: absolute;
-    background-image: linear-gradient(to right, rgba(0, 173, 164, 0.3), rgba(0, 173, 164, 0.8));
+    background-image: linear-gradient(to right, rgba(51, 64, 115, 0.3), rgba(51, 64, 115, 0.8));
     top: 0;
     left: 0;
     z-index: 1
@@ -68,18 +68,13 @@
     align-items: center;
     height: 100%;
     z-index: 3;
+    min-height: 100vh;
 }
 
 .resume .flex .container {
-    /* background-color: white; */
-    /* color: rgb(65, 53, 45); */
-    max-width: 1000px;
     margin: auto;
-    padding: 39.5px 60px;
-    padding-top: 0;
-    /* background-color: rgb(235, 222, 215); */
-    /* border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px; */
+    padding: 30px 60px;
+    padding-bottom: 80px;
 }
 
 .resume .flex .container ul {
@@ -90,8 +85,6 @@
     display: flex;
     justify-content: space-around;
     flex-direction: column;
-    /* background-color: rgb(0, 158, 212); */
-    /* background-color: rgb(249, 107, 99); */
 }
 
 .resume .flex .tabs button {
@@ -111,7 +104,7 @@
 }
 
 .resume .flex .tabs button:hover {
-    color: rgb(255, 167, 159);
+    color: rgb(0, 186, 255);
 }
 
 .resume .flex .dots {
@@ -123,7 +116,6 @@
 
 .resume .flex .dots i {
     font-size: 24px;
-    /* background-color: rgb(0, 158, 212); */
     text-align: center;
     width: 20px;
     padding-top: 10px;
@@ -133,29 +125,26 @@
     cursor: pointer;
 }
 
-.resume .flex .dots i:hover {
-    color: rgb(95, 83, 75);
-}
-
 .resume h3,
 .resume h4,
 .resume h5 {
     margin-top: 5px;
     margin-bottom: 5px;
-    color: rgb(249, 107, 99);
-    font-weight: 300;
 }
 
 .resume h3 {
     font-size: 24px;
     line-height: 34px;
     padding-top: 50px;
+    color: rgb(0, 186, 255);
+    font-weight: 200;
 }
 
 .resume h4 {
-    color: rgb(0, 158, 212);
+    color: white;
     margin-top: 10px;
-    font-size: 18px;
+    font-size: 20px;
+    font-weight: 300;
     line-height: 28px;
 }
 
@@ -163,7 +152,7 @@
     font-size: 18px;
     font-family: "Montserrat", sans-serif;
     font-weight: 400;
-    color: rgb(235, 223, 215);
+    color: white;
     margin-top: 8px;
 }
 

@@ -1,8 +1,8 @@
 /* Page */
 
 .whyMe {
-    height: 100vh;
-    min-height: 846px;
+    min-height: 100vh;
+    height: 1300px;
     width: 100%;
     /* background-color: rgb(0, 158, 212); */
     margin: 0;
@@ -13,9 +13,51 @@
     position: relative;
 }
 
-.whyMe .banner {
-    background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 158, 212, 0.7)), to(rgba(0, 158, 212, 0.7))), url("../../Images/whyMeBackground.jpg") no-repeat center center;
-    background: linear-gradient(rgba(0, 158, 212, 0.7), rgba(0, 158, 212, 0.7)), url("../../Images/whyMeBackground.jpg") no-repeat center center;
+.whyMe .whyMeText {
+    margin: 0;
+}
+
+.whyMe h1 {
+    margin: 0;
+    text-align: center;
+    color: rgb(61, 80, 153);
+    font-weight: 200;
+    font-size: 60px;
+    margin-bottom: 50px;
+}
+
+.whyMe .flex {
+    width: 100%;
+}
+
+.whyMe .point {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* margin: -4px 0px; */
+}
+
+.whyMe .picContainer {
+    width: 50%;
+    max-width: 400px;
+    height: 250px;
+    position: relative;
+}
+
+.whyMe .text {
+    width: 50%;
+    max-width: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.whyMe p {
+    width: 70%;
+}
+
+.whyMe .pic {
+    background: url("../../Images/introPattern.jpg") no-repeat center center;
     z-index: 0;
     background-size: cover;
     height: 100%;
@@ -25,113 +67,22 @@
     left: 0;
 }
 
-.whyMe .flex {
-    margin: auto;
-    max-width: 1000px;
-    display: flex;
-    z-index: 1;
+.whyMe #whyMeIBM {
+    background: url("../../Images/whyMeIBM.jpg") no-repeat center center;
+    zoom: 13.5%;
 }
 
-.whyMe .whyMeText {
-    margin: 0;
+.whyMe #whyMeFreelance {
+    background: url("../../Images/whyMeFreelance.jpg") no-repeat center center;
+    zoom: 7%;
 }
 
-.whyMe .contactMe {
-    margin: 0;
-    width: 33.33%;
+.whyMe #whyMeBerkeley {
+    background: url("../../Images/whyMeBerkeley.jpg") no-repeat left center;
+    zoom: 50%;
 }
 
-.whyMe h1 {
-    margin: 0;
-    background-color: rgb(49, 69, 86);
-    text-align: center;
-    padding-top: 11px;
-    padding-bottom: 11px;
-    color: white;
-    font-weight: 200;
-    font-size: 32px;
-}
-
-.whyMe .seeMore h1 {
-    margin-top: -1px;
-    background-color: rgb(49, 69, 86);
-}
-
-.whyMe .whyMeText ul {
-    margin: 0;
-    padding: 39.5px 60px;
-}
-
-.whyMe .whyMeText ul,
-.whyMe .seeMore {
-    background-color: rgb(235, 223, 215);
-}
-
-.whyMe .fontAwesomeLogos {
-    height: 262px;
-    text-align: center;
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-    padding-top: 40px;
-    padding-bottom: 40px;
-}
-
-.whyMe .whyMeText,
-.whyMe .fontAwesomeLogos i {
-    color: rgb(65, 53, 45);
-}
-
-.whyMe .fontAwesomeLogos i:hover {
-    color: rgb(249, 107, 99);
-    transition-duration: 300ms;
-}
-
-.whyMe .whyMeText,
-.whyMe .whyMeText h1 {
-    border-top-left-radius: 10px;
-}
-
-.whyMe .whyMeText,
-.whyMe .whyMeText .pics,
-.whyMe .whyMeText .pics .whyMePic.left,
-.whyMe .whyMeText .pics .whyMePic.left img {
-    border-bottom-left-radius: 10px;
-}
-
-.whyMe .contactMe,
-.whyMe .contactMe .profilePic,
-.whyMe .contactMe .profilePic img {
-    border-top-right-radius: 10px;
-}
-
-.whyMe .contactMe,
-.whyMe .contactMe .seeMore,
-.whyMe .contactMe .seeMore .fontAwesomeLogos {
-    border-bottom-right-radius: 10px;
-}
-
-/* Pictures */
-
-.whyMe .whyMeText .pics {
-    display: flex;
-}
-
-.whyMe .whyMeText .pics div {
-    width: 50%;
-}
-
-.whyMe .whyMeText img {
-    height: auto;
-    width: 100%;
-}
-
-.whyMe .profilePic {
-    height: 360px;
-    width: 215.1px;
-}
-
-.whyMe .profilePic img {
-    height: auto;
-    width: 100%;
+.whyMe #whyMeBrazil {
+    background: url("../../Images/whyMeBrazil.jpg") no-repeat center center;
+    zoom: 9%;
 }
