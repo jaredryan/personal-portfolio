@@ -9,7 +9,7 @@ nav {
     text-align: center;
     padding: 16px 32px;
     padding-top: 14px;
-    border-radius: 8px;
+    border-radius: 10px;
     background-color: var(--navbar);
     opacity: 0.7;
 }
@@ -21,7 +21,8 @@ nav * {
 nav:hover,
 nav:focus {
     cursor: pointer;
-    background-color: var(--navbarHover);
+    opacity: 1;
+    background-color: rgb(40, 40, 40);
 }
 
 nav ul {
@@ -51,5 +52,6 @@ nav ul li {
 
 nav ul li:hover {
     background-color: var(--navbarHover);
-    cursor: pointer;
+    opacity: 1;
+    background-color: rgb(40, 40, 40);
 }

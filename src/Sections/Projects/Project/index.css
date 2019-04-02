@@ -13,6 +13,7 @@
     background-color: rgba(0, 0, 0, 0.8);
     display: none;
     padding: 20px;
+    border-radius: 2px;
 }
 
 .projectEntry .projectImageContainer .hoverEntry h2 {
@@ -26,22 +27,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.projectEntry:hover .hoverEntry button {
-    background-color: rgb(51, 64, 115);
-    color: white;
-    padding: 10px 20px;
-    font-size: 18px;
-    font-weight: 200;
-    border-radius: 10px;
-    margin-top: 20px;
-    border: 1px solid white;
-}
-
-.projectEntry:hover .hoverEntry button:hover {
-    cursor: pointer;
-    background-color: rgb(81, 94, 145);
 }
 
 .projectEntry h2,
@@ -84,10 +69,6 @@
     text-decoration: none;
 }
 
-.projectEntry h5 {
-    padding-left: 20px;
-}
-
 .projectEntry .titleImage h5 {
     padding-left: 0px;
 }
@@ -96,14 +77,21 @@
 .projectEntry li {
     font-size: 18px;
     font-weight: 400;
-    font-family: "Montserrat", sans-serif;
 }
 
 .projectEntry h5 span {
-    font-weight: 600;
-    font-family: "Montserrat", sans-serif;
+    font-weight: 300;
+    font-family: "Roboto Slab", sans-serif;
     font-size: 18px;
     color: rgb(40,61,112);
+    padding-left: 20px;
+}
+
+.projectEntry h5 span.tech {
+    padding-left: 5px;
+    font-family: "Mulif", sans-serif;
+    font-size: 18px;
+    color: rgb(40,40,40);
 }
 
 .projectEntry h6 {
@@ -158,4 +146,5 @@
             justify-content: space-between;
     margin-left: 10px;
     margin-right: 10px;
+    margin-top: 50px;
 }

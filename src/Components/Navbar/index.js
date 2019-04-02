@@ -13,7 +13,7 @@ class Navbar extends Component {
 
     render() {
         const show = this.state.isOpen ? {display: "block"} : {display: "none"}
-        const hover = this.state.isOpen ? {backgroundColor: "rgb(112, 100, 92)"} : {}
+        const hover = this.state.isOpen ? {backgroundColor: "rgb(40, 40, 40)"} : {}
 
         return (
             <nav onClick={this.handleClick} style={hover}>

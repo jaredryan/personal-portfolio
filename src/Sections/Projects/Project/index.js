@@ -3,23 +3,6 @@ import ProjectImage from './ProjectImage';
 import Project from './Project';
 
 class ProjectContainer extends Component {
-    constructor() {
-        super();
-        this.state = {
-            clicked: false
-        }
-
-        this.handleClick = this.handleClick.bind(this);
-    }
-
-    handleClick(e) {
-        this.setState(prevState => {
-            return {
-                clicked: !prevState.clicked
-            }
-        });
-    }
-
     render() {
         const descriptionList = this.props.description.map((bullet, index) => {
             return <li key={index + bullet}>{bullet}</li>;
@@ -40,12 +23,11 @@ class ProjectContainer extends Component {
         return(
             <Project
                 mainImage={this.props.mainImage}
-                handleClick={this.handleClick}
+                handleClick={this.props.handleClick}
                 title={this.props.title}
                 demo={this.props.demo}
                 subtitle={this.props.subtitle}
                 github={this.props.github}
-                clicked={this.state.clicked}
                 techList={techList}
                 descriptionList={descriptionList}
                 imageList={imageList}

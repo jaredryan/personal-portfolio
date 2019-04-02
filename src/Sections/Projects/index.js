@@ -1,22 +1,27 @@
 import React, { Component } from 'react'
 import Project from './Project'
 import './index.css'
+import ProjectImage from './Project/ProjectImage'
 
 class Projects extends Component {
     constructor() {
         super()
         this.state = {
-            projectType: "web",
-            projectIsOpen: false
+            projectIsOpen: false,
+            imageIndex: 0
         }
     }
 
-    handleProjectType = (projectType) => {
-        this.setState({projectType})
+    handleProjectSet = (projectIsOpen) => {
+        this.setState({projectIsOpen, imageIndex: 0})
+    }
+
+    handleIndexSet = (imageIndex) => {
+        this.setState({imageIndex})
     }
 
   render() {
-      const webProjects = [
+      const projects = [
           {
               title: "Negotiation Feedback",
               subtitle: "Complex, actively-used, fullstack application with on-going development",
@@ -195,7 +200,7 @@ class Projects extends Component {
                       id: require("../../Images/openHouse3.png")
                   }
               ]
-          }
+          },
           // {
           //     title: "Design Replication",
           //     subtitle: "Practice mimicking a site's design without copying code",
@@ -282,10 +287,6 @@ class Projects extends Component {
           //         }
           //     ]
           // },
-      ];
-
-      // Add software projects
-      const softwareProjects = [
           {
               title: "When Bunnies Attack",
               subtitle: "Text-based role playing game built in Node.js",
@@ -306,9 +307,10 @@ class Projects extends Component {
           }
       ];
 
-      const mappedWebProjects = webProjects.map((project, index) => {
+      const mappedProjects = projects.map((project, index) => {
           return <Project
                       title={project.title}
+                      handleClick={() => this.handleProjectSet(project.title)}
                       mainImage={project.mainImage}
                       subtitle={project.subtitle}
                       description={project.description}
@@ -322,36 +324,73 @@ class Projects extends Component {
                  />
       });
 
-      const mappedSoftwareProjects = softwareProjects.map((project, index) => {
-          return <Project
-                      title={project.title}
-                      mainImage={project.mainImage}
-                      subtitle={project.subtitle}
-                      description={project.description}
-                      demo={project.demo}
-                      github={project.github}
-                      tech={project.tech}
-                      pictures={project.pictures}
-                      key={project.title + index}
-                      index={index}
-                      modifier={0}
-                 />
-      });
+      let project;
+      const projectIsOpen = this.state.projectIsOpen !== false;
+      if (projectIsOpen) {
+          project = projects.find(project => project.title === this.state.projectIsOpen);
 
-      const projectIsOpen = this.state.projectIsOpen === false;
+          const descriptionList = project.description.map((bullet, index) => {
+              return <li key={index + bullet}>{bullet}</li>;
+          });
 
-    return (
-        <div className="projects" id="projects">
-            <div className="banner"></div>
-            <div className="overlay"></div>
-            <div className="flex">
-                <h1>Projects</h1>
-                <div className="projectsDiv">
-                    {[...mappedWebProjects, ...mappedSoftwareProjects]}
+          let techList = project.tech && project.tech.reduce((total, elem) => {
+              return total + elem + ", ";
+          }, "");
+          techList = techList.slice(0, techList.length - 2);   // remove last ", "
+
+          return (
+              <div className="projects" id="projects">
+                  <div className="banner"></div>
+                  <div className="overlay"></div>
+                  <div className="flex" style={{padding: 0, paddingTop: "80px"}}>
+                      <h1>Projects</h1>
+                      <div className="projectDisplay">
+                          <div className="backButton" onClick={() => this.handleProjectSet(false)}><i class="fa fa-arrow-left" style={{fontSize: "24px"}}></i></div>
+                          <h2>{project.title}</h2>
+                          <h3>{project.subtitle}</h3>
+                          <div className="buttons">
+                              <a href={project.demo} target="_blank" rel="noopener noreferrer"><button className="link">Visit</button></a>
+                              <a href={project.github} target="_blank" rel="noopener noreferrer"><button className="link">Github</button></a>
+                          </div>
+                          <div className="projectEntry">
+                              <div>
+                                  <ul>
+                                      {descriptionList}
+                                  </ul>
+                                  {techList && <h5><span>Technologies:</span> <span className="tech">{techList}</span></h5>}
+                                  <div className="projectImages">
+                                      <ProjectImage
+                                          id={project.pictures[this.state.imageIndex].id}
+                                          caption={project.pictures[this.state.imageIndex].caption}
+                                      />
+                                  </div>
+                                  <div className="dots">
+                                      {
+                                          project.pictures.map((pic, index) => {
+                                              return <i className="fa fa-circle" onClick={() => this.handleIndexSet(index)} style={{fontSize: "18px", fontWeight: 100, color: this.state.imageIndex === index ? "rgb(110, 128, 192)" : "rgb(40, 40, 40)"}}></i>
+                                          })
+                                      }
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          );
+      } else {
+        return (
+            <div className="projects" id="projects">
+                <div className="banner"></div>
+                <div className="overlay"></div>
+                <div className="flex">
+                    <h1>Projects</h1>
+                    <div className="projectsDiv">
+                        {mappedProjects}
+                    </div>
                 </div>
             </div>
-        </div>
-    );
+        );
+    }
   }
 }
 
