@@ -292,7 +292,6 @@ class Projects extends Component {
               subtitle: "Text-based role playing game built in Node.js",
               mainImage: require("../../Images/bunnyAttack.jpg"),
               description: ["To play this game, clone the Github repository and run app.js in Node.js", "Game mechanics and systems required a large amount of modularized code to make it easier to add new features", "Features a navigation system allowing the player to go from area to area as desired", "Requests user input to make decisions or gather information, which then open opportunities for new decisions", "Includes a system for forced encounters with story enemies or random enemies as you walk", "Turn-based fighting system where the player can attack, flee, or use items, and is rewarded for victory", "Allows the user to print the current status or quit the game at any time"],
-              demo: "",
               github: "https://github.com/jaredryan/v-assignments/tree/master/projects/colossal-adventure-console-rpg",
               tech: ["Node.js"],
           },
@@ -301,8 +300,6 @@ class Projects extends Component {
               subtitle: "A list of projects, where the code is copyrighted",
               mainImage: require("../../Images/berkeleyProjects.jpg"),
               description: ["Designed and implemented a simplified version of Git, which manipulated files on a local computer (Java)(CS 61B)", "Implemented the logic of a simplified neural network (Python)", "Optimized a naive depth map generator algorithm using OpenMP, SSE Intrinsics, etc. for 5x speedup (C)", "Parallelized a common image compression algorithm with MapReduce in Spark (Python)", "Performed genomic analysis, including the implementation of the Needleman-Wunsch algorithms to align two sequences (Python)(BE 131)", "Implemented ALU, Register File, CPU, and 2-stage pipeline to better understand a processor (Logisim)"],
-              demo: "",
-              github: "",
               tech: ""
           }
       ];
@@ -349,8 +346,8 @@ class Projects extends Component {
                           <h2>{project.title}</h2>
                           <h3>{project.subtitle}</h3>
                           <div className="buttons">
-                              <a href={project.demo} target="_blank" rel="noopener noreferrer"><button className="link">Visit</button></a>
-                              <a href={project.github} target="_blank" rel="noopener noreferrer"><button className="link">Github</button></a>
+                              {project.demo && <a href={project.demo} target="_blank" rel="noopener noreferrer"><button className="link">Visit</button></a>}
+                              {project.github && <a href={project.github} target="_blank" rel="noopener noreferrer"><button className="link">Github</button></a>}
                           </div>
                           <div className="projectEntry">
                               <div>
