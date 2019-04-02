@@ -345,7 +345,7 @@ class Projects extends Component {
                   <div className="flex" style={{padding: 0, paddingTop: "80px"}}>
                       <h1>Projects</h1>
                       <div className="projectDisplay">
-                          <div className="backButton" onClick={() => this.handleProjectSet(false)}><i class="fa fa-arrow-left" style={{fontSize: "24px"}}></i></div>
+                          <a className="backButton" href="#projects" onClick={() => this.handleProjectSet(false)}><i class="fa fa-arrow-left" style={{fontSize: "24px"}}></i></a>
                           <h2>{project.title}</h2>
                           <h3>{project.subtitle}</h3>
                           <div className="buttons">
@@ -358,19 +358,24 @@ class Projects extends Component {
                                       {descriptionList}
                                   </ul>
                                   {techList && <h5><span>Technologies:</span> <span className="tech">{techList}</span></h5>}
-                                  <div className="projectImages">
-                                      <ProjectImage
-                                          id={project.pictures[this.state.imageIndex].id}
-                                          caption={project.pictures[this.state.imageIndex].caption}
-                                      />
-                                  </div>
-                                  <div className="dots">
-                                      {
-                                          project.pictures.map((pic, index) => {
-                                              return <i className="fa fa-circle" onClick={() => this.handleIndexSet(index)} style={{fontSize: "18px", fontWeight: 100, color: this.state.imageIndex === index ? "rgb(110, 128, 192)" : "rgb(40, 40, 40)"}}></i>
-                                          })
-                                      }
-                                  </div>
+                                  {project.pictures &&
+                                        <div>
+                                              <div className="projectImages">
+                                                  <ProjectImage
+                                                      id={project.pictures[this.state.imageIndex].id}
+                                                      caption={project.pictures[this.state.imageIndex].caption}
+                                                  />
+                                              </div>
+                                              <div className="dots">
+                                                  {
+                                                      project.pictures.map((pic, index) => {
+                                                          return <i className="fa fa-circle" onClick={() => this.handleIndexSet(index)} style={{fontSize: "18px", fontWeight: 100, color: this.state.imageIndex === index ? "rgb(110, 128, 192)" : "rgb(40, 40, 40)"}}></i>
+                                                      })
+                                                  }
+                                              </div>
+                                        </div>
+                                  }
+
                               </div>
                           </div>
                       </div>
