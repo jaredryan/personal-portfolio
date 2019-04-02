@@ -160,6 +160,7 @@
 .projects button:hover {
     cursor: pointer;
     background-color: rgb(81, 94, 145);
+    transition-duration: 300ms;
 }
 
 .projects .buttons {
@@ -177,6 +178,7 @@
 .projects .backButton:hover {
     cursor: pointer;
     background-color: rgb(81, 94, 145);
+    transition-duration: 300ms;
 }
 
 @media (max-width: 750px) {

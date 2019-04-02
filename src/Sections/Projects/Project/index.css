@@ -27,6 +27,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    transition-duration: 300ms;
 }
 
 .projectEntry h2,

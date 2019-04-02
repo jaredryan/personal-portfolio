@@ -105,6 +105,7 @@
 
 .resume .flex .tabs button:hover {
     color: rgb(0, 186, 255);
+    transition-duration: 300ms;
 }
 
 .resume .flex .dots {

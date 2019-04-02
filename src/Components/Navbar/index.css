@@ -23,6 +23,7 @@ nav:focus {
     cursor: pointer;
     opacity: 1;
     background-color: rgb(40, 40, 40);
+    transition-duration: 300ms;
 }
 
 nav ul {
@@ -54,4 +55,5 @@ nav ul li:hover {
     background-color: var(--navbarHover);
     opacity: 1;
     background-color: rgb(40, 40, 40);
+    transition-duration: 300ms;
 }
