@@ -48,6 +48,24 @@
     font-size: 60px;
 }
 
+.intro .fontAwesomeLogos {
+    margin-top: 20px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+.intro .fontAwesomeLogos i {
+    color: white;
+    margin: 0px 20px;
+    margin-bottom: 0;
+}
+
+.intro .fontAwesomeLogos i:hover {
+    color: rgb(0, 186, 255);
+    transition-duration: 300ms;
+}
+
 @media (max-width: 800px) {
     .intro .introText h1 {
         font-size: 80px;
