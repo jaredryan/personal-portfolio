@@ -8,7 +8,7 @@ const ProjectImage = props => {
                 <img src={props.id} alt=""/>
             </div>
             <h5>{props.caption}</h5>
-       </div>
+        </div>
     );
 }
 

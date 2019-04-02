@@ -13,22 +13,14 @@ class ProjectContainer extends Component {
     }
 
     handleClick(e) {
-        if (e.target.id !== "ignoreToggle") {
-            this.setState(prevState => {
-                return {
-                    clicked: !prevState.clicked
-                }
-            });
-        }
+        this.setState(prevState => {
+            return {
+                clicked: !prevState.clicked
+            }
+        });
     }
 
-    render(){
-        const style = {
-            backgroundColor: (this.props.index + this.props.modifier) % 2 === 0
-                                ? "white"
-                                : "rgb(224, 221, 213)"
-        }
-
+    render() {
         const descriptionList = this.props.description.map((bullet, index) => {
             return <li key={index + bullet}>{bullet}</li>;
         });
@@ -47,6 +39,7 @@ class ProjectContainer extends Component {
 
         return(
             <Project
+                mainImage={this.props.mainImage}
                 handleClick={this.handleClick}
                 title={this.props.title}
                 demo={this.props.demo}
@@ -56,7 +49,6 @@ class ProjectContainer extends Component {
                 techList={techList}
                 descriptionList={descriptionList}
                 imageList={imageList}
-                style={style}
             />
         );
     }

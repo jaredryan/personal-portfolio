@@ -1,21 +1,10 @@
 import React from 'react';
 import './index.css';
+import ProjectImage from './ProjectImage';
 
 const Project = props => {
-    return(
-        <div className="projectEntry" onClick={props.handleClick} style={props.style}>
-            <h2>{props.title}
-                {
-                    props.demo !== "" &&
-                        <a href={props.demo} target="_blank" rel="noopener noreferrer" id="ignoreToggle">(<span id="ignoreToggle">Demo</span>)</a>
-                }
-            </h2>
-            <h3>{props.subtitle}
-                {
-                    props.github !== "" &&
-                        <a href={props.github} target="_blank" rel="noopener noreferrer" id="ignoreToggle">(<span id="ignoreToggle">Github</span>)</a>
-                }
-            </h3>
+    return (
+        <div className="projectEntry">
             {props.clicked ?
                 <div>
                     <ul>
@@ -25,9 +14,20 @@ const Project = props => {
                     <div className="projectImages">
                         {props.imageList}
                     </div>
-                    <h6>(Click to close)</h6>
-                </div> :
-                <h6>(Click to expand)</h6>
+                </div>
+                :
+                <div className="projectImageContainer">
+                    <div className="projectImage titleImage" id={props.mainImage}>
+                        <div className="hoverEntry">
+                            <div>
+                                <h2>{props.subtitle}</h2>
+                                <button onClick={props.handleClick}>See More</button>
+                            </div>
+                        </div>
+                        <img src={props.mainImage} alt=""/>
+                    </div>
+                    <h5>{props.title}</h5>
+                </div>
             }
         </div>
     );

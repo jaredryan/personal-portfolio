@@ -13,6 +13,18 @@
     position: relative;
 }
 
+.whyMe .banner {
+    background: linear-gradient(to left, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), url("../../Images/whyMeBackground.jpg") no-repeat center center;
+    z-index: -1;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-attachment: fixed;
+}
+
 .whyMe .whyMeText {
     margin: 0;
 }

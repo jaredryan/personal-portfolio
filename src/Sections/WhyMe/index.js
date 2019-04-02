@@ -49,6 +49,7 @@ const WhyMe = () => {
 
     return (
         <div className="whyMe" id="whyMe">
+            <div className="banner"></div>
             <div className="flex">
                 <h1>Why Me?</h1>
                 <div className="points">

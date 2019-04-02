@@ -30,6 +30,7 @@ class Projects extends Component {
               demo: "https://negotiationfeedback.herokuapp.com/",
               github: "https://github.com/jaredryan/peer-review",
               tech: ['React', 'Express', 'MongoDB', 'Node.js', 'JavaScript', 'JSX', 'CSS'],
+              mainImage: require("../../Images/teacherDashboard1.png"),
               pictures: [
                   {
                       caption: "Signup Page",
@@ -81,6 +82,7 @@ class Projects extends Component {
               demo: "http://nestinvaders.herokuapp.com/",
               github: "https://github.com/jaredryan/best-class-side-scroller",
               tech: ['React', 'Express', 'MongoDB', 'Node.js', 'JavaScript', 'JSX', 'CSS'],
+              mainImage: require("../../Images/NIGame.png"),
               pictures: [
                   {
                       caption: "Home Page",
@@ -112,6 +114,7 @@ class Projects extends Component {
               demo: "https://wetheissues.herokuapp.com/",
               github: "https://github.com/jaredryan/we-the-issues",
               tech: ['React', 'Express', 'MongoDB', 'Node.js', 'JavaScript', 'JSX', 'CSS'],
+              mainImage: require("../../Images/weTheIssues1.png"),
               pictures: [
                   {
                       caption: "Banner and New Issue Form",
@@ -177,6 +180,7 @@ class Projects extends Component {
               demo: "http://openhouse-1.herokuapp.com/",
               github: "https://github.com/jjeremydiaz/OpenHouse",
               tech: ["Ruby on Rails", 'JavaScript', 'HTML', 'CSS'],
+              mainImage: require("../../Images/openHouse1.png"),
               pictures: [
                   {
                       caption: "Home Page",
@@ -285,6 +289,7 @@ class Projects extends Component {
           {
               title: "When Bunnies Attack",
               subtitle: "Text-based role playing game built in Node.js",
+              mainImage: require("../../Images/bunnyAttack.jpg"),
               description: ["To play this game, clone the Github repository and run app.js in Node.js", "Game mechanics and systems required a large amount of modularized code to make it easier to add new features", "Features a navigation system allowing the player to go from area to area as desired", "Requests user input to make decisions or gather information, which then open opportunities for new decisions", "Includes a system for forced encounters with story enemies or random enemies as you walk", "Turn-based fighting system where the player can attack, flee, or use items, and is rewarded for victory", "Allows the user to print the current status or quit the game at any time"],
               demo: "",
               github: "https://github.com/jaredryan/v-assignments/tree/master/projects/colossal-adventure-console-rpg",
@@ -293,6 +298,7 @@ class Projects extends Component {
           {
               title: "UC Berkeley Copyrighted Course Projects",
               subtitle: "A list of projects, where the code is copyrighted",
+              mainImage: require("../../Images/berkeleyProjects.jpg"),
               description: ["Designed and implemented a simplified version of Git, which manipulated files on a local computer (Java)(CS 61B)", "Implemented the logic of a simplified neural network (Python)", "Optimized a naive depth map generator algorithm using OpenMP, SSE Intrinsics, etc. for 5x speedup (C)", "Parallelized a common image compression algorithm with MapReduce in Spark (Python)", "Performed genomic analysis, including the implementation of the Needleman-Wunsch algorithms to align two sequences (Python)(BE 131)", "Implemented ALU, Register File, CPU, and 2-stage pipeline to better understand a processor (Logisim)"],
               demo: "",
               github: "",
@@ -303,6 +309,7 @@ class Projects extends Component {
       const mappedWebProjects = webProjects.map((project, index) => {
           return <Project
                       title={project.title}
+                      mainImage={project.mainImage}
                       subtitle={project.subtitle}
                       description={project.description}
                       demo={project.demo}
@@ -318,6 +325,7 @@ class Projects extends Component {
       const mappedSoftwareProjects = softwareProjects.map((project, index) => {
           return <Project
                       title={project.title}
+                      mainImage={project.mainImage}
                       subtitle={project.subtitle}
                       description={project.description}
                       demo={project.demo}
@@ -330,71 +338,6 @@ class Projects extends Component {
                  />
       });
 
-      const web = [
-          {
-              title: 'Front-end',
-              listItems: [
-                  'JavaScript',
-                  'React',
-                  'HTML/CSS',
-                  'jQuery'
-              ]
-          },
-          {
-              title: 'Back-end',
-              listItems: [
-                  'Ruby on Rails',
-                  'NodeJS',
-                  'Express',
-                  'Mongoose',
-                  'MongoDB'
-              ]
-          },
-          {
-              title: 'Other',
-              listItems: [
-                  'Python',
-                  'Java',
-                  'C',
-                  'Linux',
-                  'Git'
-              ]
-          },
-          {
-              title: 'Familiarity',
-              listItems: [
-                  'Android',
-                  'Swift',
-                  'Angular',
-                  'SQL',
-                  'Jenkins'
-              ]
-          }
-      ]
-
-      const work = [
-          {
-              title: 'Software Developer',
-              date: 'June 2018-Present',
-              location: 'IBM - Austin, Texas',
-              listItems: [
-                  'Works with AppID, a cloud security application featuring frontend, backend, and security technologies',
-                  'Design, program, review, and test code in an Agile environment',
-                  'Technologies used include Node.js, Angular.js, Java, Android, Swift, Kubernetes, Docker, Jenkins, Github, and Zenhub'
-              ]
-          },
-          {
-              title: 'Full-time Volunteer Public Representative, Trainer, and Manager',
-              date: 'April 2013—March 2015',
-              location: 'The Church of Jesus Christ of Latter Day Saints – Rio Grande do Sul, Brazil',
-              listItems: [
-                  'Presented messages to groups anywhere from 1-100 individuals',
-                  'Improved performance by 150% by leading 20 fellow volunteers through coaching, interviews, as well as weekly trainings and discussions',
-                  'Achieved fluency in Portuguese in writing, reading, and speaking'
-              ]
-          }
-      ]
-
       const projectIsOpen = this.state.projectIsOpen === false;
 
     return (
@@ -402,37 +345,9 @@ class Projects extends Component {
             <div className="banner"></div>
             <div className="overlay"></div>
             <div className="flex">
-                <div className="info">
-                    <div className="leftContainer">
-                        <div className="container">
-                            {
-                                this.state.projectType === "web" &&
-                                    <div className="projectsDiv">
-                                        {mappedWebProjects}
-                                    </div>
-                            }
-                            {
-                                this.state.projectType === "software" &&
-                                    <div className="projectsDiv">
-                                        {mappedSoftwareProjects}
-                                    </div>
-                            }
-                        </div>
-                        <div className="dots">
-                            <i className="fa fa-circle" onClick={() => this.handleProjectType("web")} style={{fontSize: "10px", fontWeight: 100, color: this.state.projectType === "web" ? "rgb(0, 158, 212)" : "rgb(65, 53, 45)"}}></i>
-                            <i className="fa fa-circle" onClick={() => this.handleProjectType("software")} style={{fontSize: "10px", fontWeight: 100, color: this.state.projectType === "software" ? "rgb(0, 158, 212)" : "rgb(65, 53, 45)"}}></i>
-                        </div>
-                    </div>
-                    {
-                        projectIsOpen &&
-                            <div className="rightContainer">
-                                <h1>Projects</h1>
-                                <div className="tabs">
-                                    <button onClick={() => this.handleProjectType("web")}><i className="fa fa-circle" style={{fontSize: "22px", fontWeight: 100, color: this.state.projectType === "web" ? "rgb(0, 158, 212)" : "rgb(65, 53, 45)"}}></i>Web</button>
-                                    <button onClick={() => this.handleProjectType("software")}><i className="fa fa-circle" style={{fontSize: "22px", fontWeight: 100, color: this.state.projectType === "software" ? "rgb(0, 158, 212)" : "rgb(65, 53, 45)"}}></i>Software</button>
-                                </div>
-                            </div>
-                    }
+                <h1>Projects</h1>
+                <div className="projectsDiv">
+                    {[...mappedWebProjects, ...mappedSoftwareProjects]}
                 </div>
             </div>
         </div>
