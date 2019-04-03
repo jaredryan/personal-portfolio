@@ -100,17 +100,12 @@ class Resume extends Component {
                     <div className="leftContainer">
                         <h1>Resume</h1>
                         <div className="tabs">
-                            <button onClick={() => this.handleResume("skills")}><i className="fa fa-circle" style={{fontSize: "22px", fontWeight: 100, color: this.state.resume === "skills" ? "rgb(0, 186, 255)" : "rgb(255, 255, 255)"}}></i>Skills</button>
-                            <button onClick={() => this.handleResume("work")}><i className="fa fa-circle" style={{fontSize: "22px", fontWeight: 100, color: this.state.resume === "work" ? "rgb(0, 186, 255)" : "rgb(255, 255, 255)"}}></i>Work</button>
-                            <button onClick={() => this.handleResume("education")}><i className="fa fa-circle" style={{fontSize: "22px", fontWeight: 100, color: this.state.resume === "education" ? "rgb(0, 186, 255)" : "rgb(255, 255, 255)"}}></i>Education</button>
+                            <button onClick={() => this.handleResume("skills")} style={{color: this.state.resume === "skills" ? "rgb(0, 186, 255)" : "rgb(255, 255, 255)"}}><i className="fa fa-circle" style={{fontSize: "22px", fontWeight: 100, color: this.state.resume === "skills" ? "rgb(0, 186, 255)" : "rgb(255, 255, 255)"}}></i>Skills</button>
+                            <button onClick={() => this.handleResume("work")} style={{color: this.state.resume === "work" ? "rgb(0, 186, 255)" : "rgb(255, 255, 255)"}}><i className="fa fa-circle" style={{fontSize: "22px", fontWeight: 100, color: this.state.resume === "work" ? "rgb(0, 186, 255)" : "rgb(255, 255, 255)"}}></i>Work</button>
+                            <button onClick={() => this.handleResume("education")} style={{color: this.state.resume === "education" ? "rgb(0, 186, 255)" : "rgb(255, 255, 255)"}}><i className="fa fa-circle" style={{fontSize: "22px", fontWeight: 100, color: this.state.resume === "education" ? "rgb(0, 186, 255)" : "rgb(255, 255, 255)"}}></i>Education</button>
                         </div>
                     </div>
                     <div className="rightContainer">
-                        <div className="dots">
-                            <i className="fa fa-circle" onClick={() => this.handleResume("skills")} style={{fontSize: "10px", fontWeight: 100, color: this.state.resume === "skills" ? "rgb(0, 186, 255)" : "rgb(235, 223, 215)"}}></i>
-                            <i className="fa fa-circle" onClick={() => this.handleResume("work")} style={{fontSize: "10px", fontWeight: 100, color: this.state.resume === "work" ? "rgb(0, 186, 255)" : "rgb(235, 223, 215)"}}></i>
-                            <i className="fa fa-circle" onClick={() => this.handleResume("education")} style={{fontSize: "10px", fontWeight: 100, color: this.state.resume === "education" ? "rgb(0, 186, 255)" : "rgb(235, 223, 215)"}}></i>
-                        </div>
                         <div className="container">
                             {
                                 this.state.resume === "skills" &&

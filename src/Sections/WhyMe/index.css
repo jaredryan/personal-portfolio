@@ -70,7 +70,6 @@
 }
 
 .whyMe .pic {
-    background: url("../../Images/introPattern.jpg") no-repeat center center;
     z-index: 0;
     background-size: cover;
     height: 100%;

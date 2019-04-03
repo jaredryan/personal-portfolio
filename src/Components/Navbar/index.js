@@ -19,7 +19,7 @@ class Navbar extends Component {
             <nav onClick={this.handleClick} style={hover}>
                 <i className="fa fa-bars"></i>
 	            <ul className="dropdown-content" style={show}>
-                    <a href="#intro"><li>Intro</li></a>
+                    <a href="#home"><li>Home</li></a>
                     <a href="#whyMe"><li>Why Me</li></a>
                     <a href="#resume"><li>Resume</li></a>
                     <a href="#projects"><li>Projects</li></a>
