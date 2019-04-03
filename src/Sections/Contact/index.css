@@ -104,7 +104,7 @@ div.contactMe {
     cursor: pointer;
     position: fixed;
     bottom: 20px;
-    right: 118px;
+    right: 115px;
     z-index: 10;
 }
 
@@ -128,9 +128,22 @@ div.contactMe {
     font-size: 32px;
 }
 
+.contactMe .fontAwesomeLogos a {
+    width: 32px;
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+.contactMe .fontAwesomeLogos a.left {
+    margin-left: 0px;
+}
+
+.contactMe .fontAwesomeLogos a.right {
+    margin-right: 0px;
+}
+
 .contactMe .fontAwesomeLogos i {
     color: white;
-    margin: 10px;
     margin-bottom: 0;
 }
 
