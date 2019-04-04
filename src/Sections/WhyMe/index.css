@@ -104,54 +104,123 @@
 
 .whyMe #whyMeIBM {
     background: url("../../Images/whyMeIBM.jpg") no-repeat center center;
-    zoom: 13.5%;
+    height: 1851.8518518518517px;
+    width: 740.74074074074066%;
+    -webkit-transform: scale(.135);
+            transform: scale(.135);
+    -webkit-transform-origin: top left;
+            transform-origin: top left;
+    -moz-transform: scale(0.135);
+    -moz-transform-origin: top left;
 }
 
 .whyMe #whyMeFreelance {
     background: url("../../Images/whyMeFreelance.jpg") no-repeat center center;
-    zoom: 7%;
+    height: 3571.428571428571px;
+    width: 1428.5714285714285%;
+    -webkit-transform: scale(.07);
+            transform: scale(.07);
+    -webkit-transform-origin: top left;
+            transform-origin: top left;
+    -moz-transform: scale(0.07);
+    -moz-transform-origin: top left;
 }
 
 .whyMe #whyMeBerkeley {
     background: url("../../Images/whyMeBerkeley.jpg") no-repeat left center;
-    zoom: 50%;
+    height: 500px;
+    width: 200%;
+    -webkit-transform: scale(.5);
+            transform: scale(.5);
+    -webkit-transform-origin: top left;
+            transform-origin: top left;
+    -moz-transform: scale(0.5);
+    -moz-transform-origin: top left;
 }
 
 .whyMe #whyMeBrazil {
     background: url("../../Images/whyMeBrazil.jpg") no-repeat center center;
-    zoom: 9%;
+    height: 2777.777777777778px;
+    width: 1111.111111111111%;
+    -webkit-transform: scale(.09);
+            transform: scale(.09);
+    -webkit-transform-origin: top left;
+            transform-origin: top left;
+    -moz-transform: scale(0.09);
+    -moz-transform-origin: top left;
 }
 
 @media (max-width: 860px) {
     .whyMe .picContainer {
-        /* width: 50%; */
         height: 220px;
     }
 
     .whyMe #whyMeIBM {
-        zoom: 12.8%;
+        height: 1718.75px;
+        width: 781.25%;
+        -webkit-transform: scale(.128);
+                transform: scale(.128);
+        -webkit-transform-origin: top left;
+                transform-origin: top left;
+        -moz-transform: scale(0.128);
+        -moz-transform-origin: top left;
     }
 
     .whyMe #whyMeFreelance {
-        zoom: 6.5%;
+        height: 3384.6153846153843;
+        width: 1538.4615384615383%;
+        -webkit-transform: scale(.065);
+                transform: scale(.065);
+        -webkit-transform-origin: top left;
+                transform-origin: top left;
+        -moz-transform: scale(0.065);
+        -moz-transform-origin: top left;
     }
 
     .whyMe #whyMeBerkeley {
-        zoom: 40%;
+        height: 550.0px;
+        width: 250%;
+        -webkit-transform: scale(.4);
+                transform: scale(.4);
+        -webkit-transform-origin: top left;
+                transform-origin: top left;
+        -moz-transform: scale(0.4);
+        -moz-transform-origin: top left;
     }
 
     .whyMe #whyMeBrazil {
-        zoom: 8.6%;
+        height: 2558.1395348837214px;
+        width: 1162.7906976744187%;
+        -webkit-transform: scale(.086);
+                transform: scale(.086);
+        -webkit-transform-origin: top left;
+                transform-origin: top left;
+        -moz-transform: scale(0.086);
+        -moz-transform-origin: top left;
     }
 }
 
 @media (max-width: 760px) {
     .whyMe #whyMeIBM {
-        zoom: 11.5%;
+        height: 1913.0434782608695px;
+        width: 869.5652173913043%;
+        -webkit-transform: scale(.115);
+                transform: scale(.115);
+        -webkit-transform-origin: top left;
+                transform-origin: top left;
+        -moz-transform: scale(0.115);
+        -moz-transform-origin: top left;
     }
 
     .whyMe #whyMeBrazil {
-        zoom: 8.2%;
+        height: 2682.9268292682927px;
+        width: 1219.5121951219512%;
+        -webkit-transform: scale(.082);
+                transform: scale(.082);
+        -webkit-transform-origin: top left;
+                transform-origin: top left;
+        -moz-transform: scale(0.082);
+        -moz-transform-origin: top left;
     }
 }
 
@@ -162,19 +231,47 @@
     }
 
     .whyMe #whyMeIBM {
-        zoom: 11%;
+        height: 1727.2727272727272px;
+        width: 909.0909090909092%;
+        -webkit-transform: scale(.11);
+                transform: scale(.11);
+        -webkit-transform-origin: top left;
+                transform-origin: top left;
+        -moz-transform: scale(0.11);
+        -moz-transform-origin: top left;
     }
 
     .whyMe #whyMeFreelance {
-        zoom: 5.7%;
+        height: 3333.333333333333px;
+        width: 1754.3859649122805%;
+        -webkit-transform: scale(.057);
+                transform: scale(.057);
+        -webkit-transform-origin: top left;
+                transform-origin: top left;
+        -moz-transform: scale(0.057);
+        -moz-transform-origin: top left;
     }
 
     .whyMe #whyMeBerkeley {
-        zoom: 32%;
+        height: 593.75px;
+        width: 312.5%;
+        -webkit-transform: scale(.32);
+                transform: scale(.32);
+        -webkit-transform-origin: top left;
+                transform-origin: top left;
+        -moz-transform: scale(0.32);
+        -moz-transform-origin: top left;
     }
 
     .whyMe #whyMeBrazil {
-        zoom: 7%;
+        height: 2714.285714285714px;
+        width: 1428.5714285714284%;
+        -webkit-transform: scale(.07);
+                transform: scale(.07);
+        -webkit-transform-origin: top left;
+                transform-origin: top left;
+        -moz-transform: scale(0.07);
+        -moz-transform-origin: top left;
     }
 }
 
@@ -196,19 +293,47 @@
     }
 
     .whyMe #whyMeIBM {
-        zoom: 12.8%;
+        height: 1718.75px;
+        width: 781.25%;
+        -webkit-transform: scale(.128);
+                transform: scale(.128);
+        -webkit-transform-origin: top left;
+                transform-origin: top left;
+        -moz-transform: scale(0.128);
+        -moz-transform-origin: top left;
     }
 
     .whyMe #whyMeFreelance {
-        zoom: 6.5%;
+        height: 3384.6153846153843px;
+        width: 1538.4615384615383%;
+        -webkit-transform: scale(.065);
+                transform: scale(.065);
+        -webkit-transform-origin: top left;
+                transform-origin: top left;
+        -moz-transform: scale(0.065);
+        -moz-transform-origin: top left;
     }
 
     .whyMe #whyMeBerkeley {
-        zoom: 40%;
+        height: 550.0px;
+        width: 250%;
+        -webkit-transform: scale(.4);
+                transform: scale(.4);
+        -webkit-transform-origin: top left;
+                transform-origin: top left;
+        -moz-transform: scale(0.4);
+        -moz-transform-origin: top left;
     }
 
     .whyMe #whyMeBrazil {
-        zoom: 8.6%;
+        height: 2558.1395348837214px;
+        width: 1162.7906976744187%;
+        -webkit-transform: scale(.086);
+                transform: scale(.086);
+        -webkit-transform-origin: top left;
+                transform-origin: top left;
+        -moz-transform: scale(0.086);
+        -moz-transform-origin: top left;
     }
 }
 
@@ -222,24 +347,59 @@
     }
 
     .whyMe #whyMeIBM {
-        zoom: 11.2%;
+        height: 1785.7142857142858px;
+        width: 892.8571428571429%;
+        -webkit-transform: scale(.112);
+                transform: scale(.112);
+        -webkit-transform-origin: top left;
+                transform-origin: top left;
+        -moz-transform: scale(0.112);
+        -moz-transform-origin: top left;
     }
 
     .whyMe #whyMeFreelance {
-        zoom: 5.7%;
+        height: 3508.771929824561px;
+        width: 1754.3859649122805%;
+        -webkit-transform: scale(.057);
+                transform: scale(.057);
+        -webkit-transform-origin: top left;
+                transform-origin: top left;
+        -moz-transform: scale(0.057);
+        -moz-transform-origin: top left;
     }
 
     .whyMe #whyMeBerkeley {
-        zoom: 33%;
+        height: 606.060606060606px;
+        width: 303.030303030303%;
+        -webkit-transform: scale(.33);
+                transform: scale(.33);
+        -webkit-transform-origin: top left;
+                transform-origin: top left;
+        -moz-transform: scale(0.33);
+        -moz-transform-origin: top left;
     }
 
     .whyMe #whyMeBrazil {
-        zoom: 7.5%;
+        height: 2666.666666666667px;
+        width: 1333.3333333333335%;
+        -webkit-transform: scale(.075);
+                transform: scale(.075);
+        -webkit-transform-origin: top left;
+                transform-origin: top left;
+        -moz-transform: scale(0.075);
+        -moz-transform-origin: top left;
     }
 }
 
 @media (max-width: 330px) {
     .whyMe #whyMeIBM {
-        zoom: 10%;
+        height: 2000px;
+        width: 1000%;
+        -webkit-transform: scale(.1);
+                transform: scale(.1);
+        -webkit-transform-origin: top left;
+                transform-origin: top left;
+        -moz-transform: scale(0.1);
+        -moz-transform-origin: top left;
     }
 }
