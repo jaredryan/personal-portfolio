@@ -1,20 +1,31 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom';
-import './index.css';
+import './index.css'
 
 class Navbar extends Component {
-    render(){
-        return(
-            <nav>
-                <ul>
-                    <li><Link to="/">Home</Link></li>
-                    <li><Link to="/about">About</Link></li>
-                    <li><Link to="/projects">Projects</Link></li>
-                    <li><Link to="/resume">Resume</Link></li>
-                </ul>
-                <div className="overlay"></div>
+    constructor() {
+        super()
+        this.state = {isOpen: false}
+    }
+
+    handleClick = () => {
+        this.setState(prevState => ({isOpen: !prevState.isOpen}))
+    }
+
+    render() {
+        const show = this.state.isOpen ? {display: "block"} : {display: "none"}
+        const hover = this.state.isOpen ? {backgroundColor: "rgb(40, 40, 40)"} : {}
+
+        return (
+            <nav onClick={this.handleClick} style={hover}>
+                <i className="fa fa-bars"></i>
+	            <ul className="dropdown-content" style={show}>
+                    <a href="#home"><li>Home</li></a>
+                    <a href="#whyMe"><li>Why Me</li></a>
+                    <a href="#resume"><li>Resume</li></a>
+                    <a href="#projects"><li>Projects</li></a>
+        		</ul>
             </nav>
-        );
+        )
     }
 }
 

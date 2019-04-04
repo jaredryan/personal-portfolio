@@ -1,0 +1,339 @@
+/* Page */
+
+.resume {
+    background-color: rgb(0, 173, 164);
+    /* background-color: rgb(0, 186, 255); */
+    /* background-color: rgb(235, 222, 215); */
+    margin: 0;
+    min-height: 100vh;
+    /* min-height: 1000px; */
+    width: 100%;
+    position: relative;
+}
+
+.resume .banner {
+    background: url("../../Images/resume.jpg") no-repeat center center;
+    z-index: 0;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-attachment: fixed;
+}
+
+.resume .overlay {
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    background-image: linear-gradient(to right, rgba(51, 64, 115, 0.3), rgba(51, 64, 115, 0.8));
+    top: 0;
+    left: 0;
+    z-index: 1
+}
+
+.resume .flex {
+    margin: auto;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.resume .flex .leftContainer {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 3;
+}
+
+.resume .flex .leftContainer h1 {
+    font-size: 80px;
+    font-weight: 200;
+    margin: 0;
+    color: white;
+}
+
+.resume .flex .rightContainer {
+    width: 50%;
+    background-color: rgba(0, 0, 0, 0.78);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    z-index: 3;
+    min-height: 100vh;
+    padding-left: 60px;
+    padding-right: 60px;
+}
+
+.resume .flex .container {
+    margin: auto;
+    padding-top: 30px;
+    padding-bottom: 80px;
+}
+
+.resume .flex .container ul {
+    padding-left: 20px;
+}
+
+.resume .flex .tabs {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+}
+
+.resume .flex .tabs button {
+    font-size: 24px;
+    background-color: transparent;
+    border: none;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    font-weight: 200;
+    cursor: pointer;
+    text-align: left;
+}
+
+.resume .flex .tabs button div {
+    display: inline-block;
+    text-align: center;
+    margin: auto;
+}
+
+.resume .flex .tabs i {
+    margin-right: 20px;
+}
+
+.resume .flex .tabs button:hover div {
+    color: rgb(0, 186, 255);
+    transition-duration: 300ms;
+}
+
+.resume .flex .dots {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+}
+
+.resume .flex .dots i {
+    font-size: 24px;
+    text-align: center;
+    width: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 15px;
+    padding-right: 0;
+    cursor: pointer;
+}
+
+.resume h3,
+.resume h4,
+.resume h5 {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.resume h3 {
+    font-size: 24px;
+    line-height: 34px;
+    padding-top: 50px;
+    color: rgb(0, 186, 255);
+    font-weight: 200;
+}
+
+.resume h4 {
+    color: rgb(230, 230, 230);
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 28px;
+}
+
+.resume h5 {
+    font-size: 18px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    color: rgb(230, 230, 230);
+    margin-top: 8px;
+}
+
+.resume li {
+    color: rgb(230, 230, 230);
+}
+
+@media (max-width: 900px) {
+    .resume h3 {
+        font-size: 22px;
+        line-height: 32px;
+    }
+
+    .resume h4 {
+        font-size: 18px;
+        margin-top: 9px;
+        line-height: 26px;
+    }
+
+    .resume h5 {
+        font-size: 16px;
+        margin-top: 7px;
+    }
+
+    .resume li {
+        font-size: 16px;
+    }
+
+    .resume .flex .leftContainer h1 {
+        font-size: 60px;
+    }
+}
+
+@media (max-width: 480px) {
+    .resume h2 {
+        width: 100%;
+    }
+}
+
+
+/* Section Formatting */
+
+.resume .skills,
+.resume .work,
+.resume .education {
+    margin: 0;
+    padding: 0;
+}
+
+/* Skills Section */
+
+.resume .skillsGrid div {
+    width: 170px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 0px auto;
+}
+
+.resume .skillsGrid {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+}
+
+@media (max-width: 700px) {
+    .resume {
+        padding-top: 80px;
+    }
+
+    .resume .flex .tabs {
+        display: flex;
+        justify-content: space-around;
+        flex-direction: row;
+        margin-top: 30px;
+        width: 100%;
+    }
+
+    .resume .flex button {
+        width: 120px;
+        margin: auto;
+    }
+
+    .resume .flex .tabs button div {
+        display: block;
+        font-size: 20px;
+        border-bottom: 2px solid white;
+        padding-bottom: 3px;
+        font-weight: 300;
+    }
+
+    .resume .flex .tabs button:hover div {
+        color: rgb(0, 186, 255);
+    }
+
+    .resume i {
+        display: none;
+    }
+
+    .resume .flex {
+        flex-direction: column;
+    }
+
+    .resume .flex .leftContainer,
+    .resume .flex .rightContainer {
+        width: 100%;
+        min-height: auto;
+    }
+
+    .resume .flex .leftContainer,
+    .resume .flex .rightContainer {
+        min-height: 30vh;
+    }
+
+    .resume .flex .rightContainer {
+        margin-top: 60px;
+        min-height: 70vh;
+    }
+
+    .resume .overlay {
+        background-image: linear-gradient(to right, rgba(51, 64, 115, 0.5), rgba(51, 64, 115, 0.5));
+    }
+}
+
+@media (max-width: 450px) {
+    .resume .flex button {
+        width: 120px;
+        margin: auto;
+    }
+
+    .resume .flex .tabs button div {
+        display: block;
+        font-size: 20px;
+        border-bottom: 2px solid white;
+        padding-bottom: 3px;
+        font-weight: 300;
+    }
+
+    .resume .flex .tabs button:hover div {
+        color: rgb(0, 186, 255);
+    }
+
+    .resume i {
+        display: none;
+    }
+
+    .resume .flex {
+        flex-direction: column;
+    }
+
+    .resume .flex .leftContainer,
+    .resume .flex .rightContainer {
+        width: 100%;
+        min-height: auto;
+    }
+
+    .resume .flex .leftContainer,
+    .resume .flex .rightContainer {
+        min-height: 30vh;
+    }
+
+    .resume .flex .rightContainer {
+        margin-top: 20px;
+        min-height: 70vh;
+    }
+
+    .resume .flex .container {
+        margin-top: 0px;
+        margin-bottom: 50px;
+    }
+}

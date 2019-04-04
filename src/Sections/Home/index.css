@@ -1,0 +1,154 @@
+/* Main Page */
+
+.home {
+    height: 100vh;
+    width: 100%;
+    position: relative;
+}
+
+.home .homeImg {
+    background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.0)), to(rgba(0, 0, 0, 0.4))), url("../../Images/home.jpg") no-repeat center center;
+    background: linear-gradient(rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.4)), url("../../Images/home.jpg") no-repeat center center;
+    background-attachment: fixed;
+    z-index: 0;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.home .homeText {
+    position: absolute;
+    z-index: 1;
+    text-align: center;
+    top: 50%;
+    height: 50%;
+    width: 100%;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    color: white;
+    padding: 10px;
+    font-family: 'Roboto Slab', serif;
+}
+
+.home .homeText h1,
+.home .homeText h2 {
+    margin: 0px;
+    font-weight: 200;
+}
+
+.home h1 {
+    font-size: 130px;
+}
+
+.home h2 {
+    font-size: 60px;
+}
+
+.home .fontAwesomeLogos {
+    margin-top: 20px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+.home .fontAwesomeLogos i {
+    color: white;
+    margin: 0;
+    margin-bottom: 0;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+.home .fontAwesomeLogos i:hover {
+    color: rgb(0, 186, 255);
+    transition-duration: 300ms;
+}
+
+.home .fontAwesomeLogos a {
+    width: 40px;
+    margin-left: 20px;
+    margin-right: 20px;
+    text-decoration: none;
+}
+
+.home .fontAwesomeLogos a.left {
+    margin-left: 0px;
+}
+
+.home .fontAwesomeLogos a.right {
+    margin-right: 0px;
+}
+
+button.downArrow {
+    padding: 10px 30px;
+    color: white;
+    font-size: 22px;
+    border: none;
+    background-color: var(--navbar);
+    opacity: 0.7;
+    z-index: 10;
+    cursor: pointer;
+    border-radius: 10px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+@media (max-width: 500px) {
+    button.downArrow {
+        padding: 8px 16px;
+    }
+}
+
+button.downArrow:hover,
+button.downArrow:focus {
+    opacity: 1;
+    background-color: rgb(40, 40, 40);
+    transition-duration: 300ms;
+    color: rgb(0, 186, 255);
+}
+
+@media (max-width: 800px) {
+    .home .homeText h1 {
+        font-size: 80px;
+    }
+
+    .home .homeText h2 {
+        font-size: 40px;
+    }
+}
+
+@media (max-width: 650px) {
+    .home .homeText h1 {
+        font-size: 60px;
+    }
+
+    .home .homeText h2 {
+        font-size: 30px;
+    }
+
+    .home .fontAwesomeLogos {
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .home .homeText h1 {
+        font-size: 45px;
+    }
+
+    .home .homeText h2 {
+        font-size: 24px;
+    }
+
+    .home .fontAwesomeLogos {
+        margin-top: 7.5px;
+    }
+}
