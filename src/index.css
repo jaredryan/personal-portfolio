@@ -33,3 +33,12 @@ h1, h2, h3, h4, button {
         line-height: 23px;
     }
 }
+
+@media all and (max-device-width: 1024px) {
+    .home .homeImg,
+    .whyMe .banner,
+    .resume .banner,
+    .projects .banner {
+        background-attachment: scroll;
+    }
+}
