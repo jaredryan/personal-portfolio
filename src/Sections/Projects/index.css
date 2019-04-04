@@ -46,6 +46,7 @@
     font-weight: 200;
     color: rgb(61, 80, 153);
     text-align: center;
+    margin-top: 30px;
 }
 
 .projects .flex {
@@ -67,6 +68,12 @@
     color: white;
     text-align: center;
     margin-bottom: 60px;
+}
+
+@media (max-width: 480px) {
+    .projects h1 {
+        font-size: 60px;
+    }
 }
 
 .projects h3,
@@ -144,9 +151,18 @@
     text-decoration: none;
 }
 
+@media (max-width: 850px) {
+    .projects .backButton {
+        position: absolute;
+        top: 49px;
+        transform: translateY(-50%);
+    }
+}
+
 .projects .flex .dots {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 .projects .flex .dots i {
@@ -197,5 +213,28 @@
     .projects h5 {
         font-size: 16px;
         margin-top: 7px;
+    }
+
+    .projects .projectDisplay h2 {
+        font-size: 24px;
+    }
+
+    .projects .projectDisplay h3 {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 450px) {
+    .projects .buttons {
+        justify-content: space-around;
+    }
+
+    .projects .link {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+
+    .projects .projectDisplay button {
+        width: 100px;
     }
 }

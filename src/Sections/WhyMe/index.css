@@ -2,9 +2,7 @@
 
 .whyMe {
     min-height: 100vh;
-    height: 1300px;
     width: 100%;
-    /* background-color: rgb(0, 158, 212); */
     margin: 0;
     padding: 80px 5%;
     display: flex;

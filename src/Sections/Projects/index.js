@@ -341,7 +341,7 @@ class Projects extends Component {
                   <div className="overlay"></div>
                   <div className="flex" style={{padding: 0, paddingTop: "80px"}}>
                       <h1>Projects</h1>
-                      <div className="projectDisplay">
+                      <div className="projectDisplay" id="projectDisplay">
                           <a className="backButton" href="#projects" onClick={() => this.handleProjectSet(false)}><i class="fa fa-arrow-left" style={{fontSize: "24px"}}></i></a>
                           <h2>{project.title}</h2>
                           <h3>{project.subtitle}</h3>

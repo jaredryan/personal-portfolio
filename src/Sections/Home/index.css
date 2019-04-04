@@ -31,6 +31,7 @@
     justify-content: center;
     flex-direction: column;
     color: white;
+    padding: 10px;
     font-family: 'Roboto Slab', serif;
 }
 
@@ -100,6 +101,12 @@ button.downArrow {
     transform: translateX(-50%);
 }
 
+@media (max-width: 500px) {
+    button.downArrow {
+        padding: 8px 16px;
+    }
+}
+
 button.downArrow:hover,
 button.downArrow:focus {
     opacity: 1;
@@ -126,6 +133,10 @@ button.downArrow:focus {
     .home .homeText h2 {
         font-size: 30px;
     }
+
+    .home .fontAwesomeLogos {
+        margin-top: 10px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -135,5 +146,9 @@ button.downArrow:focus {
 
     .home .homeText h2 {
         font-size: 24px;
+    }
+
+    .home .fontAwesomeLogos {
+        margin-top: 7.5px;
     }
 }

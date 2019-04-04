@@ -60,6 +60,12 @@
     color: white;
 }
 
+@media (max-width: 480px) {
+    .resume .flex .leftContainer h1 {
+        font-size: 60px;
+    }
+}
+
 .resume .flex .rightContainer {
     width: 50%;
     background-color: rgba(0, 0, 0, 0.78);
@@ -69,11 +75,13 @@
     height: 100%;
     z-index: 3;
     min-height: 100vh;
+    padding-left: 60px;
+    padding-right: 60px;
 }
 
 .resume .flex .container {
     margin: auto;
-    padding: 30px 60px;
+    padding-top: 30px;
     padding-bottom: 80px;
 }
 
@@ -142,7 +150,7 @@
 }
 
 .resume h4 {
-    color: white;
+    color: rgb(230, 230, 230);
     margin-top: 10px;
     font-size: 20px;
     font-weight: 300;
@@ -153,12 +161,12 @@
     font-size: 18px;
     font-family: "Montserrat", sans-serif;
     font-weight: 400;
-    color: white;
+    color: rgb(230, 230, 230);
     margin-top: 8px;
 }
 
 .resume li {
-    color: rgb(235, 223, 215);
+    color: rgb(230, 230, 230);
 }
 
 @media (max-width: 750px) {

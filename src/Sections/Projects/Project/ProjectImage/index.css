@@ -54,3 +54,12 @@
         margin: auto;
     }
 }
+
+@media (max-width: 480px) {
+    .projectImageContainer .projectImage.titleImage,
+    .projectImageContainer .projectImage.titleImage img {
+        width: 100%;
+        height: auto;
+        margin: auto;
+    }
+}

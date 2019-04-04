@@ -43,6 +43,11 @@ div.contactMe {
     background-color: rgb(40, 40, 40);
 }
 
+.contactMe.picture {
+     opacity: 1;
+     bottom: 80px;
+}
+
 .contactMe .quote {
     color: white;
     font-weight: 200;
@@ -150,4 +155,28 @@ div.contactMe {
 .contactMe .fontAwesomeLogos i:hover {
     color: rgb(110, 128, 192);
     transition-duration: 300ms;
+}
+
+@media (max-width: 450px) {
+    .contactMe {
+        bottom: 10px;
+        right: 10px;
+    }
+
+    .contact .backButton {
+        bottom: 10px;
+        right: 105px;
+        z-index: 10;
+    }
+
+    button.contactMe {
+        padding: 8px 16px;
+        color: white;
+        font-size: 16px;
+        border: none;
+    }
+
+    .contactMe.picture {
+         bottom: 60px;
+    }
 }

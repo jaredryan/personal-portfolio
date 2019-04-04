@@ -19,7 +19,7 @@ class Contact extends Component {
         if (this.state.opened) {
             return (
                 <div className="contact">
-                    <div className="contactMe" style={{opacity: 1, bottom: "80px"}}>
+                    <div className="contactMe picture">
                         <div className="profilePic">
                             <div></div>
                         </div>
