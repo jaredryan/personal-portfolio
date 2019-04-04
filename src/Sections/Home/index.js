@@ -14,7 +14,7 @@ const Home = () => {
                 </div>
             </div>
             <div className="homeImg"></div>
-            <button className="downArrow" onClick={() => window.scroll(0, window.innerHeight)}><i class="fa fa-arrow-down" style={{fontSize: "24px"}}></i></button>
+            <a href="#whyMe"><button className="downArrow"><i class="fa fa-arrow-down" style={{fontSize: "24px"}}></i></button></a>
         </div>
     );
 }
