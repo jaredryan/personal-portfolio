@@ -24,6 +24,7 @@
     height: 100%;
     width: 100%;
     position: absolute;
+    background-image: -webkit-gradient(linear, right top, left top, from(rgba(0, 186, 255, 0.3)), to(rgba(0, 186, 255, 0.3)));
     background-image: linear-gradient(to left, rgba(0, 186, 255, 0.3), rgba(0, 186, 255, 0.3));
     top: 0;
     left: 0;
@@ -118,11 +119,17 @@
 }
 
 .projects .projectsDiv {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: space-around;
-    align-items: center;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     width: 100%;
-    flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
 }
 
 .projects button,
@@ -144,10 +151,16 @@
     left: 5%;
     width: 50px;
     height: 50px;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     margin: 0;
-    justify-content: center;
-    align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     text-decoration: none;
 }
 
@@ -155,14 +168,20 @@
     .projects .backButton {
         position: absolute;
         top: 49px;
-        transform: translateY(-50%);
+        -webkit-transform: translateY(-50%);
+                transform: translateY(-50%);
     }
 }
 
 .projects .flex .dots {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
 }
 
 .projects .flex .dots i {
@@ -177,13 +196,20 @@
 .projects button:hover {
     cursor: pointer;
     background-color: rgb(81, 94, 145);
-    transition-duration: 300ms;
+    -webkit-transition-duration: 300ms;
+            transition-duration: 300ms;
 }
 
 .projects .buttons {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
 }
 
 .projects .link {
@@ -195,7 +221,8 @@
 .projects .backButton:hover {
     cursor: pointer;
     background-color: rgb(81, 94, 145);
-    transition-duration: 300ms;
+    -webkit-transition-duration: 300ms;
+            transition-duration: 300ms;
 }
 
 @media (max-width: 750px) {
@@ -226,7 +253,8 @@
 
 @media (max-width: 450px) {
     .projects .buttons {
-        justify-content: space-around;
+        -ms-flex-pack: distribute;
+            justify-content: space-around;
     }
 
     .projects .link {
