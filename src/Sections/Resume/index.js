@@ -100,9 +100,30 @@ class Resume extends Component {
                     <div className="leftContainer">
                         <h1>Resume</h1>
                         <div className="tabs">
-                            <button onClick={() => this.handleResume("skills")} style={{color: this.state.resume === "skills" ? "rgb(0, 186, 255)" : "rgb(255, 255, 255)"}}><i className="fa fa-circle" style={{fontSize: "22px", fontWeight: 100, color: this.state.resume === "skills" ? "rgb(0, 186, 255)" : "rgb(255, 255, 255)"}}></i>Skills</button>
-                            <button onClick={() => this.handleResume("work")} style={{color: this.state.resume === "work" ? "rgb(0, 186, 255)" : "rgb(255, 255, 255)"}}><i className="fa fa-circle" style={{fontSize: "22px", fontWeight: 100, color: this.state.resume === "work" ? "rgb(0, 186, 255)" : "rgb(255, 255, 255)"}}></i>Work</button>
-                            <button onClick={() => this.handleResume("education")} style={{color: this.state.resume === "education" ? "rgb(0, 186, 255)" : "rgb(255, 255, 255)"}}><i className="fa fa-circle" style={{fontSize: "22px", fontWeight: 100, color: this.state.resume === "education" ? "rgb(0, 186, 255)" : "rgb(255, 255, 255)"}}></i>Education</button>
+                            <button onClick={() => this.handleResume("skills")}
+                                    style={{color: this.state.resume === "skills" ? "rgb(0, 186, 255)" : "rgb(255, 255, 255)"}}>
+                                <i  className="fa fa-circle"
+                                    style={{fontSize: "22px", fontWeight: 100, color: this.state.resume === "skills" ? "rgb(0, 186, 255)" : "rgb(255, 255, 255)"}}></i>
+                                <div style={{borderBottom: this.state.resume === "skills" ? "2px solid rgb(0, 186, 255)" : "2px solid rgb(255, 255, 255)"}}>
+                                    Skills
+                                </div>
+                            </button>
+                            <button onClick={() => this.handleResume("work")}
+                                    style={{color: this.state.resume === "work" ? "rgb(0, 186, 255)" : "rgb(255, 255, 255)"}}>
+                                <i  className="fa fa-circle"
+                                    style={{fontSize: "22px", fontWeight: 100, color: this.state.resume === "work" ? "rgb(0, 186, 255)" : "rgb(255, 255, 255)"}}></i>
+                                <div style={{borderBottom: this.state.resume === "work" ? "2px solid rgb(0, 186, 255)" : "2px solid rgb(255, 255, 255)"}}>
+                                    Work
+                                </div>
+                            </button>
+                            <button onClick={() => this.handleResume("education")}
+                                    style={{color: this.state.resume === "education" ? "rgb(0, 186, 255)" : "rgb(255, 255, 255)"}}>
+                                <i  className="fa fa-circle"
+                                    style={{fontSize: "22px", fontWeight: 100, color: this.state.resume === "education" ? "rgb(0, 186, 255)" : "rgb(255, 255, 255)"}}></i>
+                                <div style={{borderBottom: this.state.resume === "education" ? "2px solid rgb(0, 186, 255)" : "2px solid rgb(255, 255, 255)"}}>
+                                    Education
+                                </div>
+                            </button>
                         </div>
                     </div>
                     <div className="rightContainer">

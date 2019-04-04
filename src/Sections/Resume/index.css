@@ -60,12 +60,6 @@
     color: white;
 }
 
-@media (max-width: 480px) {
-    .resume .flex .leftContainer h1 {
-        font-size: 60px;
-    }
-}
-
 .resume .flex .rightContainer {
     width: 50%;
     background-color: rgba(0, 0, 0, 0.78);
@@ -107,11 +101,17 @@
     text-align: left;
 }
 
+.resume .flex .tabs button div {
+    display: inline-block;
+    text-align: center;
+    margin: auto;
+}
+
 .resume .flex .tabs i {
     margin-right: 20px;
 }
 
-.resume .flex .tabs button:hover {
+.resume .flex .tabs button:hover div {
     color: rgb(0, 186, 255);
     transition-duration: 300ms;
 }
@@ -169,7 +169,7 @@
     color: rgb(230, 230, 230);
 }
 
-@media (max-width: 750px) {
+@media (max-width: 900px) {
     .resume h3 {
         font-size: 22px;
         line-height: 32px;
@@ -184,6 +184,14 @@
     .resume h5 {
         font-size: 16px;
         margin-top: 7px;
+    }
+
+    .resume li {
+        font-size: 16px;
+    }
+
+    .resume .flex .leftContainer h1 {
+        font-size: 60px;
     }
 }
 
@@ -223,9 +231,109 @@
             justify-content: space-between;
 }
 
+@media (max-width: 700px) {
+    .resume {
+        padding-top: 80px;
+    }
 
-/* Education Section */
+    .resume .flex .tabs {
+        display: flex;
+        justify-content: space-around;
+        flex-direction: row;
+        margin-top: 30px;
+        width: 100%;
+    }
 
+    .resume .flex button {
+        width: 120px;
+        margin: auto;
+    }
 
+    .resume .flex .tabs button div {
+        display: block;
+        font-size: 20px;
+        border-bottom: 2px solid white;
+        padding-bottom: 3px;
+        font-weight: 300;
+    }
 
-/* Work Experience Section */
+    .resume .flex .tabs button:hover div {
+        color: rgb(0, 186, 255);
+    }
+
+    .resume i {
+        display: none;
+    }
+
+    .resume .flex {
+        flex-direction: column;
+    }
+
+    .resume .flex .leftContainer,
+    .resume .flex .rightContainer {
+        width: 100%;
+        min-height: auto;
+    }
+
+    .resume .flex .leftContainer,
+    .resume .flex .rightContainer {
+        min-height: 30vh;
+    }
+
+    .resume .flex .rightContainer {
+        margin-top: 60px;
+        min-height: 70vh;
+    }
+
+    .resume .overlay {
+        background-image: linear-gradient(to right, rgba(51, 64, 115, 0.5), rgba(51, 64, 115, 0.5));
+    }
+}
+
+@media (max-width: 450px) {
+    .resume .flex button {
+        width: 120px;
+        margin: auto;
+    }
+
+    .resume .flex .tabs button div {
+        display: block;
+        font-size: 20px;
+        border-bottom: 2px solid white;
+        padding-bottom: 3px;
+        font-weight: 300;
+    }
+
+    .resume .flex .tabs button:hover div {
+        color: rgb(0, 186, 255);
+    }
+
+    .resume i {
+        display: none;
+    }
+
+    .resume .flex {
+        flex-direction: column;
+    }
+
+    .resume .flex .leftContainer,
+    .resume .flex .rightContainer {
+        width: 100%;
+        min-height: auto;
+    }
+
+    .resume .flex .leftContainer,
+    .resume .flex .rightContainer {
+        min-height: 30vh;
+    }
+
+    .resume .flex .rightContainer {
+        margin-top: 20px;
+        min-height: 70vh;
+    }
+
+    .resume .flex .container {
+        margin-top: 0px;
+        margin-bottom: 50px;
+    }
+}
