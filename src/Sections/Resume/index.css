@@ -134,6 +134,10 @@
     margin: auto;
 }
 
+.resume .flex .tabs button div.mobile {
+    display: none;
+}
+
 .resume .flex .tabs i {
     margin-right: 20px;
 }
@@ -291,11 +295,18 @@
     }
 
     .resume .flex .tabs button div {
-        display: block;
         font-size: 20px;
         border-bottom: 2px solid white;
         padding-bottom: 3px;
         font-weight: 300;
+    }
+
+    .resume .flex .tabs button div.mobile {
+        display: block;
+    }
+
+    .resume .flex .tabs button div.default {
+        display: none;
     }
 
     .resume .flex .tabs button:hover div {

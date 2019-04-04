@@ -104,7 +104,10 @@ class Resume extends Component {
                                     style={{color: this.state.resume === "skills" ? "rgb(0, 186, 255)" : "rgb(255, 255, 255)"}}>
                                 <i  className="fa fa-circle"
                                     style={{fontSize: "22px", fontWeight: 100, color: this.state.resume === "skills" ? "rgb(0, 186, 255)" : "rgb(255, 255, 255)"}}></i>
-                                <div style={{borderBottom: this.state.resume === "skills" ? "2px solid rgb(0, 186, 255)" : "2px solid rgb(255, 255, 255)"}}>
+                                <div className="mobile" style={{borderBottom: this.state.resume === "skills" ? "2px solid rgb(0, 186, 255)" : "2px solid rgb(255, 255, 255)"}}>
+                                    Skills
+                                </div>
+                                <div className="default">
                                     Skills
                                 </div>
                             </button>
@@ -112,7 +115,10 @@ class Resume extends Component {
                                     style={{color: this.state.resume === "work" ? "rgb(0, 186, 255)" : "rgb(255, 255, 255)"}}>
                                 <i  className="fa fa-circle"
                                     style={{fontSize: "22px", fontWeight: 100, color: this.state.resume === "work" ? "rgb(0, 186, 255)" : "rgb(255, 255, 255)"}}></i>
-                                <div style={{borderBottom: this.state.resume === "work" ? "2px solid rgb(0, 186, 255)" : "2px solid rgb(255, 255, 255)"}}>
+                                <div className="mobile" style={{borderBottom: this.state.resume === "work" ? "2px solid rgb(0, 186, 255)" : "2px solid rgb(255, 255, 255)"}}>
+                                    Work
+                                </div>
+                                <div className="default">
                                     Work
                                 </div>
                             </button>
@@ -120,7 +126,10 @@ class Resume extends Component {
                                     style={{color: this.state.resume === "education" ? "rgb(0, 186, 255)" : "rgb(255, 255, 255)"}}>
                                 <i  className="fa fa-circle"
                                     style={{fontSize: "22px", fontWeight: 100, color: this.state.resume === "education" ? "rgb(0, 186, 255)" : "rgb(255, 255, 255)"}}></i>
-                                <div style={{borderBottom: this.state.resume === "education" ? "2px solid rgb(0, 186, 255)" : "2px solid rgb(255, 255, 255)"}}>
+                                <div className="mobile" style={{borderBottom: this.state.resume === "education" ? "2px solid rgb(0, 186, 255)" : "2px solid rgb(255, 255, 255)"}}>
+                                    Education
+                                </div>
+                                <div className="default">
                                     Education
                                 </div>
                             </button>
