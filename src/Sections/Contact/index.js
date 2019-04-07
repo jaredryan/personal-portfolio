@@ -5,20 +5,52 @@ class Contact extends Component {
     constructor() {
         super();
         this.state = {
-            opened: false
+            opened: false,
+            animation: {}
         }
     }
 
     handleClick = () => {
-        this.setState(prevState => {
-            return {opened: !prevState.opened}
-        })
+        this.handleFade()
+        setTimeout(() => {
+            this.setState(prevState => {
+                return {opened: !prevState.opened}
+            })
+            this.handleAppear()
+        }, 500)
+    }
+
+    handleFade = () => {
+        const self = this;
+        var op = 1;  // initial opacity
+        var timer = setInterval(function () {
+            if (op <= 0.1){
+                clearInterval(timer);
+                self.setState({animation: {opacity: 0, filter: `alpha(opacity=0)`}})
+            } else {
+                self.setState({animation: {opacity: `${op}`, filter: `alpha(opacity=${op * 100})`}})
+                op -= op * 0.1;
+            }
+        }, 10);
+    }
+
+    handleAppear = () => {
+        const self = this;
+        var op = 0.1;  // initial opacity
+        var timer = setInterval(function () {
+            if (op >= 1){
+                clearInterval(timer);
+            } else {
+                self.setState({animation: {opacity: `${op}`, filter: `alpha(opacity=${op * 100})`}})
+                op += op * 0.1;
+            }
+        }, 10);
     }
 
     render() {
         if (this.state.opened) {
             return (
-                <div className="contact" ref={this.props.refs.contact}>
+                <div className="contact" ref={this.props.refs.contact} style={this.state.animation}>
                     <div className="contactMe picture">
                         <div className="profilePic">
                             <div></div>
@@ -36,7 +68,7 @@ class Contact extends Component {
             )
         } else {
             return (
-                <button className="contactMe" onClick={this.handleClick} ref={this.props.refs.contact}>Contact Me</button>
+                <button className="contactMe" onClick={this.handleClick} ref={this.props.refs.contact} style={this.state.animation}>Contact Me</button>
             )
         }
     }
