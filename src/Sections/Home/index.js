@@ -2,7 +2,55 @@ import React, { Component } from 'react'
 import './index.css'
 
 class Home extends Component {
+    constructor() {
+        super()
+        this.state = {
+            animation: {opacity: '0', filter: 'alpha(opacity=0)'},
+            scrolled: false
+        }
+    }
+    componentDidMount() {
+        window.addEventListener('scroll', this.arrowDisappear);
+        setTimeout(() => {
+            if (!this.state.scrolled) {
+                this.arrowAppear()
+            }
+        }, 3000)
+    }
+
+    arrowAppear = () => {
+        const self = this;
+        var op = 0.1;  // initial opacity
+        var timer = setInterval(function () {
+            if (op >= 0.7){
+                self.setState({animation: {opacity: '0.7', filter: 'alpha(opacity=70)'}})
+                clearInterval(timer);
+            } else {
+                self.setState({animation: {opacity: `${op}`, filter: `alpha(opacity=${op * 100})`}})
+                op += op * 0.1;
+            }
+        }, 10);
+    }
+
+    arrowDisappear = () => {
+        if (!this.state.scrolled) {
+            this.setState({scrolled: true})
+            const self = this;
+            var op = 1;  // initial opacity
+            var timer = setInterval(function () {
+                if (op <= 0.1){
+                    clearInterval(timer);
+                    self.setState({animation: {display: 'none'}})
+                } else {
+                    self.setState({animation: {opacity: `${op}`, filter: `alpha(opacity=${op * 100})`}})
+                    op -= op * 0.1;
+                }
+            }, 10);
+        }
+    }
+
     handleScroll = () => {
+        // this.arrowDisappear()
         const goal = this.props.refs.whyMe.current.offsetTop;
         const start = window.pageYOffset;
         const diff = goal - start;
@@ -35,7 +83,12 @@ class Home extends Component {
                     </div>
                 </div>
                 <div className="homeImg"></div>
-                <button className="downArrow" onClick={this.handleScroll}><i class="fa fa-arrow-down" style={{fontSize: "24px"}}></i></button>
+                <button
+                    style={this.state.animation}
+                    className="downArrow"
+                    onClick={this.handleScroll}>
+                        <i class="fa fa-arrow-down" style={{fontSize: "24px"}}></i>
+                </button>
             </div>
         );
     }
