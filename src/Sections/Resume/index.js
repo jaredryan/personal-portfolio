@@ -5,13 +5,44 @@ class Resume extends Component {
     constructor() {
         super()
         this.state = {
-            resume: "skills"
+            resume: "skills",
+            animation: {}
         }
-        this.myRef = React.createRef();
     }
 
     handleResume = (resume) => {
-        this.setState({resume})
+        this.handleFade()
+        setTimeout(() => {
+            this.setState({resume})
+            this.handleAppear()
+        }, 500)
+    }
+
+    handleFade = () => {
+        const self = this;
+        var op = 1;  // initial opacity
+        var timer = setInterval(function () {
+            if (op <= 0.1){
+                clearInterval(timer);
+                self.setState({animation: {opacity: 0, filter: `alpha(opacity=0)`}})
+            } else {
+                self.setState({animation: {opacity: `${op}`, filter: `alpha(opacity=${op * 100})`}})
+                op -= op * 0.1;
+            }
+        }, 10);
+    }
+
+    handleAppear = () => {
+        const self = this;
+        var op = 0.1;  // initial opacity
+        var timer = setInterval(function () {
+            if (op >= 1){
+                clearInterval(timer);
+            } else {
+                self.setState({animation: {opacity: `${op}`, filter: `alpha(opacity=${op * 100})`}})
+                op += op * 0.1;
+            }
+        }, 10);
     }
 
     render() {
@@ -140,7 +171,7 @@ class Resume extends Component {
                         <div className="container">
                             {
                                 this.state.resume === "skills" &&
-                                    <div className="skills">
+                                    <div className="skills" style={this.state.animation}>
                                         <div className="skillsGrid">
                                             {
                                                 skills.map((skill, index) => {
@@ -159,7 +190,7 @@ class Resume extends Component {
                             }
                             {
                                 this.state.resume === "work" &&
-                                    <div className="work">
+                                    <div className="work" style={this.state.animation}>
                                         {
                                             work.map((work, index) => {
                                                 return (
@@ -177,7 +208,7 @@ class Resume extends Component {
                             }
                             {
                                 this.state.resume === "education" &&
-                                    <div className="education">
+                                    <div className="education" style={this.state.animation}>
                                         {
                                             education.map((education, index) => {
                                                 return (

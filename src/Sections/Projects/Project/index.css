@@ -59,20 +59,20 @@
     color: rgb(46,53,70);
 }
 
-.projectEntry h3 a,
-.projectEntry h2 a {
+.projectEntry h3 button,
+.projectEntry h2 button {
     margin-left: 4px;
     padding: 3px 4px;
 }
 
-.projectEntry h2 a {
+.projectEntry h2 button {
     padding: 5px 10px;
     text-decoration: none;
     color: rgb(112,53,41);
     font-weight: 400;
 }
 
-.projectEntry h3 a {
+.projectEntry h3 button {
     color: rgb(46,53,70);
     text-decoration: none;
 }

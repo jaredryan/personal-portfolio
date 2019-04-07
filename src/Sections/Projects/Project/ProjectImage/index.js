@@ -3,7 +3,7 @@ import './index.css';
 
 const ProjectImage = props => {
     return(
-        <div className="projectImageContainer">
+        <div className="projectImageContainer" style={props.style}>
             <div className="projectImage" id={props.id}>
                 <img src={props.id} alt=""/>
             </div>

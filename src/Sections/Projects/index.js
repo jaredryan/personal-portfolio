@@ -8,13 +8,41 @@ class Projects extends Component {
         super()
         this.state = {
             projectIsOpen: false,
-            imageIndex: 0
+            imageIndex: 0,
+            animation: {}
         }
     }
 
     handleProjectSet = (projectIsOpen) => {
         this.setState({projectIsOpen, imageIndex: 0})
         this.handleScroll(this.props.refs.projects.current.offsetTop)
+    }
+
+    handleFade = () => {
+        const self = this;
+        var op = 1;  // initial opacity
+        var timer = setInterval(function () {
+            if (op <= 0.1){
+                clearInterval(timer);
+                self.setState({animation: {opacity: 0, filter: `alpha(opacity=0)`}})
+            } else {
+                self.setState({animation: {opacity: `${op}`, filter: `alpha(opacity=${op * 100})`}})
+                op -= op * 0.1;
+            }
+        }, 10);
+    }
+
+    handleAppear = () => {
+        const self = this;
+        var op = 0.1;  // initial opacity
+        var timer = setInterval(function () {
+            if (op >= 1){
+                clearInterval(timer);
+            } else {
+                self.setState({animation: {opacity: `${op}`, filter: `alpha(opacity=${op * 100})`}})
+                op += op * 0.1;
+            }
+        }, 10);
     }
 
     handleScroll = (elementTop) => {
@@ -38,7 +66,11 @@ class Projects extends Component {
     }
 
     handleIndexSet = (imageIndex) => {
-        this.setState({imageIndex})
+        this.handleFade()
+        setTimeout(() => {
+            this.setState({imageIndex})
+            this.handleAppear()
+        }, 500)
     }
 
     handleScroll = () => {
@@ -383,7 +415,7 @@ class Projects extends Component {
                   <div className="flex" style={{padding: 0, paddingTop: "80px"}}>
                       <h1>Projects</h1>
                       <div className="projectDisplay" id="projectDisplay">
-                          <a className="backButton" onClick={() => this.handleProjectSet(false)}><i class="fa fa-arrow-left" style={{fontSize: "24px"}}></i></a>
+                          <div className="backButton" onClick={() => this.handleProjectSet(false)}><i class="fa fa-arrow-left" style={{fontSize: "24px"}}></i></div>
                           <h2>{project.title}</h2>
                           <h3>{project.subtitle}</h3>
                           <div className="buttons">
@@ -400,6 +432,7 @@ class Projects extends Component {
                                         <div>
                                               <div className="projectImages">
                                                   <ProjectImage
+                                                      style={this.state.animation}
                                                       id={project.pictures[this.state.imageIndex].id}
                                                       caption={project.pictures[this.state.imageIndex].caption}
                                                   />

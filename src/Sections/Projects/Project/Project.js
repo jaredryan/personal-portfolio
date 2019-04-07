@@ -9,7 +9,7 @@ const Project = props => {
                     <div className="hoverEntry">
                         <div>
                             <h2>{props.subtitle}</h2>
-                            <a><button onClick={props.handleClick}>See More</button></a>
+                            <button onClick={props.handleClick}>See More</button>
                         </div>
                     </div>
                     <img src={props.mainImage} alt=""/>
