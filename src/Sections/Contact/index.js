@@ -18,7 +18,7 @@ class Contact extends Component {
     render() {
         if (this.state.opened) {
             return (
-                <div className="contact">
+                <div className="contact" ref={this.props.refs.contact}>
                     <div className="contactMe picture">
                         <div className="profilePic">
                             <div></div>
@@ -36,7 +36,7 @@ class Contact extends Component {
             )
         } else {
             return (
-                <button className="contactMe" onClick={this.handleClick}>Contact Me</button>
+                <button className="contactMe" onClick={this.handleClick} ref={this.props.refs.contact}>Contact Me</button>
             )
         }
     }

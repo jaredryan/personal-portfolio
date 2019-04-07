@@ -9,7 +9,7 @@ const Project = props => {
                     <div className="hoverEntry">
                         <div>
                             <h2>{props.subtitle}</h2>
-                            <a href="#projectDisplay"><button onClick={props.handleClick}>See More</button></a>
+                            <a><button onClick={props.handleClick}>See More</button></a>
                         </div>
                     </div>
                     <img src={props.mainImage} alt=""/>

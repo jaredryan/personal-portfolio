@@ -8,14 +8,23 @@ import Projects from './Sections/Projects'
 import Contact from './Sections/Contact'
 
 const App = () => {
+    const refs = {
+        navbar: React.createRef(),
+        home: React.createRef(),
+        whyMe: React.createRef(),
+        resume: React.createRef(),
+        projects: React.createRef(),
+        contact: React.createRef()
+    }
+
     return (
         <div>
-            <Navbar />
-            <Home />
-            <WhyMe />
-            <Resume />
-            <Projects />
-            <Contact />
+            <Navbar refs={refs}/>
+            <Home refs={refs}/>
+            <WhyMe refs={refs}/>
+            <Resume refs={refs}/>
+            <Projects refs={refs}/>
+            <Contact refs={refs}/>
         </div>
     )
 }

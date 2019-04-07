@@ -41,10 +41,6 @@ nav ul {
     right: 0px;
 }
 
-nav ul a {
-    text-decoration: none;
-}
-
 nav ul li {
 	padding: 8px 16px;
 	-webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.3), 0 1px 3px 0 rgba(0, 0, 0, 0.33);

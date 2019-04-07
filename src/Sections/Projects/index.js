@@ -14,10 +14,51 @@ class Projects extends Component {
 
     handleProjectSet = (projectIsOpen) => {
         this.setState({projectIsOpen, imageIndex: 0})
+        this.handleScroll(this.props.refs.projects.current.offsetTop)
+    }
+
+    handleScroll = (elementTop) => {
+        const goal = elementTop
+        const start = window.pageYOffset
+        const diff = goal - start
+        const scrollStep = Math.PI / (200 / 1);
+        let count = 0;
+        let currPos;
+
+        const scrollInterval = setInterval(function(){
+            if (window.pageYOffset !== goal) {
+                count = count + 1
+                currPos = start + diff * (0.5 - 0.5 * Math.cos(count * scrollStep))
+                window.scrollTo(0, currPos)
+            }
+            else {
+                clearInterval(scrollInterval)
+            }
+        }, 1);
     }
 
     handleIndexSet = (imageIndex) => {
         this.setState({imageIndex})
+    }
+
+    handleScroll = () => {
+        const goal = this.props.refs.projects.current.offsetTop;
+        const start = window.pageYOffset;
+        const diff = goal - start;
+        const scrollStep = Math.PI / (350 / 1);
+        let count = 0;
+        let currPos;
+
+        const scrollInterval = setInterval(function(){
+            if (window.pageYOffset !== goal) {
+                count = count + 1
+                currPos = start + diff * (0.5 - 0.5 * Math.cos(count * scrollStep))
+                window.scrollTo(0, currPos)
+            }
+            else {
+                clearInterval(scrollInterval)
+            }
+        }, 1);
     }
 
   render() {
@@ -336,13 +377,13 @@ class Projects extends Component {
           techList = techList.slice(0, techList.length - 2);   // remove last ", "
 
           return (
-              <div className="projects" id="projects">
+              <div className="projects" id="projects" ref={this.props.refs.projects}>
                   <div className="banner"></div>
                   <div className="overlay"></div>
                   <div className="flex" style={{padding: 0, paddingTop: "80px"}}>
                       <h1>Projects</h1>
                       <div className="projectDisplay" id="projectDisplay">
-                          <a className="backButton" href="#projects" onClick={() => this.handleProjectSet(false)}><i class="fa fa-arrow-left" style={{fontSize: "24px"}}></i></a>
+                          <a className="backButton" onClick={() => this.handleProjectSet(false)}><i class="fa fa-arrow-left" style={{fontSize: "24px"}}></i></a>
                           <h2>{project.title}</h2>
                           <h3>{project.subtitle}</h3>
                           <div className="buttons">
@@ -381,12 +422,15 @@ class Projects extends Component {
           );
       } else {
         return (
-            <div className="projects" id="projects">
+            <div className="projects" id="projects" ref={this.props.refs.projects}>
                 <div className="banner"></div>
                 <div className="overlay"></div>
                 <div className="flex">
                     <h1>Projects</h1>
                     <div className="projectsDiv">
+                        {mappedProjects}
+                    </div>
+                    <div className="projectsDisplay" style={{display: "none"}}>
                         {mappedProjects}
                     </div>
                 </div>

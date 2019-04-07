@@ -7,6 +7,7 @@ class Resume extends Component {
         this.state = {
             resume: "skills"
         }
+        this.myRef = React.createRef();
     }
 
     handleResume = (resume) => {
@@ -93,7 +94,7 @@ class Resume extends Component {
         ]
 
         return (
-            <div className="resume" id="resume">
+            <div className="resume" id="resume" ref={this.props.refs.resume}>
                 <div className="banner"></div>
                 <div className="overlay"></div>
                 <div className="flex">
