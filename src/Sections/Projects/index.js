@@ -9,13 +9,32 @@ class Projects extends Component {
         this.state = {
             projectIsOpen: false,
             imageIndex: 0,
-            animation: {}
+            animation: {},
+            projectList: {},
+            projectDisplay: {opacity: 0, filter: `alpha(opacity=0)`}
         }
     }
 
     handleProjectSet = (projectIsOpen) => {
-        this.setState({projectIsOpen, imageIndex: 0})
         this.handleScroll(this.props.refs.projects.current.offsetTop)
+        this.handleListFade()
+        setTimeout(() => {
+            this.setState({projectIsOpen, imageIndex: 0})
+        }, 250)
+        setTimeout(() => {
+            this.handleProjectAppear()
+        }, 700)
+    }
+
+    handleProjectUnset = () => {
+        this.handleScroll(this.props.refs.projects.current.offsetTop)
+        this.handleProjectFade()
+        setTimeout(() => {
+            this.setState({projectIsOpen: false, imageIndex: 0})
+        }, 250)
+        setTimeout(() => {
+            this.handleListAppear()
+        }, 700)
     }
 
     handleFade = () => {
@@ -45,6 +64,60 @@ class Projects extends Component {
         }, 10);
     }
 
+    handleListFade = () => {
+        const self = this;
+        var op = 1;  // initial opacity
+        var timer = setInterval(function () {
+            if (op <= 0.1){
+                clearInterval(timer);
+                self.setState({projectList: {opacity: 0, filter: `alpha(opacity=0)`}})
+            } else {
+                self.setState({projectList: {opacity: `${op}`, filter: `alpha(opacity=${op * 100})`}})
+                op -= op * 0.1;
+            }
+        }, 10);
+    }
+
+    handleListAppear = () => {
+        const self = this;
+        var op = 0.1;  // initial opacity
+        var timer = setInterval(function () {
+            if (op >= 1){
+                clearInterval(timer);
+            } else {
+                self.setState({projectList: {opacity: `${op}`, filter: `alpha(opacity=${op * 100})`}})
+                op += op * 0.1;
+            }
+        }, 10);
+    }
+
+    handleProjectFade = () => {
+        const self = this;
+        var op = 1;  // initial opacity
+        var timer = setInterval(function () {
+            if (op <= 0.1){
+                clearInterval(timer);
+                self.setState({projectDisplay: {opacity: 0, filter: `alpha(opacity=0)`}})
+            } else {
+                self.setState({projectDisplay: {opacity: `${op}`, filter: `alpha(opacity=${op * 100})`}})
+                op -= op * 0.1;
+            }
+        }, 10);
+    }
+
+    handleProjectAppear = () => {
+        const self = this;
+        var op = 0.1;  // initial opacity
+        var timer = setInterval(function () {
+            if (op >= 1){
+                clearInterval(timer);
+            } else {
+                self.setState({projectDisplay: {opacity: `${op}`, filter: `alpha(opacity=${op * 100})`}})
+                op += op * 0.1;
+            }
+        }, 10);
+    }
+
     handleScroll = (elementTop) => {
         const goal = elementTop
         const start = window.pageYOffset
@@ -69,10 +142,10 @@ class Projects extends Component {
         this.handleFade()
         setTimeout(() => {
             this.setState({imageIndex})
-        }, 500)
+        }, 250)
         setTimeout(() => {
             this.handleAppear()
-        }, 800)
+        }, 700)
     }
 
     handleScroll = () => {
@@ -416,8 +489,8 @@ class Projects extends Component {
                   <div className="overlay"></div>
                   <div className="flex" style={{padding: 0, paddingTop: "80px"}}>
                       <h1>Projects</h1>
-                      <div className="projectDisplay" id="projectDisplay">
-                          <div className="backButton" onClick={() => this.handleProjectSet(false)}><i class="fa fa-arrow-left" style={{fontSize: "24px"}}></i></div>
+                      <div className="projectDisplay" id="projectDisplay" style={this.state.projectDisplay}>
+                          <div className="backButton" onClick={() => this.handleProjectUnset()}><i class="fa fa-arrow-left" style={{fontSize: "24px"}}></i></div>
                           <h2>{project.title}</h2>
                           <h3>{project.subtitle}</h3>
                           <div className="buttons">
@@ -462,10 +535,7 @@ class Projects extends Component {
                 <div className="overlay"></div>
                 <div className="flex">
                     <h1>Projects</h1>
-                    <div className="projectsDiv">
-                        {mappedProjects}
-                    </div>
-                    <div className="projectsDisplay" style={{display: "none"}}>
+                    <div className="projectsDiv" style={this.state.projectList}>
                         {mappedProjects}
                     </div>
                 </div>
