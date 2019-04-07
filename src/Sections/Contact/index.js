@@ -13,10 +13,16 @@ class Contact extends Component {
     handleClick = () => {
         this.handleFade()
         setTimeout(() => {
+            let newState;
             this.setState(prevState => {
-                return {opened: !prevState.opened}
+                newState = !prevState.opened
+                return {opened: newState}
             })
-            this.handleAppear()
+            if (newState) {
+                this.handleAppear(1)
+            } else {
+                this.handleAppear(0.7)
+            }
         }, 500)
     }
 
@@ -34,11 +40,11 @@ class Contact extends Component {
         }, 10);
     }
 
-    handleAppear = () => {
+    handleAppear = (intendedOpacity) => {
         const self = this;
         var op = 0.1;  // initial opacity
         var timer = setInterval(function () {
-            if (op >= 1){
+            if (op >= intendedOpacity){
                 clearInterval(timer);
             } else {
                 self.setState({animation: {opacity: `${op}`, filter: `alpha(opacity=${op * 100})`}})
