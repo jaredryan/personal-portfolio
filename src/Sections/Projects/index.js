@@ -69,8 +69,10 @@ class Projects extends Component {
         this.handleFade()
         setTimeout(() => {
             this.setState({imageIndex})
-            this.handleAppear()
         }, 500)
+        setTimeout(() => {
+            this.handleAppear()
+        }, 800)
     }
 
     handleScroll = () => {
