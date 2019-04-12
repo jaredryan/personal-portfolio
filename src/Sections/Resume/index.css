@@ -194,6 +194,11 @@
     line-height: 28px;
 }
 
+.resume h4 span {
+    margin-left: 10px;
+    margin-right: 10px; 
+}
+
 .resume h5 {
     font-size: 18px;
     font-family: "Montserrat", sans-serif;

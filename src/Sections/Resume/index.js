@@ -196,7 +196,7 @@ class Resume extends Component {
                                                 return (
                                                     <div key={work.title}>
                                                         <h3>{work.title}</h3>
-                                                        <h4>{work.location}</h4>
+                                                        <h4>{work.location}<span>|</span>{work.date}</h4>
                                                         <ul>
                                                             {work.listItems.map((item, index) => <li key={item}>{item}</li>)}
                                                         </ul>
