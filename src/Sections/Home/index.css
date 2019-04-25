@@ -88,7 +88,7 @@
 }
 
 .home .fontAwesomeLogos i:hover {
-    color: rgb(160, 94, 203);
+    color: rgb(0, 137, 203);
     -webkit-transition-duration: 300ms;
             transition-duration: 300ms;
 }
@@ -133,11 +133,11 @@ button.downArrow {
 
 button.downArrow:hover,
 button.downArrow:focus {
-    opacity: 1;
+    opacity: 1 !important;
     background-color: rgb(40, 40, 40);
     -webkit-transition-duration: 300ms;
             transition-duration: 300ms;
-    color: rgb(160, 94, 203);
+    color: rgb(0, 137, 203);
 }
 
 @media (max-width: 1200px) {

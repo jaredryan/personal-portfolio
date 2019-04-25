@@ -37,46 +37,6 @@
             transition-duration: 300ms;
 }
 
-.projectEntry h2,
-.projectEntry h3 {
-    text-align: center;
-}
-
-.projectEntry h2 {
-    margin-top: 0px;
-    margin-bottom: 0px;
-    font-size: 30px;
-    color: rgb(112,53,41);
-    font-weight: 400;
-}
-
-.projectEntry h3 {
-    margin-top: 10px;
-    margin-bottom: 0px;
-    font-size: 24px;
-    font-family: "Muli", sans-serif;
-    font-weight: 300;
-    color: rgb(46,53,70);
-}
-
-.projectEntry h3 button,
-.projectEntry h2 button {
-    margin-left: 4px;
-    padding: 3px 4px;
-}
-
-.projectEntry h2 button {
-    padding: 5px 10px;
-    text-decoration: none;
-    color: rgb(112,53,41);
-    font-weight: 400;
-}
-
-.projectEntry h3 button {
-    color: rgb(46,53,70);
-    text-decoration: none;
-}
-
 .projectEntry .titleImage h5 {
     padding-left: 0px;
 }
@@ -91,7 +51,7 @@
     font-weight: 300;
     font-family: "Roboto Slab", sans-serif;
     font-size: 18px;
-    color: rgb(40,61,112);
+    color: rgb(0, 137, 203);
     padding-left: 20px;
 }
 

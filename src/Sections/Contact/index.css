@@ -18,7 +18,7 @@ button.contactMe {
 button.contactMe:hover,
 button.contactMe:focus {
     cursor: pointer;
-    opacity: 1;
+    opacity: 1 !important;
     background-color: rgb(40, 40, 40);
     -webkit-transition-duration: 300ms;
             transition-duration: 300ms;
@@ -142,7 +142,7 @@ div.contactMe {
 }
 
 .contact .backButton:hover {
-    color: rgb(110, 128, 192);
+    color: rgb(0, 137, 203);
     -webkit-transition-duration: 300ms;
             transition-duration: 300ms;
 }
@@ -186,7 +186,7 @@ div.contactMe {
 }
 
 .contactMe .fontAwesomeLogos i:hover {
-    color: rgb(110, 128, 192);
+    color: rgb(0, 137, 203);
     -webkit-transition-duration: 300ms;
             transition-duration: 300ms;
 }
