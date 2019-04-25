@@ -26,8 +26,8 @@
     height: 100%;
     width: 100%;
     position: absolute;
-    background-image: -webkit-gradient(linear, left top, right top, from(rgba(4, 65, 178, 0.3)), to(rgba(4, 65, 178, 0.8)));
-    background-image: linear-gradient(to right, rgba(4, 65, 178, 0.3), rgba(4, 65, 178, 0.8));
+    background-image: -webkit-gradient(linear, left top, right top, from(rgba(4, 55, 162, 0.3)), to(rgba(4, 55, 162, 0.8)));
+    background-image: linear-gradient(to right, rgba(4, 55, 162, 0.3), rgba(4, 55, 162, 0.8));
     top: 0;
     left: 0;
     z-index: 1
@@ -141,7 +141,7 @@
 }
 
 .resume .flex .tabs button:hover div {
-    color: rgb(192, 89, 213);
+    color: rgb(210, 98, 213);
     -webkit-transition-duration: 300ms;
             transition-duration: 300ms;
 }
@@ -182,7 +182,7 @@
     font-size: 24px;
     line-height: 34px;
     padding-top: 50px;
-    color: rgb(192, 89, 213);
+    color: rgb(210, 98, 213);
     font-weight: 200;
 }
 
@@ -313,7 +313,7 @@
     }
 
     .resume .flex .tabs button:hover div {
-        color: rgb(192, 89, 213);
+        color: rgb(210, 98, 213);
     }
 
     .resume i {
@@ -344,8 +344,8 @@
     }
 
     .resume .overlay {
-        background-image: -webkit-gradient(linear, left top, right top, from(rgba(4, 65, 178, 0.5)), to(rgba(4, 65, 178, 0.5)));
-        background-image: linear-gradient(to right, rgba(4, 65, 178, 0.5), rgba(4, 65, 178, 0.5));
+        background-image: -webkit-gradient(linear, left top, right top, from(rgba(4, 55, 162, 0.5)), to(rgba(4, 55, 162, 0.5)));
+        background-image: linear-gradient(to right, rgba(4, 55, 162, 0.5), rgba(4, 55, 162, 0.5));
     }
 }
 
@@ -364,7 +364,7 @@
     }
 
     .resume .flex .tabs button:hover div {
-        color: rgb(192, 89, 213);
+        color: rgb(210, 98, 213);
     }
 
     .resume i {

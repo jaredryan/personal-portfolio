@@ -133,10 +133,10 @@ class Resume extends Component {
                         <h1>Resume</h1>
                         <div className="tabs">
                             <button onClick={() => this.handleResume("skills")}
-                                    style={{color: this.state.resume === "skills" ? "rgb(192, 89, 213)" : "rgb(255, 255, 255)"}}>
+                                    style={{color: this.state.resume === "skills" ? "rgb(210, 98, 213)" : "rgb(255, 255, 255)", fontWeight: this.state.resume === "skills" ? 300 : 200}}>
                                 <i  className="fa fa-circle"
-                                    style={{fontSize: "22px", fontWeight: 100, color: this.state.resume === "skills" ? "rgb(192, 89, 213)" : "rgb(255, 255, 255)"}}></i>
-                                <div className="mobile" style={{borderBottom: this.state.resume === "skills" ? "2px solid rgb(192, 89, 213)" : "2px solid rgb(255, 255, 255)"}}>
+                                    style={{fontSize: "22px", fontWeight: 100, color: this.state.resume === "skills" ? "rgb(210, 98, 213)" : "rgb(255, 255, 255)"}}></i>
+                                <div className="mobile" style={{borderBottom: this.state.resume === "skills" ? "2px solid rgb(210, 98, 213)" : "2px solid rgb(255, 255, 255)"}}>
                                     Skills
                                 </div>
                                 <div className="default">
@@ -144,10 +144,10 @@ class Resume extends Component {
                                 </div>
                             </button>
                             <button onClick={() => this.handleResume("work")}
-                                    style={{color: this.state.resume === "work" ? "rgb(192, 89, 213)" : "rgb(255, 255, 255)"}}>
+                                    style={{color: this.state.resume === "work" ? "rgb(210, 98, 213)" : "rgb(255, 255, 255)", fontWeight: this.state.resume === "work" ? 300 : 200}}>
                                 <i  className="fa fa-circle"
-                                    style={{fontSize: "22px", fontWeight: 100, color: this.state.resume === "work" ? "rgb(192, 89, 213)" : "rgb(255, 255, 255)"}}></i>
-                                <div className="mobile" style={{borderBottom: this.state.resume === "work" ? "2px solid rgb(192, 89, 213)" : "2px solid rgb(255, 255, 255)"}}>
+                                    style={{fontSize: "22px", fontWeight: 100, color: this.state.resume === "work" ? "rgb(210, 98, 213)" : "rgb(255, 255, 255)"}}></i>
+                                <div className="mobile" style={{borderBottom: this.state.resume === "work" ? "2px solid rgb(210, 98, 213)" : "2px solid rgb(255, 255, 255)"}}>
                                     Work
                                 </div>
                                 <div className="default">
@@ -155,10 +155,10 @@ class Resume extends Component {
                                 </div>
                             </button>
                             <button onClick={() => this.handleResume("education")}
-                                    style={{color: this.state.resume === "education" ? "rgb(192, 89, 213)" : "rgb(255, 255, 255)"}}>
+                                    style={{color: this.state.resume === "education" ? "rgb(210, 98, 213)" : "rgb(255, 255, 255)", fontWeight: this.state.resume === "education" ? 300 : 200}}>
                                 <i  className="fa fa-circle"
-                                    style={{fontSize: "22px", fontWeight: 100, color: this.state.resume === "education" ? "rgb(192, 89, 213)" : "rgb(255, 255, 255)"}}></i>
-                                <div className="mobile" style={{borderBottom: this.state.resume === "education" ? "2px solid rgb(192, 89, 213)" : "2px solid rgb(255, 255, 255)"}}>
+                                    style={{fontSize: "22px", fontWeight: 100, color: this.state.resume === "education" ? "rgb(210, 98, 213)" : "rgb(255, 255, 255)"}}></i>
+                                <div className="mobile" style={{borderBottom: this.state.resume === "education" ? "2px solid rgb(210, 98, 213)" : "2px solid rgb(255, 255, 255)"}}>
                                     Education
                                 </div>
                                 <div className="default">
