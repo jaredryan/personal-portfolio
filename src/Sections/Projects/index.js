@@ -444,7 +444,7 @@ class Projects extends Component {
               tech: ["Node.js"],
           },
           {
-              title: "UC Berkeley Copyrighted Course Projects",
+              title: "UC Berkeley Projects",
               subtitle: "A list of projects, where the code is copyrighted",
               mainImage: require("../../Images/berkeleyProjects.jpg"),
               description: ["Designed and implemented a simplified version of Git, which manipulated files on a local computer (Java)(CS 61B)", "Implemented the logic of a simplified neural network (Python)", "Optimized a naive depth map generator algorithm using OpenMP, SSE Intrinsics, etc. for 5x speedup (C)", "Parallelized a common image compression algorithm with MapReduce in Spark (Python)", "Performed genomic analysis, including the implementation of the Needleman-Wunsch algorithms to align two sequences (Python)(BE 131)", "Implemented ALU, Register File, CPU, and 2-stage pipeline to better understand a processor (Logisim)"],
