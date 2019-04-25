@@ -8,8 +8,8 @@
 }
 
 .home .homeImg {
-    background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.0)), to(rgba(0, 0, 0, 0.4))), url("../../Images/home.jpg") no-repeat center center;
-    background: linear-gradient(rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.4)), url("../../Images/home.jpg") no-repeat center center;
+    background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.3)), to(rgba(0, 0, 0, 0.1))), url("../../Images/home.jpg") no-repeat center center;
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1)), url("../../Images/home.jpg") no-repeat center center;
     background-attachment: fixed;
     z-index: 0;
     background-size: cover;
@@ -23,10 +23,10 @@
 .home .homeText {
     position: absolute;
     z-index: 1;
-    text-align: center;
-    top: 50%;
+    text-align: left;
+    top: 0%;
     height: 50%;
-    width: 100%;
+    left: 5%;
     position: absolute;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -50,11 +50,12 @@
 }
 
 .home h1 {
-    font-size: 130px;
+    font-size: 80px;
+    letter-spacing: 0.6;
 }
 
 .home h2 {
-    font-size: 60px;
+    font-size: 32px;
 }
 
 .home .fontAwesomeLogos {
@@ -63,9 +64,9 @@
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
+    -webkit-box-pack: left;
+        -ms-flex-pack: left;
+            justify-content: left;
 }
 
 .home .fontAwesomeLogos i {
@@ -79,18 +80,23 @@
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
+    font-size: 32px;
+}
+
+.home .fontAwesomeLogos i.fa-envelope {
+    font-size: 30px;
 }
 
 .home .fontAwesomeLogos i:hover {
-    color: rgb(0, 186, 255);
+    color: rgb(160, 94, 203);
     -webkit-transition-duration: 300ms;
             transition-duration: 300ms;
 }
 
 .home .fontAwesomeLogos a {
-    width: 40px;
+    width: 30px;
     margin-left: 20px;
-    margin-right: 20px;
+    margin-right: 7px;
     text-decoration: none;
 }
 
@@ -131,36 +137,50 @@ button.downArrow:focus {
     background-color: rgb(40, 40, 40);
     -webkit-transition-duration: 300ms;
             transition-duration: 300ms;
-    color: rgb(0, 186, 255);
+    color: rgb(160, 94, 203);
 }
 
-@media (max-width: 800px) {
+@media (max-width: 1200px) {
+    .home .homeText {
+        top: -2%;
+        left: 3%;
+    }
+}
+
+@media (max-width: 1120px) {
+    .home .homeText {
+        top: -7%;
+        left: 3%;
+    }
+}
+
+@media (max-width: 1000px) {
     .home .homeText h1 {
-        font-size: 80px;
+        font-size: 70px;
+        letter-spacing: 0;
     }
 
     .home .homeText h2 {
-        font-size: 40px;
+        font-size: 27.5px;
+    }
+
+    .home .fontAwesomeLogos a {
+        width: 27.5px;
+    }
+
+    .home .fontAwesomeLogos i {
+        font-size: 27.5px;
+    }
+
+    .home .fontAwesomeLogos i.fa-envelope {
+        font-size: 26.5px;
     }
 }
 
 @media (max-width: 650px) {
     .home .homeText h1 {
         font-size: 60px;
-    }
-
-    .home .homeText h2 {
-        font-size: 30px;
-    }
-
-    .home .fontAwesomeLogos {
-        margin-top: 10px;
-    }
-}
-
-@media (max-width: 480px) {
-    .home .homeText h1 {
-        font-size: 45px;
+        letter-spacing: 0.5;
     }
 
     .home .homeText h2 {
@@ -168,6 +188,52 @@ button.downArrow:focus {
     }
 
     .home .fontAwesomeLogos {
+        margin-top: 10px;
+    }
+
+    .home .fontAwesomeLogos a {
+        width: 25px;
+    }
+
+    .home .fontAwesomeLogos i {
+        font-size: 26px;
+    }
+
+    .home .fontAwesomeLogos i.fa-envelope {
+        font-size: 25px;
+    }
+}
+
+@media (max-width: 480px) {
+    .home .homeText {
+        top: -7%;
+    }
+
+    .home .homeText h1 {
+        font-size: 35px;
+    }
+
+    .home .homeText h2 {
+        font-size: 20px;
+    }
+
+    .home .fontAwesomeLogos {
         margin-top: 7.5px;
+    }
+
+    .home .fontAwesomeLogos a {
+        margin-right: 5px;
+        margin-left: 5px;
+        width: 21px;
+    }
+
+    .home .fontAwesomeLogos i {
+        font-size: 22px;
+        margin-right: 0;
+        margin-left: 0;
+    }
+
+    .home .fontAwesomeLogos i.fa-envelope {
+        font-size: 21px;
     }
 }
