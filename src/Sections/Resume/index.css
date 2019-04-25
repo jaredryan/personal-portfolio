@@ -26,8 +26,8 @@
     height: 100%;
     width: 100%;
     position: absolute;
-    background-image: -webkit-gradient(linear, left top, right top, from(rgba(4, 55, 162, 0.3)), to(rgba(4, 55, 162, 0.8)));
-    background-image: linear-gradient(to right, rgba(4, 55, 162, 0.3), rgba(4, 55, 162, 0.8));
+    background-image: -webkit-gradient(linear, left top, right top, from(rgba(115, 68, 140, 0.65)), to(rgba(115, 68, 140, 0.8)));
+    background-image: linear-gradient(to right, rgba(115, 68, 140, 0.65), rgba(115, 68, 140, 0.8));
     top: 0;
     left: 0;
     z-index: 1
@@ -141,7 +141,7 @@
 }
 
 .resume .flex .tabs button:hover div {
-    color: rgb(210, 98, 213);
+    color: rgb(0, 186, 255);
     -webkit-transition-duration: 300ms;
             transition-duration: 300ms;
 }
@@ -182,7 +182,7 @@
     font-size: 24px;
     line-height: 34px;
     padding-top: 50px;
-    color: rgb(210, 98, 213);
+    color: rgb(0, 186, 255);
     font-weight: 200;
 }
 
@@ -313,7 +313,7 @@
     }
 
     .resume .flex .tabs button:hover div {
-        color: rgb(210, 98, 213);
+        color: rgb(0, 186, 255);
     }
 
     .resume i {
@@ -364,7 +364,7 @@
     }
 
     .resume .flex .tabs button:hover div {
-        color: rgb(210, 98, 213);
+        color: rgb(0, 186, 255);
     }
 
     .resume i {

@@ -487,6 +487,7 @@ class Projects extends Component {
               <div className="projects" id="projects" ref={this.props.refs.projects}>
                   <div className="banner"></div>
                   <div className="overlay"></div>
+                  <div className="overlay2"></div>
                   <div className="flex" style={{padding: 0, paddingTop: "80px"}}>
                       <h1>Projects</h1>
                       <div className="projectDisplay" id="projectDisplay" style={this.state.projectDisplay}>
@@ -533,6 +534,7 @@ class Projects extends Component {
             <div className="projects" id="projects" ref={this.props.refs.projects}>
                 <div className="banner"></div>
                 <div className="overlay"></div>
+                <div className="overlay2"></div>
                 <div className="flex">
                     <h1>Projects</h1>
                     <div className="projectsDiv" style={this.state.projectList}>

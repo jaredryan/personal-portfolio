@@ -25,11 +25,23 @@
     height: 100%;
     width: 100%;
     position: absolute;
-    background-image: -webkit-gradient(linear, right top, left top, from(rgba(210, 98, 213, 0.3)), to(rgba(210, 98, 213, 0.3)));
-    background-image: linear-gradient(to left, rgba(210, 98, 213, 0.3), rgba(210, 98, 213, 0.3));
+    background-image: -webkit-gradient(linear, right top, left top, from(rgba(80, 180, 255, 0.65)), to(rgba(80, 180, 255, 0.65)));
+    background-image: linear-gradient(to left, rgba(80, 180, 255, 0.65), rgba(80, 180, 255, 0.65));
     top: 0;
     left: 0;
-    z-index: -1
+    z-index: -1;
+}
+
+.projects .overlay2 {
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    /* background-image: -webkit-gradient(linear, right top, left top, from(rgba(255, 255, 255, 0.1)), to(rgba(255, 255, 255, 0.1)));
+    background-image: linear-gradient(to left, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1)); */
+    top: 0;
+    left: 0;
+    z-index: -1;
 }
 
 .projects .projectDisplay {
@@ -105,7 +117,7 @@
 .projects h5 {
     font-size: 22px;
     font-family: 'Roboto Slab', serif;
-    font-weight: 200;
+    font-weight: 300;
     color: white;
     margin-top: 8px;
 }
