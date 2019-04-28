@@ -26,8 +26,8 @@
     height: 100%;
     width: 100%;
     position: absolute;
-    background-image: -webkit-gradient(linear, left top, right top, from(rgba(115, 68, 140, 0.65)), to(rgba(115, 68, 140, 0.8)));
-    background-image: linear-gradient(to right, rgba(115, 68, 140, 0.65), rgba(115, 68, 140, 0.8));
+    background-image: -webkit-gradient(linear, left top, right top, from(rgba(100, 53, 125, 0.5)), to(rgba(100, 53, 125, 0.8)));
+    background-image: linear-gradient(to right, rgba(100, 53, 125, 0.5), rgba(100, 53, 125, 0.8));
     top: 0;
     left: 0;
     z-index: 1
