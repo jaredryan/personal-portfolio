@@ -30,7 +30,7 @@ class Projects extends Component {
                     this.handleAppear()
                 }, 700)
             }
-        }, 4000);
+        }, 3000);
         this.setState({rotateTimer})
     }
 

@@ -31,7 +31,7 @@ class Resume extends Component {
                     this.handleAppear()
                 }, 500)
             }
-        }, 4000);
+        }, 3000);
         this.setState({rotateTimer})
     }
 
