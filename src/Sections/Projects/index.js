@@ -1,15 +1,13 @@
 import React, { Component } from 'react'
 import Project from './Project'
 import './index.css'
-import ProjectImage from './Project/ProjectImage'
+import ProjectSlideShow from './Project/ProjectSlideshow'
 
 class Projects extends Component {
     constructor() {
         super()
         this.state = {
             projectIsOpen: false,
-            imageIndex: 0,
-            animation: {},
             projectList: {},
             projectDisplay: {opacity: 0, filter: `alpha(opacity=0)`}
         }
@@ -19,7 +17,7 @@ class Projects extends Component {
         this.handleScroll(this.props.refs.projects.current.offsetTop)
         this.handleListFade()
         setTimeout(() => {
-            this.setState({projectIsOpen, imageIndex: 0})
+            this.setState({projectIsOpen})
         }, 250)
         setTimeout(() => {
             this.handleProjectAppear()
@@ -30,38 +28,11 @@ class Projects extends Component {
         this.handleScroll(this.props.refs.projects.current.offsetTop)
         this.handleProjectFade()
         setTimeout(() => {
-            this.setState({projectIsOpen: false, imageIndex: 0})
+            this.setState({projectIsOpen: false})
         }, 250)
         setTimeout(() => {
             this.handleListAppear()
         }, 700)
-    }
-
-    handleFade = () => {
-        const self = this;
-        var op = 1;  // initial opacity
-        var timer = setInterval(function () {
-            if (op <= 0.1){
-                clearInterval(timer);
-                self.setState({animation: {opacity: 0, filter: `alpha(opacity=0)`}})
-            } else {
-                self.setState({animation: {opacity: `${op}`, filter: `alpha(opacity=${op * 100})`}})
-                op -= op * 0.1;
-            }
-        }, 10);
-    }
-
-    handleAppear = () => {
-        const self = this;
-        var op = 0.1;  // initial opacity
-        var timer = setInterval(function () {
-            if (op >= 1){
-                clearInterval(timer);
-            } else {
-                self.setState({animation: {opacity: `${op}`, filter: `alpha(opacity=${op * 100})`}})
-                op += op * 0.1;
-            }
-        }, 10);
     }
 
     handleListFade = () => {
@@ -136,16 +107,6 @@ class Projects extends Component {
                 clearInterval(scrollInterval)
             }
         }, 1);
-    }
-
-    handleIndexSet = (imageIndex) => {
-        this.handleFade()
-        setTimeout(() => {
-            this.setState({imageIndex})
-        }, 250)
-        setTimeout(() => {
-            this.handleAppear()
-        }, 700)
     }
 
     handleScroll = () => {
@@ -505,24 +466,9 @@ class Projects extends Component {
                                   </ul>
                                   {techList && <h5><span>Technologies:</span> <span className="tech">{techList}</span></h5>}
                                   {project.pictures &&
-                                        <div>
-                                              <div className="projectImages">
-                                                  <ProjectImage
-                                                      style={this.state.animation}
-                                                      id={project.pictures[this.state.imageIndex].id}
-                                                      caption={project.pictures[this.state.imageIndex].caption}
-                                                  />
-                                              </div>
-                                              <div className="dots">
-                                                  {
-                                                      project.pictures.map((pic, index) => {
-                                                          return <i className="fa fa-circle" onClick={() => this.handleIndexSet(index)} style={{fontSize: "18px", fontWeight: 100, color: this.state.imageIndex === index ? "rgb(0, 137, 203)" : "rgb(40, 40, 40)"}}></i>
-                                                      })
-                                                  }
-                                              </div>
-                                        </div>
+                                        <ProjectSlideShow
+                                            project={project}/>
                                   }
-
                               </div>
                           </div>
                       </div>

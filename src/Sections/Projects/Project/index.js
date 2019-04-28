@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ProjectImage from './ProjectImage';
 import Project from './Project';
 
 class ProjectContainer extends Component {
@@ -13,13 +12,6 @@ class ProjectContainer extends Component {
         }, "");
         techList = techList.slice(0, techList.length - 2);   // remove last ", "
 
-        const imageList = this.props.pictures && this.props.pictures.map((image, index) => {
-            return <ProjectImage
-                        id={image.id}
-                        caption={image.caption}
-                   />
-        })
-
         return(
             <Project
                 mainImage={this.props.mainImage}
@@ -30,7 +22,6 @@ class ProjectContainer extends Component {
                 github={this.props.github}
                 techList={techList}
                 descriptionList={descriptionList}
-                imageList={imageList}
             />
         );
     }

@@ -10,7 +10,33 @@ class Resume extends Component {
         }
     }
 
+    componentDidMount() {
+        const rotateTimer = setInterval(() => {
+            if (this.state.resume === "skills") {
+                this.handleFade()
+                setTimeout(() => {
+                    this.setState({resume: "work"})
+                    this.handleAppear()
+                }, 500)
+            } else if (this.state.resume === "work") {
+                this.handleFade()
+                setTimeout(() => {
+                    this.setState({resume: "education"})
+                    this.handleAppear()
+                }, 500)
+            } else {
+                this.handleFade()
+                setTimeout(() => {
+                    this.setState({resume: "skills"})
+                    this.handleAppear()
+                }, 500)
+            }
+        }, 4000);
+        this.setState({rotateTimer})
+    }
+
     handleResume = (resume) => {
+        clearInterval(this.state.rotateTimer)
         this.handleFade()
         setTimeout(() => {
             this.setState({resume})
@@ -28,6 +54,19 @@ class Resume extends Component {
             } else {
                 self.setState({animation: {opacity: `${op}`, filter: `alpha(opacity=${op * 100})`}})
                 op -= op * 0.1;
+            }
+        }, 10);
+    }
+
+    handleAppear = () => {
+        const self = this;
+        var op = 0.1;  // initial opacity
+        var timer = setInterval(function () {
+            if (op >= 1){
+                clearInterval(timer);
+            } else {
+                self.setState({animation: {opacity: `${op}`, filter: `alpha(opacity=${op * 100})`}})
+                op += op * 0.1;
             }
         }, 10);
     }
