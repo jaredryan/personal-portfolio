@@ -33,11 +33,12 @@ class Navbar extends Component {
 
     render() {
         const show = this.state.isOpen ? {display: "block"} : {display: "none"}
-        const hover = this.state.isOpen ? {backgroundColor: "rgb(40, 40, 40)"} : {}
+        const hover = this.state.isOpen ? {backgroundColor: "rgb(40, 40, 40)", opacity: 1} : {}
+        const highlighted = this.state.isOpen ? {color: "rgb(0, 137, 203)"} : {}
 
         return (
             <nav onClick={this.handleClick} style={hover} ref={this.props.refs.navbar}>
-                <i className="fa fa-bars"></i>
+                <i className="fa fa-bars" style={highlighted}></i>
 	            <ul className="dropdown-content" style={show}>
                     <div onClick={() => this.handleScroll(this.props.refs.home)}><li>Home</li></div>
                     <div onClick={() => this.handleScroll(this.props.refs.whyMe)}><li>Why Me</li></div>

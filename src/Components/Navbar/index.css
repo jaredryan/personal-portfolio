@@ -31,6 +31,13 @@ nav:focus {
             transition-duration: 300ms;
 }
 
+nav:hover i,
+nav:focus i {
+    color: rgb(0, 137, 203);
+    -webkit-transition-duration: 300ms;
+            transition-duration: 300ms;
+}
+
 nav ul {
     list-style: none;
 	position: absolute;
@@ -56,6 +63,7 @@ nav ul li {
 nav ul li:hover {
     background-color: var(--navbarHover);
     opacity: 1;
+    color: rgb(0, 137, 203);
     background-color: rgb(40, 40, 40);
     -webkit-transition-duration: 300ms;
             transition-duration: 300ms;
