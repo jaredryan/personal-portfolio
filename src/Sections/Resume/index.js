@@ -170,6 +170,7 @@ class Resume extends Component {
                 <div className="flex">
                     <div className="leftContainer">
                         <h1>Resume</h1>
+                        <a href="Ryan_Jared_Resume.pdf" download="Ryan_Jared_Resume.pdf" className="downloadButton mobile">Download</a>
                         <div className="tabs">
                             <button onClick={() => this.handleResume("skills")}
                                     style={{color: this.state.resume === "skills" ? "rgb(0, 186, 255)" : "rgb(255, 255, 255)", fontWeight: this.state.resume === "skills" ? 300 : 200}}>
@@ -205,6 +206,7 @@ class Resume extends Component {
                                 </div>
                             </button>
                         </div>
+                        <a href="Ryan_Jared_Resume.pdf" download="Ryan_Jared_Resume.pdf" className="downloadButton desktop">Download</a>
                     </div>
                     <div className="rightContainer">
                         <div className="container">
