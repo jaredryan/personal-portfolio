@@ -13,7 +13,7 @@ class Projects extends Component {
 
     componentDidMount() {
         const rotateTimer = setInterval(() => {
-            if (this.state.imageIndex >= this.props.project.pictures.length) {
+            if (this.state.imageIndex + 1 >= this.props.project.pictures.length) {
                 this.handleFade()
                 setTimeout(() => {
                     this.setState({imageIndex: 0})
