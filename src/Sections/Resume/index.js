@@ -6,37 +6,52 @@ class Resume extends Component {
         super()
         this.state = {
             resume: "skills",
-            animation: {}
+            animation: {},
+            clicked: false,
+            rotateTimer: false
         }
     }
 
     componentDidMount() {
-        const rotateTimer = setInterval(() => {
-            if (this.state.resume === "skills") {
-                this.handleFade()
-                setTimeout(() => {
-                    this.setState({resume: "work"})
-                    this.handleAppear()
-                }, 500)
-            } else if (this.state.resume === "work") {
-                this.handleFade()
-                setTimeout(() => {
-                    this.setState({resume: "education"})
-                    this.handleAppear()
-                }, 500)
-            } else {
-                this.handleFade()
-                setTimeout(() => {
-                    this.setState({resume: "skills"})
-                    this.handleAppear()
-                }, 500)
-            }
-        }, 3000);
-        this.setState({rotateTimer})
+        window.addEventListener('scroll', this.startRotation);
+    }
+
+    startRotation = () => {
+        const halfPageLength = (this.props.refs.projects.current.offsetTop - this.props.refs.resume.current.offsetTop) / 2
+        if (!this.state.rotateTimer && window.pageYOffset >= this.props.refs.resume.current.offsetTop - halfPageLength && window.pageYOffset <= this.props.refs.projects.current.offsetTop - halfPageLength && !this.state.clicked) {
+            const rotateTimer = setInterval(() => {
+                if (this.state.resume === "skills") {
+                    this.handleFade()
+                    setTimeout(() => {
+                        this.setState({resume: "work"})
+                        this.handleAppear()
+                    }, 500)
+                } else if (this.state.resume === "work") {
+                    this.handleFade()
+                    setTimeout(() => {
+                        this.setState({resume: "education"})
+                        this.handleAppear()
+                    }, 500)
+                } else {
+                    this.handleFade()
+                    setTimeout(() => {
+                        this.setState({resume: "skills"})
+                        this.handleAppear()
+                    }, 500)
+                }
+            }, 3000);
+            this.setState({rotateTimer})
+        } else if (this.state.rotateTimer !== false && (window.pageYOffset < this.props.refs.resume.current.offsetTop - halfPageLength || window.pageYOffset > this.props.refs.projects.current.offsetTop - halfPageLength)) {
+            clearInterval(this.state.rotateTimer)
+            this.setState({rotateTimer: false})
+        }
     }
 
     handleResume = (resume) => {
-        clearInterval(this.state.rotateTimer)
+        if (this.state.rotateTimer !== false) {
+            this.setState({clicked: true, rotateTimer: false})
+            clearInterval(this.state.rotateTimer)
+        }
         this.handleFade()
         setTimeout(() => {
             this.setState({resume})
