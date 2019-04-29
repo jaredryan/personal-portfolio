@@ -7,11 +7,16 @@ class Projects extends Component {
         super(props)
         this.state = {
             imageIndex: 0,
-            animation: {}
+            animation: {},
+            paused: false
         }
     }
 
     componentDidMount() {
+        this.slideshowStart()
+    }
+
+    slideshowStart = () => {
         const rotateTimer = setInterval(() => {
             if (this.state.imageIndex + 1 >= this.props.project.pictures.length) {
                 this.handleFade()
@@ -30,7 +35,7 @@ class Projects extends Component {
                     this.handleAppear()
                 }, 700)
             }
-        }, 3000);
+        }, 5000);
         this.setState({rotateTimer})
     }
 
@@ -72,6 +77,32 @@ class Projects extends Component {
         }, 700)
     }
 
+    handleIndexIncrease = () => {
+        if (this.state.imageIndex + 1 >= this.props.project.pictures.length) {
+            this.handleIndexSet(0);
+        } else {
+            this.handleIndexSet(this.state.imageIndex + 1);
+        }
+    }
+
+    handleIndexDecrease = () => {
+        if (this.state.imageIndex - 1 < 0) {
+            this.handleIndexSet(this.props.project.pictures.length - 1);
+        } else {
+            this.handleIndexSet(this.state.imageIndex - 1);
+        }
+    }
+
+    stopSlideshow = () => {
+        this.setState({paused: true})
+        clearInterval(this.state.rotateTimer)
+    }
+
+    startSlideshow = () => {
+        this.setState({paused: false})
+        this.slideshowStart();
+    }
+
     render() {
         return (
             <div>
@@ -85,9 +116,19 @@ class Projects extends Component {
                   <div className="dots">
                       {
                           this.props.project.pictures.map((pic, index) => {
-                              return <i className="fa fa-circle" onClick={() => this.handleIndexSet(index)} style={{fontSize: "18px", fontWeight: 100, color: this.state.imageIndex === index ? "rgb(0, 137, 203)" : "rgb(40, 40, 40)"}}></i>
+                              return <i className="fa fa-circle" onClick={() => this.handleIndexSet(index)} style={{fontSize: "22px", fontWeight: 100, color: this.state.imageIndex === index ? "rgb(0, 137, 203)" : "rgb(40, 40, 40)"}}></i>
                           })
                       }
+                  </div>
+                  <div className="dots">
+                      <i className="fa fa-arrow-circle-left" onClick={this.handleIndexDecrease} style={{fontSize: "30px", fontWeight: 100, color: "rgb(0, 137, 203)"}}></i>
+                      {
+                          this.state.paused ?
+                              <i className="fa fa-play" onClick={this.startSlideshow} style={{fontSize: "22px", fontWeight: 100}}></i>
+                              :
+                              <i className="fa fa-pause" onClick={this.stopSlideshow} style={{fontSize: "22px", fontWeight: 100}}></i>
+                      }
+                      <i className="fa fa-arrow-circle-right" onClick={this.handleIndexIncrease} style={{fontSize: "30px", fontWeight: 100, color: "rgb(0, 137, 203)"}}></i>
                   </div>
             </div>
         )
