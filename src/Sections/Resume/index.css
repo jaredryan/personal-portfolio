@@ -352,8 +352,8 @@
     }
 
     .resume .overlay {
-        background-image: -webkit-gradient(linear, left top, right top, from(rgba(100, 53, 125, 0.5)), to(rgba(100, 53, 125, 0.5)));
-        background-image: linear-gradient(to right, rgba(100, 53, 125, 0.5), rgba(100, 53, 125, 0.5));
+        background-image: -webkit-gradient(linear, left top, right top, from(rgba(170, 123, 195, 0.7)), to(rgba(170, 123, 195, 0.7)));
+        background-image: linear-gradient(to right, rgba(170, 123, 195, 0.7), rgba(170, 123, 195, 0.7));
     }
 }
 
