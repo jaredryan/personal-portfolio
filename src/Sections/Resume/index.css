@@ -162,6 +162,12 @@
     border-radius: 10px;
 }
 
+.resume .flex .downloadButton:hover {
+    background-color: rgb(40, 40, 40, 1);
+    -webkit-transition-duration: 300ms;
+            transition-duration: 300ms;
+}
+
 .resume .flex .downloadButton.mobile {
     display: none;
 }
