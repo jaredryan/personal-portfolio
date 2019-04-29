@@ -33,7 +33,7 @@ class Navbar extends Component {
 
     render() {
         const show = this.state.isOpen ? {display: "block"} : {display: "none"}
-        const hover = this.state.isOpen ? {backgroundColor: "rgb(40, 40, 40)", opacity: 1} : {}
+        const hover = this.state.isOpen ? {opacity: 1} : {}
         const highlighted = this.state.isOpen ? {color: "rgb(0, 137, 203)"} : {}
 
         return (

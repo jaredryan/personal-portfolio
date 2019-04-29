@@ -8,9 +8,8 @@
 }
 
 .home .homeImg {
-    background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.3)), to(rgba(0, 0, 0, 0.1))), url("../../Images/home.jpg") no-repeat center center;
-    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1)), url("../../Images/home.jpg") no-repeat center center;
-    background-attachment: fixed;
+    background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 0))), url("../../Images/home.jpg") no-repeat center center;
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url("../../Images/home.jpg") no-repeat center center;
     z-index: 0;
     background-size: cover;
     height: 100%;
@@ -23,10 +22,10 @@
 .home .homeText {
     position: absolute;
     z-index: 1;
-    text-align: left;
-    top: 0%;
+    text-align: center;
+    top: 10%;
     height: 50%;
-    left: 5%;
+    left: 35%;
     position: absolute;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -38,7 +37,7 @@
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
-    color: white;
+    color: black;
     padding: 10px;
     font-family: 'Roboto Slab', serif;
 }
@@ -64,13 +63,13 @@
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    -webkit-box-pack: left;
-        -ms-flex-pack: left;
-            justify-content: left;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
 }
 
 .home .fontAwesomeLogos i {
-    color: white;
+    color: black;
     margin: 0;
     margin-bottom: 0;
     text-align: center;
