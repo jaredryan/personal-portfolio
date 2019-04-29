@@ -10,6 +10,7 @@ nav {
     padding: 16px 32px;
     padding-top: 14px;
     border-radius: 10px;
+    border: 1px solid white;
     background-color: var(--navbar);
     opacity: 0.7;
 }
@@ -58,6 +59,7 @@ nav ul li {
     margin-top: 10px;
     margin-bottom: 10px;
     font-weight: 400;
+    border: 1px solid white;
 }
 
 nav ul li:hover {
