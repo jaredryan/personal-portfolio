@@ -182,13 +182,14 @@ class Resume extends Component {
             <div className="resume" id="resume" ref={this.props.refs.resume}>
                 <div className="banner"></div>
                 <div className="overlay"></div>
+                <div className="overlay2"></div>
                 <div className="flex">
                     <div className="leftContainer">
                         <h1>Resume</h1>
                         <a href="Ryan_Jared_Resume.pdf" download="Ryan_Jared_Resume.pdf" className="downloadButton mobile">Download</a>
                         <div className="tabs">
                             <button onClick={() => this.handleResume("skills")}
-                                    style={{color: this.state.resume === "skills" ? "rgb(0, 186, 255)" : "rgb(255, 255, 255)", fontWeight: this.state.resume === "skills" ? 300 : 200}}>
+                                    style={{color: this.state.resume === "skills" ? "rgb(0, 186, 255)" : "rgb(255, 255, 255)"}}>
                                 <i  className="fa fa-circle"
                                     style={{fontSize: "22px", fontWeight: 100, color: this.state.resume === "skills" ? "rgb(0, 186, 255)" : "rgb(255, 255, 255)"}}></i>
                                 <div className="mobile" style={{borderBottom: this.state.resume === "skills" ? "2px solid rgb(0, 186, 255)" : "2px solid rgb(255, 255, 255)"}}>
@@ -199,7 +200,7 @@ class Resume extends Component {
                                 </div>
                             </button>
                             <button onClick={() => this.handleResume("work")}
-                                    style={{color: this.state.resume === "work" ? "rgb(0, 186, 255)" : "rgb(255, 255, 255)", fontWeight: this.state.resume === "work" ? 300 : 200}}>
+                                    style={{color: this.state.resume === "work" ? "rgb(0, 186, 255)" : "rgb(255, 255, 255)"}}>
                                 <i  className="fa fa-circle"
                                     style={{fontSize: "22px", fontWeight: 100, color: this.state.resume === "work" ? "rgb(0, 186, 255)" : "rgb(255, 255, 255)"}}></i>
                                 <div className="mobile" style={{borderBottom: this.state.resume === "work" ? "2px solid rgb(0, 186, 255)" : "2px solid rgb(255, 255, 255)"}}>
@@ -210,7 +211,7 @@ class Resume extends Component {
                                 </div>
                             </button>
                             <button onClick={() => this.handleResume("education")}
-                                    style={{color: this.state.resume === "education" ? "rgb(0, 186, 255)" : "rgb(255, 255, 255)", fontWeight: this.state.resume === "education" ? 300 : 200}}>
+                                    style={{color: this.state.resume === "education" ? "rgb(0, 186, 255)" : "rgb(255, 255, 255)"}}>
                                 <i  className="fa fa-circle"
                                     style={{fontSize: "22px", fontWeight: 100, color: this.state.resume === "education" ? "rgb(0, 186, 255)" : "rgb(255, 255, 255)"}}></i>
                                 <div className="mobile" style={{borderBottom: this.state.resume === "education" ? "2px solid rgb(0, 186, 255)" : "2px solid rgb(255, 255, 255)"}}>
