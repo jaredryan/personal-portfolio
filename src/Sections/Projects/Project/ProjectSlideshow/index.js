@@ -67,6 +67,7 @@ class Projects extends Component {
     }
 
     handleIndexSet = (imageIndex) => {
+        this.setState({paused: true})
         clearInterval(this.state.rotateTimer)
         this.handleFade()
         setTimeout(() => {
