@@ -18,8 +18,8 @@
 }
 
 .whyMe .banner {
-    background: -webkit-gradient(linear, right top, left top, from(rgba(255, 255, 255, 0.85)), to(rgba(255, 255, 255, 0.85))), url("../../Images/whyMeBackground.jpg") no-repeat center center;
-    background: linear-gradient(to left, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), url("../../Images/whyMeBackground.jpg") no-repeat center center;
+    background: -webkit-gradient(linear, right top, left top, from(rgba(255, 255, 255, 0.85)), to(rgba(255, 255, 255, 0.85))), url("../../Images/whyMe.jpg") no-repeat center center;
+    background: linear-gradient(to left, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), url("../../Images/whyMe.jpg") no-repeat center center;
     z-index: -1;
     background-size: cover;
     height: 100%;

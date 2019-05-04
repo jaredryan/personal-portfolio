@@ -26,8 +26,8 @@
     height: 100%;
     width: 100%;
     position: absolute;
-    background-image: -webkit-gradient(linear, left top, right top, from(rgba(170, 123, 195, 0.3)), to(rgba(170, 123, 195, 0.7)));
-    background-image: linear-gradient(to right, rgba(170, 123, 195, 0.3), rgba(170, 123, 195, 0.7));
+    background-image: -webkit-gradient(linear, left top, right top, from(rgba(120, 73, 145, 0.6)), to(rgba(120, 73, 145, 0.9)));
+    background-image: linear-gradient(to right, rgba(120, 73, 145, 0.6), rgba(120, 73, 145, 0.9));
     top: 0;
     left: 0;
     z-index: 1
@@ -358,8 +358,8 @@
     }
 
     .resume .overlay {
-        background-image: -webkit-gradient(linear, left top, right top, from(rgba(170, 123, 195, 0.7)), to(rgba(170, 123, 195, 0.7)));
-        background-image: linear-gradient(to right, rgba(170, 123, 195, 0.7), rgba(170, 123, 195, 0.7));
+        background-image: -webkit-gradient(linear, left top, right top, from(rgba(120, 73, 145, 0.7)), to(rgba(120, 73, 145, 0.7)));
+        background-image: linear-gradient(to right, rgba(120, 73, 145, 0.7), rgba(120, 73, 145, 0.7));
     }
 }
 
