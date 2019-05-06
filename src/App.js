@@ -52,7 +52,6 @@ class App extends Component {
     }
 
     onImageLoad = () => {
-        console.log("WOOOO");
         this.setState(prevState => {
             const imgCount = prevState.imgCount + 1
             if (imgCount === this.state.imgLoadCount) {
@@ -111,7 +110,7 @@ class App extends Component {
                         <h1>Loading...</h1>
                     </div>
                 </div>
-                <div style={{display: this.state.pagesDisplay}}>
+                <div style={{display: this.state.pagesDisplay, ...this.state.pageAnimation}}>
                     <Navbar refs={this.state.refs}/>
                     <Home refs={this.state.refs}/>
                     <WhyMe refs={this.state.refs}/>
