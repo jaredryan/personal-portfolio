@@ -21,7 +21,7 @@ class App extends Component {
             firstLoaded: false,
             domLoaded: false,
             imageLoaded: false,
-            loaded: false,
+            startedFinalLoad: false,
             animation: {},
             pageAnimation: {opacity: 0, filter: `alpha(opacity=0)`},
             loadingDisplay: 'none',
@@ -67,13 +67,15 @@ class App extends Component {
 
     handleLoad = () => {
         const self = this;
+        this.setState({startedFinalLoad: true})
         setTimeout(() => {
             let op = 1;  // initial opacity
             const timer = setInterval(function () {
                 if (op <= 0.1) {
                     clearInterval(timer);
-                    self.setState({loaded: true, loadingDisplay: 'none', pagesDisplay: 'block', appStyle: {}})
+                    self.setState({loaded: true, loadingDisplay: 'none', pagesDisplay: 'block', appStyle: {backgroundColor: 'rgb(33, 1, 32)'}})
                 } else {
+                    console.log("there");
                     self.setState({animation: {opacity: `${op}`, filter: `alpha(opacity=${op * 100})`}})
                     op -= op * 0.1;
                 }
@@ -82,9 +84,10 @@ class App extends Component {
         setTimeout(() => {
             let op = 0.1;  // initial opacity
             const timer = setInterval(function () {
-                if (op >= 1){
+                if (op >= 1) {
                     clearInterval(timer);
                 } else {
+                    console.log("here");
                     self.setState({pageAnimation: {opacity: `${op}`, filter: `alpha(opacity=${op * 100})`}})
                     op += op * 0.1;
                 }
@@ -97,7 +100,7 @@ class App extends Component {
             setTimeout(() => this.setState({firstLoaded: true, loadingDisplay: "flex"}), 200);
         }
 
-        if (!this.state.loaded && this.state.domLoaded && this.state.imageLoaded) {
+        if (!this.state.startedFinalLoad && this.state.domLoaded && this.state.imageLoaded) {
             this.handleLoad()
         }
 
