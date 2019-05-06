@@ -23,9 +23,10 @@ class App extends Component {
             imageLoaded: false,
             loaded: false,
             animation: {},
+            pageAnimation: {opacity: 0, filter: `alpha(opacity=0)`},
             loadingDisplay: 'none',
             pagesDisplay: 'none',
-            appStyle: {height: '100vh', width: '100%', position: 'relative'},
+            appStyle: {height: '100vh', width: '100%', position: 'relative', backgroundColor: 'rgb(33, 1, 32)'},
             refs: {
                 navbar: React.createRef(),
                 home: React.createRef(),
@@ -51,6 +52,7 @@ class App extends Component {
     }
 
     onImageLoad = () => {
+        console.log("WOOOO");
         this.setState(prevState => {
             const imgCount = prevState.imgCount + 1
             if (imgCount === this.state.imgLoadCount) {
@@ -77,7 +79,18 @@ class App extends Component {
                     op -= op * 0.1;
                 }
             }, 5);
-        }, 1000)
+        }, 300)
+        setTimeout(() => {
+            let op = 0.1;  // initial opacity
+            const timer = setInterval(function () {
+                if (op >= 1){
+                    clearInterval(timer);
+                } else {
+                    self.setState({pageAnimation: {opacity: `${op}`, filter: `alpha(opacity=${op * 100})`}})
+                    op += op * 0.1;
+                }
+            }, 5);
+        }, 500)
     }
 
     render() {
