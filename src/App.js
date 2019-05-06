@@ -21,6 +21,7 @@ class App extends Component {
         super();
         this.state = {
             imgCount: 0,
+            loadingMessage: "Loading...",
             firstLoaded: false,
             domLoaded: false,
             imageLoaded: false,
@@ -87,7 +88,6 @@ class App extends Component {
                     clearInterval(timer);
                     self.setState({loaded: true, loadingDisplay: 'none', pagesDisplay: 'block', appStyle: {backgroundColor: 'rgb(33, 1, 32)'}})
                 } else {
-                    console.log("there");
                     self.setState({animation: {opacity: `${op}`, filter: `alpha(opacity=${op * 100})`}})
                     op -= op * 0.1;
                 }
@@ -99,7 +99,6 @@ class App extends Component {
                 if (op >= 1) {
                     clearInterval(timer);
                 } else {
-                    console.log("here");
                     self.setState({pageAnimation: {opacity: `${op}`, filter: `alpha(opacity=${op * 100})`}})
                     op += op * 0.1;
                 }
@@ -110,6 +109,11 @@ class App extends Component {
     render() {
         if (this.state.firstLoaded === false) {
             setTimeout(() => this.setState({firstLoaded: true, loadingDisplay: "flex"}), 200);
+            setTimeout(() => this.setState({loadingMessage: "Still loading..."}), 3000);
+            setTimeout(() => this.setState({loadingMessage: "Getting tired..."}), 6000);
+            setTimeout(() => this.setState({loadingMessage: "Daydreaming..."}), 9000);
+            setTimeout(() => this.setState({loadingMessage: "Refocusing..."}), 12000);
+            setTimeout(() => this.setState({loadingMessage: "Almost there..."}), 15000);
         }
 
         if (!this.state.startedFinalLoad && this.state.domLoaded && this.state.imageLoaded) {
@@ -122,7 +126,7 @@ class App extends Component {
                 <div className="loadingContainer" style={{...this.state.animation, display: this.state.loadingDisplay}}>
                     <div>
                         <div className="loading"></div>
-                        <h1>Loading...</h1>
+                        <h1>{this.state.loadingMessage}</h1>
                     </div>
                 </div>
                 <div style={{display: this.state.pagesDisplay, ...this.state.pageAnimation}}>
