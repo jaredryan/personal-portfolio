@@ -40,12 +40,11 @@ class App extends Component {
     handleLoad = () => {
         const self = this;
         setTimeout(() => {
-            self.setState({loading: false})
-            var op = 1;  // initial opacity
-            var timer = setInterval(function () {
+            let op = 1;  // initial opacity
+            const timer = setInterval(function () {
                 if (op <= 0.1){
                     clearInterval(timer);
-                    self.setState({loadingDisplay: 'none', pagesDisplay: 'block', appStyle: {}})
+                    self.setState({loading: false, loadingDisplay: 'none', pagesDisplay: 'block', appStyle: {}})
                 } else {
                     self.setState({animation: {opacity: `${op}`, filter: `alpha(opacity=${op * 100})`}})
                     op -= op * 0.1;
@@ -61,7 +60,7 @@ class App extends Component {
 
         return (
             <div style={this.state.appStyle}>
-                <div className="loadingContainer" style={{display: this.state.loadingDisplay, ...this.state.animation}}>
+                <div className="loadingContainer" style={{...this.state.animation, display: this.state.loadingDisplay}}>
                     <div>
                         <div className="loading"></div>
                         <h1>Loading...</h1>
