@@ -11,13 +11,16 @@ import HomeImage from './Images/home.jpg'
 import WhyMeImage from './Images/whyMe.jpg'
 import ResumeImage from './Images/resume.jpg'
 import ProjectsImage from './Images/projects.jpg'
+import WhyMeBerkeleyImage from './Images/whyMeBerkeley.jpg'
+import WhyMeBrazilImage from './Images/whyMeBrazil.jpg'
+import WhyMeFreelanceImage from './Images/whyMeFreelance.jpg'
+import WhyMeIBMImage from './Images/whyMeIBM.jpg'
 
 class App extends Component {
     constructor() {
         super();
         this.state = {
             imgCount: 0,
-            imgLoadCount: 4,
             firstLoaded: false,
             domLoaded: false,
             imageLoaded: false,
@@ -35,7 +38,16 @@ class App extends Component {
                 projects: React.createRef(),
                 contact: React.createRef()
             },
-            images: [HomeImage, WhyMeImage, ResumeImage, ProjectsImage]
+            images: [
+                HomeImage,
+                WhyMeImage,
+                ResumeImage,
+                ProjectsImage,
+                WhyMeBerkeleyImage,
+                WhyMeBrazilImage,
+                WhyMeFreelanceImage,
+                WhyMeIBMImage
+            ]
         }
     }
 
@@ -54,7 +66,7 @@ class App extends Component {
     onImageLoad = () => {
         this.setState(prevState => {
             const imgCount = prevState.imgCount + 1
-            if (imgCount === this.state.imgLoadCount) {
+            if (imgCount === this.state.images.length) {
                 this.setState({imageLoaded: true})
             }
             return {imgCount}
