@@ -13,11 +13,16 @@
 }
 
 .loadingContainer {
+    position: absolute;
+    left: 0;
+    top: 0;
     height: 100vh;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: white;
+    z-index: 10000;
 }
 
 .loading {

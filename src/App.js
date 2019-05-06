@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import OnImagesLoaded from 'react-on-images-loaded';
 
 import Navbar from './Components/Navbar'
 import Home from './Sections/Home'
@@ -7,13 +8,16 @@ import Resume from './Sections/Resume'
 import Projects from './Sections/Projects'
 import Contact from './Sections/Contact'
 
+
 class App extends Component {
     constructor() {
         super();
         this.state = {
             loading: true,
             animation: {},
-            display: 'none'
+            loadingDisplay: 'none',
+            pagesDisplay: 'none',
+            appStyle: {height: '100vh', width: '100%', position: 'relative'}
         }
         this.refs = {
             navbar: React.createRef(),
@@ -26,7 +30,11 @@ class App extends Component {
     }
 
     componentDidMount() {
-        window.addEventListener('load', this.handleLoad);
+        window.addEventListener('load', this.handleLoad)
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('load', this.handleLoad)
     }
 
     handleLoad = () => {
@@ -36,7 +44,7 @@ class App extends Component {
         var timer = setInterval(function () {
             if (op <= 0.1){
                 clearInterval(timer);
-                self.setState({loading: false})
+                self.setState({loadingDisplay: 'none', pagesDisplay: 'block', appStyle: {}})
             } else {
                 self.setState({animation: {opacity: `${op}`, filter: `alpha(opacity=${op * 100})`}})
                 op -= op * 0.1;
@@ -46,27 +54,30 @@ class App extends Component {
 
     render() {
         if (this.state.loading) {
-            setTimeout(() => this.setState({display: "block"}), 200);
-            return (
-                <div className="loadingContainer">
-                    <div style={{display: this.state.display, ...this.state.animation}}>
+            setTimeout(() => this.setState({loadingDisplay: "flex"}), 200);
+        }
+
+        return (
+            <div style={this.state.appStyle}>
+                <div className="loadingContainer" style={{display: this.state.loadingDisplay, ...this.state.animation}}>
+                    <div>
                         <div className="loading"></div>
                         <h1>Loading...</h1>
                     </div>
                 </div>
-            )
-        } else {
-            return (
-                <div>
+                <OnImagesLoaded
+                    onLoaded={this.handleLoad}
+                    style={{display: this.state.pagesDisplay}}
+                >
                     <Navbar refs={this.refs}/>
                     <Home refs={this.refs}/>
                     <WhyMe refs={this.refs}/>
                     <Resume refs={this.refs}/>
                     <Projects refs={this.refs}/>
                     <Contact refs={this.refs}/>
-                </div>
-            )
-        }
+                </OnImagesLoaded>
+            </div>
+        )
     }
 }
 
