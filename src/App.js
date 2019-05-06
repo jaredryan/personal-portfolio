@@ -38,18 +38,18 @@ class App extends Component {
     }
 
     handleLoad = () => {
-        const self = this;
-        self.setState({loading: false})
-        var op = 1;  // initial opacity
-        var timer = setInterval(function () {
-            if (op <= 0.1){
-                clearInterval(timer);
-                self.setState({loadingDisplay: 'none', pagesDisplay: 'block', appStyle: {}})
-            } else {
-                self.setState({animation: {opacity: `${op}`, filter: `alpha(opacity=${op * 100})`}})
-                op -= op * 0.1;
-            }
-        }, 5);
+        // const self = this;
+        // self.setState({loading: false})
+        // var op = 1;  // initial opacity
+        // var timer = setInterval(function () {
+        //     if (op <= 0.1){
+        //         clearInterval(timer);
+        //         self.setState({loadingDisplay: 'none', pagesDisplay: 'block', appStyle: {}})
+        //     } else {
+        //         self.setState({animation: {opacity: `${op}`, filter: `alpha(opacity=${op * 100})`}})
+        //         op -= op * 0.1;
+        //     }
+        // }, 5);
     }
 
     render() {
