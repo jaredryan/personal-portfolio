@@ -109,11 +109,11 @@ class App extends Component {
     render() {
         if (this.state.firstLoaded === false) {
             setTimeout(() => this.setState({firstLoaded: true, loadingDisplay: "flex"}), 200);
-            setTimeout(() => this.setState({loadingMessage: "Still loading..."}), 3000);
-            setTimeout(() => this.setState({loadingMessage: "Getting tired..."}), 6000);
-            setTimeout(() => this.setState({loadingMessage: "Daydreaming..."}), 9000);
-            setTimeout(() => this.setState({loadingMessage: "Refocusing..."}), 12000);
-            setTimeout(() => this.setState({loadingMessage: "Almost there..."}), 15000);
+            setTimeout(() => this.setState({loadingMessage: "Still loading..."}), 2000);
+            setTimeout(() => this.setState({loadingMessage: "Getting tired..."}), 4000);
+            setTimeout(() => this.setState({loadingMessage: "Daydreaming..."}), 6000);
+            setTimeout(() => this.setState({loadingMessage: "Refocusing..."}), 8000);
+            setTimeout(() => this.setState({loadingMessage: "Almost there..."}), 10000);
         }
 
         if (!this.state.startedFinalLoad && this.state.domLoaded && this.state.imageLoaded) {
