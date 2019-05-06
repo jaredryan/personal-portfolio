@@ -42,7 +42,7 @@ class App extends Component {
         setTimeout(() => {
             let op = 1;  // initial opacity
             const timer = setInterval(function () {
-                if (op <= 0.1){
+                if (op <= 0.1) {
                     clearInterval(timer);
                     self.setState({loading: false, loadingDisplay: 'none', pagesDisplay: 'block', appStyle: {}})
                 } else {
@@ -50,12 +50,12 @@ class App extends Component {
                     op -= op * 0.1;
                 }
             }, 5);
-        }, 0)
+        }, 1000)
     }
 
     render() {
         if (this.state.loading) {
-            setTimeout(() => this.setState({loadingDisplay: "flex"}), 200);
+            setTimeout(() => this.setState({loading: false, loadingDisplay: "flex"}), 200);
         }
 
         return (
