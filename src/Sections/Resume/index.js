@@ -86,19 +86,6 @@ class Resume extends Component {
         }, 10);
     }
 
-    handleAppear = () => {
-        const self = this;
-        var op = 0.1;  // initial opacity
-        var timer = setInterval(function () {
-            if (op >= 1){
-                clearInterval(timer);
-            } else {
-                self.setState({animation: {opacity: `${op}`, filter: `alpha(opacity=${op * 100})`}})
-                op += op * 0.1;
-            }
-        }, 10);
-    }
-
     render() {
         const skills = [
             {
