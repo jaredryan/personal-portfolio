@@ -7,13 +7,21 @@ import Resume from './Sections/Resume'
 import Projects from './Sections/Projects'
 import Contact from './Sections/Contact'
 
+import HomeImage from './Images/home.jpg'
+import WhyMeImage from './Images/whyMe.jpg'
+import ResumeImage from './Images/resume.jpg'
+import ProjectsImage from './Images/projects.jpg'
+
 class App extends Component {
     constructor() {
         super();
         this.state = {
             imgCount: 0,
-            imgLoadCount: 0,
-            loading: true,
+            imgLoadCount: 4,
+            firstLoaded: false,
+            domLoaded: false,
+            imageLoaded: false,
+            loaded: false,
             animation: {},
             loadingDisplay: 'none',
             pagesDisplay: 'none',
@@ -25,16 +33,35 @@ class App extends Component {
                 resume: React.createRef(),
                 projects: React.createRef(),
                 contact: React.createRef()
-            }
+            },
+            images: [HomeImage, WhyMeImage, ResumeImage, ProjectsImage]
         }
     }
 
+    loadingCompleted = () => {
+        this.setState({domLoaded: true});
+    }
+
     componentDidMount() {
-        window.addEventListener('load', this.handleLoad);
+        window.addEventListener('load', this.loadingCompleted);
     }
 
     componentWillUnmount() {
-        window.removeEventListener('load', this.handleLoad)
+        window.removeEventListener('load', this.loadingCompleted)
+    }
+
+    onImageLoad = () => {
+        this.setState(prevState => {
+            const imgCount = prevState.imgCount + 1
+            if (imgCount === this.state.imgLoadCount) {
+                this.setState({imageLoaded: true})
+            }
+            return {imgCount}
+        })
+    }
+
+    mapImage = (image) => {
+        return <img src={image} alt="fillerText" style={{display: 'none'}} onLoad={this.onImageLoad}/>
     }
 
     handleLoad = () => {
@@ -44,7 +71,7 @@ class App extends Component {
             const timer = setInterval(function () {
                 if (op <= 0.1) {
                     clearInterval(timer);
-                    self.setState({loading: false, loadingDisplay: 'none', pagesDisplay: 'block', appStyle: {}})
+                    self.setState({loaded: true, loadingDisplay: 'none', pagesDisplay: 'block', appStyle: {}})
                 } else {
                     self.setState({animation: {opacity: `${op}`, filter: `alpha(opacity=${op * 100})`}})
                     op -= op * 0.1;
@@ -54,12 +81,17 @@ class App extends Component {
     }
 
     render() {
-        if (this.state.loading) {
-            setTimeout(() => this.setState({loading: false, loadingDisplay: "flex"}), 200);
+        if (this.state.firstLoaded === false) {
+            setTimeout(() => this.setState({firstLoaded: true, loadingDisplay: "flex"}), 200);
+        }
+
+        if (!this.state.loaded && this.state.domLoaded && this.state.imageLoaded) {
+            this.handleLoad()
         }
 
         return (
             <div style={this.state.appStyle}>
+                {this.state.images.map(this.mapImage)}
                 <div className="loadingContainer" style={{...this.state.animation, display: this.state.loadingDisplay}}>
                     <div>
                         <div className="loading"></div>
