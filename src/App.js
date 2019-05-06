@@ -51,7 +51,7 @@ class App extends Component {
                     op -= op * 0.1;
                 }
             }, 5);
-        }, 10000)
+        }, 0)
     }
 
     render() {
