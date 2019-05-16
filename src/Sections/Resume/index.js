@@ -88,11 +88,13 @@ class Resume extends Component {
 
     mapSkills = (skill, index) => {
         return (
-            <div key={skill.title}>
-                <h3>{skill.title}</h3>
-                <ul>
-                    {skill.listItems.map((item, index) => <li key={item}>{item}</li>)}
-                </ul>
+            <div key={skill.title} className="skillContainer">
+                <div>
+                    <h3>{skill.title}</h3>
+                    <ul>
+                        {skill.listItems.map((item, index) => <li key={item}>{item}</li>)}
+                    </ul>
+                </div>
             </div>
         )
     }
