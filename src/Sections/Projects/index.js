@@ -14,119 +14,25 @@ class Projects extends Component {
     }
 
     handleProjectSet = (projectIsOpen) => {
-        this.handleScroll(this.props.refs.projects.current.offsetTop)
-        this.handleListFade()
+        this.props.onScroll(this.props.refs.projects.current.offsetTop);
         setTimeout(() => {
-            this.setState({projectIsOpen})
-        }, 250)
-        setTimeout(() => {
-            this.handleProjectAppear()
-        }, 700)
+            this.setState({
+              projectIsOpen,
+              projectList: {opacity: 0, filter: `alpha(opacity=0)`},
+              projectDisplay: {opacity: `${1}`, filter: `alpha(opacity=${1 * 100})`}
+            })
+        }, 350)
     }
 
     handleProjectUnset = () => {
-        this.handleScroll(this.props.refs.projects.current.offsetTop)
-        this.handleProjectFade()
+        this.props.onScroll(this.props.refs.projects.current.offsetTop);
         setTimeout(() => {
-            this.setState({projectIsOpen: false})
-        }, 250)
-        setTimeout(() => {
-            this.handleListAppear()
-        }, 700)
-    }
-
-    handleListFade = () => {
-        const self = this;
-        var op = 1;  // initial opacity
-        var timer = setInterval(function () {
-            if (op <= 0.1){
-                clearInterval(timer);
-                self.setState({projectList: {opacity: 0, filter: `alpha(opacity=0)`}})
-            } else {
-                self.setState({projectList: {opacity: `${op}`, filter: `alpha(opacity=${op * 100})`}})
-                op -= op * 0.1;
-            }
-        }, 10);
-    }
-
-    handleListAppear = () => {
-        const self = this;
-        var op = 0.1;  // initial opacity
-        var timer = setInterval(function () {
-            if (op >= 1){
-                clearInterval(timer);
-            } else {
-                self.setState({projectList: {opacity: `${op}`, filter: `alpha(opacity=${op * 100})`}})
-                op += op * 0.1;
-            }
-        }, 10);
-    }
-
-    handleProjectFade = () => {
-        const self = this;
-        var op = 1;  // initial opacity
-        var timer = setInterval(function () {
-            if (op <= 0.1){
-                clearInterval(timer);
-                self.setState({projectDisplay: {opacity: 0, filter: `alpha(opacity=0)`}})
-            } else {
-                self.setState({projectDisplay: {opacity: `${op}`, filter: `alpha(opacity=${op * 100})`}})
-                op -= op * 0.1;
-            }
-        }, 10);
-    }
-
-    handleProjectAppear = () => {
-        const self = this;
-        var op = 0.1;  // initial opacity
-        var timer = setInterval(function () {
-            if (op >= 1){
-                clearInterval(timer);
-            } else {
-                self.setState({projectDisplay: {opacity: `${op}`, filter: `alpha(opacity=${op * 100})`}})
-                op += op * 0.1;
-            }
-        }, 10);
-    }
-
-    handleScroll = (elementTop) => {
-        const goal = elementTop
-        const start = window.pageYOffset
-        const diff = goal - start
-        const scrollStep = Math.PI / (200 / 1);
-        let count = 0;
-        let currPos;
-
-        const scrollInterval = setInterval(function(){
-            if (window.pageYOffset !== goal) {
-                count = count + 1
-                currPos = start + diff * (0.5 - 0.5 * Math.cos(count * scrollStep))
-                window.scrollTo(0, currPos)
-            }
-            else {
-                clearInterval(scrollInterval)
-            }
-        }, 1);
-    }
-
-    handleScroll = () => {
-        const goal = this.props.refs.projects.current.offsetTop;
-        const start = window.pageYOffset;
-        const diff = goal - start;
-        const scrollStep = Math.PI / (350 / 1);
-        let count = 0;
-        let currPos;
-
-        const scrollInterval = setInterval(function(){
-            if (window.pageYOffset !== goal) {
-                count = count + 1
-                currPos = start + diff * (0.5 - 0.5 * Math.cos(count * scrollStep))
-                window.scrollTo(0, currPos)
-            }
-            else {
-                clearInterval(scrollInterval)
-            }
-        }, 1);
+            this.setState({
+              projectIsOpen: false,
+              projectList: {opacity: `${1}`, filter: `alpha(opacity=${1 * 100})`},
+              projectDisplay: {opacity: 0, filter: `alpha(opacity=0)`}
+            })
+        }, 350)
     }
 
   render() {

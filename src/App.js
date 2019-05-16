@@ -65,38 +65,50 @@ class App extends Component {
         window.removeEventListener('load', this.loadingCompleted)
     }
 
-    onScroll = (goal) => {
-      this.handleFade()
+    onNavbarScroll = (goal) => {
+      this.handleFade('black')
       setTimeout(() => {
           window.scrollTo(0, goal)
       }, 250)
       setTimeout(() => {
-          this.handleAppear()
+          this.handleAppear('black')
       }, 700)
     }
 
-    handleAppear = () => {
+    onProjectScroll = (goal) => {
+      this.handleFade('white')
+      setTimeout(() => {
+          window.scrollTo(0, goal)
+      }, 250)
+      setTimeout(() => {
+          this.handleAppear('white')
+      }, 700)
+    }
+
+    handleAppear = (color) => {
+        const backgroundColor = color === 'black' ? 'rgb(33, 1, 32)' : 'rgb(255, 255, 255)'
         const self = this;
         var op = 1;  // initial opacity
         var timer = setInterval(function () {
             if (op <= 0.1){
                 clearInterval(timer);
-                self.setState({scrollContainer: {display: 'none', opacity: 0, filter: `alpha(opacity=0)`}})
+                self.setState({scrollContainer: {display: 'none', backgroundColor, opacity: 0, filter: `alpha(opacity=0)`}})
             } else {
-                self.setState({scrollContainer: {display: 'block', opacity: `${op}`, filter: `alpha(opacity=${op * 100})`}})
+                self.setState({scrollContainer: {display: 'block', backgroundColor, opacity: `${op}`, filter: `alpha(opacity=${op * 100})`}})
                 op -= op * 0.1;
             }
         }, 10);
     }
 
-    handleFade = () => {
+    handleFade = (color) => {
         const self = this;
+        const backgroundColor = color === 'black' ? 'rgb(33, 1, 32)' : 'rgb(255, 255, 255)'
         var op = 0.1;  // initial opacity
         var timer = setInterval(function () {
             if (op >= 1){
                 clearInterval(timer);
             } else {
-                self.setState({scrollContainer: {display: 'block', opacity: `${op}`, filter: `alpha(opacity=${op * 100})`}})
+                self.setState({scrollContainer: {display: 'block', opacity: `${op}`, backgroundColor, filter: `alpha(opacity=${op * 100})`}})
                 op += op * 0.1;
             }
         }, 10);
@@ -169,11 +181,11 @@ class App extends Component {
                     </div>
                 </div>
                 <div style={{display: this.state.pagesDisplay, ...this.state.pageAnimation}}>
-                    <Navbar refs={this.state.refs} onScroll={this.onScroll}/>
+                    <Navbar refs={this.state.refs} onScroll={this.onNavbarScroll}/>
                     <Home refs={this.state.refs}/>
                     <WhyMe refs={this.state.refs}/>
                     <Resume refs={this.state.refs}/>
-                    <Projects refs={this.state.refs}/>
+                    <Projects refs={this.state.refs} onScroll={this.onProjectScroll}/>
                     <Contact refs={this.state.refs}/>
                 </div>
             </div>
