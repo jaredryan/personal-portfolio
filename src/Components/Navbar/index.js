@@ -4,7 +4,9 @@ import './index.css'
 class Navbar extends Component {
     constructor() {
         super()
-        this.state = {isOpen: false}
+        this.state = {
+          isOpen: false
+        }
     }
 
     handleClick = () => {
@@ -12,12 +14,21 @@ class Navbar extends Component {
     }
 
     handleScroll = (target) => {
+        this.setState()
+
+        const scroll = () => window.scrollTo(0, window.pageYOffset);
+        const touchmove = e => e.preventDefault();
+        window.addEventListener('scroll', scroll);
+        window.addEventListener('touchmove', touchmove);
+
         const goal = target.current.offsetTop;
         const start = window.pageYOffset;
         const diff = goal - start;
         const scrollStep = Math.PI / (350 / 1);
         let count = 0;
         let currPos;
+
+        window.addEventListener('touchmove', e => e.preventDefault());
 
         const scrollInterval = setInterval(function(){
             if (window.pageYOffset !== goal) {
@@ -27,6 +38,10 @@ class Navbar extends Component {
             }
             else {
                 clearInterval(scrollInterval)
+                setTimeout(() => {
+                  window.removeEventListener('scroll', scroll);
+                  window.removeEventListener('touchmove', touchmove);
+                }, 2000)
             }
         }, 1);
     }
