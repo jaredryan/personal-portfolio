@@ -86,7 +86,7 @@ class App extends Component {
     }
 
     handleAppear = (color) => {
-        const backgroundColor = color === 'black' ? 'rgb(33, 1, 32)' : 'rgb(255, 255, 255)'
+        const backgroundColor = color === 'black' ? 'rgb(33, 1, 32)' : 'rgb(214, 226, 234)'
         const self = this;
         var op = 1;  // initial opacity
         var timer = setInterval(function () {
@@ -102,7 +102,7 @@ class App extends Component {
 
     handleFade = (color) => {
         const self = this;
-        const backgroundColor = color === 'black' ? 'rgb(33, 1, 32)' : 'rgb(255, 255, 255)'
+        const backgroundColor = color === 'black' ? 'rgb(33, 1, 32)' : 'rgb(214, 226, 234)'
         var op = 0.1;  // initial opacity
         var timer = setInterval(function () {
             if (op >= 1){

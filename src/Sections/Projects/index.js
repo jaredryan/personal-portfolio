@@ -311,6 +311,7 @@ class Projects extends Component {
                                   }
                               </div>
                           </div>
+                          <div className="bottomBackButton" onClick={() => this.handleProjectUnset()}><i class="fa fa-arrow-left" style={{fontSize: "24px"}}></i></div>
                       </div>
                   </div>
               </div>

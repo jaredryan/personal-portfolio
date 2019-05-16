@@ -52,7 +52,7 @@
     margin-top: 60px;
     padding-right: 5%;
     padding-left: 5%;
-    padding-bottom: 80px;
+    padding-bottom: 140px;
     position: relative;
 }
 
@@ -147,7 +147,8 @@
 }
 
 .projects button,
-.projects .backButton {
+.projects .backButton,
+.projects .bottomBackButton {
     background-color: rgb(4, 55, 162);
     color: white;
     padding: 10px 20px;
@@ -159,10 +160,9 @@
     width: 120px;
 }
 
-.projects .backButton {
+.projects .backButton,
+.projects .bottomBackButton {
     position: absolute;
-    top: 60px;
-    left: 5%;
     width: 50px;
     height: 50px;
     display: -webkit-box;
@@ -178,10 +178,25 @@
     text-decoration: none;
 }
 
+.projects .backButton {
+    top: 60px;
+    left: 5%;
+}
+
+.projects .bottomBackButton {
+    bottom: 60px;
+    left: 5%;
+}
+
 @media (max-width: 850px) {
     .projects .backButton {
-        position: absolute;
         top: 49px;
+        -webkit-transform: translateY(-50%);
+                transform: translateY(-50%);
+    }
+
+    .projects .bottomBackButton {
+        bottom: 49px;
         -webkit-transform: translateY(-50%);
                 transform: translateY(-50%);
     }
@@ -235,7 +250,8 @@
 }
 
 .projects button:hover,
-.projects .backButton:hover {
+.projects .backButton:hover,
+.projects .bottomBackButton:hover {
     cursor: pointer;
     background-color: rgb(24, 95, 218);
     -webkit-transition-duration: 300ms;
