@@ -87,7 +87,7 @@
 
     .projectEntry h5,
     .projectEntry li,
-    .projectEntry h5 span {
+    .projectEntry h5 span.tech {
         font-size: 16px;
         line-height: 26px;
     }
