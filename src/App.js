@@ -27,6 +27,7 @@ class App extends Component {
             imageLoaded: false,
             startedFinalLoad: false,
             animation: {},
+            scrollContainer: {display: 'none'},
             pageAnimation: {opacity: 0, filter: `alpha(opacity=0)`},
             loadingDisplay: 'none',
             pagesDisplay: 'none',
@@ -62,6 +63,43 @@ class App extends Component {
 
     componentWillUnmount() {
         window.removeEventListener('load', this.loadingCompleted)
+    }
+
+    onScroll = (goal) => {
+      this.handleFade()
+      setTimeout(() => {
+          window.scrollTo(0, goal)
+      }, 250)
+      setTimeout(() => {
+          this.handleAppear()
+      }, 700)
+    }
+
+    handleAppear = () => {
+        const self = this;
+        var op = 1;  // initial opacity
+        var timer = setInterval(function () {
+            if (op <= 0.1){
+                clearInterval(timer);
+                self.setState({scrollContainer: {display: 'none', opacity: 0, filter: `alpha(opacity=0)`}})
+            } else {
+                self.setState({scrollContainer: {display: 'block', opacity: `${op}`, filter: `alpha(opacity=${op * 100})`}})
+                op -= op * 0.1;
+            }
+        }, 10);
+    }
+
+    handleFade = () => {
+        const self = this;
+        var op = 0.1;  // initial opacity
+        var timer = setInterval(function () {
+            if (op >= 1){
+                clearInterval(timer);
+            } else {
+                self.setState({scrollContainer: {display: 'block', opacity: `${op}`, filter: `alpha(opacity=${op * 100})`}})
+                op += op * 0.1;
+            }
+        }, 10);
     }
 
     onImageLoad = () => {
@@ -123,6 +161,7 @@ class App extends Component {
         return (
             <div style={this.state.appStyle}>
                 {this.state.images.map(this.mapImage)}
+                <div className="scrollContainer" style={this.state.scrollContainer}></div>
                 <div className="loadingContainer" style={{...this.state.animation, display: this.state.loadingDisplay}}>
                     <div>
                         <div className="loading"></div>
@@ -130,7 +169,7 @@ class App extends Component {
                     </div>
                 </div>
                 <div style={{display: this.state.pagesDisplay, ...this.state.pageAnimation}}>
-                    <Navbar refs={this.state.refs}/>
+                    <Navbar refs={this.state.refs} onScroll={this.onScroll}/>
                     <Home refs={this.state.refs}/>
                     <WhyMe refs={this.state.refs}/>
                     <Resume refs={this.state.refs}/>

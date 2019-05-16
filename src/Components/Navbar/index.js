@@ -14,36 +14,8 @@ class Navbar extends Component {
     }
 
     handleScroll = (target) => {
-        this.setState()
-
-        const scroll = () => window.scrollTo(0, window.pageYOffset);
-        const touchmove = e => e.preventDefault();
-        window.addEventListener('scroll', scroll);
-        window.addEventListener('touchmove', touchmove);
-
         const goal = target.current.offsetTop;
-        const start = window.pageYOffset;
-        const diff = goal - start;
-        const scrollStep = Math.PI / (350 / 1);
-        let count = 0;
-        let currPos;
-
-        window.addEventListener('touchmove', e => e.preventDefault());
-
-        const scrollInterval = setInterval(function(){
-            if (window.pageYOffset !== goal) {
-                count = count + 1
-                currPos = start + diff * (0.5 - 0.5 * Math.cos(count * scrollStep))
-                window.scrollTo(0, currPos)
-            }
-            else {
-                clearInterval(scrollInterval)
-                setTimeout(() => {
-                  window.removeEventListener('scroll', scroll);
-                  window.removeEventListener('touchmove', touchmove);
-                }, 2000)
-            }
-        }, 1);
+        this.props.onScroll(goal);
     }
 
     render() {
