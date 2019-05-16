@@ -122,7 +122,7 @@ class Resume extends Component {
     render() {
         const skills = [
             {
-                title: 'Front-end',
+                title: 'Frontend',
                 listItems: [
                     'JavaScript',
                     'React',
@@ -131,7 +131,7 @@ class Resume extends Component {
                 ]
             },
             {
-                title: 'Back-end',
+                title: 'Backend',
                 listItems: [
                     'Ruby on Rails',
                     'NodeJS',

@@ -92,18 +92,19 @@
 }
 
 .resume h3 {
-    font-size: 24px;
+    font-size: 20px;
     line-height: 34px;
     padding-top: 0px;
     margin: 0;
-    color: rgb(0, 186, 255);
-    font-weight: 200;
+    color: white;
+    font-weight: 500;
 }
 
-.resume h4 {
+.resume h4,
+.resume h5 {
     color: white;
-    margin-top: 10px;
-    font-size: 20px;
+    margin-top: 0px;
+    font-size: 18px;
     font-weight: 300;
     line-height: 28px;
 }
@@ -113,16 +114,20 @@
     margin-right: 10px;
 }
 
-.resume h5 {
-    font-size: 18px;
-    font-family: "Montserrat", sans-serif;
-    font-weight: 400;
-    color: white;
-    margin-top: 8px;
-}
-
 .resume li {
     color: white;
+}
+
+.resume h5,
+.resume li {
+    color: white;
+    font-size: 18px;
+    font-family: "Muli", sans-serif;
+    font-weight: 200;
+}
+
+.resume h5 {
+    margin-top: -3px;
 }
 
 @media (max-width: 900px) {
@@ -189,8 +194,8 @@
     text-align: center;
     margin-top: 0;
     font-size: 24px;
-    color: white;
-    font-weight: 300;
+    color: rgb(0, 186, 255);
+    font-weight: 200;
 }
 
 .resume .skills > div,
