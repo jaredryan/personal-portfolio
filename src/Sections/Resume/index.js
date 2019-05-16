@@ -12,40 +12,40 @@ class Resume extends Component {
         }
     }
 
-    componentDidMount() {
-        window.addEventListener('scroll', this.startRotation);
-    }
-
-    startRotation = () => {
-        const halfPageLength = (this.props.refs.projects.current.offsetTop - this.props.refs.resume.current.offsetTop) / 2
-        if (!this.state.rotateTimer && window.pageYOffset >= this.props.refs.resume.current.offsetTop - halfPageLength && window.pageYOffset <= this.props.refs.projects.current.offsetTop - halfPageLength && !this.state.clicked) {
-            const rotateTimer = setInterval(() => {
-                if (this.state.resume === "skills") {
-                    this.handleFade()
-                    setTimeout(() => {
-                        this.setState({resume: "work"})
-                        this.handleAppear()
-                    }, 500)
-                } else if (this.state.resume === "work") {
-                    this.handleFade()
-                    setTimeout(() => {
-                        this.setState({resume: "education"})
-                        this.handleAppear()
-                    }, 500)
-                } else {
-                    this.handleFade()
-                    setTimeout(() => {
-                        this.setState({resume: "skills"})
-                        this.handleAppear()
-                    }, 500)
-                }
-            }, 3000);
-            this.setState({rotateTimer})
-        } else if (this.state.rotateTimer !== false && (window.pageYOffset < this.props.refs.resume.current.offsetTop - halfPageLength || window.pageYOffset > this.props.refs.projects.current.offsetTop - halfPageLength)) {
-            clearInterval(this.state.rotateTimer)
-            this.setState({rotateTimer: false})
-        }
-    }
+    // componentDidMount() {
+    //     window.addEventListener('scroll', this.startRotation);
+    // }
+    //
+    // startRotation = () => {
+    //     const halfPageLength = (this.props.refs.projects.current.offsetTop - this.props.refs.resume.current.offsetTop) / 2
+    //     if (!this.state.rotateTimer && window.pageYOffset >= this.props.refs.resume.current.offsetTop - halfPageLength && window.pageYOffset <= this.props.refs.projects.current.offsetTop - halfPageLength && !this.state.clicked) {
+    //         const rotateTimer = setInterval(() => {
+    //             if (this.state.resume === "skills") {
+    //                 this.handleFade()
+    //                 setTimeout(() => {
+    //                     this.setState({resume: "work"})
+    //                     this.handleAppear()
+    //                 }, 500)
+    //             } else if (this.state.resume === "work") {
+    //                 this.handleFade()
+    //                 setTimeout(() => {
+    //                     this.setState({resume: "education"})
+    //                     this.handleAppear()
+    //                 }, 500)
+    //             } else {
+    //                 this.handleFade()
+    //                 setTimeout(() => {
+    //                     this.setState({resume: "skills"})
+    //                     this.handleAppear()
+    //                 }, 500)
+    //             }
+    //         }, 3000);
+    //         this.setState({rotateTimer})
+    //     } else if (this.state.rotateTimer !== false && (window.pageYOffset < this.props.refs.resume.current.offsetTop - halfPageLength || window.pageYOffset > this.props.refs.projects.current.offsetTop - halfPageLength)) {
+    //         clearInterval(this.state.rotateTimer)
+    //         this.setState({rotateTimer: false})
+    //     }
+    // }
 
     handleResume = (resume) => {
         if (this.state.rotateTimer !== false) {
@@ -84,6 +84,39 @@ class Resume extends Component {
                 op += op * 0.1;
             }
         }, 10);
+    }
+
+    mapSkills = (skill, index) => {
+        return (
+            <div key={skill.title}>
+                <h3>{skill.title}</h3>
+                <ul>
+                    {skill.listItems.map((item, index) => <li key={item}>{item}</li>)}
+                </ul>
+            </div>
+        )
+    }
+
+    mapWork = (work, index) => {
+        return (
+            <div key={work.title}>
+                <h3>{work.title}</h3>
+                <h4>{work.location}<span>|</span>{work.date}</h4>
+                <ul>
+                    {work.listItems.map((item, index) => <li key={item}>{item}</li>)}
+                </ul>
+            </div>
+        )
+    }
+
+    mapEducation = (education, index) => {
+        return (
+            <div key={education.title}>
+                <h3>{education.title}</h3>
+                <h4>{education.subject}</h4>
+                <h5>{education.date}</h5>
+            </div>
+        )
     }
 
     render() {
@@ -169,103 +202,29 @@ class Resume extends Component {
             <div className="resume" id="resume" ref={this.props.refs.resume}>
                 <div className="banner"></div>
                 <div className="overlay"></div>
-                <div className="overlay2"></div>
-                <div className="flex">
-                    <div className="leftContainer">
+                <div className="title">
+                    <div>
                         <h1>Resume</h1>
                         <a href="Ryan_Jared_Resume.pdf" download="Ryan_Jared_Resume.pdf" className="downloadButton mobile">Download</a>
-                        <div className="tabs">
-                            <button onClick={() => this.handleResume("skills")}
-                                    style={{color: this.state.resume === "skills" ? "rgb(0, 186, 255)" : "rgb(255, 255, 255)"}}>
-                                <i  className="fa fa-circle"
-                                    style={{fontSize: "22px", fontWeight: 100, color: this.state.resume === "skills" ? "rgb(0, 186, 255)" : "rgb(255, 255, 255)"}}></i>
-                                <div className="mobile" style={{borderBottom: this.state.resume === "skills" ? "2px solid rgb(0, 186, 255)" : "2px solid rgb(255, 255, 255)"}}>
-                                    Skills
-                                </div>
-                                <div className="default">
-                                    Skills
-                                </div>
-                            </button>
-                            <button onClick={() => this.handleResume("work")}
-                                    style={{color: this.state.resume === "work" ? "rgb(0, 186, 255)" : "rgb(255, 255, 255)"}}>
-                                <i  className="fa fa-circle"
-                                    style={{fontSize: "22px", fontWeight: 100, color: this.state.resume === "work" ? "rgb(0, 186, 255)" : "rgb(255, 255, 255)"}}></i>
-                                <div className="mobile" style={{borderBottom: this.state.resume === "work" ? "2px solid rgb(0, 186, 255)" : "2px solid rgb(255, 255, 255)"}}>
-                                    Work
-                                </div>
-                                <div className="default">
-                                    Work
-                                </div>
-                            </button>
-                            <button onClick={() => this.handleResume("education")}
-                                    style={{color: this.state.resume === "education" ? "rgb(0, 186, 255)" : "rgb(255, 255, 255)"}}>
-                                <i  className="fa fa-circle"
-                                    style={{fontSize: "22px", fontWeight: 100, color: this.state.resume === "education" ? "rgb(0, 186, 255)" : "rgb(255, 255, 255)"}}></i>
-                                <div className="mobile" style={{borderBottom: this.state.resume === "education" ? "2px solid rgb(0, 186, 255)" : "2px solid rgb(255, 255, 255)"}}>
-                                    Education
-                                </div>
-                                <div className="default">
-                                    Education
-                                </div>
-                            </button>
-                        </div>
-                        <a href="Ryan_Jared_Resume.pdf" download="Ryan_Jared_Resume.pdf" className="downloadButton desktop">Download</a>
                     </div>
-                    <div className="rightContainer">
-                        <div className="container">
-                            {
-                                this.state.resume === "skills" &&
-                                    <div className="skills" style={this.state.animation}>
-                                        <div className="skillsGrid">
-                                            {
-                                                skills.map((skill, index) => {
-                                                    return (
-                                                        <div key={skill.title}>
-                                                            <h3>{skill.title}</h3>
-                                                            <ul>
-                                                                {skill.listItems.map((item, index) => <li key={item}>{item}</li>)}
-                                                            </ul>
-                                                        </div>
-                                                    )
-                                                })
-                                            }
-                                        </div>
-                                    </div>
-                            }
-                            {
-                                this.state.resume === "work" &&
-                                    <div className="work" style={this.state.animation}>
-                                        {
-                                            work.map((work, index) => {
-                                                return (
-                                                    <div key={work.title}>
-                                                        <h3>{work.title}</h3>
-                                                        <h4>{work.location}<span>|</span>{work.date}</h4>
-                                                        <ul>
-                                                            {work.listItems.map((item, index) => <li key={item}>{item}</li>)}
-                                                        </ul>
-                                                    </div>
-                                                )
-                                            })
-                                        }
-                                    </div>
-                            }
-                            {
-                                this.state.resume === "education" &&
-                                    <div className="education" style={this.state.animation}>
-                                        {
-                                            education.map((education, index) => {
-                                                return (
-                                                    <div key={education.title}>
-                                                        <h3>{education.title}</h3>
-                                                        <h4>{education.subject}</h4>
-                                                        <h5>{education.date}</h5>
-                                                    </div>
-                                                )
-                                            })
-                                        }
-                                    </div>
-                            }
+                </div>
+                <div className="container">
+                    <div className="skills">
+                        <h2>Skills</h2>
+                        <div className="skillsGrid">
+                            {skills.map(this.mapSkills)}
+                        </div>
+                    </div>
+                    <div className="work" style={this.state.animation}>
+                        <h2>Work</h2>
+                        <div className="workItems">
+                          {work.map(this.mapWork)}
+                        </div>
+                    </div>
+                    <div className="education" style={this.state.animation}>
+                        <h2>Education</h2>
+                        <div className="educationItems">
+                          {education.map(this.mapEducation)}
                         </div>
                     </div>
                 </div>
