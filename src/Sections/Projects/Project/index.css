@@ -76,6 +76,12 @@
     color: rgb(180, 110, 20);
 }
 
+@media (min-width: 1600px) and (max-width: 2200px) {
+    .projectEntry {
+        padding: 20px 9%;
+    }
+}
+
 @media (max-width: 750px) {
     .projectEntry h2 {
         font-size: 22px;

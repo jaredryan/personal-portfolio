@@ -61,6 +61,10 @@ div.contactMe {
      bottom: 80px;
 }
 
+.contactMe p {
+    color: white;
+}
+
 .contactMe .quote {
     color: white;
     font-weight: 200;

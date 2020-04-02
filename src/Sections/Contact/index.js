@@ -62,6 +62,7 @@ class Contact extends Component {
                             <div></div>
                         </div>
                         <div className="seeMore">
+                            <p>I'd love to connect!</p>
                             <div className="fontAwesomeLogos">
                                 <a href="mailto:jryantennis@gmail.com?subject=Hi, Jared (from the Portfolio Website)" className="left"><i className="fa fa-envelope" style={{fontSize: "32px", fontWeight: 100}}></i></a>
                                 <a href="https://github.com/jaredryan"><i className="fa fa-github" style={{fontSize: "32px", fontWeight: 100}}></i></a>

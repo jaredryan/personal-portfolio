@@ -86,20 +86,20 @@ class Resume extends Component {
         }, 10);
     }
 
-    mapSkills = (skill, index) => {
+    mapSkills = (skill) => {
         return (
             <div key={skill.title} className="skillContainer">
                 <div>
                     <h3>{skill.title}</h3>
                     <ul>
-                        {skill.listItems.map((item, index) => <li key={item}>{item}</li>)}
+                        {skill.listItems.map((item) => <li key={item}>{item}</li>)}
                     </ul>
                 </div>
             </div>
         )
     }
 
-    mapWork = (work, index) => {
+    mapWork = (work) => {
         return (
             <div key={work.title}>
                 <h3>{work.title}</h3>
@@ -111,7 +111,7 @@ class Resume extends Component {
         )
     }
 
-    mapEducation = (education, index) => {
+    mapEducation = (education) => {
         return (
             <div key={education.title}>
                 <h3>{education.title}</h3>
@@ -122,83 +122,73 @@ class Resume extends Component {
     }
 
     render() {
-        const skills = [
-            {
-                title: 'Frontend',
-                listItems: [
-                    'JavaScript',
-                    'React',
-                    'HTML/CSS',
-                    'jQuery'
-                ]
-            },
-            {
-                title: 'Backend',
-                listItems: [
-                    'Ruby on Rails',
-                    'NodeJS',
-                    'Express',
-                    'Mongoose',
-                    'MongoDB'
-                ]
-            },
-            {
-                title: 'Other',
-                listItems: [
-                    'Python',
-                    'Java',
-                    'C',
-                    'Linux',
-                    'Git'
-                ]
-            },
-            {
-                title: 'Familiarity',
-                listItems: [
-                    'Android',
-                    'Swift',
-                    'Angular',
-                    'SQL',
-                    'Jenkins'
-                ]
-            }
-        ]
+        const skills = [{
+            title: 'Frontend',
+            listItems: [
+                'JavaScript',
+                'React',
+                'HTML/CSS',
+                'jQuery'
+            ]
+        }, {
+            title: 'Backend',
+            listItems: [
+                'NodeJS',
+                'Express',
+                'Mongoose',
+                'MongoDB',
+                'Ruby on Rails',
+            ]
+        }, {
+            title: 'Other',
+            listItems: [
+                'Python',
+                'Java',
+                'C',
+                'Linux',
+                'Git'
+            ]
+        }, {
+            title: 'Familiarity',
+            listItems: [
+                'Android',
+                'Swift',
+                'Angular',
+                'SQL',
+                'Jenkins'
+            ]
+        }]
 
-        const work = [
-            {
-                title: 'Software Developer',
-                date: 'June 2018-Present',
-                location: 'IBM - Austin, Texas',
-                listItems: [
-                    'Works with AppID, a cloud security application featuring frontend, backend, and security technologies',
-                    'Design, program, review, and test code in an Agile environment',
-                    'Technologies used include Node.js, Angular.js, Java, Android, Swift, Kubernetes, Docker, Jenkins, Github, and Zenhub'
-                ]
-            },
-            {
-                title: 'Full-time Volunteer Public Representative, Trainer, and Manager',
-                date: 'April 2013—March 2015',
-                location: 'The Church of Jesus Christ of Latter Day Saints – Rio Grande do Sul, Brazil',
-                listItems: [
-                    'Presented messages to groups anywhere from 1-100 individuals',
-                    'Improved performance by 150% by leading 20 fellow volunteers through coaching, interviews, as well as weekly trainings and discussions',
-                    'Achieved fluency in Portuguese in writing, reading, and speaking'
-                ]
-            }
-        ]
+        const work = [{
+            title: 'Software Developer II',
+            date: 'April 2019-Present',
+            location: 'IBM - San Jose, CA',
+            listItems: [
+                'Works with Cloud Pak for Data, a cloud platform for analyzing data using AI',
+                'Owns the user management frontend, working primarily in React.js and Node.js',
+                'Collaborates with the backend team on resolving issues, and implemented the user management auditing functionality',
+                'Collaborates with the design team, giving feedback to find the best solution, and created the new user groups with two designers'
+            ]
+        }, {
+            title: 'Software Developer I',
+            date: 'June 2018-March 2019',
+            location: 'IBM - Austin, Texas',
+            listItems: [
+                'Worked with AppID, a cloud security application featuring frontend, backend, and security technologies',
+                'Design, program, review, and test code in an Agile environment',
+                'Technologies used include Node.js, Angular.js, Java, Android, Swift, Kubernetes, Docker, Jenkins, Github, and Zenhub'
+            ]
+        }]
 
-        const education = [
-            {
-                title: 'V School',
-                date: 'April 2018',
-                subject: 'Full Stack JavaScript Web Development (MERN Stack)',
-            },
-            {
-                title: 'University of California, Berkeley—College of Engineering',
-                date: 'December 2017',
-                subject: 'B.S. Bioengineering with Computer Science Emphasis',
-            }
-        ]
+        const education = [{
+            title: 'V School',
+            date: 'April 2018',
+            subject: 'Full Stack JavaScript Web Development (MERN Stack)',
+        }, {
+            title: 'University of California, Berkeley—College of Engineering',
+            date: 'December 2017',
+            subject: 'B.S. Bioengineering with Computer Science Emphasis',
+        }]
 
         return (
             <div className="resume" id="resume" ref={this.props.refs.resume}>
