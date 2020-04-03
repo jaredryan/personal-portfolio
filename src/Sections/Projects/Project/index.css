@@ -1,8 +1,8 @@
 /* Project Entry Formatting */
 
 .projectEntry {
-    padding: 20px 15px;
-    margin: 0;
+    margin: 20px 15px;
+    padding: 0;
 }
 
 .projectEntry .hoverEntry {
@@ -78,7 +78,7 @@
 
 @media (min-width: 1600px) and (max-width: 2200px) {
     .projectEntry {
-        padding: 20px 9%;
+        margin: 20px 9%;
     }
 }
 
