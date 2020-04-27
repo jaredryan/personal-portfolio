@@ -175,7 +175,7 @@ class Resume extends Component {
             location: 'IBM - Austin, Texas',
             listItems: [
                 'Worked with AppID, a cloud security application featuring frontend, backend, and security technologies',
-                'Design, program, review, and test code in an Agile environment',
+                'Designed, programmed, reviewed, and tested code in an Agile environment',
                 'Technologies used include Node.js, Angular.js, Java, Android, Swift, Kubernetes, Docker, Jenkins, Github, and Zenhub'
             ]
         }]
