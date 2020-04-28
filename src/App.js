@@ -31,7 +31,7 @@ class App extends Component {
             pageAnimation: {opacity: 0, filter: `alpha(opacity=0)`},
             loadingDisplay: 'none',
             pagesDisplay: 'none',
-            appStyle: {height: '100vh', width: '100%', position: 'relative', backgroundColor: 'rgb(33, 1, 32)'},
+            appStyle: {height: '100vh', width: '100%', position: 'relative', backgroundColor: 'rgb(255, 255, 255)'},
             refs: {
                 navbar: React.createRef(),
                 home: React.createRef(),
@@ -86,7 +86,7 @@ class App extends Component {
     }
 
     handleAppear = (color) => {
-        const backgroundColor = color === 'black' ? 'rgb(33, 1, 32)' : 'rgb(214, 226, 234)'
+        const backgroundColor = color === 'black' ? 'rgb(255, 255, 255)' : 'rgb(214, 226, 234)'
         const self = this;
         var op = 1;  // initial opacity
         var timer = setInterval(function () {
@@ -102,7 +102,7 @@ class App extends Component {
 
     handleFade = (color) => {
         const self = this;
-        const backgroundColor = color === 'black' ? 'rgb(33, 1, 32)' : 'rgb(214, 226, 234)'
+        const backgroundColor = color === 'black' ? 'rgb(255, 255, 255)' : 'rgb(214, 226, 234)'
         var op = 0.1;  // initial opacity
         var timer = setInterval(function () {
             if (op >= 1){
@@ -136,7 +136,7 @@ class App extends Component {
             const timer = setInterval(function () {
                 if (op <= 0.1) {
                     clearInterval(timer);
-                    self.setState({loaded: true, loadingDisplay: 'none', pagesDisplay: 'block', appStyle: {backgroundColor: 'rgb(33, 1, 32)'}})
+                    self.setState({loaded: true, loadingDisplay: 'none', pagesDisplay: 'block', appStyle: {backgroundColor: 'rgb(255, 255, 255)'}})
                 } else {
                     self.setState({animation: {opacity: `${op}`, filter: `alpha(opacity=${op * 100})`}})
                     op -= op * 0.1;
