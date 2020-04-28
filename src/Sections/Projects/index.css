@@ -1,7 +1,7 @@
 /* Page */
 
 .projects {
-    background-color: rgb(30, 130, 200);
+    background-color: white;
     margin: 0;
     min-height: 100vh;
     width: 100%;
@@ -10,7 +10,8 @@
 }
 
 .projects .banner {
-    background: url("../../Images/projects.jpg") no-repeat center center;
+    background: -webkit-gradient(linear, right top, left top, from(rgba(255, 255, 255, 0.3)), to(rgba(255, 255, 255, 0.3))), url("../../Images/projects.jpg") no-repeat center center;
+    background: linear-gradient(to left, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)), url("../../Images/projects.jpg") no-repeat center center;
     z-index: -2;
     background-size: cover;
     height: 100%;
@@ -26,8 +27,8 @@
     height: 100%;
     width: 100%;
     position: absolute;
-    background-image: -webkit-gradient(linear, right top, left top, from(rgba(30, 130, 200, 0.5)), to(rgba(30, 130, 200, 0.5)));
-    background-image: linear-gradient(to left, rgba(30, 130, 200, 0.5), rgba(30, 130, 200, 0.5));
+    /* background-image: -webkit-gradient(linear, right top, left top, from(rgba(30, 130, 200, 0.5)), to(rgba(30, 130, 200, 0.5)));
+    background-image: linear-gradient(to left, rgba(30, 130, 200, 0.5), rgba(30, 130, 200, 0.5)); */
     top: 0;
     left: 0;
     z-index: -1;
@@ -46,7 +47,7 @@
 }
 
 .projects .projectDisplay {
-    background-color: rgba(255, 255, 255, 0.85);
+    background-color: rgba(255, 255, 255, 1);
     width: 100%;
     padding-top: 60px;
     margin-top: 60px;
@@ -80,7 +81,7 @@
     font-size: 80px;
     font-weight: 200;
     margin: 0;
-    color: white;
+    color: black;
     text-align: center;
     margin-bottom: 60px;
 }
@@ -108,7 +109,7 @@
 }
 
 .projects h4 {
-    color: white;
+    color: black;
     margin-top: 10px;
     font-size: 20px;
     font-weight: 300;
@@ -119,7 +120,7 @@
     font-size: 22px;
     font-family: 'Roboto Slab', serif;
     font-weight: 300;
-    color: white;
+    color: black;
     margin-top: 8px;
 }
 
@@ -150,7 +151,7 @@
 .projects .backButton,
 .projects .bottomBackButton {
     background-color: rgb(4, 55, 162);
-    color: white;
+    color: black;
     padding: 10px 20px;
     font-size: 18px;
     font-weight: 200;
