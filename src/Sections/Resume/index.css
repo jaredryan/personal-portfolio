@@ -167,6 +167,7 @@
 
 /* Section Formatting */
 
+.resume .summary,
 .resume .skills,
 .resume .work,
 .resume .education {
@@ -177,7 +178,8 @@
 }
 
 .resume .skills,
-.resume .work {
+.resume .work,
+.resume .summary {
     padding-top: 60px;
 }
 
@@ -187,7 +189,8 @@
 
 .resume .skills h2,
 .resume .work h2,
-.resume .education h2 {
+.resume .education h2,
+.resume .summary h2 {
     width: 33.33%;
     text-align: center;
     margin-top: 0;
@@ -198,7 +201,8 @@
 
 .resume .skills > div,
 .resume .work > div,
-.resume .education > div {
+.resume .education > div,
+.resume .summary > div {
     width: 66.67%;
 }
 
@@ -223,14 +227,16 @@
 @media (max-width: 750px) {
     .resume .skills h2,
     .resume .work h2,
-    .resume .education h2 {
+    .resume .education h2,
+    .resume .summary h2 {
         font-size: 20px;
         width: 25%;
     }
 
     .resume .skills > div,
     .resume .work > div,
-    .resume .education > div {
+    .resume .education > div,
+    .resume .summary > div {
         width: 75%;
     }
 }
@@ -245,13 +251,15 @@
 
     .resume .skills,
     .resume .work,
-    .resume .education {
+    .resume .education,
+    .resume .summary {
         flex-direction: column;
     }
 
     .resume .skills h2,
     .resume .work h2,
-    .resume .education h2 {
+    .resume .education h2,
+    .resume .summary h2 {
         width: 100%;
         text-align: center;
         margin-top: 0;
@@ -263,7 +271,8 @@
 
     .resume .skills > div,
     .resume .work > div,
-    .resume .education > div {
+    .resume .education > div,
+    .resume .summary > div {
         width: 100%;
     }
 }

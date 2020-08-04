@@ -1,6 +1,87 @@
 import React, { Component } from 'react'
 import './index.css'
 
+const summary = "Full stack software engineer specializing in React.js and Node.js. Front end lead of the user and role management service in IBM’s data and AI analytics platform."
+
+const skills = [{
+    title: 'Frontend',
+    listItems: [
+        'JavaScript',
+        'React',
+        'HTML/CSS',
+        'jQuery'
+    ]
+}, {
+    title: 'Backend',
+    listItems: [
+        'NodeJS',
+        'Express',
+        'Mongoose',
+        'MongoDB',
+        'Ruby on Rails',
+    ]
+}, {
+    title: 'Other',
+    listItems: [
+        'Python',
+        'Java',
+        'C',
+        'Linux',
+        'Git'
+    ]
+}, {
+    title: 'Familiarity',
+    listItems: [
+        'Android',
+        'Swift',
+        'Angular',
+        'SQL',
+        'Jenkins'
+    ]
+}]
+
+const work = [{
+    title: 'Software Developer II',
+    date: 'April 2019-Present',
+    location: 'IBM - San Jose, CA',
+    listItems: [
+        'Led front end development in React.js for user and role management for Cloud Pak for Data, a data and AI analytics platform',
+        'Co-created conceptual models and user flows with design, providing guidance on attributes and relationships between users, roles, permissions, and groups',
+        'Architected technical solutions with product and backend, considering security, performance, sizing, business value, and usability',
+        'Built backend audit logging in Node.js for user and role management, for compliance and customer support',
+        'Mentored and led product innovations teams, which produced 4 patent applications and 1 issued patent',
+    ]
+}, {
+    title: 'Software Developer I',
+    date: 'June 2018-March 2019',
+    location: 'IBM - Austin, Texas',
+    listItems: [
+        'Junior developer on AppID, which helps developers easily add security to their apps',
+        'Prototyped a fullstack application in React, Node, and Python showcasing all uses of AppID, and was leveraged for sales pitches and demos',
+        'Adapted to multiple technologies to quickly debug issues: OAuth, OpenID, Node, Angular, Java, Android, Swift, Kubernetes, Docker, Jenkins, Github, Zenhub'
+    ]
+}, {
+    title: 'Web Developer	',
+    date: 'April 2018-Present',
+    location: 'Negotiation and Team Resources Institute	- Berkeley, CA',
+    listItems: [
+        'Sole developer on a web app for collecting, grading, and anonymizing peer feedback, which has been used by 600 students, across 7 schools, generating 6K evaluations',
+        'Collaborated with UC Berkeley professor to define product requirements and designs',
+        'Addressed client and user issues through discussion, collaboration, then implementation',
+        'Created data visualizations to show grades against class benchmarks'
+    ]
+}]
+
+const education = [{
+    title: 'V School',
+    date: 'April 2018',
+    subject: 'Full Stack JavaScript Web Development (MERN Stack)',
+}, {
+    title: 'UC Berkeley College of Engineering',
+    date: 'December 2017',
+    subject: 'B.S. Bioengineering, Computer Science emphasis',
+}]
+
 class Resume extends Component {
     constructor() {
         super()
@@ -122,74 +203,6 @@ class Resume extends Component {
     }
 
     render() {
-        const skills = [{
-            title: 'Frontend',
-            listItems: [
-                'JavaScript',
-                'React',
-                'HTML/CSS',
-                'jQuery'
-            ]
-        }, {
-            title: 'Backend',
-            listItems: [
-                'NodeJS',
-                'Express',
-                'Mongoose',
-                'MongoDB',
-                'Ruby on Rails',
-            ]
-        }, {
-            title: 'Other',
-            listItems: [
-                'Python',
-                'Java',
-                'C',
-                'Linux',
-                'Git'
-            ]
-        }, {
-            title: 'Familiarity',
-            listItems: [
-                'Android',
-                'Swift',
-                'Angular',
-                'SQL',
-                'Jenkins'
-            ]
-        }]
-
-        const work = [{
-            title: 'Software Developer II',
-            date: 'April 2019-Present',
-            location: 'IBM - San Jose, CA',
-            listItems: [
-                'Works with Cloud Pak for Data, a cloud platform for analyzing data using AI',
-                'Owns the user management frontend, working primarily in React.js and Node.js',
-                'Collaborates with the backend team on resolving issues, and implemented the user management auditing functionality',
-                'Collaborates with the design team, giving feedback to find the best solution, and created the new user groups with two designers'
-            ]
-        }, {
-            title: 'Software Developer I',
-            date: 'June 2018-March 2019',
-            location: 'IBM - Austin, Texas',
-            listItems: [
-                'Worked with AppID, a cloud security application featuring frontend, backend, and security technologies',
-                'Designed, programmed, reviewed, and tested code in an Agile environment',
-                'Technologies used include Node.js, Angular.js, Java, Android, Swift, Kubernetes, Docker, Jenkins, Github, and Zenhub'
-            ]
-        }]
-
-        const education = [{
-            title: 'V School',
-            date: 'April 2018',
-            subject: 'Full Stack JavaScript Web Development (MERN Stack)',
-        }, {
-            title: 'University of California, Berkeley—College of Engineering',
-            date: 'December 2017',
-            subject: 'B.S. Bioengineering with Computer Science Emphasis',
-        }]
-
         return (
             <div className="resume" id="resume" ref={this.props.refs.resume}>
                 <div className="banner"></div>
@@ -201,6 +214,12 @@ class Resume extends Component {
                     </div>
                 </div>
                 <div className="container">
+                    <div className="summary">
+                        <h2>Summary</h2>
+                        <div>
+                            <h4>{summary}</h4>
+                        </div>
+                    </div>
                     <div className="skills">
                         <h2>Skills</h2>
                         <div className="skillsGrid">
