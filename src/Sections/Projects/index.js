@@ -26,7 +26,6 @@ const projects = [{
         "Helping a client to determine their needs (including the needs they may not already have considered)",
         "To bill by the hour — until I know better how to estimate the amount of work to complete a task"],
     demo: "https://negotiationfeedback.herokuapp.com/",
-    github: "https://github.com/jaredryan/peer-review",
     tech: ['React', 'Express', 'MongoDB', 'Node.js', 'JavaScript', 'JSX', 'CSS'],
     mainImage: require("../../Images/teacherDashboard1.png"),
     pictures: [
