@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './index.css'
 
-const summary = "Full stack software engineer specializing in React.js and Node.js. Front end lead of the user and role management service in IBM’s data and AI analytics platform."
+const summary = "Frontend lead and backend co-lead of the user and role management service in IBM’s data and AI analytics platform. Open to relocation."
 
 const skills = [{
     title: 'Frontend',
@@ -45,11 +45,12 @@ const work = [{
     date: 'April 2019-Present',
     location: 'IBM - San Jose, CA',
     listItems: [
-        'Led front end development in React.js for user and role management for Cloud Pak for Data, a data and AI analytics platform',
+        'Created frontend code from scratch, with focus on a clean, clear, reusable codebase',
+        'Architected technical solutions with product and backend lead, considering security, performance, sizing, business value, and usability',
+        'Strong communication skills: user testing, customer support, cross-team coordination, internal team coordination, influencing product discussions',
         'Co-created conceptual models and user flows with design, providing guidance on attributes and relationships between users, roles, permissions, and groups',
-        'Architected technical solutions with product and backend, considering security, performance, sizing, business value, and usability',
-        'Built backend audit logging in Node.js for user and role management, for compliance and customer support',
-        'Mentored and led product innovations teams, which produced 4 patent applications and 1 issued patent',
+        'Prioritized tasks in 6 month and 1 month cycles with larger product team, and uses Agile methodology to coordinate and execute tasks within the team in two-week sprints',
+        'Mentored and led product innovations teams, leading to 3 publications',
     ]
 }, {
     title: 'Software Developer I',
