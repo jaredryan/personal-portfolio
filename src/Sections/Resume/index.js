@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './index.css'
 
-const summary = "Frontend lead and backend co-lead of the user and role management service in IBM’s data and AI analytics platform. Open to relocation."
+const summary = "Frontend lead and backend co-lead of the user and role management service in IBM’s data and AI analytics platform. Seeking full-time, 100% remote, frontend or fullstack roles."
 
 const skills = [{
     title: 'Frontend',
