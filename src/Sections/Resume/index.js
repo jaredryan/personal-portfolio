@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './index.css'
 
-const summary = "Frontend lead and backend co-lead of the user and role management service in IBM’s data and AI analytics platform. Seeking full-time, 100% remote, frontend or fullstack roles."
+const summary = "Fullstack software engineer. 5 years of experience, mostly w/JS languages. Better at frontend. Seeking full-time, 100% remote, frontend or fullstack roles."
 
 const skills = [{
     title: 'Frontend',
@@ -16,13 +16,13 @@ const skills = [{
     listItems: [
         'NodeJS',
         'Express',
-        'Mongoose',
         'MongoDB',
         'Ruby on Rails',
     ]
 }, {
     title: 'Other',
     listItems: [
+        'Kubernetes',
         'Python',
         'Java',
         'C',
@@ -35,36 +35,45 @@ const skills = [{
         'Android',
         'Swift',
         'Angular',
+        'GraphQL',
         'SQL',
+        'Buildkite',
         'Jenkins'
     ]
 }]
 
 const work = [{
     title: 'Software Developer II',
-    date: 'April 2019-Present',
+    date: '2021 - 2023',
+    location: 'MANTL - Remote - Jupiter, FL',
+    listItems: [
+        'Mentored a few engineers on frontend work and owned crucial frontend features, gaining a reputation for good PR reviews, careful testing, troubleshooting, good design and flows',
+        'Co-led work on introducing a design-component library that integrates with the prior one',
+	    'Co-led work on an automated testing pipeline: the pipeline itself, testing framework, database seeding / cleanup, tests, and teaching others how to contribute',
+        'Proactively worked with cross-team stakeholders to identify, prioritize, and complete work to reduce number of days on our “activation” flow (time from request to completion)',
+    ]
+}, {
+    title: 'Software Developer II',
+    date: '2019 - 2021',
     location: 'IBM - San Jose, CA',
     listItems: [
-        'Created frontend code from scratch, with focus on a clean, clear, reusable codebase',
-        'Architected technical solutions with product and backend lead, considering security, performance, sizing, business value, and usability',
-        'Strong communication skills: user testing, customer support, cross-team coordination, internal team coordination, influencing product discussions',
-        'Co-created conceptual models and user flows with design, providing guidance on attributes and relationships between users, roles, permissions, and groups',
-        'Prioritized tasks in 6 month and 1 month cycles with larger product team, and uses Agile methodology to coordinate and execute tasks within the team in two-week sprints',
-        'Mentored and led product innovations teams, leading to 3 publications',
+        'Refactored entire frontend for user management, which evolved to a small leadership role as work expanded and required additional engineers',
+	    'Architected user management technical solutions with product and backend lead, considering security, performance, sizing, business value, and usability',
+	    'Co-created conceptual models and user flows with design, providing guidance on attributes and relationships between users, roles, permissions, and groups',
+        'Planned projects with 1, 3, and 6 month cycles, executed via Agile in 2-week sprints',
     ]
 }, {
     title: 'Software Developer I',
-    date: 'June 2018-March 2019',
+    date: '2018 - 2019',
     location: 'IBM - Austin, Texas',
     listItems: [
-        'Junior developer on AppID, which helps developers easily add security to their apps',
-        'Prototyped a fullstack application in React, Node, and Python showcasing all uses of AppID, and was leveraged for sales pitches and demos',
-        'Adapted to multiple technologies to quickly debug issues: OAuth, OpenID, Node, Angular, Java, Android, Swift, Kubernetes, Docker, Jenkins, Github, Zenhub'
+        'Prototyped a fullstack application in React, Node, and Python showcasing all uses of AppID, which was leveraged for sales pitches and demos',
+	    'Adapted to multiple technologies and protocols to quickly debug issues: OAuth, OpenID, Node, Angular, Java, Android, Swift, Kubernetes, Docker, Jenkins, Github, Zenhub',
     ]
 }, {
-    title: 'Web Developer	',
-    date: 'April 2018-Present',
-    location: 'Negotiation and Team Resources Institute	- Berkeley, CA',
+    title: 'Web Developer',
+    date: '2018 - 2022',
+    location: 'Negotiation and Team Resources Institute	- Remote - Berkeley, CA',
     listItems: [
         'Sole developer on a web app for collecting, grading, and anonymizing peer feedback, which has been used by 600 students, across 7 schools, generating 6K evaluations',
         'Collaborated with UC Berkeley professor to define product requirements and designs',
@@ -75,11 +84,11 @@ const work = [{
 
 const education = [{
     title: 'V School',
-    date: 'April 2018',
+    date: '2018',
     subject: 'Full Stack JavaScript Web Development (MERN Stack)',
 }, {
     title: 'UC Berkeley College of Engineering',
-    date: 'December 2017',
+    date: '2017',
     subject: 'B.S. Bioengineering, Computer Science emphasis',
 }]
 
@@ -211,7 +220,7 @@ class Resume extends Component {
                 <div className="title">
                     <div>
                         <h1>Resume</h1>
-                        <a href="Ryan_Jared_Resume.pdf" download="Ryan_Jared_Resume.pdf" className="downloadButton mobile">Download</a>
+                        <a href="Ryan_Jared_Resume.pdf" download="Ryan_Jared_Resume_2024.pdf" className="downloadButton mobile">Download</a>
                     </div>
                 </div>
                 <div className="container">
