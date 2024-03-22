@@ -5,8 +5,8 @@ import ProjectSlideShow from './Project/ProjectSlideshow'
 
 const projects = [{
     title: "Negotiation Feedback",
-    subtitle: "Complex, actively-used, fullstack application with on-going development",
-    date: "April 2018-Present",
+    subtitle: "Complex, actively-used, fullstack application",
+    date: "2018",
     summaryBullets: [
         "Freelance project for college professor",
         "Fullstack JavaScript with MongoDB consisting of schools, classes, sprints, assignments, evaluations, students, teachers, administrators, and feedback about the site"
@@ -18,7 +18,7 @@ const projects = [{
         "Report system which ensures that students' feedback is anonymous, while also displaying the answers in an attractive manner using statistics and Victory's data visualization package",
         "Student management system for teachers",
         "Assignment management system for teachers, allowing grouping of assignments -- called sprints -- which allow for template assignment generation, as well as making possible anonymous feedback for the students",
-        "Granting special adminstrator to select accounts, allowing them to manage all schools, as well as viewing and deleting access for all teachers and classes"],
+        "Granting special administrator to select accounts, allowing them to manage all schools, as well as viewing and deleting access for all teachers and classes"],
     lessonsLearned: [
         "How to technically design a large, complex site",
         "How to single-handedly manage the task associated with such a site",
@@ -67,42 +67,10 @@ const projects = [{
         },
     ]
 }, {
-    title: "Nest Invaders",
-    subtitle: "A 2D shooting game built in a fullstack website with secure login",
-    date: "April 2018",
-    summaryBullets: ["Made game from scratch using JSX, CSS, and JavaScript"],
-    lessonsLearned: [
-        "How to create a site with a full authentication package, complete with hashed passwords and an ability to safely reset your password if you forget it",
-        "How to control content of the site based on the user's permissions (in this case, access to the playing the game at levels 1-3)",
-        "How to write a quickly-updating game loop factoring game logic, determining the current score, AI decisions, and enemy waves",
-        "How to get user input to activate game controls in the UI"],
-    demo: "http://nestinvaders.herokuapp.com/",
-    github: "https://github.com/jaredryan/best-class-side-scroller",
-    tech: ['React', 'Express', 'MongoDB', 'Node.js', 'JavaScript', 'JSX', 'CSS'],
-    mainImage: require("../../Images/NIGame.png"),
-    pictures: [
-        {
-            caption: "Home Page",
-            id: require("../../Images/NIMainPage.png")
-        },
-        {
-            caption: "Game",
-            id: require("../../Images/NIGame.png")
-        },
-        {
-            caption: "Levels, Instructions, and Scores",
-            id: require("../../Images/NIScoresAndLevels.png")
-        },
-        {
-            caption: "Profile Page",
-            id: require("../../Images/NIProfileForms.png")
-        },
-    ]
-}, {
     title: "When Bunnies Attack",
     subtitle: "Text-based role playing game built in Node.js",
     mainImage: require("../../Images/bunnyAttack.jpg"),
-    date: "February 2018",
+    date: "2018",
     summaryBullets: [
         "Made a short RPG with all of the basic elements and a simple event engine to quickly add more content",
         "To play this game, clone the Github repository and run the app.js file with Node.js"],
@@ -117,21 +85,6 @@ const projects = [{
         "How to write code in a manner that allows for easy production — in this case, by simply adding an object with all necessary information into an array"],
     github: "https://github.com/jaredryan/v-assignments/tree/master/projects/colossal-adventure-console-rpg",
     tech: ["Node.js"],
-}, {
-    title: "UC Berkeley Projects",
-    subtitle: "A list of projects, where the code is copyrighted",
-    mainImage: require("../../Images/berkeleyProjects.jpg"),
-    date: "Fall 2014-Fall 2018",
-    description: [
-        "Worked with OpenHouse, a startup, to create its website, a fullstack application with CRUD on home office objects, Google Maps integration, login, messaging, and it was thoroughly tested.",
-        "Designed and implemented a simplified version of Git, which manipulated files on a local computer (Java)(CS 61B)",
-        "Implemented the logic of a simplified neural network (Python)",
-        "Optimized a naive depth map generator algorithm using OpenMP, SSE Intrinsics, etc. for 5x speedup (C)",
-        "Parallelized a common image compression algorithm with MapReduce in Spark (Python)",
-        "Performed genomic analysis, including the implementation of the Needleman-Wunsch algorithms to align two sequences (Python)(BE 131)",
-        "Implemented ALU, Register File, CPU, and 2-stage pipeline to better understand a processor (Logisim)"
-    ],
-    tech: ""
 }];
 
 class Projects extends Component {
