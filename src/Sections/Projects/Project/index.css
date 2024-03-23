@@ -1,7 +1,7 @@
 /* Project Entry Formatting */
 
 .projectEntry {
-    margin: 20px 15px;
+    margin: 0px auto;
     padding: 0;
 }
 
@@ -13,14 +13,14 @@
     background-color: rgba(0, 0, 0, 0.8);
     display: none;
     padding: 20px;
-    border-radius: 2px;
+    border-radius: 50px;
 }
 
 .projectEntry .projectImageContainer .hoverEntry h2 {
     color: white;
     font-family: 'Roboto Slab', serif;
-    font-size: 20px;
-    font-weight: 200;
+    font-size: 18px;
+    font-weight: 300;
 }
 
 .projectEntry:hover .hoverEntry {
@@ -41,89 +41,18 @@
     padding-left: 0px;
 }
 
-.projectEntry h5,
-.projectEntry li {
-    font-size: 18px;
-    font-weight: 400;
-    color: rgb(40,40,40);
+.projectInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 50px;
+    max-width: 800px;
 }
 
-.projectEntry h5 span {
-    font-weight: 300;
-    font-family: "Roboto Slab", sans-serif;
-    font-size: 18px;
-    color: rgb(0, 137, 203);
-    padding-left: 20px;
-}
-
-.projectEntry h5 span.tech {
-    padding-left: 5px;
-    font-family: "Muli", sans-serif;
-    font-size: 18px;
-    color: rgb(40,40,40);
-    font-weight: 400;
-}
-
-.projectEntry h6 {
-    text-align: center;
-    font-weight: 400;
-    font-family: "Roboto Slab", sans-serif;
-    font-size: 15px;
-    margin-top: 10px;
-    margin-bottom: 0;
-    display: none;
-    font-weight: 600;
-    color: rgb(180, 110, 20);
-}
-
-@media (min-width: 1600px) and (max-width: 2200px) {
-    .projectEntry {
-        margin: 20px 9%;
-    }
-}
-
-@media (max-width: 750px) {
-    .projectEntry h2 {
-        font-size: 22px;
-    }
-
-    .projectEntry h3 {
-        font-size: 18px;
-    }
-
-    .projectEntry h5,
-    .projectEntry li,
-    .projectEntry h5 span.tech {
-        font-size: 16px;
-        line-height: 26px;
-    }
-}
-
-@media (max-width: 550px) {
-    .projectEntry ul {
-        padding-left: 20px;
-    }
-
-    .projectEntry h5 {
-        padding-left: 0px;
-    }
-}
-
-@media (max-width: 450px) {
-    .projectEntry ul {
-        padding-left: 20px;
-    }
-
-    .projectEntry h5 {
-        padding-left: 0px;
-    }
-}
-
-@media (max-width: 400px) {
-    .projectEntry .projectImageContainer .hoverEntry h2,
-    .projectEntry .projectImageContainer .hoverEntry button {
-        font-size: 16px;
-    }
+.projectInfo > div {
+    background-color: var(--primarylight);
+    padding: 50px;
+    border-radius: 50px;
 }
 
 /* Image Formatting */
@@ -137,7 +66,4 @@
     -webkit-box-pack: justify;
         -ms-flex-pack: justify;
             justify-content: space-between;
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-top: 50px;
 }

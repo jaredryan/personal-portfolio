@@ -1,15 +1,20 @@
-:root {
-    --navbar: black;
-}
-
 * {
     -webkit-box-sizing: border-box;
             box-sizing: border-box;
-    /* font-family: "Muli", serif; */
+    --primary: #87CEFB;
+    --primarylight: #B3E8FF;
+    --secondary: #FCFCBD;
+    --secondarylight: #FEFFE1;
+    --background: white;
+    --backgroundsecondary: #F5F5F4;
 }
 
 *:focus {
     outline:none;
+}
+
+* a {
+    color: inherit;
 }
 
 .loadingContainer {
@@ -28,6 +33,7 @@
         -ms-flex-pack: center;
             justify-content: center;
     z-index: 10000;
+    background-color: white;
 }
 
 .scrollContainer {
@@ -46,7 +52,6 @@
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
-    background-color: rgb(33, 1, 32);
     z-index: 9999;
 }
 
@@ -55,17 +60,15 @@
     animation: loading 1s linear infinite;
     width: 150px;
     height: 150px;
-    background-color: transparent;
     border-radius: 50%;
-    -webkit-box-shadow: inset -2.5px 1px 1px 1px rgb(0, 186, 255);
-            box-shadow: inset -2.5px 1px 1px 1px rgb(0, 186, 255);
+    -webkit-box-shadow: inset -2.5px 1px 1px 1px var(--primary);
+            box-shadow: inset -2.5px 1px 1px 1px var(--primary);
     margin: auto;
 }
 
 .loadingContainer h1 {
     font-size: 32px;
     font-weight: 200;
-    color: white;
 }
 
 @-webkit-keyframes loading {
@@ -90,15 +93,34 @@
     }
 }
 
+.contentContainer {
+    /* display: flex; */
+    min-height: 100vh;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
 body {
     margin: 0;
     padding: 0;
 }
 
 p, li {
-    font-size: 18px;
     font-family: "Muli", sans-serif;
-    line-height: 28px;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 22px;
+}
+
+ul {
+    padding-left: 24px;
+    margin-bottom: 0;
+}
+
+li {
+    padding-left: 6px;
 }
 
 h1, h2, h3, h4, button {

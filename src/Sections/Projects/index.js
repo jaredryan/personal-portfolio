@@ -26,7 +26,6 @@ const projects = [{
         "Helping a client to determine their needs (including the needs they may not already have considered)",
         "To bill by the hour — until I know better how to estimate the amount of work to complete a task"],
     demo: "https://negotiationfeedback.herokuapp.com/",
-    tech: ['React', 'Express', 'MongoDB', 'Node.js', 'JavaScript', 'JSX', 'CSS'],
     mainImage: require("../../Images/teacherDashboard1.png"),
     pictures: [
         {
@@ -57,14 +56,6 @@ const projects = [{
             caption: "Reports",
             id: require("../../Images/report.png")
         },
-        {
-            caption: "Old Main Page",
-            id: require("../../Images/NRMainPage.png")
-        },
-        {
-            caption: "Old Teacher Review",
-            id: require("../../Images/NRTeacherReview.png")
-        },
     ]
 }, {
     title: "When Bunnies Attack",
@@ -84,7 +75,6 @@ const projects = [{
         "How to write a game loop",
         "How to write code in a manner that allows for easy production — in this case, by simply adding an object with all necessary information into an array"],
     github: "https://github.com/jaredryan/v-assignments/tree/master/projects/colossal-adventure-console-rpg",
-    tech: ["Node.js"],
 }];
 
 class Projects extends Component {
@@ -126,7 +116,6 @@ class Projects extends Component {
                       handleClick={() => this.handleProjectSet(project.title)}
                       mainImage={project.mainImage}
                       subtitle={project.subtitle}
-                      description={project.description}
                       demo={project.demo}
                       github={project.github}
                       tech={project.tech}
@@ -151,74 +140,54 @@ class Projects extends Component {
           const lessonsLearnedList = project.lessonsLearned && project.lessonsLearned.length > 0 && project.lessonsLearned.map((bullet, index) => {
               return <li key={index + bullet}>{bullet}</li>;
           });
-          const descriptionList = project.description && project.description.length > 0 && project.description.map((bullet, index) => {
-              return <li key={index + bullet}>{bullet}</li>;
-          });
-
-          let techList = project.tech && project.tech.reduce((total, elem) => {
-              return total + elem + ", ";
-          }, "");
-          techList = techList.slice(0, techList.length - 2);   // remove last ", "
 
           return (
               <div className="projects" id="projects" ref={this.props.refs.projects}>
-                  <div className="banner"></div>
-                  <div className="overlay"></div>
-                  <div className="overlay2"></div>
-                  <div className="flex" style={{padding: 0, paddingTop: "80px"}}>
-                      <h1>Projects</h1>
-                      <div className="projectDisplay" id="projectDisplay" style={this.state.projectDisplay}>
-                          <div className="backButton" onClick={() => this.handleProjectUnset()}><i class="fa fa-arrow-left" style={{fontSize: "24px"}}></i></div>
-                          <h2>{project.title}</h2>
-                          <h3>{project.subtitle} <br/>({project.date})</h3>
-                          <div className="buttons">
-                              {project.demo && <a href={project.demo} target="_blank" rel="noopener noreferrer"><button className="link">Visit</button></a>}
-                              {project.github && <a href={project.github} target="_blank" rel="noopener noreferrer"><button className="link">Github</button></a>}
-                          </div>
-                          <div className="projectEntry">
-                              <div>
-                                  {summaryList &&
-                                      <div>
-                                          <h5><span>Summary</span></h5>
-                                          <ul>{summaryList}</ul>
-                                      </div>
-                                  }
-                                  {problemsSolvedList &&
-                                      <div>
-                                          <h5><span>Problems Solved</span></h5>
-                                          <ul>{problemsSolvedList}</ul>
-                                      </div>
-                                  }
-                                  {lessonsLearnedList &&
-                                      <div>
-                                          <h5><span>Lessons Learned</span></h5>
-                                          <ul>{lessonsLearnedList}</ul>
-                                      </div>
-                                  }
-                                  {descriptionList && <ul>{descriptionList}</ul>}
-                                  {techList && <h5><span>Technologies:</span> <span className="tech">{techList}</span></h5>}
-                                  {project.pictures &&
-                                        <ProjectSlideShow
-                                            project={project}/>
-                                  }
-                              </div>
-                          </div>
-                          <div className="bottomBackButton" onClick={() => this.handleProjectUnset()}><i class="fa fa-arrow-left" style={{fontSize: "24px"}}></i></div>
-                      </div>
-                  </div>
+                    <h1>Projects</h1>
+                    <div className="projectDisplay" id="projectDisplay" style={this.state.projectDisplay}>
+                        <div className="backButton" onClick={() => this.handleProjectUnset()}><i class="fa fa-arrow-left" style={{fontSize: "24px"}}></i></div>
+                        <div className="projectTitle">
+                            <h2>{project.title}</h2>
+                            <h3>{project.subtitle}<span>|</span>{project.date}</h3>
+                            <div className="buttons">
+                                {project.demo && <a href={project.demo} target="_blank" rel="noopener noreferrer"><button className="link">Visit</button></a>}
+                                {project.github && <a href={project.github} target="_blank" rel="noopener noreferrer"><button className="link">Github</button></a>}
+                            </div>
+                        </div>
+                        <div className="projectInfo">
+                            {summaryList &&
+                                <div>
+                                    <h5><span>Summary</span></h5>
+                                    <ul>{summaryList}</ul>
+                                </div>
+                            }
+                            {problemsSolvedList &&
+                                <div className="projectEntryItem">
+                                    <h5><span>Problems Solved</span></h5>
+                                    <ul>{problemsSolvedList}</ul>
+                                </div>
+                            }
+                            {lessonsLearnedList &&
+                                <div>
+                                    <h5><span>Lessons Learned</span></h5>
+                                    <ul>{lessonsLearnedList}</ul>
+                                </div>
+                            }
+                            {project.pictures &&
+                                <ProjectSlideShow
+                                    project={project}/>
+                            }
+                        </div>
+                        <div className="bottomBackButton" onClick={() => this.handleProjectUnset()}><i class="fa fa-arrow-left" style={{fontSize: "24px"}}></i></div>
+                    </div>
               </div>
           );
       } else {
         return (
             <div className="projects" id="projects" ref={this.props.refs.projects}>
-                <div className="banner"></div>
-                <div className="overlay"></div>
-                <div className="overlay2"></div>
-                <div className="flex">
-                    <h1>Projects</h1>
-                    <div className="projectsDiv" style={this.state.projectList}>
-                        {mappedProjects}
-                    </div>
+                <h1>Projects</h1>
+                <div className="projectsDiv" style={this.state.projectList}>
+                    {mappedProjects}
                 </div>
             </div>
         );

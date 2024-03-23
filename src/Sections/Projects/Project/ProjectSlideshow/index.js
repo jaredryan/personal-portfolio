@@ -117,19 +117,19 @@ class Projects extends Component {
                   <div className="dots">
                       {
                           this.props.project.pictures.map((pic, index) => {
-                              return <i className="fa fa-circle" onClick={() => this.handleIndexSet(index)} style={{fontSize: "22px", fontWeight: 100, color: this.state.imageIndex === index ? "rgb(0, 137, 203)" : "rgb(40, 40, 40)"}}></i>
+                              return <i className="fa fa-circle" onClick={() => this.handleIndexSet(index)} style={{fontSize: "22px", fontWeight: 100, color: this.state.imageIndex === index ? "white" : ""}}></i>
                           })
                       }
                   </div>
                   <div className="dots">
-                      <i className="fa fa-arrow-circle-left" onClick={this.handleIndexDecrease} style={{fontSize: "30px", fontWeight: 100, color: "rgb(0, 137, 203)"}}></i>
+                      <i className="fa fa-arrow-left" onClick={this.handleIndexDecrease} style={{fontSize: "24px", fontWeight: 100}}></i>
                       {
                           this.state.paused ?
                               <i className="fa fa-play" onClick={this.startSlideshow} style={{fontSize: "22px", fontWeight: 100}}></i>
                               :
                               <i className="fa fa-pause" onClick={this.stopSlideshow} style={{fontSize: "22px", fontWeight: 100}}></i>
                       }
-                      <i className="fa fa-arrow-circle-right" onClick={this.handleIndexIncrease} style={{fontSize: "30px", fontWeight: 100, color: "rgb(0, 137, 203)"}}></i>
+                      <i className="fa fa-arrow-right" onClick={this.handleIndexIncrease} style={{fontSize: "24px", fontWeight: 100}}></i>
                   </div>
             </div>
         )

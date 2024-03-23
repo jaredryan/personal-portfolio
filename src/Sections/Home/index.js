@@ -1,97 +1,50 @@
-import React, { Component } from 'react'
+import React from 'react'
 import './index.css'
 
-class Home extends Component {
-    constructor() {
-        super()
-        this.state = {
-            animation: {opacity: '0', filter: 'alpha(opacity=0)'},
-            scrolled: false
-        }
-    }
-    componentDidMount() {
-        window.addEventListener('scroll', this.arrowDisappear);
-        setTimeout(() => {
-            if (!this.state.scrolled) {
-                this.arrowAppear()
-            }
-        }, 3000)
-    }
-
-    arrowAppear = () => {
-        const self = this;
-        var op = 0.1;  // initial opacity
-        var timer = setInterval(function () {
-            if (op >= 0.7){
-                self.setState({animation: {opacity: '0.7', filter: 'alpha(opacity=70)'}})
-                clearInterval(timer);
-            } else {
-                self.setState({animation: {opacity: `${op}`, filter: `alpha(opacity=${op * 100})`}})
-                op += op * 0.1;
-            }
-        }, 10);
-    }
-
-    arrowDisappear = () => {
-        if (!this.state.scrolled) {
-            this.setState({scrolled: true})
-            const self = this;
-            var op = 1;  // initial opacity
-            var timer = setInterval(function () {
-                if (op <= 0.1){
-                    clearInterval(timer);
-                    self.setState({animation: {display: 'none'}})
-                } else {
-                    self.setState({animation: {opacity: `${op}`, filter: `alpha(opacity=${op * 100})`}})
-                    op -= op * 0.1;
-                }
-            }, 10);
-        }
-    }
-
-    handleScroll = () => {
-        // this.arrowDisappear()
-        const goal = this.props.refs.whyMe.current.offsetTop;
-        const start = window.pageYOffset;
-        const diff = goal - start;
-        const scrollStep = Math.PI / (350 / 1);
-        let count = 0;
-        let currPos;
-
-        const scrollInterval = setInterval(function(){
-            if (window.pageYOffset !== goal) {
-                count = count + 1
-                currPos = start + diff * (0.5 - 0.5 * Math.cos(count * scrollStep))
-                window.scrollTo(0, currPos)
-            }
-            else {
-                clearInterval(scrollInterval)
-            }
-        }, 1);
-    }
-
-    render() {
-        return (
-            <div className="home" id="home" ref={this.props.refs.home}>
-                <div className="homeText">
-                    <h1>Jared Ryan</h1>
-                    <h2>Software and Web Developer</h2>
-                    <div className="fontAwesomeLogos">
-                        <a href="mailto:jryantennis@gmail.com?subject=Hi, Jared (from the Portfolio Website)" className="left"><i className="fa fa-envelope" style={{fontWeight: 100}}></i></a>
-                        <a href="https://github.com/jaredryan"><i className="fa fa-github" style={{fontWeight: 100}}></i></a>
-                        <a href="https://www.linkedin.com/in/jared-m-ryan/" className="right"><i className="fa fa-linkedin" style={{fontWeight: 100}}></i></a>
-                    </div>
+const Home = () => (
+    <div className="home" id="home">
+        <div className="row">
+            <div className="homeText">
+                <h1>Jared Ryan</h1>
+                <h2>Software Engineer</h2>
+                <div className="fontAwesomeLogos">
+                    <a href="Ryan_Jared_Resume.pdf" download="Ryan_Jared_Resume_2024.pdf" className="downloadButton left">Resume</a>
+                    <a href="mailto:jryantennis@gmail.com?subject=Hi, Jared (from the Portfolio Website)" ><i className="fa fa-envelope" style={{fontWeight: 100}}></i></a>
+                    <a href="https://www.linkedin.com/in/jared-m-ryan/" className="right"><i className="fa fa-linkedin" style={{fontWeight: 100}}></i></a>
                 </div>
-                <div className="homeImg"></div>
-                <button
-                    style={this.state.animation}
-                    className="downArrow"
-                    onClick={this.handleScroll}>
-                        <i class="fa fa-arrow-down" style={{fontSize: "24px"}}></i>
-                </button>
             </div>
-        );
-    }
-}
+            <div className="profilePic">
+                <div></div>
+            </div>
+        </div>
+        <div className="row summary">
+            <ul>
+                <li>Fullstack software engineer with 5 years experience, primarily in JS-based languages.</li>
+                <li>Seeking full-time, 100% remote, frontend or fullstack roles.</li>
+            </ul>
+        </div>
+        <div className="row points">
+            <div className="pointsContainer">
+                <h3>Technical Traits</h3>
+                <ul>
+                    <li>Curious to try new things</li>
+                    <li>Tackles big projects boldly and systemically</li>
+                    <li>Enjoys PR reviews</li>
+                    <li>Loves clean code</li>
+                    <li>Prioritizes design and usability</li>
+                </ul>
+            </div>
+            <div className="pointsContainer">
+                <h3>Personal Traits</h3>
+                <ul>
+                    <li>Organized: plans, coordinates, executes, and follows up</li>
+                    <li>Empathetic and listens well</li>
+                    <li>Appropriately outspoken</li>
+                    <li>Personable and funny-ish</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+)
 
-export default Home;
+export default Home
