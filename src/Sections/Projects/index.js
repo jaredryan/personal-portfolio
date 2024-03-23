@@ -17,14 +17,14 @@ const projects = [{
         "Evaluation management system with a complex lifecycle where both students and teachers have varying permissions to submit, grade, view and edit content",
         "Report system which ensures that students' feedback is anonymous, while also displaying the answers in an attractive manner using statistics and Victory's data visualization package",
         "Student management system for teachers",
-        "Assignment management system for teachers, allowing grouping of assignments -- called sprints -- which allow for template assignment generation, as well as making possible anonymous feedback for the students",
+        "Assignment management system for teachers, allowing grouping of assignments — called sprints — which allow for template assignment generation, as well as making possible anonymous feedback for the students",
         "Granting special administrator to select accounts, allowing them to manage all schools, as well as viewing and deleting access for all teachers and classes"],
     lessonsLearned: [
-        "How to technically design a large, complex site",
-        "How to single-handedly manage the task associated with such a site",
+        "How to technically plan and design a large, complex site for many types of users",
+        "How to single-handedly manage the tasks associated with such a site",
         "How to work with a designer, both in terms of tweaking the UI and discussing what is possible as a developer",
         "Helping a client to determine their needs (including the needs they may not already have considered)",
-        "To bill by the hour — until I know better how to estimate the amount of work to complete a task"],
+        "How to request bug reports and troubleshoot them without being able to see the bug immediately for myself"],
     demo: "https://negotiationfeedback.herokuapp.com/",
     mainImage: require("../../Images/teacherDashboard1.png"),
     pictures: [
