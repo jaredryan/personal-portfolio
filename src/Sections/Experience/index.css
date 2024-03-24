@@ -1,7 +1,7 @@
 /* Page */
 
 .experience {
-    /* background-color: var(--primary); */
+    background-color: var(--primary);
     margin: 0;
     width: 100%;
     position: relative;
@@ -10,7 +10,7 @@
     flex-direction: column;
     align-items: center;
 }
-
+/* 
 .experience .banner {
     background: url("../../Images/resume.jpg") no-repeat center center;
     z-index: -2;
@@ -28,12 +28,12 @@
     height: 100%;
     width: 100%;
     position: absolute;
-    background-image: -webkit-gradient(linear, left top, right top, from(rgba(135, 206, 251, 0.7)), to(rgba(135, 206, 251, 0.7)));
-    background-image: linear-gradient(to right, rgba(135, 206, 251, 0.7), rgba(135, 206, 251, 0.7));
+    background-image: -webkit-gradient(linear, left top, right top, from(rgba(135, 206, 251, 0.2)), to(rgba(135, 206, 251, 0.2)));
+    background-image: linear-gradient(to right, rgba(135, 206, 251, 0.2), rgba(135, 206, 251, 0.5));
     top: 0;
     left: 0;
     z-index: -1;
-}
+} */
 
 .experience .container {
     max-width: 1000px;
@@ -64,7 +64,7 @@
     background-color: var(--background);
     padding: 50px;
     border-radius: 50px;
-    outline: 5px solid var(--primary);
+    outline: 5px solid var(--primarylight);
     box-shadow: 0 11px 6px -4px grey;
 }
 

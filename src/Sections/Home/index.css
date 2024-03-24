@@ -160,11 +160,11 @@
 }
 
 .home .fontAwesomeLogos .downloadButton:hover {
-    background-color: lightgrey;
+    background-color: var(--secondarylight);
 }
 
 .home .fontAwesomeLogos i:hover {
-    color: lightgrey;
+    color: var(--secondarylight);
     -webkit-transition-duration: 300ms;
             transition-duration: 300ms;
 }
@@ -261,22 +261,15 @@
 .home .pointsContainer i {
     font-size: 48px;
     margin-bottom: 16px;
+    color: var(--secondary);
 }
 
 .home .pointsContainer.technical {
     border: 5px solid var(--primary);
 }
 
-.home .pointsContainer.technical i {
-    color: var(--primary);
-}
-
 .home .pointsContainer.personal {
     border: 5px solid var(--primarylight);
-}
-
-.home .pointsContainer.personal i {
-    color: var(--primarylight);
 }
 
 .home .points h3 {
@@ -303,13 +296,6 @@
     flex-direction: row;
 }
 
-.home .circleContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-}
-
 @media (max-width: 1200px) {
     .home .circleContainer {
         display: none;
@@ -317,10 +303,6 @@
 
     .home .pointsContainer.technical {
         border: 5px solid var(--primarylight);
-    }
-
-    .home .pointsContainer.technical i {
-        color: var(--primarylight);
     }
 }
 

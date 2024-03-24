@@ -1,6 +1,6 @@
 .skills {
     width: 100%;
-    background-color: var(--primary);
+    background-color: var(--primarylight);
     padding: 100px;
     display: flex;
     justify-content: center;
@@ -39,7 +39,7 @@
 .skills .skillsGrid i {
     font-size: 48px;
     margin-bottom: 16px;
-    color: var(--primary);
+    color: var(--secondary);
 }
 
 .skills .skillsGrid .skillCategoryContainer {
@@ -52,7 +52,7 @@
     border-radius: 50px;
     width: 320px;
     margin: 0 auto;
-    outline: 5px solid var(--primarylight);
+    outline: 5px solid var(--primary);
     box-shadow: 0 11px 6px -4px grey;
 }
 

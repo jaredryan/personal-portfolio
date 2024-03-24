@@ -163,7 +163,7 @@
 }
 
 .projects .dots i:hover {
-    color: grey;
+    color: var(--secondarylight);
     -webkit-transition-duration: 300ms;
             transition-duration: 300ms;
 }
