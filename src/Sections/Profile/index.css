@@ -1,6 +1,6 @@
 /* Main Page */
 
-.home {
+.profile {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -9,42 +9,29 @@
     /* gap: 100px; */
 }
 
-.home .topSection,
-.home .bottomSection {
+.profile .topSection {
     padding: 100px;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.home .topSection {
     background-color: var(--primary);
 }
 
-.home .container {
+.profile .container {
     width: 100%;
     max-width: 1000px;
     display: flex;
     flex-direction: column;
 }
 
-.home .topSection .container {
+.profile .topSection .container {
     gap: 50px;
     align-items: start;
     justify-content: space-between;
 }
 
-.home .bottomSection .container {
-    max-width: 1050px;
-    gap: 100px;
-}
-
-.home .bottomSection .container h1 {
-    text-align: center;
-}
-
-.home .row {
+.profile .row {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -53,7 +40,7 @@
     gap: 50px;
 }
 
-.home .homeText {
+.profile .profileText {
     z-index: 1;
     text-align: left;
     display: -webkit-box;
@@ -69,26 +56,26 @@
     gap: 16px;
 }
 
-.home a {
+.profile a {
     color: black;
 }
 
-.home h1,
-.home .homeText h2 {
+.profile h1,
+.profile .profileText h2 {
     margin: 0px;
     font-weight: 200;
 }
 
-.home h1 {
+.profile h1 {
     font-size: 80px;
     letter-spacing: 0.6;
 }
 
-.home h2 {
+.profile h2 {
     font-size: 32px;
 }
 
-.home .fontAwesomeLogos {
+.profile .fontAwesomeLogos {
     text-align: center;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -98,7 +85,7 @@
             justify-content: left;
 }
 
-.home .fontAwesomeLogos i {
+.profile .fontAwesomeLogos i {
     margin: 0;
     margin-bottom: 0;
     text-align: center;
@@ -111,7 +98,7 @@
     font-size: 32px;
 }
 
-.home .fontAwesomeLogos a {
+.profile .fontAwesomeLogos a {
     width: 30px;
     margin-left: 20px;
     margin-right: 7px;
@@ -121,15 +108,15 @@
     align-items: center;
 }
 
-.home .fontAwesomeLogos a.left {
+.profile .fontAwesomeLogos a.left {
     margin-left: 0px;
 }
 
-.home .fontAwesomeLogos a.right {
+.profile .fontAwesomeLogos a.right {
     margin-right: 0px;
 }
 
-.home .fontAwesomeLogos .downloadButton {
+.profile .fontAwesomeLogos .downloadButton {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -146,41 +133,41 @@
     color: black;
 }
 
-.home .fontAwesomeLogos .downloadButton i {
+.profile .fontAwesomeLogos .downloadButton i {
     font-size: 20px;
     margin-left: 8px;
 }
 
-.home .fontAwesomeLogos .downloadButton i:hover {
+.profile .fontAwesomeLogos .downloadButton i:hover {
     color: black;
 }
 
-.home .fontAwesomeLogos .downloadButton:hover,
-.home .fontAwesomeLogos i:hover {
+.profile .fontAwesomeLogos .downloadButton:hover,
+.profile .fontAwesomeLogos i:hover {
     -webkit-transition-duration: 300ms;
             transition-duration: 300ms;
 }
 
-.home .fontAwesomeLogos .downloadButton {
+.profile .fontAwesomeLogos .downloadButton {
     background-color: white;
     /* color: white; */
 }
 
-.home .fontAwesomeLogos a {
+.profile .fontAwesomeLogos a {
     color: white;
 }
 
-.home .fontAwesomeLogos .downloadButton:hover {
+.profile .fontAwesomeLogos .downloadButton:hover {
     background-color: var(--secondarylight);
 }
 
-.home .fontAwesomeLogos i:hover {
+.profile .fontAwesomeLogos i:hover {
     color: var(--secondarylight);
     -webkit-transition-duration: 300ms;
             transition-duration: 300ms;
 }
 
-.home .profilePic {
+.profile .profilePic {
     height: 200px;
     width: 200px;
     border-radius: 50%;
@@ -190,7 +177,7 @@
     outline: 5px solid var(--primarylight)
 }
 
-.home .profilePic div {
+.profile .profilePic div {
     background: url("../../Images/profilePic.jpg") no-repeat center center;
     position: absolute;
     top: 0;
@@ -206,43 +193,16 @@
     -moz-transform-origin: top left;
 }
 
-.home .homePic {
-    height: 440px;
-    width: 100%;
-    max-width: 1000px;
-    overflow: hidden;
-    position: relative;
-    z-index: 1; 
-    margin-top: 50px;
-    margin-bottom: -320.5px;
-}
-
-.home .homePic div {
-    background: url("../../Images/home.png") no-repeat center center;
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 641px;
-    width: 1452px;
-    background-size: cover;
-    -webkit-transform: scale(0.6868);
-            transform: scale(0.6868);
-    -webkit-transform-origin: top left;
-            transform-origin: top left;
-    -moz-transform: scale(0.6868);
-    -moz-transform-origin: top left;
-}
-
-.home .summary ul {
+.profile .summary ul {
     list-style-type: none;
 }
 
-.home .summary ul {
+.profile .summary ul {
     margin-top: 0;
     padding: 0;
 }
 
-.home .summary li {
+.profile .summary li {
     font-family: 'Roboto Slab', serif;
     font-size: 20px;
     font-weight: 300;
@@ -251,169 +211,82 @@
     line-height: 32px;
 }
 
-.home .points {
-    display: flex;
-    align-items: stretch;
-    justify-content: space-between;
-}
-
-.home .pointsContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 50px;
-    border-radius: 50px;
-    width: 350px;
-    box-shadow: 0 6px 6px -4px lightgrey;
-    margin: 0 auto;
-}
-
-.home .pointsContainer i {
-    font-size: 48px;
-    margin-bottom: 16px;
-    color: var(--secondary);
-}
-
-.home .pointsContainer.technical {
-    border: 5px solid var(--primary);
-}
-
-.home .pointsContainer.personal {
-    border: 5px solid var(--primarylight);
-}
-
-.home .points h3 {
-    font-size: 20px;
-    font-weight: 400;
-    margin: 0;
-}
-
-.home .pointsContainer ul {
-    padding-left: 16px;
-}
-
-.home .pointsContainer li {
-    /* font-family: "Muli", sans-serif; */
-    font-size: 16px;
-    line-height: 22px;
-    margin: 6px 0;
-}
-
-.home .circleContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-}
-
-@media (max-width: 1200px) {
-    .home .circleContainer {
-        display: none;
-    }
-
-    .home .pointsContainer.technical {
-        border: 5px solid var(--primarylight);
-    }
-}
-
-.home .circle {
-    height: 200px;
-    width: 100px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.home .circle.left {
-    border-radius: 200px 0 0 200px;
-    background-color: var(--primary);
-    gap: 0
-}
-
-.home .circle.right {
-    height: 200px;
-    width: 100px;
-    border-radius: 0 200px 200px 0;
-    background-color: var(--primarylight);
-}
-
 @media (max-width: 1000px) {
-    .home h1 {
+    .profile h1 {
         font-size: 70px;
         letter-spacing: 0;
     }
 
-    .home .homeText h2 {
+    .profile .profileText h2 {
         font-size: 27.5px;
     }
 
-    .home .fontAwesomeLogos a {
+    .profile .fontAwesomeLogos a {
         width: 27.5px;
     }
 
-    .home .fontAwesomeLogos i {
+    .profile .fontAwesomeLogos i {
         font-size: 27.5px;
     }
 
-    .home .fontAwesomeLogos i.fa-envelope {
+    .profile .fontAwesomeLogos i.fa-envelope {
         font-size: 26.5px;
     }
 }
 
 @media (max-width: 650px) {
-    .home h1 {
+    .profile h1 {
         font-size: 60px;
         letter-spacing: 0.5;
     }
 
-    .home .homeText h2 {
+    .profile .profileText h2 {
         font-size: 24px;
     }
 
-    .home .fontAwesomeLogos {
+    .profile .fontAwesomeLogos {
         margin-top: 10px;
     }
 
-    .home .fontAwesomeLogos a {
+    .profile .fontAwesomeLogos a {
         width: 25px;
     }
 
-    .home .fontAwesomeLogos i {
+    .profile .fontAwesomeLogos i {
         font-size: 26px;
     }
 
-    .home .fontAwesomeLogos i.fa-envelope {
+    .profile .fontAwesomeLogos i.fa-envelope {
         font-size: 25px;
     }
 }
 
 @media (max-width: 480px) {
-    .home h1 {
+    .profile h1 {
         font-size: 35px;
     }
 
-    .home .homeText h2 {
+    .profile .profileText h2 {
         font-size: 20px;
     }
 
-    .home .fontAwesomeLogos {
+    .profile .fontAwesomeLogos {
         margin-top: 7.5px;
     }
 
-    .home .fontAwesomeLogos a {
+    .profile .fontAwesomeLogos a {
         margin-right: 5px;
         margin-left: 5px;
         width: 21px;
     }
 
-    .home .fontAwesomeLogos i {
+    .profile .fontAwesomeLogos i {
         font-size: 22px;
         margin-right: 0;
         margin-left: 0;
     }
 
-    .home .fontAwesomeLogos i.fa-envelope {
+    .profile .fontAwesomeLogos i.fa-envelope {
         font-size: 21px;
     }
 }

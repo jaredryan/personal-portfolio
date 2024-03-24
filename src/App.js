@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 
-import Home from './Sections/Home'
+import Navbar from './Navbar'
+
+import Profile from './Sections/Profile'
+import AboutMe from './Sections/AboutMe'
 import Skills from './Sections/Skills'
 import Experience from './Sections/Experience'
 import Projects from './Sections/Projects'
@@ -21,6 +24,10 @@ class App extends Component {
             loadingDisplay: 'none',
             pagesDisplay: 'none',
             refs: {
+                navbar: React.createRef(),
+                profile: React.createRef(),
+                aboutMe: React.createRef(),
+                experience: React.createRef(),
                 projects: React.createRef(),
             },
         }
@@ -38,8 +45,8 @@ class App extends Component {
         window.removeEventListener('load', this.loadingCompleted)
     }
 
-    onProjectScroll = (goal) => {
-      this.handleFade()
+    onScroll = (goal, action) => {
+      this.handleFade(action)
       setTimeout(() => {
           window.scrollTo(0, goal)
       }, 250)
@@ -63,13 +70,14 @@ class App extends Component {
         }, 10);
     }
 
-    handleFade = () => {
+    handleFade = (action) => {
         const backgroundColor = 'white'
         const self = this;
         var op = 0.1;  // initial opacity
         var timer = setInterval(function () {
             if (op >= 1){
                 clearInterval(timer);
+                if (action) action()
             } else {
                 self.setState({scrollContainer: {display: 'block', opacity: `${op}`, backgroundColor, filter: `alpha(opacity=${op * 100})`}})
                 op += op * 0.1;
@@ -133,10 +141,12 @@ class App extends Component {
                     </div>
                 </div>
                 <div className="contentContainer" style={{display: this.state.pagesDisplay, ...this.state.pageAnimation}}>
-                    <Home />
-                    <Skills />
-                    <Experience />
-                    <Projects refs={this.state.refs} onScroll={this.onProjectScroll}/>
+                    <Navbar refs={this.state.refs} onScroll={this.onScroll} />
+                    <Profile refs={this.state.refs} />
+                    <AboutMe refs={this.state.refs} />
+                    <Skills refs={this.state.refs} />
+                    <Experience refs={this.state.refs} onScroll={this.onScroll} />
+                    <Projects refs={this.state.refs} onScroll={this.onScroll} />
                 </div>
             </div>
         )

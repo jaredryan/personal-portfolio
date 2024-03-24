@@ -22,7 +22,7 @@ const work = [{
 	    'Architected user management technical solutions with product and backend lead, considering security, performance, sizing, business value, and usability',
 	    'Co-created conceptual models and user flows with design, providing guidance on attributes and relationships between users, roles, permissions, and groups',
         'Planned projects with 1, 3, and 6 month cycles, executed via Agile in 2-week sprints',
-    ]
+    ],
 }, {
     title: 'Software Developer I',
     company: 'IBM',
@@ -43,6 +43,8 @@ const work = [{
   	    'Learned troubleshooting without access to clients, and maintenance practices',
     ]
 }]
+
+const lastDefaultItemIndex = 1
 
 const education = [{
     title: 'V School',
@@ -69,21 +71,30 @@ const mapEducation = (education) =>
         <h4>{education.subject}<span>|</span>{education.date}</h4>
     </div>
 
-const Experience = () => {
-    const [seeMore, setSeeMore] = useState(false);
+const Experience = (props) => {
+    const [seeMore, setSeeMore] = useState(false)
+
+    const handleSeeMoreClick = () => {
+        if (seeMore) {
+            const target = props.refs.projects.current.offsetTop
+            props.onScroll(target - 1500, () => setSeeMore(!seeMore))  
+        } else {
+            setSeeMore(!seeMore)
+        }
+    }
 
     return (
-        <div className="experience" id="experience">
+        <div className="experience" id="experience" ref={props.refs.experience}>
             <div className="banner"></div>
             <div className="overlay"></div>
             <div className="container">
                 <h1>Experience</h1>
                 <div className="experienceItems">
-                    {!seeMore && work.slice(0, 2).map(mapWork)}
+                    {!seeMore && work.slice(0, lastDefaultItemIndex + 1).map(mapWork)}
                     {seeMore && work.map(mapWork)}
                     {seeMore && education.map(mapEducation)}
                 </div>
-                <h5 className="experienceToggle" onClick={() => setSeeMore(!seeMore)}>
+                <h5 className="experienceToggle" onClick={handleSeeMoreClick}>
                     {seeMore ? 'See less' : 'See more'}
                     {seeMore && <i className="fa fa-angle-up" style={{fontWeight: 100}} />}
                     {!seeMore && <i className="fa fa-angle-down" />}
