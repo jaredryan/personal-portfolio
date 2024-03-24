@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './index.css'
 
 const work = [{
@@ -69,17 +69,28 @@ const mapEducation = (education) =>
         <h4>{education.subject}<span>|</span>{education.date}</h4>
     </div>
 
-const Experience = () => 
-    <div className="experience" id="experience">
-        <div className="banner"></div>
-        <div className="overlay"></div>
-        <div className="container">
-            <h1>Experience</h1>
-            <div className="experienceItems">
-                {work.map(mapWork)}
-                {education.map(mapEducation)}
+const Experience = () => {
+    const [seeMore, setSeeMore] = useState(false);
+
+    return (
+        <div className="experience" id="experience">
+            <div className="banner"></div>
+            <div className="overlay"></div>
+            <div className="container">
+                <h1>Experience</h1>
+                <div className="experienceItems">
+                    {!seeMore && work.slice(0, 2).map(mapWork)}
+                    {seeMore && work.map(mapWork)}
+                    {seeMore && education.map(mapEducation)}
+                </div>
+                <h5 className="experienceToggle" onClick={() => setSeeMore(!seeMore)}>
+                    {seeMore ? 'See less' : 'See more'}
+                    {seeMore && <i className="fa fa-angle-up" style={{fontWeight: 100}} />}
+                    {!seeMore && <i className="fa fa-angle-down" />}
+                </h5>
             </div>
         </div>
-    </div>
+    )
+}
 
 export default Experience;

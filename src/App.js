@@ -5,8 +5,6 @@ import Skills from './Sections/Skills'
 import Experience from './Sections/Experience'
 import Projects from './Sections/Projects'
 
-import ResumeImage from './Images/resume.jpg'
-
 class App extends Component {
     constructor() {
         super();
@@ -25,9 +23,6 @@ class App extends Component {
             refs: {
                 projects: React.createRef(),
             },
-            images: [
-                ResumeImage,
-            ]
         }
     }
 
@@ -82,16 +77,6 @@ class App extends Component {
         }, 10);
     }
 
-    onImageLoad = () => {
-        this.setState(prevState => {
-            const imgCount = prevState.imgCount + 1
-            if (imgCount === this.state.images.length) {
-                this.setState({imageLoaded: true})
-            }
-            return {imgCount}
-        })
-    }
-
     mapImage = (image) => {
         return <img src={image} alt="fillerText" style={{display: 'none'}} onLoad={this.onImageLoad}/>
     }
@@ -134,13 +119,12 @@ class App extends Component {
             setTimeout(() => this.setState({loadingMessage: "Almost there..."}), 10000);
         }
 
-        if (!this.state.startedFinalLoad && this.state.domLoaded && this.state.imageLoaded) {
+        if (!this.state.startedFinalLoad && this.state.domLoaded) {
             this.handleLoad()
         }
 
         return (
             <div>
-                {this.state.images.map(this.mapImage)}
                 <div className="scrollContainer" style={this.state.scrollContainer}></div>
                 <div className="loadingContainer" style={{...this.state.animation, display: this.state.loadingDisplay}}>
                     <div>

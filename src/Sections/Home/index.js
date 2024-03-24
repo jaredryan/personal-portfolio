@@ -10,7 +10,9 @@ const Home = () => (
                         <h1>Jared Ryan</h1>
                         <h2>Software Engineer</h2>
                         <div className="fontAwesomeLogos">
-                            <a href="Ryan_Jared_Resume.pdf" download="Ryan_Jared_Resume.pdf" className="downloadButton left">Resume</a>
+                            <a href="Ryan_Jared_Resume.pdf" download="Ryan_Jared_Resume.pdf" className="downloadButton left">
+                                Resume <i className="fa fa-download" style={{fontWeight: 100}} />
+                            </a>
                             <a href="mailto:jryantennis@gmail.com?subject=Hi, Jared (from the Portfolio Website)" ><i className="fa fa-envelope" style={{fontWeight: 100}}></i></a>
                             <a href="https://www.linkedin.com/in/jared-m-ryan/" className="right"><i className="fa fa-linkedin" style={{fontWeight: 100}}></i></a>
                         </div>
