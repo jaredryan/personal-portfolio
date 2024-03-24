@@ -31,7 +31,8 @@ const Home = () => (
             <div className="container"> 
                 <h1>About Me</h1>
                 <div className="row points">
-                    <div className="pointsContainer">
+                    <div className="pointsContainer technical">
+                        <i className="fa fa-code" style={{fontWeight: 100}}></i>
                         <h3 className="mobile">Technical</h3>
                         <ul>
                             <li>Curious to try new things</li>
@@ -49,7 +50,8 @@ const Home = () => (
                             <h3>Personal</h3>
                         </div>
                     </div>
-                    <div className="pointsContainer">
+                    <div className="pointsContainer personal">
+                        <i className="fa fa-user" style={{fontWeight: 100}}></i>
                         <h3 className="mobile">Personal</h3>
                         <ul>
                             <li>Organized: plans, coordinates, executes, and follows up</li>

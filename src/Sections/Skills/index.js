@@ -3,6 +3,7 @@ import './index.css'
 
 const mapSkills = (skill) =>
     <div key={skill.title} className="skillCategoryContainer">
+        {skill.icon}
         <h3>{skill.title}</h3>
         <ul>
             {skill.listItems.map((item) => <li key={item}>{item}</li>)}
@@ -22,7 +23,8 @@ const skills = [{
         'Automated testing',
         'Performance tuning',
         'GraphQL',
-    ]
+    ],
+    icon: <i className="fa fa-laptop" style={{fontWeight: 100}}></i>,
 }, {
     title: 'Backend',
     listItems: [
@@ -35,7 +37,8 @@ const skills = [{
         'Kubernetes',
         'Automated testing',
         'Automated pipelines',
-    ]
+    ],
+    icon: <i className="fa fa-server" style={{fontWeight: 100}}></i>,
 }, {
     title: 'Soft',
     listItems: [
@@ -48,7 +51,8 @@ const skills = [{
         'Mentoring',
         'Independent',
         '...but knows when to seek help'
-    ]
+    ],
+    icon: <i className="fa fa-users" style={{fontWeight: 100}}></i>,
 }]
 
 const Skills = () => 

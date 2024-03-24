@@ -254,9 +254,29 @@
     padding: 50px;
     border-radius: 50px;
     width: 350px;
-    border: 5px solid var(--primarylight);
     box-shadow: 0 6px 6px -4px lightgrey;
     margin: 0 auto;
+}
+
+.home .pointsContainer i {
+    font-size: 48px;
+    margin-bottom: 16px;
+}
+
+.home .pointsContainer.technical {
+    border: 5px solid var(--primary);
+}
+
+.home .pointsContainer.technical i {
+    color: var(--primary);
+}
+
+.home .pointsContainer.personal {
+    border: 5px solid var(--primarylight);
+}
+
+.home .pointsContainer.personal i {
+    color: var(--primarylight);
 }
 
 .home .points h3 {
@@ -294,6 +314,14 @@
     .home .circleContainer {
         display: none;
     }
+
+    .home .pointsContainer.technical {
+        border: 5px solid var(--primarylight);
+    }
+
+    .home .pointsContainer.technical i {
+        color: var(--primarylight);
+    }
 }
 
 .home .circle {
@@ -318,7 +346,7 @@
 }
 
 @media (max-width: 1000px) {
-    .home .homeText h1 {
+    .home h1 {
         font-size: 70px;
         letter-spacing: 0;
     }
@@ -341,7 +369,7 @@
 }
 
 @media (max-width: 650px) {
-    .home .homeText h1 {
+    .home h1 {
         font-size: 60px;
         letter-spacing: 0.5;
     }
@@ -368,11 +396,7 @@
 }
 
 @media (max-width: 480px) {
-    .home .homeText {
-        top: -7%;
-    }
-
-    .home .homeText h1 {
+    .home h1 {
         font-size: 35px;
     }
 

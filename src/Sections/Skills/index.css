@@ -36,6 +36,12 @@
     gap: 60px;
 }
 
+.skills .skillsGrid i {
+    font-size: 48px;
+    margin-bottom: 16px;
+    color: var(--primary);
+}
+
 .skills .skillsGrid .skillCategoryContainer {
     border-radius: 50px;
     background-color: var(--background);
