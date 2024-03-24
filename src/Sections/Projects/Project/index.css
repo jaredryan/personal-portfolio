@@ -50,9 +50,10 @@
 }
 
 .projectInfo > div {
-    background-color: var(--primarylight);
+    border: 5px solid var(--primarylight);
     padding: 50px;
     border-radius: 50px;
+    box-shadow: 0 6px 6px -4px lightgrey;
 }
 
 /* Image Formatting */

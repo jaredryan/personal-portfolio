@@ -8,14 +8,14 @@
     margin: auto;
     position: relative;
     margin-bottom: 20px;
-    outline: 0.5px solid lightgrey;
 }
 
 .projectImageContainer .projectImage,
 .projectImageContainer .projectImage img {
     width: 576px;
     height: 360px;
-    border-radius: 50px;
+    outline: 1px solid lightgrey;
+    box-shadow: 0 4px 4px -2px lightgrey;
 }
 
 .projectImageContainer .projectImage.titleImage,
@@ -24,11 +24,13 @@
     height: 250px;
     padding-bottom: 0;
     border-radius: 50px;
+    outline: 5px solid var(--primarylight);
+    box-shadow: 0 11px 6px -4px lightgrey;
 }
 
 .projectImageContainer h5 {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 25px;
     font-weight: 500;
     padding-left: 0;
 }

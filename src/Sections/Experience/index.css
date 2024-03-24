@@ -1,12 +1,11 @@
 /* Page */
 
 .experience {
-    background-color: var(--primary);
+    /* background-color: var(--primary); */
     margin: 0;
     width: 100%;
     position: relative;
     z-index: 0;
-    margin-top: 50px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -29,8 +28,8 @@
     height: 100%;
     width: 100%;
     position: absolute;
-    background-image: -webkit-gradient(linear, left top, right top, from(rgba(135, 206, 251, 0.6)), to(rgba(135, 206, 251, 0.6)));
-    background-image: linear-gradient(to right, rgba(135, 206, 251, 0.6), rgba(135, 206, 251, 0.6));
+    background-image: -webkit-gradient(linear, left top, right top, from(rgba(135, 206, 251, 0.7)), to(rgba(135, 206, 251, 0.7)));
+    background-image: linear-gradient(to right, rgba(135, 206, 251, 0.7), rgba(135, 206, 251, 0.7));
     top: 0;
     left: 0;
     z-index: -1;
@@ -57,7 +56,7 @@
 .experience .container .experienceItems {
     display: flex;
     flex-direction: column;
-    gap: 50px;
+    gap: 60px;
     align-items: stretch;
 }
 
@@ -65,7 +64,8 @@
     background-color: var(--background);
     padding: 50px;
     border-radius: 50px;
-
+    outline: 5px solid var(--primary);
+    box-shadow: 0 11px 6px -4px grey;
 }
 
 .experience .container ul {

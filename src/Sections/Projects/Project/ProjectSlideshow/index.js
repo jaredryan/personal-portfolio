@@ -117,7 +117,7 @@ class Projects extends Component {
                   <div className="dots">
                       {
                           this.props.project.pictures.map((pic, index) => {
-                              return <i className="fa fa-circle" onClick={() => this.handleIndexSet(index)} style={{fontSize: "22px", fontWeight: 100, color: this.state.imageIndex === index ? "white" : ""}}></i>
+                              return <i className="fa fa-circle" onClick={() => this.handleIndexSet(index)} style={{fontSize: "22px", fontWeight: 100, color: this.state.imageIndex === index ? "rgb(135, 206, 251)" : ""}}></i>
                           })
                       }
                   </div>

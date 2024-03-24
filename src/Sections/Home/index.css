@@ -1,17 +1,51 @@
 /* Main Page */
 
 .home {
-    min-height: 100vh;
-    max-width: 1500px;
     width: 100%;
-    position: relative;
-    background-color: var(--background);
-    padding: 100px;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* gap: 100px; */
+}
+
+.home .topSection,
+.home .bottomSection {
+    padding: 100px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.home .topSection {
+    background-color: var(--primary);
+}
+
+.home .bottomSection {
+    margin-top: 220.5px;
+}
+
+.home .container {
+    width: 100%;
+    max-width: 1000px;
+    display: flex;
+    flex-direction: column;
+}
+
+.home .topSection .container {
+    gap: 50px;
     align-items: start;
     justify-content: space-between;
-    gap: 50px;
+}
+
+.home .bottomSection .container {
+    max-width: 1050px;
+    gap: 100px;
+}
+
+.home .bottomSection .container h1 {
+    text-align: center;
 }
 
 .home .row {
@@ -43,7 +77,7 @@
     color: black;
 }
 
-.home .homeText h1,
+.home h1,
 .home .homeText h2 {
     margin: 0px;
     font-weight: 200;
@@ -81,12 +115,6 @@
     font-size: 32px;
 }
 
-.home .fontAwesomeLogos i:hover {
-    color: var(--primarylight);
-    -webkit-transition-duration: 300ms;
-            transition-duration: 300ms;
-}
-
 .home .fontAwesomeLogos a {
     width: 30px;
     margin-left: 20px;
@@ -95,7 +123,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    color: var(--primary);
 }
 
 .home .fontAwesomeLogos a.left {
@@ -109,7 +136,6 @@
 .home .fontAwesomeLogos .downloadButton {
     display: block;
     font-size: 20px;
-    background-color: var(--primary);
     border: none;
     padding: 4px 12px;
     font-weight: 200;
@@ -122,9 +148,27 @@
     color: black
 }
 
+.home .fontAwesomeLogos .downloadButton:hover,
+.home .fontAwesomeLogos i:hover {
+    -webkit-transition-duration: 300ms;
+            transition-duration: 300ms;
+}
+
+.home .fontAwesomeLogos .downloadButton {
+    background-color: white;
+    /* color: white; */
+}
+
+.home .fontAwesomeLogos a {
+    color: white;
+}
+
 .home .fontAwesomeLogos .downloadButton:hover {
-    background-color: var(--primarylight);
-    color: grey;
+    background-color: lightgrey;
+}
+
+.home .fontAwesomeLogos i:hover {
+    color: lightgrey;
     -webkit-transition-duration: 300ms;
             transition-duration: 300ms;
 }
@@ -136,6 +180,7 @@
     overflow: hidden;
     position: relative;
     z-index: 1;
+    outline: 5px solid var(--primarylight)
 }
 
 .home .profilePic div {
@@ -154,6 +199,33 @@
     -moz-transform-origin: top left;
 }
 
+.home .homePic {
+    height: 440px;
+    width: 100%;
+    max-width: 1000px;
+    overflow: hidden;
+    position: relative;
+    z-index: 1; 
+    margin-top: 50px;
+    margin-bottom: -320.5px;
+}
+
+.home .homePic div {
+    background: url("../../Images/home.png") no-repeat center center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 641px;
+    width: 1452px;
+    background-size: cover;
+    -webkit-transform: scale(0.6868);
+            transform: scale(0.6868);
+    -webkit-transform-origin: top left;
+            transform-origin: top left;
+    -moz-transform: scale(0.6868);
+    -moz-transform-origin: top left;
+}
+
 .home .summary ul {
     list-style-type: none;
 }
@@ -165,9 +237,9 @@
 
 .home .summary li {
     font-family: 'Roboto Slab', serif;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 300;
-    margin: 12px 0;
+    margin: 2px 0;
     padding-left: 0;
     line-height: 32px;
 }
@@ -181,18 +253,24 @@
 .home .pointsContainer {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
     padding: 50px;
-    background-color: var(--primarylight);
     border-radius: 50px;
-    width: 450px;
-    margin: 0 auto;
+    width: 350px;
+    border: 5px solid var(--primarylight);
+    box-shadow: 0 6px 6px -4px lightgrey;
 }
 
-.home .pointsContainer h3 {
+
+.home .points h3 {
     font-size: 20px;
     font-weight: 400;
     margin: 0;
+}
+
+.home .points h3.mobile {
+    /* display: none; */
 }
 
 .home .pointsContainer ul {
@@ -204,6 +282,34 @@
     font-size: 16px;
     line-height: 22px;
     margin: 6px 0;
+}
+
+.home .circleContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.home .circle {
+    height: 200px;
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.home .circle.left {
+    border-radius: 200px 0 0 200px;
+    background-color: var(--primary);
+    gap: 0
+}
+
+.home .circle.right {
+    height: 200px;
+    width: 100px;
+    border-radius: 0 200px 200px 0;
+    background-color: var(--primarylight);
 }
 
 @media (max-width: 1000px) {

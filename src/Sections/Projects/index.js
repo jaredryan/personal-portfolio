@@ -143,6 +143,7 @@ class Projects extends Component {
 
           return (
               <div className="projects" id="projects" ref={this.props.refs.projects}>
+                <div className="container">
                     <h1>Projects</h1>
                     <div className="projectDisplay" id="projectDisplay" style={this.state.projectDisplay}>
                         <div className="backButton" onClick={() => this.handleProjectUnset()}><i class="fa fa-arrow-left" style={{fontSize: "24px"}}></i></div>
@@ -180,14 +181,17 @@ class Projects extends Component {
                         </div>
                         <div className="bottomBackButton" onClick={() => this.handleProjectUnset()}><i class="fa fa-arrow-left" style={{fontSize: "24px"}}></i></div>
                     </div>
+                </div>
               </div>
           );
       } else {
         return (
             <div className="projects" id="projects" ref={this.props.refs.projects}>
-                <h1>Projects</h1>
-                <div className="projectsDiv" style={this.state.projectList}>
-                    {mappedProjects}
+                <div className="container">
+                    <h1>Projects</h1>
+                    <div className="projectsDiv" style={this.state.projectList}>
+                        {mappedProjects}
+                    </div>
                 </div>
             </div>
         );

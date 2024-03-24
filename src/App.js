@@ -6,7 +6,6 @@ import Experience from './Sections/Experience'
 import Projects from './Sections/Projects'
 
 import ResumeImage from './Images/resume.jpg'
-import ProjectsImage from './Images/projects.jpg'
 
 class App extends Component {
     constructor() {
@@ -28,7 +27,6 @@ class App extends Component {
             },
             images: [
                 ResumeImage,
-                ProjectsImage,
             ]
         }
     }

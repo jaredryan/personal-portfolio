@@ -53,9 +53,11 @@ const skills = [{
 
 const Skills = () => 
     <div className="skills">
-        <h1>Skills</h1>
-        <div className="skillsGrid">
-            {skills.map(mapSkills)}
+        <div className="container">
+            <h1>Skills</h1>
+            <div className="skillsGrid">
+                {skills.map(mapSkills)}
+            </div>
         </div>
     </div>
 
