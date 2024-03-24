@@ -25,9 +25,6 @@ const Home = () => (
                         <li>Seeking full-time, 100% remote, frontend or fullstack roles.</li>
                     </ul>
                 </div>
-                <div className="homePic">
-                    <div></div>
-                </div>
             </div>
         </div>
         <div className="bottomSection">

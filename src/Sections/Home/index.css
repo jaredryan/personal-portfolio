@@ -22,10 +22,6 @@
     background-color: var(--primary);
 }
 
-.home .bottomSection {
-    margin-top: 220.5px;
-}
-
 .home .container {
     width: 100%;
     max-width: 1000px;
@@ -260,17 +256,13 @@
     width: 350px;
     border: 5px solid var(--primarylight);
     box-shadow: 0 6px 6px -4px lightgrey;
+    margin: 0 auto;
 }
-
 
 .home .points h3 {
     font-size: 20px;
     font-weight: 400;
     margin: 0;
-}
-
-.home .points h3.mobile {
-    /* display: none; */
 }
 
 .home .pointsContainer ul {
@@ -289,6 +281,19 @@
     justify-content: center;
     align-items: center;
     flex-direction: row;
+}
+
+.home .circleContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+@media (max-width: 1200px) {
+    .home .circleContainer {
+        display: none;
+    }
 }
 
 .home .circle {
