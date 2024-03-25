@@ -208,18 +208,6 @@
     line-height: 30px;
 }
 
-@media (max-width: 650px) {
-    h1 {
-        
-    }
-}
-
-@media (max-width: 480px) {
-    h1 {
-        
-    }
-}
-
 @media (max-width: 1000px) {
     .profile .profilePic {
         height: 175px;
@@ -259,7 +247,7 @@
 
     .profile .summary li {
         font-size: 18px;
-        line-height: 26px;
+        line-height: 28px;
     }
 }
 
@@ -282,18 +270,29 @@
     }
 
     .profile .profilePic {
-        height: 300px;
-        width: 300px;
+        height: 225px;
+        width: 225px;
     }
     
     .profile .profilePic div {
-        -webkit-transform: scale(0.1935);
-                transform: scale(0.1935);
-        -moz-transform: scale(0.1935);
+        -webkit-transform: scale(0.14516);
+                transform: scale(0.14516);
+        -moz-transform: scale(0.14516);
     }
 }
 
 @media (max-width: 650px) {
+    .profile .profilePic {
+        height: 200px;
+        width: 200px;
+    }
+    
+    .profile .profilePic div {
+        -webkit-transform: scale(0.13);
+                transform: scale(0.13);
+        -moz-transform: scale(0.13);
+    }
+    
     .profile .profileText h2 {
         font-size: 24px;
     }
@@ -316,8 +315,19 @@
 }
 
 @media (max-width: 480px) {
+    .profile .profilePic {
+        height: 175px;
+        width: 175px;
+    }
+    
+    .profile .profilePic div {
+        -webkit-transform: scale(0.1129);
+                transform: scale(0.1129);
+        -moz-transform: scale(0.1129);
+    }
+
     .profile .profileText h2 {
-        font-size: 20px;
+        font-size: 22px;
     }
 
     .profile .fontAwesomeLogos {

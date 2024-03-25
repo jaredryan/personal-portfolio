@@ -181,6 +181,9 @@
 
 .projects .buttons button {
     margin: 0;
+}
+
+.projects button {
     color: black;
 }
 
