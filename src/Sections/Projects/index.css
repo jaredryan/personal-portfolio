@@ -219,6 +219,7 @@
     }
 
     .projects .dots i {
+        width: 16px;
         font-size: 18px;
         margin: 0 10px;
     }
@@ -249,7 +250,25 @@
     }
 }
 
-@media (max-width: 450px) {
+@media (max-width: 550px) {
+    .projects {
+        padding: 50px 25px 100px;
+    }
+
+    .projectInfo > div {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .projects .dots i {
+        margin: 0 6px;
+    }
+
+    .projects .dots.play i {
+        margin: 0 10px;
+    }
+    
     .projects .buttons {
         -ms-flex-pack: distribute;
             justify-content: space-around;

@@ -96,3 +96,13 @@
         width: 100%;
     }
 }
+
+@media (max-width: 550px) {
+    .skills {
+        padding: 50px 25px;
+    }
+
+    .skills .skillsGrid .skillCategoryContainer {
+        padding: 20px;
+    }
+}

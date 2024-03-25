@@ -122,7 +122,7 @@ class Projects extends Component {
                           })
                       }
                   </div>
-                  <div className="dots">
+                  <div className="dots play">
                       <i className="fa fa-arrow-left" onClick={this.handleIndexDecrease} />
                       {
                           this.state.paused ?

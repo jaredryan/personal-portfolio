@@ -155,8 +155,18 @@
     }
 }
 
+@media (max-width: 550px) {
+    .aboutMe .bottomSection {
+        padding: 50px 25px;
+    }
+
+    .aboutMe .pointsContainer  {
+        padding: 20px 70px;
+    }
+}
+
 @media (max-width: 500px) {
     .aboutMe .pointsContainer {
-        padding: 40px;
+        padding: 20px;
     }
 }

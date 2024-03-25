@@ -314,6 +314,12 @@
     }
 }
 
+@media (max-width: 550px) {
+    .profile .topSection {
+        padding: 50px 25px;
+    }
+}
+
 @media (max-width: 480px) {
     .profile .profilePic {
         height: 175px;

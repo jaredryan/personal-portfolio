@@ -131,3 +131,13 @@
         padding: 40px;
     }
 }
+
+@media (max-width: 550px) {
+    .experience .container {
+        padding: 50px 25px;
+    }
+
+    .experience .container .experienceItems > div {
+        padding: 20px;
+    }
+}
