@@ -76,8 +76,8 @@ const Experience = (props) => {
 
     const handleSeeMoreClick = () => {
         if (seeMore) {
-            const target = props.refs.projects.current.offsetTop
-            props.onScroll(target - 1500, () => setSeeMore(!seeMore))  
+            const target = props.refs.experience.current.offsetTop
+            props.onScroll(target + 900, () => setSeeMore(!seeMore))  
         } else {
             setSeeMore(!seeMore)
         }
