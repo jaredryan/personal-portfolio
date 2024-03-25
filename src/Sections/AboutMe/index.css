@@ -6,7 +6,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    /* gap: 100px; */
 }
 
 .aboutMe .bottomSection {
@@ -31,6 +30,7 @@
 
 .aboutMe .bottomSection .container h1 {
     text-align: center;
+    margin: 0;
 }
 
 .aboutMe .row {
@@ -98,7 +98,7 @@
     flex-direction: row;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1260px) {
     .aboutMe .circleContainer {
         display: none;
     }
@@ -109,22 +109,22 @@
 }
 
 .aboutMe .circle {
-    height: 200px;
-    width: 100px;
+    height: 250px;
+    width: 125px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .aboutMe .circle.left {
-    border-radius: 200px 0 0 200px;
+    border-radius: 250px 0 0 250px;
     background-color: var(--primary);
     gap: 0
 }
 
 .aboutMe .circle.right {
-    height: 200px;
-    width: 100px;
-    border-radius: 0 200px 200px 0;
+    height: 250px;
+    width: 125px;
+    border-radius: 0 250px 250px 0;
     background-color: var(--primarylight);
 }

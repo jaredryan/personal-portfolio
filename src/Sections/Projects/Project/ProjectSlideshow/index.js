@@ -107,6 +107,7 @@ class Projects extends Component {
     render() {
         return (
             <div>
+                  <h5>Slideshow</h5>
                   <div className="projectImages">
                       <ProjectImage
                           style={this.state.animation}

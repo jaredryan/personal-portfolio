@@ -56,15 +56,6 @@
     box-shadow: 0 6px 6px -4px lightgrey;
 }
 
-/* Image Formatting */
-
-.projectEntry .projectImages {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
-    -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
+.projectImages {
+    margin-top: 16px;
 }

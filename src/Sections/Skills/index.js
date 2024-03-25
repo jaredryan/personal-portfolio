@@ -24,7 +24,7 @@ const skills = [{
         'Performance tuning',
         'GraphQL',
     ],
-    icon: <i className="fa fa-laptop" style={{fontWeight: 100}}></i>,
+    icon: <i className="fa fa-laptop" style={{fontWeight: 100}} />,
 }, {
     title: 'Backend',
     listItems: [
@@ -38,7 +38,7 @@ const skills = [{
         'Automated testing',
         'Automated pipelines',
     ],
-    icon: <i className="fa fa-server" style={{fontWeight: 100}}></i>,
+    icon: <i className="fa fa-server" style={{fontWeight: 100}} />,
 }, {
     title: 'Soft',
     listItems: [
@@ -52,7 +52,7 @@ const skills = [{
         'Independent',
         '...but knows when to seek help'
     ],
-    icon: <i className="fa fa-users" style={{fontWeight: 100}}></i>,
+    icon: <i className="fa fa-users" style={{fontWeight: 100}} />,
 }]
 
 const Skills = (props) => 

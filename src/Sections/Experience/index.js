@@ -34,7 +34,7 @@ const work = [{
     ]
 }, {
     title: 'Web Developer',
-    company: 'Negotiation and Team Resources Institute',
+    company: 'NTR',
     date: '2018 - 2022',
     location: 'Remote - Berkeley, CA',
     listItems: [
