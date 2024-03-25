@@ -195,15 +195,17 @@
 .profile .summary ul {
     margin-top: 0;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
 }
 
 .profile .summary li {
     font-family: 'Roboto Slab', serif;
     font-size: 20px;
     font-weight: 300;
-    margin: 2px 0;
     padding-left: 0;
-    line-height: 32px;
+    line-height: 30px;
 }
 
 @media (max-width: 650px) {
@@ -257,6 +259,7 @@
 
     .profile .summary li {
         font-size: 18px;
+        line-height: 26px;
     }
 }
 

@@ -6,8 +6,6 @@
     min-height: 100vh;
     display: flex;
     justify-content: center;
-    /* align-items: center; */
-    /* background-color: var(--primary); */
 }
 
 .projects .container {
@@ -183,6 +181,7 @@
 
 .projects .buttons button {
     margin: 0;
+    color: black;
 }
 
 .projects .link {
