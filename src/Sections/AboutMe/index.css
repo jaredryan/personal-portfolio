@@ -80,10 +80,6 @@
     margin: 0;
 }
 
-.aboutMe .pointsContainer ul {
-    padding-left: 16px;
-}
-
 .aboutMe .pointsContainer li {
     /* font-family: "Muli", sans-serif; */
     font-size: 16px;
