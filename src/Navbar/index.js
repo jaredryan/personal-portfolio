@@ -21,7 +21,9 @@ class Navbar extends Component {
     render() {
         return (
             <nav onClick={this.handleClick} className={this.state.isOpen ? "open" : "closed"}>
-                <i className="fa fa-bars" />
+                <div className="container">
+                    <i className="fa fa-bars" />
+                </div>
 	            <ul className={`dropdown-content ${this.state.isOpen ? "open" : "closed"}`}>
                     <div onClick={() => this.handleScroll(this.props.refs.profile)}><li>Profile</li></div>
                     <div onClick={() => this.handleScroll(this.props.refs.aboutMe)}><li>About Me</li></div>

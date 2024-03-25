@@ -3,10 +3,13 @@ nav {
     position: fixed;
 	right: 20px;
 	top: 20px;
-    height: 60px;
 	margin: 0px;
-	font-size: 28px;
     text-align: center;
+    display: flex;
+}
+
+nav .container {
+	font-size: 28px;
     padding: 12px 24px;
     padding-top: 14px;
     border-radius: 10px;
@@ -15,7 +18,7 @@ nav {
     box-shadow: 0 1px 2px 0 grey;
 }
 
-nav.open {
+nav.open .container {
     background-color: var(--secondarylight);
 }
 
@@ -27,15 +30,15 @@ nav * {
     color: black;
 }
 
-nav:hover,
-nav:focus {
+nav .container:hover,
+nav .container:focus {
     cursor: pointer;
     background-color: var(--secondarylight);
     -webkit-transition-duration: 300ms;
             transition-duration: 300ms;
 }
 
-nav.open:hover {
+nav.open .container:hover {
     background-color: var(--secondary);
 }
 
@@ -50,7 +53,8 @@ nav ul {
 	position: absolute;
 	background-color: transparent;
 	text-align: center;
-    top: 32px;
+    margin: 0;
+    top: 58px;
     right: 0px;
 }
 
