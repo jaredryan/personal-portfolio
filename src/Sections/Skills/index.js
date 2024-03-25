@@ -55,8 +55,8 @@ const skills = [{
     icon: <i className="fa fa-users" style={{fontWeight: 100}}></i>,
 }]
 
-const Skills = () => 
-    <div className="skills">
+const Skills = (props) => 
+    <div className="skills" ref={props.refs.skills}>
         <div className="container">
             <h1>Skills</h1>
             <div className="skillsGrid">

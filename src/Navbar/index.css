@@ -15,6 +15,10 @@ nav {
     box-shadow: 0 1px 2px 0 grey;
 }
 
+nav.open {
+    background-color: var(--secondarylight);
+}
+
 nav .fa {
     font-size: 28px;
 }
@@ -31,6 +35,10 @@ nav:focus {
             transition-duration: 300ms;
 }
 
+nav.open:hover {
+    background-color: var(--secondary);
+}
+
 /* nav:hover i,
 nav:focus i {
     -webkit-transition-duration: 300ms;
@@ -44,6 +52,14 @@ nav ul {
 	text-align: center;
     top: 32px;
     right: 0px;
+}
+
+nav ul.open {
+    display: block;
+}
+
+nav ul.closed {
+    display: none;
 }
 
 nav ul li {

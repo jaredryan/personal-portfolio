@@ -27,6 +27,7 @@ class App extends Component {
                 navbar: React.createRef(),
                 profile: React.createRef(),
                 aboutMe: React.createRef(),
+                skills: React.createRef(),
                 experience: React.createRef(),
                 projects: React.createRef(),
             },
