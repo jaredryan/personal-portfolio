@@ -70,3 +70,13 @@
     line-height: 22px;
     margin: 6px 0;
 }
+
+@media (max-width: 1000px) {
+    .skills .skillsGrid i {
+        font-size: 42px;
+    }
+
+    .skills .skillsGrid h3  {
+        font-size: 18px;
+    }
+}

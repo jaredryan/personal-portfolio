@@ -36,8 +36,8 @@
 }
 
 .projects .projectDisplay h2 {
-    font-size: 24px;
-    font-weight: 300;
+    font-size: 22px;
+    font-weight: 400;
     text-align: center;
     margin: 0;
 }
@@ -130,11 +130,11 @@
 
 .projects .backButton {
     left: 0;
-    top: -75px;    
+    top: -65px;    
 }
 
 .projects .bottomBackButton {
-    bottom: -75px;
+    bottom: -65px;
     left: 0;
 }
 
@@ -159,6 +159,8 @@
     margin-right: 15px;
     padding-top: 20px;
     cursor: pointer;
+    font-size: 22px;
+    font-weight: 100;
 }
 
 .projects .dots i:hover {
@@ -188,6 +190,11 @@
     margin-bottom: 0px;
 }
 
+.projects .backButton,
+.projects .bottomBackButton {
+    font-size: 24px;
+}
+
 .projects button:hover,
 .projects .backButton:hover,
 .projects .bottomBackButton:hover {
@@ -196,6 +203,34 @@
     color: grey;
     -webkit-transition-duration: 300ms;
             transition-duration: 300ms;
+}
+
+@media (max-width: 1000px) {
+    .projects .projectDisplay h2 {
+        font-size: 20px;
+    }
+
+    .projects h3,
+    .projects h5,
+    .projects .projectDisplay h5 {
+        font-size: 18px;
+    }
+
+    .projects .dots i {
+        font-size: 18px;
+        margin: 0 10px;
+    }
+
+    .projects .backButton,
+    .projects .bottomBackButton {
+        width: 40px;
+        height: 40px;
+    }
+
+    .projects .backButton i,
+    .projects .bottomBackButton i {
+        font-size: 18px;
+    }
 }
 
 @media (max-width: 450px) {

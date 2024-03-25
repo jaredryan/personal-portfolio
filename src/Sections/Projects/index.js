@@ -146,7 +146,7 @@ class Projects extends Component {
                 <div className="container">
                     <h1>Projects</h1>
                     <div className="projectDisplay" id="projectDisplay" style={this.state.projectDisplay}>
-                        <div className="backButton" onClick={() => this.handleProjectUnset()}><i class="fa fa-arrow-left" style={{fontSize: "24px"}}></i></div>
+                        <div className="backButton" onClick={() => this.handleProjectUnset()}><i className="fa fa-arrow-left" /></div>
                         <div className="projectTitle">
                             <h2>{project.title}</h2>
                             <h3>{project.subtitle}<span>|</span>{project.date}</h3>
@@ -179,7 +179,7 @@ class Projects extends Component {
                                     project={project}/>
                             }
                         </div>
-                        <div className="bottomBackButton" onClick={() => this.handleProjectUnset()}><i class="fa fa-arrow-left" style={{fontSize: "24px"}}></i></div>
+                        <div className="bottomBackButton" onClick={() => this.handleProjectUnset()}><i class="fa fa-arrow-left" /></div>
                     </div>
                 </div>
               </div>

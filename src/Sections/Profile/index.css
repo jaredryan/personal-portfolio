@@ -206,14 +206,10 @@
     line-height: 32px;
 }
 
-@media (max-width: 1000px) {
-    .profile .profileText {
-        gap: 12px;
-    }
-}
-
 @media (max-width: 650px) {
-    
+    h1 {
+        
+    }
 }
 
 @media (max-width: 480px) {
@@ -223,8 +219,28 @@
 }
 
 @media (max-width: 1000px) {
+    .profile .profilePic {
+        height: 175px;
+        width: 175px;
+    }
+    
+    .profile .profilePic div {
+        -webkit-transform: scale(0.1129);
+                transform: scale(0.1129);
+        -moz-transform: scale(0.1129);
+    }
+
+    .profile .profileText {
+        gap: 12px;
+    }
+
     .profile h2 {
         font-size: 27.5px;
+    }
+
+    .profile .fontAwesomeLogos .downloadButton,
+    .profile .fontAwesomeLogos .downloadButton i {
+        font-size: 18px;
     }
 
     .profile .fontAwesomeLogos a {
@@ -237,6 +253,10 @@
 
     .profile .fontAwesomeLogos i.fa-envelope {
         font-size: 26.5px;
+    }
+
+    .profile .summary li {
+        font-size: 18px;
     }
 }
 

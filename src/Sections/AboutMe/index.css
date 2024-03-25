@@ -128,3 +128,13 @@
     border-radius: 0 250px 250px 0;
     background-color: var(--primarylight);
 }
+
+@media (max-width: 1000px) {
+    .aboutMe .pointsContainer i {
+        font-size: 42px;
+    }
+
+    .aboutMe .points h3 {
+        font-size: 18px;
+    }
+}
