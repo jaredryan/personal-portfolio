@@ -233,6 +233,20 @@
     }
 }
 
+@media (max-width: 825px) {
+    .projects {
+        padding: 50px 50px 100px;
+    }
+
+    .projects .container {
+        gap: 50px;
+    }
+
+    .projectInfo > div {
+        padding: 40px;
+    }
+}
+
 @media (max-width: 450px) {
     .projects .buttons {
         -ms-flex-pack: distribute;

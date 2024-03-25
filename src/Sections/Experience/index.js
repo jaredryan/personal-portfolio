@@ -85,8 +85,6 @@ const Experience = (props) => {
 
     return (
         <div className="experience" id="experience" ref={props.refs.experience}>
-            <div className="banner"></div>
-            <div className="overlay"></div>
             <div className="container">
                 <h1>Experience</h1>
                 <div className="experienceItems">
