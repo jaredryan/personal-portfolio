@@ -63,15 +63,10 @@
 .profile h1,
 .profile .profileText h2 {
     margin: 0px;
-    font-weight: 200;
-}
-
-.profile h1 {
-    font-size: 80px;
-    letter-spacing: 0.6;
 }
 
 .profile h2 {
+    font-weight: 200;
     font-size: 32px;
 }
 
@@ -212,12 +207,7 @@
 }
 
 @media (max-width: 1000px) {
-    .profile h1 {
-        font-size: 70px;
-        letter-spacing: 0;
-    }
-
-    .profile .profileText h2 {
+    .profile h2 {
         font-size: 27.5px;
     }
 
@@ -235,11 +225,6 @@
 }
 
 @media (max-width: 650px) {
-    .profile h1 {
-        font-size: 60px;
-        letter-spacing: 0.5;
-    }
-
     .profile .profileText h2 {
         font-size: 24px;
     }
@@ -262,10 +247,6 @@
 }
 
 @media (max-width: 480px) {
-    .profile h1 {
-        font-size: 35px;
-    }
-
     .profile .profileText h2 {
         font-size: 20px;
     }

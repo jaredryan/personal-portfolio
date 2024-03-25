@@ -127,9 +127,35 @@ h1, h2, h3, h4, button {
     font-family: 'Roboto Slab', serif;
 }
 
+h1 {
+    font-size: 80px;
+    letter-spacing: 0.6;
+    font-weight: 200;
+}
+
+@media (max-width: 1000px) {
+    h1 {
+        font-size: 70px;
+        letter-spacing: 0;
+    }
+}
+
 @media (max-width: 750px) {
     p, li {
         font-size: 16px;
         line-height: 23px;
+    }
+}
+
+@media (max-width: 650px) {
+    h1 {
+        font-size: 60px;
+        letter-spacing: 0.5;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 35px;
     }
 }

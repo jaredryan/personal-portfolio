@@ -42,13 +42,6 @@
     gap: 50px;
 }
 
-.aboutMe h1 {
-    margin: 0px;
-    font-weight: 200;
-    font-size: 80px;
-    letter-spacing: 0.6;
-}
-
 .aboutMe .points {
     display: flex;
     align-items: stretch;
@@ -134,24 +127,4 @@
     width: 100px;
     border-radius: 0 200px 200px 0;
     background-color: var(--primarylight);
-}
-
-@media (max-width: 1000px) {
-    .aboutMe h1 {
-        font-size: 70px;
-        letter-spacing: 0;
-    }
-}
-
-@media (max-width: 650px) {
-    .aboutMe h1 {
-        font-size: 60px;
-        letter-spacing: 0.5;
-    }
-}
-
-@media (max-width: 480px) {
-    .aboutMe h1 {
-        font-size: 35px;
-    }
 }

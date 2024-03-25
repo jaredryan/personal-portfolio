@@ -43,8 +43,6 @@
 }
 
 .projects h1 {
-    font-size: 80px;
-    font-weight: 200;
     margin: 0;
 }
 
@@ -130,12 +128,12 @@
 }
 
 .projects .backButton {
-    top: 0;
     left: 0;
+    top: -75px;    
 }
 
 .projects .bottomBackButton {
-    bottom: 0;
+    bottom: -75px;
     left: 0;
 }
 
