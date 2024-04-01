@@ -2,7 +2,7 @@
     -webkit-box-sizing: border-box;
             box-sizing: border-box;
     --primary: #87CEFB;
-    --primarylight: #B3E8FF;
+    --primarylight: lightgrey;
     --secondary: #FBB487;
     --secondarylight: #FFCAB3;
     --background: white;
