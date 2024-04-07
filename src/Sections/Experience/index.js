@@ -29,7 +29,7 @@ const work = [{
     date: '2018 - 2019',
     location: 'Austin, Texas',
     listItems: [
-        'Prototyped a fullstack application in React, Node, and Python showcasing all uses of AppID, which was leveraged for sales pitches and demos',
+        'Prototyped a full stack application in React, Node, and Python showcasing all uses of AppID, which was leveraged for sales pitches and demos',
 	    'Adapted to multiple technologies and protocols to quickly debug issues: OAuth, OpenID, Node, Angular, Java, Android, Swift, Kubernetes, Docker, Jenkins, Github, Zenhub',
     ]
 }, {

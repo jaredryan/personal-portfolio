@@ -23,8 +23,8 @@ const Profile = (props) => (
                 </div>
                 <div className="row summary">
                     <ul>
-                        <li>Fullstack software engineer with 5 years experience, primarily in JS-based languages.</li>
-                        <li>Seeking full-time, 100% remote, frontend or fullstack roles.</li>
+                        <li>Full stack software engineer with 5 years experience, primarily in JS-based languages.</li>
+                        <li>Seeking full-time, 100% remote, frontend or full stack roles.</li>
                     </ul>
                 </div>
             </div>

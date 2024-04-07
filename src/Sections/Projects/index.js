@@ -5,11 +5,11 @@ import ProjectSlideShow from './Project/ProjectSlideshow'
 
 const projects = [{
     title: "Negotiation Feedback",
-    subtitle: "Complex, actively-used, fullstack application",
+    subtitle: "Complex, actively-used, full stack application",
     date: "2018",
     summaryBullets: [
         "Freelance project for college professor",
-        "Fullstack JavaScript with MongoDB consisting of schools, classes, sprints, assignments, evaluations, students, teachers, administrators, and feedback about the site"
+        "Full stack JavaScript with MongoDB consisting of schools, classes, sprints, assignments, evaluations, students, teachers, administrators, and feedback about the site"
     ],
     problemsSolved: [
         "Secure user authentication, which then directs the user to for 1 of 3 dashboards, depending on whether the user is a student, teacher, or admin",
