@@ -21,7 +21,7 @@ const work = [{
         'Refactored entire frontend for user management, which evolved to a small leadership role as work expanded and required additional engineers',
 	    'Architected user management technical solutions with product and backend lead, considering security, performance, sizing, business value, and usability',
 	    'Co-created conceptual models and user flows with design, providing guidance on attributes and relationships between users, roles, permissions, and groups',
-        'Planned projects with 1, 3, and 6 month cycles, executed via Agile in 2-week sprints',
+        'Planned projects with 1-, 3-, and 6-month cycles, executed via Agile in 2-week sprints',
     ],
 }, {
     title: 'Software Developer I',
