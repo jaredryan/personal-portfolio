@@ -41,7 +41,6 @@
 }
 
 .profile .profileText {
-    z-index: 1;
     text-align: left;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -93,7 +92,7 @@
     font-size: 32px;
 }
 
-.profile .fontAwesomeLogos a {
+.profile .fontAwesomeLogos > a {
     width: 30px;
     margin-left: 20px;
     margin-right: 7px;
@@ -103,63 +102,119 @@
     align-items: center;
 }
 
-.profile .fontAwesomeLogos a.left {
+.profile .fontAwesomeLogos > a.left {
     margin-left: 0px;
 }
 
-.profile .fontAwesomeLogos a.right {
+.profile .fontAwesomeLogos > a.right {
     margin-right: 0px;
 }
 
-.profile .fontAwesomeLogos .downloadButton {
+
+.profile .fontAwesomeLogos .resumeButtonContainer {
+    position: relative;
+}
+
+.profile .fontAwesomeLogos .resumeButton {
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 20px;
     border: none;
     padding: 4px 12px;
-    font-weight: 200;
+    font-weight: 300;
     cursor: pointer;
     text-decoration: none;
     font-family: 'Roboto Slab', serif;
     text-align: center;
     border-radius: 6px;
     width: fit-content;
-    color: black;
 }
 
-.profile .fontAwesomeLogos .downloadButton i {
+.profile .fontAwesomeLogos .resumeButton i {
     font-size: 20px;
     margin-left: 8px;
 }
 
-.profile .fontAwesomeLogos .downloadButton i:hover {
-    color: black;
-}
-
-.profile .fontAwesomeLogos .downloadButton:hover,
-.profile .fontAwesomeLogos i:hover {
+.profile .fontAwesomeLogos .resumeButton:hover,
+.profile .fontAwesomeLogos i:hover,
+.profile .fontAwesomeLogos .resumeTooltip a:hover {
     -webkit-transition-duration: 300ms;
             transition-duration: 300ms;
 }
 
-.profile .fontAwesomeLogos .downloadButton {
+.profile .fontAwesomeLogos .resumeButton {
     background-color: white;
-    /* color: white; */
 }
 
-.profile .fontAwesomeLogos a {
+.profile .fontAwesomeLogos > a {
     color: white;
 }
 
-.profile .fontAwesomeLogos .downloadButton:hover {
+.profile .fontAwesomeLogos .resumeButton:hover {
     background-color: var(--secondarylight);
 }
 
-.profile .fontAwesomeLogos i:hover {
+.profile .fontAwesomeLogos .downloadOption:hover {
+    background-color: var(--secondarylight);
+}
+
+.profile .fontAwesomeLogos > a i:hover {
     color: var(--secondarylight);
-    -webkit-transition-duration: 300ms;
-            transition-duration: 300ms;
+}
+
+.profile .resumeTooltip.hidden {
+    display: none;
+}
+
+.profile .resumeTooltip {
+    display: flex;
+    position: absolute;
+    left: 0;
+    font-family: "Roboto Slab", serif;
+    font-weight: 300;
+    flex-direction: column;
+    box-shadow: 0 1px 2px 0 grey;
+    background-color: white;
+    color: black;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    margin-top: 2px;
+    align-items: center;
+    width: max-content;
+    z-index: 1;
+}
+
+.profile .resumeTooltip,
+.profile .resumeTooltip a i {
+    font-size: 16px;
+}
+
+.profile .resumeTooltip a {
+    display: block;
+    margin: 0;
+    padding: 8px 12px;
+    border-radius: 6px 6px 0 0;
+    margin: 0;
+    background-color: white;
+    cursor: pointer;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.profile .resumeTooltip a:first-of-type {
+    border-radius: 6px 6px 0 0;
+}
+
+.profile .resumeTooltip a:last-of-type {
+    border-radius: 0 0 6px 6px;
+}
+
+.profile .resumeTooltip i {
+    margin-left: 8px;
 }
 
 .profile .profilePic {
@@ -168,7 +223,6 @@
     border-radius: 50%;
     overflow: hidden;
     position: relative;
-    z-index: 1;
     outline: 5px solid var(--primarylight)
 }
 
@@ -228,12 +282,12 @@
         font-size: 27.5px;
     }
 
-    .profile .fontAwesomeLogos .downloadButton,
-    .profile .fontAwesomeLogos .downloadButton i {
+    .profile .fontAwesomeLogos .resumeButton,
+    .profile .fontAwesomeLogos .resumeButton i {
         font-size: 18px;
     }
 
-    .profile .fontAwesomeLogos a {
+    .profile .fontAwesomeLogos > a {
         width: 27.5px;
     }
 
@@ -258,6 +312,12 @@
 
     .profile .profileText {
         gap: 10px;
+        width: 100%;
+    }
+
+    .profile .fontAwesomeLogos {
+        width: 100%;
+        justify-content: center;
     }
 
     .profile .row {
@@ -278,6 +338,19 @@
         -webkit-transform: scale(0.14516);
                 transform: scale(0.14516);
         -moz-transform: scale(0.14516);
+    }
+
+    .profile .fontAwesomeLogos .resumeButtonContainer {
+        position: initial;
+    }
+
+    .profile .resumeTooltip {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .profile .resumeTooltip a {
+        justify-content: center;
     }
 }
 
@@ -301,7 +374,7 @@
         margin-top: 10px;
     }
 
-    .profile .fontAwesomeLogos a {
+    .profile .fontAwesomeLogos > a {
         width: 25px;
     }
 
@@ -340,13 +413,13 @@
         margin-top: 7.5px;
     }
 
-    .profile .fontAwesomeLogos a {
+    .profile .fontAwesomeLogos > a {
         margin-right: 5px;
         margin-left: 5px;
         width: 21px;
     }
 
-    .profile .fontAwesomeLogos i {
+    .profile .fontAwesomeLogos > a i {
         font-size: 22px;
         margin-right: 0;
         margin-left: 0;
