@@ -129,6 +129,7 @@
     text-align: center;
     border-radius: 6px;
     width: fit-content;
+    color: black;
 }
 
 .profile .fontAwesomeLogos .resumeButton i {
