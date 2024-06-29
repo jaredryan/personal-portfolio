@@ -17,8 +17,8 @@
 }
 
 .projectImageContainer .projectImage {
-    outline: 1px solid lightgrey;
-    box-shadow: 0 4px 4px -2px lightgrey;
+    outline: 1px solid grey;
+    box-shadow: 0 4px 4px -2px grey;
 }
 
 .projectImageContainer .projectImage.titleImage,
@@ -30,8 +30,8 @@
 }
 
 .projectImageContainer .projectImage.titleImage {
-    outline: 5px solid var(--primarylight);
-    box-shadow: 0 11px 6px -4px lightgrey;
+    outline: 5px solid var(--primary);
+    box-shadow: 0 11px 6px -4px grey;
 }
 
 .projectImageContainer h5 {

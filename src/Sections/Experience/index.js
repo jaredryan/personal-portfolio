@@ -46,16 +46,6 @@ const work = [{
 
 const lastDefaultItemIndex = 1
 
-const education = [{
-    title: 'V School',
-    date: '2018',
-    subject: 'Full Stack JavaScript Web Development (MERN Stack)',
-}, {
-    title: 'UC Berkeley College of Engineering',
-    date: '2017',
-    subject: 'B.S. Bioengineering, Computer Science emphasis',
-}]
-
 const mapWork = (work) => 
     <div key={work.title}>
         <h3>{work.title}</h3>
@@ -63,12 +53,6 @@ const mapWork = (work) =>
         <ul>
             {work.listItems.map((item) => <li key={item}>{item}</li>)}
         </ul>
-    </div>
-
-const mapEducation = (education) => 
-    <div key={education.title}>
-        <h3>{education.title}</h3>
-        <h4>{education.subject}<span>|</span>{education.date}</h4>
     </div>
 
 const Experience = (props) => {
@@ -90,7 +74,6 @@ const Experience = (props) => {
                 <div className="experienceItems">
                     {!seeMore && work.slice(0, lastDefaultItemIndex + 1).map(mapWork)}
                     {seeMore && work.map(mapWork)}
-                    {seeMore && education.map(mapEducation)}
                 </div>
                 <h5 className="experienceToggle" onClick={handleSeeMoreClick}>
                     {seeMore ? 'See less' : 'See more'}
@@ -102,4 +85,4 @@ const Experience = (props) => {
     )
 }
 
-export default Experience;
+export default Experience

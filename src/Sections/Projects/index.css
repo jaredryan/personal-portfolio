@@ -6,6 +6,7 @@
     min-height: 100vh;
     display: flex;
     justify-content: center;
+    background-color: var(--primarylight);
 }
 
 .projects .container {
@@ -99,13 +100,22 @@
 .projects button,
 .projects .backButton,
 .projects .bottomBackButton {
-    background-color: var(--primary);
+    background-color: var(--background);
     padding: 6px 12px;
     font-size: 18px;
     font-weight: 300;
     border-radius: 6px;
     margin-top: 20px;
     border: none;
+}
+
+.projects button {
+    background-color: var(--secondary);
+}
+
+.projects .backButton,
+.projects .bottomBackButton {
+    background-color: var(--background);
 }
 
 .projects .backButton,
@@ -201,8 +211,7 @@
 .projects .backButton:hover,
 .projects .bottomBackButton:hover {
     cursor: pointer;
-    background-color: var(--primarylight);
-    color: grey;
+    background-color: var(--secondarylight);
     -webkit-transition-duration: 300ms;
             transition-duration: 300ms;
 }
