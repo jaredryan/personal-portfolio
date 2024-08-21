@@ -4,7 +4,7 @@ import './index.css'
 const education = [{
     title: 'V School',
     date: '2018',
-    subject: 'Full Stack JavaScript Web Development (MERN Stack)',
+    subject: 'Fullstack JavaScript Web Development (MERN Stack)',
 }, {
     title: 'UC Berkeley College of Engineering',
     date: '2017',

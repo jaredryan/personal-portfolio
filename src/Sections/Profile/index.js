@@ -13,7 +13,7 @@ const Profile = (props) => {
                     <div className="row">
                         <div className="profileText">
                             <h1>Jared Ryan</h1>
-                            <h2>Software Engineer</h2>
+                            <h2>Senior Fullstack Engineer</h2>
                             <div className="fontAwesomeLogos">
                                 <div className="resumeButtonContainer">
                                     <button className="resumeButton left" onClick={handleResumeButtonClick}>
@@ -40,10 +40,8 @@ const Profile = (props) => {
                         </div>
                     </div>
                     <div className="row summary">
-                        <ul>
-                            <li>Full stack software engineer with 5 years experience, primarily in JS-based languages.</li>
-                            <li>Seeking full-time, 100% remote, frontend or full stack roles.</li>
-                        </ul>
+                        <h3>I love the human side of software and learning how things work.</h3>
+                        <h4>Seeking full-time, remote, fullstack or frontend roles.</h4>
                     </div>
                 </div>
             </div>

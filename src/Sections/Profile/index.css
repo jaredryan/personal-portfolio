@@ -60,13 +60,29 @@
 }
 
 .profile h1,
-.profile .profileText h2 {
+.profile .profileText h2,
+.profile h3,
+.profile h4 {
     margin: 0px;
 }
 
 .profile h2 {
     font-weight: 300;
     font-size: 32px;
+}
+
+.profile h3,
+.profile h4 {
+    font-weight: 300;
+    font-family: "Muli", sans-serif;
+}
+
+.profile h3 {
+    font-size: 24px;
+}
+
+.profile h4 {
+    font-size: 20px;
 }
 
 .profile .fontAwesomeLogos {
@@ -243,24 +259,9 @@
     -moz-transform-origin: top left;
 }
 
-.profile .summary ul {
-    list-style-type: none;
-}
-
-.profile .summary ul {
-    margin-top: 0;
-    padding: 0;
+.profile .summary {
     display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-.profile .summary li {
-    font-family: 'Roboto Slab', serif;
-    font-size: 20px;
-    font-weight: 300;
-    padding-left: 0;
-    line-height: 30px;
+    gap: 8px;
 }
 
 @media (max-width: 1000px) {
@@ -300,9 +301,12 @@
         font-size: 26.5px;
     }
 
-    .profile .summary li {
+    .profile .summary h3 {
+        font-size: 22px;
+    }
+
+    .profile .summary h4 {
         font-size: 18px;
-        line-height: 28px;
     }
 }
 
@@ -353,6 +357,10 @@
     .profile .resumeTooltip a {
         justify-content: center;
     }
+
+    .profile .summary {
+        text-align: center;
+    }
 }
 
 @media (max-width: 650px) {
@@ -369,6 +377,10 @@
     
     .profile .profileText h2 {
         font-size: 24px;
+    }
+
+    .profile .summary h3 {
+        font-size: 20px;
     }
 
     .profile .fontAwesomeLogos {
