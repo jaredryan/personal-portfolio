@@ -12,8 +12,10 @@ const Profile = (props) => {
                 <div className="container">
                     <div className="row">
                         <div className="profileText">
-                            <h1>Jared Ryan</h1>
-                            <h2>Senior Fullstack Engineer</h2>
+                            <div>
+                                <h1>Jared Ryan</h1>
+                                <h2>Senior Fullstack Engineer</h2>
+                            </div>
                             <div className="fontAwesomeLogos">
                                 <div className="resumeButtonContainer">
                                     <button className="resumeButton left" onClick={handleResumeButtonClick}>
@@ -31,17 +33,12 @@ const Profile = (props) => {
                                         </a>
                                     </div>
                                 </div>
-                                <a href="mailto:jryantennis@gmail.com?subject=Hi, Jared (from the Portfolio Website)" ><i className="fa fa-envelope" style={{fontWeight: 100}}></i></a>
+                                <a href="mailto:jryantennis@gmail.com?subject=Hi, Jared (from the Portfolio Website)"><i className="fa fa-envelope" style={{fontWeight: 100}}></i></a>
                                 <a href="https://www.linkedin.com/in/jared-m-ryan/" className="right"><i className="fa fa-linkedin" style={{fontWeight: 100}}></i></a>
+                                <a href="https://github.com/jaredryan" className="right"><i className="fa fa-github" style={{fontWeight: 100}}></i></a>
                             </div>
+                            <h3>The human side of software & how things work.</h3>
                         </div>
-                        <div className="profilePic">
-                            <div></div>
-                        </div>
-                    </div>
-                    <div className="row summary">
-                        <h3>I love the human side of software and learning how things work.</h3>
-                        <h4>Seeking full-time, remote, fullstack or frontend roles.</h4>
                     </div>
                 </div>
             </div>

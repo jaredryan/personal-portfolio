@@ -2,31 +2,30 @@
 
 .profile {
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(rgba(158, 213, 247, 0.5), rgba(135, 206, 251, 0.1), rgba(135, 206, 251, 0.2)), url("../../Images/homeBackground.jpg") no-repeat center center;
+    background-size: cover;
+    position: relative;
     /* gap: 100px; */
 }
 
 .profile .topSection {
-    padding: 100px;
+    padding: 50px 100px;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--primary);
 }
 
 .profile .container {
     width: 100%;
-    max-width: 1000px;
+    /* max-width: 1000px; */
     display: flex;
     flex-direction: column;
 }
 
 .profile .topSection .container {
-    gap: 50px;
+    gap: 100px;
     align-items: start;
     justify-content: space-between;
 }
@@ -56,7 +55,7 @@
 }
 
 .profile a {
-    color: black;
+    color: white;
 }
 
 .profile h1,
@@ -64,6 +63,7 @@
 .profile h3,
 .profile h4 {
     margin: 0px;
+    color: white;
 }
 
 .profile h2 {
@@ -78,11 +78,11 @@
 }
 
 .profile h3 {
-    font-size: 24px;
+    font-size: 20px;
 }
 
 .profile h4 {
-    font-size: 20px;
+    font-size: 24px;
 }
 
 .profile .fontAwesomeLogos {
@@ -169,15 +169,15 @@
 }
 
 .profile .fontAwesomeLogos .resumeButton:hover {
-    background-color: var(--secondarylight);
+    background-color: var(--primarylight);
 }
 
 .profile .fontAwesomeLogos .downloadOption:hover {
-    background-color: var(--secondarylight);
+    background-color: var(--primarylight);
 }
 
 .profile .fontAwesomeLogos > a i:hover {
-    color: var(--secondarylight);
+    color: var(--primarylight);
 }
 
 .profile .resumeTooltip.hidden {
@@ -209,6 +209,7 @@
 }
 
 .profile .resumeTooltip a {
+    color: black;
     display: block;
     margin: 0;
     padding: 8px 12px;
@@ -240,7 +241,8 @@
     border-radius: 50%;
     overflow: hidden;
     position: relative;
-    outline: 5px solid var(--primarylight)
+    outline: 5px solid var(--primarylight);
+    box-shadow: 0px 2px 8px 4px grey;
 }
 
 .profile .profilePic div {
@@ -261,7 +263,13 @@
 
 .profile .summary {
     display: flex;
-    gap: 8px;
+    gap: 10px;
+    justify-content: center;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: white;
+    padding: 8px 16px;
 }
 
 @media (max-width: 1000px) {
@@ -301,8 +309,9 @@
         font-size: 26.5px;
     }
 
-    .profile .summary h3 {
+    .profile h3 {
         font-size: 22px;
+        width: 400px;
     }
 
     .profile .summary h4 {

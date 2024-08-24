@@ -1,8 +1,8 @@
 * {
     -webkit-box-sizing: border-box;
             box-sizing: border-box;
-    --primary: #87CEFB;
-    --primarylight: #B3E8FF;
+    --primary: #87CEFB; /* rgb(135, 206, 251) */ 
+    --primarylight: #B3E8FF; /* rgb(179, 232, 255) */ 
     --secondary: #FBB487;
     --secondarylight: #FFCAB3;
     --background: white;
