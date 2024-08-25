@@ -15,6 +15,7 @@ const Profile = (props) => {
                             <div>
                                 <h1>Jared Ryan</h1>
                                 <h2>Senior Fullstack Engineer</h2>
+                                <h3>The human side of software & how things work.</h3>
                             </div>
                             <div className="fontAwesomeLogos">
                                 <div className="resumeButtonContainer">
@@ -37,11 +38,12 @@ const Profile = (props) => {
                                 <a href="https://www.linkedin.com/in/jared-m-ryan/" className="right"><i className="fa fa-linkedin" style={{fontWeight: 100}}></i></a>
                                 <a href="https://github.com/jaredryan" className="right"><i className="fa fa-github" style={{fontWeight: 100}}></i></a>
                             </div>
-                            <h3>The human side of software & how things work.</h3>
+                            
                         </div>
                     </div>
                 </div>
             </div>
+            <div className="bottomSection" />
         </div>
     )
 }

@@ -69,7 +69,7 @@
 
 .loadingContainer h1 {
     font-size: 32px;
-    font-weight: 300;
+    font-weight: 400;
 }
 
 @-webkit-keyframes loading {
@@ -114,7 +114,7 @@ a {
 
 p, li {
     font-family: "Muli", sans-serif;
-    font-weight: 300;
+    font-weight: 400;
     font-size: 16px;
     line-height: 22px;
 }
@@ -135,7 +135,7 @@ h1, h2, h3, h4, button {
 h1 {
     font-size: 80px;
     letter-spacing: 0.6;
-    font-weight: 300;
+    font-weight: 400;
 }
 
 @media (max-width: 1000px) {

@@ -17,6 +17,15 @@
     justify-content: center;
 }
 
+.profile .bottomSection {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    border-bottom: 75px solid white;
+    border-left: 100vw solid transparent;
+}
+
 .profile .container {
     width: 100%;
     /* max-width: 1000px; */
@@ -66,19 +75,16 @@
     color: white;
 }
 
-.profile h1 {
-    font-weight: 400;
-}
-
 .profile h2 {
-    font-weight: 300;
+    font-weight: 400;
     font-size: 32px;
 }
 
 .profile h3,
 .profile h4 {
-    font-weight: 300;
+    font-weight: 400;
     font-family: "Muli", sans-serif;
+    margin-top: 10px;
 }
 
 .profile h3 {
@@ -142,7 +148,7 @@
     font-size: 20px;
     border: none;
     padding: 4px 12px;
-    font-weight: 300;
+    font-weight: 400;
     cursor: pointer;
     text-decoration: none;
     font-family: 'Roboto Slab', serif;
@@ -193,7 +199,7 @@
     position: absolute;
     left: 0;
     font-family: "Roboto Slab", serif;
-    font-weight: 300;
+    font-weight: 400;
     flex-direction: column;
     box-shadow: 0 1px 2px 0 grey;
     background-color: white;
