@@ -25,33 +25,81 @@
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
-    -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
     width: 100%;
-    gap: 60px;
+    gap: 50px;
+    flex-direction: column;
+    align-items: center;
 }
 
 .skills .skillsGrid i {
     font-size: 48px;
-    margin-bottom: 16px;
     color: var(--secondary);
 }
 
 .skills .skillsGrid .skillCategoryContainer {
-    border-radius: 50px;
+    border-radius: 10000px;
     background-color: var(--background);
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    padding: 50px;
-    border-radius: 50px;
+    flex-direction: row;
     width: 350px;
-    margin: 0 auto;
+    margin: 0;
     outline: 5px solid var(--primary);
     box-shadow: 0 11px 6px -4px grey;
+    width: 100%;
+    max-width: 1050px;
+}
+
+.skills .skillCategoryContainer img {
+    border-radius: 50px 0 0 50px;
+    object-fit: cover;
+    max-width: 210px;
+    max-height: 210px;
+}
+
+/* .skills .skillCategoryContainer > div:first-child {
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    max-width: 210px;
+    max-height: 210px;
+    border-radius: 50px 0 0 50px;
+}
+
+.skills .skillCategoryContainer .frontend {
+    background: linear-gradient(rgba(135, 206, 251, 0.5), rgba(135, 206, 251, 0.5)), url("../../Images/frontendIcon.png") no-repeat center center;
+}
+
+.skills .skillCategoryContainer .backend {
+    background: linear-gradient(rgba(135, 206, 251, 0.5), rgba(135, 206, 251, 0.5)), url("../../Images/backend.png") no-repeat center center;
+}
+
+.skills .skillCategoryContainer .soft {
+    background: linear-gradient(rgba(135, 206, 251, 0.5), rgba(135, 206, 251, 0.5)), url("../../Images/softIcon.png") no-repeat center center;
+} */
+
+
+
+    
+
+.skills .categoryContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 370px;
+    max-width: 830px;
+    gap: 16px;
+    padding: 50px;
+}
+
+.skills .categoryTitle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
 }
 
 .skills .skillsGrid h3 {
@@ -61,10 +109,26 @@
     text-align: center;
 }
 
+.skills ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    width: 100%;
+}
+
 .skills li {
+    padding: 0;
     font-size: 16px;
     line-height: 22px;
-    margin: 6px 0;
+    margin: 0;
+    width: fit-content;
+    padding: 4px 12px;
+    border-radius: 10000px;
+    background-color: var(--primarylight);
+    color: var(--primaryfont);
+    display: block;
 }
 
 @media (max-width: 1000px) {

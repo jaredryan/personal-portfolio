@@ -1,13 +1,22 @@
 import React from 'react'
 import './index.css'
+import FrontendImage from '../../Images/frontendIcon2.png';
+import BackendImage from '../../Images/backend2.png';
+import SoftImage from '../../Images/softIcon2.png';
+
 
 const mapSkills = (skill) =>
     <div key={skill.title} className="skillCategoryContainer">
-        {skill.icon}
-        <h3>{skill.title}</h3>
-        <ul>
-            {skill.listItems.map((item) => <li key={item}>{item}</li>)}
-        </ul>
+        {/* <div className={skill.title.toLowerCase()}></div> */}
+        {skill.image}
+        <div className="categoryContainer">
+            <div className="categoryTitle">
+                <h3>{skill.title}</h3>
+            </div>
+            <ul>
+                {skill.listItems.map((item) => <li key={item}>{item}</li>)}
+            </ul>
+        </div>
     </div>
 
 const skills = [{
@@ -25,6 +34,7 @@ const skills = [{
         'GraphQL',
     ],
     icon: <i className="fa fa-laptop" style={{fontWeight: 100}} />,
+    image: <img src={FrontendImage} alt="Frontend Skills" className="frontend" />,
 }, {
     title: 'Backend',
     listItems: [
@@ -39,6 +49,7 @@ const skills = [{
         'Automated pipelines',
     ],
     icon: <i className="fa fa-server" style={{fontWeight: 100}} />,
+    image: <img src={BackendImage} alt="Backend Skills" className="backend" />,
 }, {
     title: 'Soft',
     listItems: [
@@ -53,6 +64,7 @@ const skills = [{
         '...but knows when to seek help'
     ],
     icon: <i className="fa fa-users" style={{fontWeight: 100}} />,
+    image: <img src={SoftImage} alt="Soft Skills" className="soft" />,
 }]
 
 const Skills = (props) => 

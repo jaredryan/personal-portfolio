@@ -86,6 +86,7 @@
     width: 50%;
     object-fit: cover;
     max-width: 480px;
+    border-radius: 50px;
 }
 
 .aboutMe .points {

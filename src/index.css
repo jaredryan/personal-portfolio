@@ -3,6 +3,7 @@
             box-sizing: border-box;
     --primary: #87CEFB; /* rgb(135, 206, 251) */ 
     --primarylight: #B3E8FF; /* rgb(179, 232, 255) */ 
+    --primaryfont: #365264;
     --secondary: #FBB487;
     --secondarylight: #FFCAB3;
     --background: white;
