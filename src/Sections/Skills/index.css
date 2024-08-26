@@ -1,10 +1,11 @@
 .skills {
     width: 100%;
-    padding: 80px 100px 100px;
+    padding: 50px 100px;
     display: flex;
     justify-content: center;
     align-items: center;
     background: linear-gradient(var(--primarylight), var(--primarylight), var(--primarylight), var(--primarylight), white, white)
+    /* background-color: #f6f9fc; */
 }
 
 .skills .container {
@@ -56,6 +57,13 @@
     object-fit: cover;
     max-width: 210px;
     max-height: 210px;
+}
+
+.skills .emphasis {
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--primaryfont);
+    margin: 0;
 }
 
 /* .skills .skillCategoryContainer > div:first-child {

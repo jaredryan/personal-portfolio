@@ -10,7 +10,6 @@
     align-items: center;
     position: relative;
     color: white;
-    min-height: 100vh;
 }
 
 .experience .background {
@@ -36,12 +35,12 @@
     max-width: 1000px;
     width: 100%;
     position: relative;
-    padding: 80px 100px 130px;
+    padding: 50px 100px 100px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 100px;
+    gap: 50px;
 }
 
 .experience .container h1 {

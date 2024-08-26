@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 
 import Navbar from './Navbar'
+import Footer from './Footer'
 
 import Profile from './Sections/Profile'
 import AboutMe from './Sections/AboutMe'
 import Skills from './Sections/Skills'
 import Experience from './Sections/Experience'
-import Projects from './Sections/Projects'
 
 class App extends Component {
     constructor() {
@@ -29,7 +29,6 @@ class App extends Component {
                 aboutMe: React.createRef(),
                 skills: React.createRef(),
                 experience: React.createRef(),
-                projects: React.createRef(),
             },
         }
     }
@@ -147,7 +146,7 @@ class App extends Component {
                     <AboutMe refs={this.state.refs} />
                     <Skills refs={this.state.refs} />
                     <Experience refs={this.state.refs} onScroll={this.onScroll} />
-                    <Projects refs={this.state.refs} onScroll={this.onScroll} />
+                    <Footer />
                 </div>
             </div>
         )

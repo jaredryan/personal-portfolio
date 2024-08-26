@@ -1,0 +1,224 @@
+.footer {
+    width: 100%;
+    background-color: white;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px 100px 50px;
+    width: 100%;
+    max-width: 1250px;
+    gap: 50px;
+}
+
+.footer .emphasis {
+    font-family: 'Roboto Slab', serif;
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--primaryfont);
+    margin-top: 0;
+}
+
+.footer h3 {
+    font-family: 'Roboto Slab', serif;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.footer .blurb {
+    width: 100%;
+    max-width: 600px;
+}
+
+.footer .contact {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    min-width: 290px;
+}
+
+.footer ul {
+    list-style-type: none;
+    padding: 0;
+    margin: -5px 0 0;
+}
+
+/* Repeated profilePic code */
+
+.footer .profilePic {
+    height: 150px;
+    width: 150px;
+    min-width: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+    outline: 5px solid var(--primary);
+    box-shadow: 0px 2px 8px 4px black;
+}
+
+.footer .profilePic div {
+    background: url("../Images/profilePic.jpg") no-repeat center center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 1550px;
+    width: 1550px;
+    background-size: cover;
+    -webkit-transform: scale(0.09677);
+            transform: scale(0.09677);
+    -webkit-transform-origin: top left;
+            transform-origin: top left;
+    -moz-transform: scale(0.09677);
+    -moz-transform-origin: top left;
+}
+
+/* Repeated icon and resume button code */
+
+.footer .fontAwesomeLogos {
+    text-align: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: left;
+        -ms-flex-pack: left;
+            justify-content: left;
+}
+
+.footer .fontAwesomeLogos i {
+    margin: 0;
+    margin-bottom: 0;
+    text-align: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    font-size: 32px;
+}
+
+.footer .fontAwesomeLogos > a {
+    width: 30px;
+    margin-left: 20px;
+    margin-right: 7px;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer .fontAwesomeLogos > a.left {
+    margin-left: 0px;
+}
+
+.footer .fontAwesomeLogos > a.right {
+    margin-right: 0px;
+}
+
+
+.footer .fontAwesomeLogos .resumeButtonContainer {
+    position: relative;
+}
+
+.footer .fontAwesomeLogos .resumeButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    border: none;
+    padding: 4px 12px;
+    font-weight: 400;
+    cursor: pointer;
+    text-decoration: none;
+    font-family: 'Roboto Slab', serif;
+    text-align: center;
+    border-radius: 6px;
+    width: fit-content;
+    color: black;
+    background-color: var(--primary);
+}
+
+.footer .fontAwesomeLogos .resumeButton i {
+    font-size: 20px;
+    margin-left: 8px;
+}
+
+.footer .fontAwesomeLogos .resumeButton:hover,
+.footer .fontAwesomeLogos i:hover,
+.footer .fontAwesomeLogos .resumeTooltip a:hover {
+    -webkit-transition-duration: 300ms;
+            transition-duration: 300ms;
+}
+
+.footer .fontAwesomeLogos > a {
+    color: var(--primary);
+}
+
+.footer .fontAwesomeLogos .resumeButton:hover {
+    background-color: var(--secondarylight);
+}
+
+.footer .fontAwesomeLogos .downloadOption:hover {
+    background-color: var(--secondarylight);
+}
+
+.footer .fontAwesomeLogos > a i:hover {
+    color: var(--secondarylight);
+}
+
+.footer .resumeTooltip.hidden {
+    display: none;
+}
+
+.footer .resumeTooltip {
+    display: flex;
+    position: absolute;
+    left: 0;
+    font-family: "Roboto Slab", serif;
+    font-weight: 400;
+    flex-direction: column;
+    box-shadow: 0 1px 2px 0 grey;
+    background-color: white;
+    color: black;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    margin-top: 2px;
+    align-items: center;
+    width: max-content;
+    z-index: 1;
+}
+
+.footer .resumeTooltip,
+.footer .resumeTooltip a i {
+    font-size: 16px;
+}
+
+.footer .resumeTooltip a {
+    color: black;
+    display: block;
+    margin: 0;
+    padding: 8px 12px;
+    border-radius: 6px 6px 0 0;
+    margin: 0;
+    background-color: white;
+    cursor: pointer;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.footer .resumeTooltip a:first-of-type {
+    border-radius: 6px 6px 0 0;
+}
+
+.footer .resumeTooltip a:last-of-type {
+    border-radius: 0 0 6px 6px;
+}
+
+.footer .resumeTooltip i {
+    margin-left: 8px;
+}

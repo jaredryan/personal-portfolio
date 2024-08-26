@@ -38,7 +38,6 @@ const Profile = (props) => {
                                 <a href="https://www.linkedin.com/in/jared-m-ryan/" className="right"><i className="fa fa-linkedin" style={{fontWeight: 100}}></i></a>
                                 <a href="https://github.com/jaredryan" className="right"><i className="fa fa-github" style={{fontWeight: 100}}></i></a>
                             </div>
-                            
                         </div>
                     </div>
                 </div>

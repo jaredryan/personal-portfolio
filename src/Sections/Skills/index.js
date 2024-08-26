@@ -61,7 +61,7 @@ const skills = [{
         'Pairing',
         'Mentoring',
         'Independent',
-        '...but knows when to seek help'
+        'When/how to seek help'
     ],
     icon: <i className="fa fa-users" style={{fontWeight: 100}} />,
     image: <img src={SoftImage} alt="Soft Skills" className="soft" />,
@@ -74,6 +74,9 @@ const Skills = (props) =>
             <div className="skillsGrid">
                 {skills.map(mapSkills)}
             </div>
+            <h3 className="emphasis">
+                Where did I pick up these skills?
+            </h3>
         </div>
     </div>
 
