@@ -35,7 +35,7 @@
     max-width: 1000px;
     width: 100%;
     position: relative;
-    padding: 50px 100px 100px;
+    padding: 50px 100px 115px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -47,6 +47,12 @@
     margin: 0 auto;
 }
 
+.experience .contentContainer { 
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
 .experience .container .experienceItems {
     display: flex;
     flex-direction: row;
@@ -56,7 +62,35 @@
     border-radius: 50px;
     outline: 5px solid var(--primary);
     box-shadow: 0px 2px 8px 3px black;
-    
+}
+
+.experience .timelineContainer ul {
+    padding: 40px 0px !important;
+    margin: 0;
+}
+
+.experience .timelineContainer li:last-child {
+    min-height: fit-content;
+}
+
+.experience .timelineContainer li > div:first-child {
+    width: 80px;
+}
+
+.experience .timelineContainer li > div:last-child {
+    width: 60px;
+}
+
+.experience .icon {
+    cursor: pointer;
+    width: 28px;
+    height: 28px;
+}
+
+.experience .icon:hover {
+    outline: 5px solid var(--primary);
+    border-radius: 2px;
+    transition-duration: 0.3s;
 }
 
 .experience .container .experienceItems .tabContainer {
@@ -85,6 +119,7 @@
     align-items: center;
     padding: 40px 50px;
     height: 100%;
+    width: 600px;
 }
 
 .experience .container ul {
