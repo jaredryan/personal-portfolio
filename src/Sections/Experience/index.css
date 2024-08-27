@@ -94,7 +94,7 @@
 }
 
 .experience .icon:hover {
-    outline: 5px solid var(--primaryfont);
+    outline: 5px solid var(--primaryfont) !important;
 }
 
 .experience .icon.chosen {
