@@ -29,8 +29,8 @@ const work = [{
 	    'Co-led work on an automated testing pipeline: the pipeline itself, testing framework, database seeding / cleanup, tests, and teaching others how to contribute',
         'Proactively worked with cross-team stakeholders to identify, prioritize, and complete work to reduce number of days on our “activation” flow (time from request to completion)',
     ],
-    icon: handleChange =>
-        <img src={MantlIcon} alt={'MANTL'} className="icon" onClick={() => handleChange('MANTL')}/>,
+    icon: (handleChange, value) =>
+        <img src={MantlIcon} alt={'MANTL'} className={`icon${value === 'MANTL' ? ' chosen' : ''}`} onClick={() => handleChange('MANTL')}/>,
 }, {
     tab: 'IBM - CA',
     title: 'Software Developer II',
@@ -44,8 +44,8 @@ const work = [{
 	    'Co-created conceptual models and user flows with design, providing guidance on attributes and relationships between users, roles, permissions, and groups',
         'Planned projects with 1-, 3-, and 6-month cycles, executed via Agile in 2-week sprints',
     ],
-    icon: handleChange => 
-        <img src={IBMIcon} alt={'IBM'} className="icon" onClick={() => handleChange('IBM - CA')} />,
+    icon: (handleChange, value) => 
+        <img src={IBMIcon} alt={'IBM'} className={`icon${value === 'IBM - CA' ? ' chosen' : ''}`} onClick={() => handleChange('IBM - CA')} />,
 }, {
 }, {
     tab: 'IBM - TX',
@@ -58,8 +58,8 @@ const work = [{
         'Prototyped a fullstack application in React, Node, and Python showcasing all uses of AppID, which was leveraged for sales pitches and demos',
 	    'Adapted to multiple technologies and protocols to quickly debug issues: OAuth, OpenID, Node, Angular, Java, Android, Swift, Kubernetes, Docker, Jenkins, Github, Zenhub',
     ],
-    icon: handleChange =>
-        <img src={IBMIcon} alt={'IBM'} className="icon" onClick={() => handleChange('IBM - TX')} />,
+    icon: (handleChange, value) =>
+        <img src={IBMIcon} alt={'IBM'} className={`icon${value === 'IBM - TX' ? ' chosen' : ''}`} onClick={() => handleChange('IBM - TX')} />,
 }, {
     tab: 'NTR',
     title: 'Web Developer',
@@ -72,8 +72,8 @@ const work = [{
       	'Collaborated with non-technical UC Berkeley professor to define product requirements and designs, then again for updates and new features over the 4 years before handoff', 
   	    'Learned troubleshooting without access to clients, and maintenance practices',
     ],
-    icon: handleChange =>
-        <img src={NTRIcon} alt={'NTR'} className="icon" onClick={() => handleChange('NTR')} />,
+    icon: (handleChange, value) =>
+        <img src={NTRIcon} alt={'NTR'} className={`icon${value === 'NTR' ? ' chosen' : ''}`} onClick={() => handleChange('NTR')} />,
 }]
 
 const education = [{
@@ -81,15 +81,15 @@ const education = [{
     title: 'V School',
     date: 2018,
     subject: 'Fullstack JavaScript Web Development (MERN Stack)',
-    icon: handleChange => 
-        <img src={VSchoolIcon} alt={'V School'} className="icon" onClick={() => handleChange('V School')} />,
+    icon: (handleChange, value) => 
+        <img src={VSchoolIcon} alt={'V School'} className={`icon${value === 'V School' ? ' chosen' : ''}`} onClick={() => handleChange('V School')} />,
 }, {
     tab: 'UC Berkeley',
     title: 'UC Berkeley College of Engineering',
     date: 2017,
     subject: 'B.S. Bioengineering, Computer Science Emphasis',
-    icon: handleChange =>
-        <img src={UCBerkeleyIcon} alt={'UC Berkeley'} className="icon" onClick={() => handleChange('UC Berkeley')} />,
+    icon: (handleChange, value) =>
+        <img src={UCBerkeleyIcon} alt={'UC Berkeley'} className={`icon${value === 'UC Berkeley' ? ' chosen' : ''}`} onClick={() => handleChange('UC Berkeley')} />,
 }]
 
 const experience = [...work, ...education]
@@ -137,7 +137,7 @@ const timelineYears = Array.from(
     (v, k) => k + earliestYear
 )
 
-const timeline = (handleChange) => 
+const timeline = (handleChange, value) => 
     timelineYears.map((year, index) => {
         const yearEducation = experience
             .filter(entry => entry?.date === year)
@@ -149,7 +149,7 @@ const timeline = (handleChange) =>
             ...yearEducation,
             ...yearWork
         ]
-            .map(entry => entry?.icon(handleChange))
+            .map(entry => entry?.icon(handleChange, value))
 
         return (
             <TimelineItem>
@@ -188,7 +188,7 @@ const Experience = (props) => {
                         </div> */}
                         <div className="timelineContainer">
                             <Timeline>
-                                {timeline(handleChange)}
+                                {timeline(handleChange, value)}
                             </Timeline>
                         </div>
                         {experience.map(mapExperienceEntry(value))}

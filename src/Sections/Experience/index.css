@@ -87,10 +87,18 @@
     height: 28px;
 }
 
-.experience .icon:hover {
-    outline: 5px solid var(--primary);
+.experience .icon:hover,
+.experience .icon.chosen {
     border-radius: 2px;
     transition-duration: 0.3s;
+}
+
+.experience .icon:hover {
+    outline: 5px solid var(--primaryfont);
+}
+
+.experience .icon.chosen {
+    outline: 5px solid var(--primary);
 }
 
 .experience .container .experienceItems .tabContainer {
