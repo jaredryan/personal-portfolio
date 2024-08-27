@@ -29,6 +29,7 @@ class App extends Component {
                 aboutMe: React.createRef(),
                 skills: React.createRef(),
                 experience: React.createRef(),
+                contact: React.createRef(),
             },
         }
     }
@@ -146,7 +147,7 @@ class App extends Component {
                     <AboutMe refs={this.state.refs} />
                     <Skills refs={this.state.refs} />
                     <Experience refs={this.state.refs} onScroll={this.onScroll} />
-                    <Footer />
+                    <Footer refs={this.state.refs} />
                 </div>
             </div>
         )

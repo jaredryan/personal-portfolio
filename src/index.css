@@ -4,8 +4,8 @@
     --primary: #87CEFB; /* rgb(135, 206, 251) */ 
     --primarylight: #B3E8FF; /* rgb(179, 232, 255) */ 
     --primaryfont: #1975d2; /* rgb(25, 118, 210); */
-    --secondary: #FBB487;
-    --secondarylight: #FFCAB3;
+    --secondary: rgb(210, 240, 255);;
+    --secondarylight: rgb(230, 245, 255);
     --background: white;
     --backgroundsecondary: #F5F5F4;
 }
@@ -111,10 +111,13 @@ a {
     text-decoration: none;
 }
 
-p, li {
+p, li, button {
     font-family: "Muli", sans-serif;
     font-weight: 400;
     font-size: 16px;
+}
+
+p, li {
     line-height: 22px;
 }
 
@@ -127,7 +130,7 @@ li {
     padding-left: 6px;
 }
 
-h1, h2, h3, h4, button {
+h1, h2, h3, h4 {
     font-family: 'Roboto Slab', serif;
 }
 

@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import './index.css'
 
-const Footer = () => {
+const Footer = (props) => {
     const [resumeButtonExpanded, setResumeButtonExpanded] = useState(false)
 
     const handleResumeButtonClick = () => setResumeButtonExpanded(!resumeButtonExpanded)
 
     return (
-        <div className="footer">
+        <div className="footer" ref={props.refs.contact}>
             <div className="blurb">
                 <h2 className="emphasis">Thanks for visiting!</h2>
                 <h3>I'm currently looking for full-time, remote positions.</h3>

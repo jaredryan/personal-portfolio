@@ -29,6 +29,7 @@ class Navbar extends Component {
                     <div onClick={() => this.handleScroll(this.props.refs.aboutMe)}><li>About Me</li></div>
                     <div onClick={() => this.handleScroll(this.props.refs.skills)}><li>Skills</li></div>
                     <div onClick={() => this.handleScroll(this.props.refs.experience)}><li>Timeline</li></div>
+                    <div onClick={() => this.handleScroll(this.props.refs.contact)}><li>Contact</li></div>
         		</ul>
             </nav>
         )
