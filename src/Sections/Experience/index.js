@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
+import { CSSTransition } from 'react-transition-group';
 import './index.css'
-import Tabs from '@mui/material/Tabs'
-import Tab from '@mui/material/Tab'
+
 import Timeline from '@mui/lab/Timeline'
 import TimelineItem from '@mui/lab/TimelineItem'
 import TimelineSeparator from '@mui/lab/TimelineSeparator'
@@ -94,42 +94,48 @@ const education = [{
 
 const experience = [...work, ...education]
 
-const mapEducationEntry = (education, value) => 
+const mapEducationEntry = (education, hidden, thisRef) => 
     <div
         key={education.title}
-        role="tabpanel"
-        hidden={value !== education.tab}
         className="school"
+        ref={thisRef}
+        hidden={hidden}
     >
-        {value === education.tab &&
-            <div className="experienceContainer">
-                <h3>{education.title}</h3>
-                <h4>{education.subject}</h4>
-            </div>
-        }
+        <div className="experienceContainer">
+            <h3>{education.title}</h3>
+            <h4>{education.subject}</h4>
+        </div>
     </div>
 
-const mapWorkEntry = (work, value) =>
+const mapWorkEntry = (work, hidden, thisRef) =>
     <div 
         key={work.title + work.company}
-        role="tabpanel"
-        hidden={value !== work.tab}
         className="position"
+        ref={thisRef}
+        hidden={hidden}
     >
-        {value === work.tab && 
-            <div className="experienceContainer">
-                <h3>{work.title}</h3>
-                <h4>{work.company}<span>|</span>{work.location}<span>|</span>{work.start}<span>—</span>{work.end}</h4>
-                <ul>
-                    {work.listItems.map((item) => <li key={item}>{item}</li>)}
-                </ul>
-            </div>
-        }
+        <div className="experienceContainer">
+            <h3>{work.title}</h3>
+            <h4>{work.company}<span>|</span>{work.location}<span>|</span>{work.start}<span>—</span>{work.end}</h4>
+            <ul>
+                {work.listItems.map((item) => <li key={item}>{item}</li>)}
+            </ul>
+        </div>
     </div>
 
-const mapExperienceEntry = value => (experience, index) => experience?.company
-    ? mapWorkEntry(experience, value, index)
-    : mapEducationEntry(experience, value, index)
+const mapExperienceEntry = (value, nodeRefs) => (experience, index) => {
+    const thisRef = (el) => nodeRefs.current[index] = el
+    const hidden = value !== experience.tab
+    
+    return (
+        <CSSTransition nodeRef={thisRef} in={!hidden} timeout={500} classNames="fade-bounce">
+            {experience?.company
+                ? mapWorkEntry(experience, hidden, nodeRefs.current[index])
+                : mapEducationEntry(experience, hidden, nodeRefs.current[index])
+            }
+        </CSSTransition>
+    )
+}
 
 const earliestYear = 2017
 const timelineYears = Array.from(
@@ -170,6 +176,7 @@ const timeline = (handleChange, value) =>
 
 const Experience = (props) => {
     const [value, setValue] = useState(experience[0].tab);
+    const nodeRefs = useRef([])
 
     const handleChange = (entry) => setValue(entry)
 
@@ -191,7 +198,7 @@ const Experience = (props) => {
                                 {timeline(handleChange, value)}
                             </Timeline>
                         </div>
-                        {experience.map(mapExperienceEntry(value))}
+                        {experience.map(mapExperienceEntry(value, nodeRefs))}
                     </div>
                 </div>
             </div>

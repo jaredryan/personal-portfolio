@@ -166,3 +166,35 @@ h1 {
         font-size: 40px;
     }
 }
+
+.fade-bounce-enter {
+    opacity: 0;
+    transform: translateY(-10%);
+}
+
+.fade-bounce-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: 500ms ease;
+}
+
+.fade-bounce-enter-done {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.fade-bounce-exit {
+    opacity: 1;
+    transform: translateY(0%);
+}
+
+.fade-bounce-exit-active {
+    opacity: 0;
+    transform: translateY(-10%);
+    transition: 500ms ease;
+}
+
+.fade-bounce-exit-done {
+    opacity: 0;
+    transform: translateY(-10%);
+}
