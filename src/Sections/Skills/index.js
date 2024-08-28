@@ -1,8 +1,8 @@
 import React from 'react'
 import './index.css'
-import FrontendImage from '../../Images/frontendIcon2.png';
-import BackendImage from '../../Images/backend2.png';
-import SoftImage from '../../Images/softIcon2.png';
+import FrontendImage from '../../Images/frontendIcon5.png';
+import BackendImage from '../../Images/backend3.png';
+import SoftImage from '../../Images/softIcon7.jpg';
 
 
 const mapSkills = (skill) =>

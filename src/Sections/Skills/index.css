@@ -53,6 +53,17 @@
 }
 
 .skills .skillCategoryContainer img {
+    border-radius: 50%;
+    object-fit: cover;
+    max-width: 210px;
+    max-height: 210px;
+    width: 210px;
+    height: 210px;
+    position: relative;
+    right: 5px;
+}
+
+.skills .skillCategoryContainer .imageContainer {
     border-radius: 50px 0 0 50px;
     object-fit: cover;
     max-width: 210px;
