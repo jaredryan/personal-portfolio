@@ -1,10 +1,22 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { CSSTransition } from 'react-transition-group';
 import './index.css'
 
 const Navbar = (props) => {
-    const [isOpen, setIsOpen] = useState(false);
-    const nodeRef = useRef(null);
+    const [isOpen, setIsOpen] = useState(false)
+    const nodeRef = useRef(null)
+    const barsRef = useRef(null)
+
+    useEffect(() => {
+        const closeMenuOnOutsideClick = (e)=> {
+            if (isOpen && !nodeRef.current?.contains(e.target) && !barsRef.current?.contains(e.target)) {
+                setIsOpen(false)
+            }
+        }
+
+        window.addEventListener('mousedown', closeMenuOnOutsideClick);
+        return () => window.removeEventListener('mousedown', closeMenuOnOutsideClick);
+    }, [isOpen]);
 
     const handleScroll = (target) => {
         const goal = target.current.offsetTop;
@@ -13,7 +25,7 @@ const Navbar = (props) => {
 
     return (
         <nav onClick={() => setIsOpen(!isOpen)} className={isOpen ? "open" : "closed"}>
-            <div className="container">
+            <div ref={barsRef} className="container">
                 <i className="fa fa-bars" />
             </div>
             <CSSTransition nodeRef={nodeRef} in={isOpen} mountOnEnter unmountOnExit timeout={500} classNames="fade-bounce-down">
