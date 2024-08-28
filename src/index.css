@@ -167,34 +167,73 @@ h1 {
     }
 }
 
-.fade-bounce-enter {
+.fade-bounce-down-enter {
     opacity: 0;
     transform: translateY(-10%);
 }
 
-.fade-bounce-enter-active {
+.fade-bounce-down-enter-active {
     opacity: 1;
     transform: translateY(0);
     transition: 500ms ease;
 }
 
-.fade-bounce-enter-done {
+.fade-bounce-down-enter-done {
     opacity: 1;
     transform: translateY(0);
 }
 
-.fade-bounce-exit {
+.fade-bounce-down-exit {
     opacity: 1;
     transform: translateY(0%);
 }
 
-.fade-bounce-exit-active {
+.fade-bounce-down-exit-active {
     opacity: 0;
     transform: translateY(-10%);
     transition: 500ms ease;
 }
 
-.fade-bounce-exit-done {
+.fade-bounce-down-exit-done {
     opacity: 0;
     transform: translateY(-10%);
+}
+
+
+
+
+
+
+
+
+.fade-bounce-right-enter {
+    opacity: 0;
+    transform: translateX(-10%);
+}
+
+.fade-bounce-right-enter-active {
+    opacity: 1;
+    transform: translateX(0);
+    transition: 500ms ease;
+}
+
+.fade-bounce-right-enter-done {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.fade-bounce-right-exit {
+    opacity: 1;
+    transform: translateX(0%);
+}
+
+.fade-bounce-right-exit-active {
+    opacity: 0;
+    transform: translateX(-10%);
+    transition: 500ms ease;
+}
+
+.fade-bounce-right-exit-done {
+    opacity: 0;
+    transform: translateX(-10%);
 }

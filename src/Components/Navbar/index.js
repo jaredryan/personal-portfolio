@@ -16,7 +16,7 @@ const Navbar = (props) => {
             <div className="container">
                 <i className="fa fa-bars" />
             </div>
-            <CSSTransition nodeRef={nodeRef} in={isOpen} mountOnEnter={true} timeout={500} classNames="fade-bounce">
+            <CSSTransition nodeRef={nodeRef} in={isOpen} mountOnEnter unmountOnExit timeout={500} classNames="fade-bounce-down">
                 <ul ref={nodeRef} className={`dropdown-content ${isOpen ? "open" : "closed"}`}>
                     <div onClick={() => handleScroll(props.refs.profile)}><li>Home</li></div>
                     <div onClick={() => handleScroll(props.refs.aboutMe)}><li>About Me</li></div>

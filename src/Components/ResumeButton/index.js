@@ -14,7 +14,7 @@ const ResumeButton = () => {
                     ? <i className="fa fa-angle-up" style={{fontWeight: 100}} />
                     : <i className="fa fa-angle-down" />}
             </button>
-            <CSSTransition nodeRef={nodeRef} in={isOpen} mountOnEnter={true} timeout={500} classNames="fade-bounce">
+            <CSSTransition nodeRef={nodeRef} in={isOpen} mountOnEnter unmountOnExit timeout={500} classNames="fade-bounce-down">
                 <div ref={nodeRef} className="resumeTooltip">
                     <a href="Ryan_Jared_Resume.docx" target='_blank' rel='noopener noreferrer' className="downloadOption">
                         Download Word Document<i className="fa fa-download" style={{fontWeight: 100}} />

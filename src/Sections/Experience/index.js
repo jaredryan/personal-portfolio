@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, createRef } from 'react'
 import { CSSTransition } from 'react-transition-group';
 import './index.css'
 
@@ -96,10 +96,8 @@ const experience = [...work, ...education]
 
 const mapEducationEntry = (education, hidden, thisRef) => 
     <div
-        key={education.title}
         className="school"
         ref={thisRef}
-        hidden={hidden}
     >
         <div className="experienceContainer">
             <h3>{education.title}</h3>
@@ -109,10 +107,8 @@ const mapEducationEntry = (education, hidden, thisRef) =>
 
 const mapWorkEntry = (work, hidden, thisRef) =>
     <div 
-        key={work.title + work.company}
         className="position"
         ref={thisRef}
-        hidden={hidden}
     >
         <div className="experienceContainer">
             <h3>{work.title}</h3>
@@ -123,15 +119,24 @@ const mapWorkEntry = (work, hidden, thisRef) =>
         </div>
     </div>
 
-const mapExperienceEntry = (value, nodeRefs) => (experience, index) => {
-    const thisRef = (el) => nodeRefs.current[index] = el
+const mapExperienceEntry = (value, loading, setLoading) => (experience, index) => {
+    const thisRef = createRef(null)
     const hidden = value !== experience.tab
     
     return (
-        <CSSTransition nodeRef={thisRef} in={!hidden} timeout={500} classNames="fade-bounce">
+        <CSSTransition
+            key={experience.title + index}
+            nodeRef={thisRef}
+            in={!hidden && !loading}
+            timeout={500}
+            mountOnEnter
+            unmountOnExit
+            classNames="fade-bounce-right"
+            onExited={() => setLoading(false)}
+        >
             {experience?.company
-                ? mapWorkEntry(experience, hidden, nodeRefs.current[index])
-                : mapEducationEntry(experience, hidden, nodeRefs.current[index])
+                ? mapWorkEntry(experience, hidden, thisRef)
+                : mapEducationEntry(experience, hidden, thisRef)
             }
         </CSSTransition>
     )
@@ -158,7 +163,7 @@ const timeline = (handleChange, value) =>
             .map(entry => entry?.icon(handleChange, value))
 
         return (
-            <TimelineItem>
+            <TimelineItem key={year}>
                 <TimelineOppositeContent color="text.secondary">
                     {year}
                 </TimelineOppositeContent>
@@ -176,9 +181,12 @@ const timeline = (handleChange, value) =>
 
 const Experience = (props) => {
     const [value, setValue] = useState(experience[0].tab);
-    const nodeRefs = useRef([])
+    const [loading, setLoading] = useState(false);
 
-    const handleChange = (entry) => setValue(entry)
+    const handleChange = (value) => {
+        setLoading(true)
+        setValue(value)
+    }
 
     return (
         <div className="experience" id="experience" ref={props.refs.experience}>
@@ -186,19 +194,13 @@ const Experience = (props) => {
             <div className="container">
                 <h1>Timeline</h1>
                 <div className="contentContainer">
-                    
                     <div className="experienceItems">
-                        {/* <div className="tabContainer">
-                            <Tabs value={value} onChange={handleChange} orientation="vertical" className="tabs">
-                                {experience.map((position, index) => <Tab label={position.tab} value={index} />)}
-                            </Tabs>
-                        </div> */}
                         <div className="timelineContainer">
                             <Timeline>
                                 {timeline(handleChange, value)}
                             </Timeline>
                         </div>
-                        {experience.map(mapExperienceEntry(value, nodeRefs))}
+                        {experience.map(mapExperienceEntry(value, loading, setLoading))}
                     </div>
                 </div>
             </div>
