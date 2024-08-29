@@ -167,6 +167,25 @@ h1 {
     }
 }
 
+.emphasis {
+    font-family: 'Roboto Slab', serif;
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--primaryfont);
+}
+
+@media (max-width: 1000px) {
+    .emphasis {
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 825px) {
+    .emphasis {
+        font-size: 20px;
+    }
+}
+
 .fade-bounce-down-enter {
     opacity: 0;
     transform: translateY(-10%);
