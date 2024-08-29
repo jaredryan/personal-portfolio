@@ -78,7 +78,7 @@
 }
 
 .experience .timelineContainer li > div:first-child {
-    width: 70px;
+    width: 95px;
 }
 
 .experience .timelineContainer li > div:nth-child(2) .MuiTimelineDot-filled {
@@ -205,7 +205,7 @@
     }
 }
 
-@media (max-width: 670px) {
+@media (max-width: 740px) {
     .experience .container {
         padding: 40px 25px 100px;
         gap: 20px;
@@ -222,7 +222,7 @@
 }
 
 
-@media (max-width: 600px) { /* 600px */
+@media (max-width: 670px) { /* 600px */
     /* Some sort of horizontal timeline at the top will be the way to go */
     /* Maybe temporarily make the the timeline sticky, like only when you're scrolling in this section */
     /* Or perhaps make the work description itself scrollable, instead of the page, so navigation between
