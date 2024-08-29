@@ -122,6 +122,24 @@
     .aboutMe .pointsContainer i {
         font-size: 42px;
     }
+
+    .aboutMe {
+        padding: 40px 50px;
+    }
+
+    .aboutMe .container {
+        gap: 50px;
+    }
+
+    .aboutMe h3.bottom {
+        margin: 0;
+    }
+}
+
+@media (max-width: 850px) {
+    .aboutMe .row img {
+        height: 250px;
+    }
 }
 
 @media (max-width: 825px) {
@@ -132,11 +150,47 @@
     .aboutMe h3 {
         font-size: 18px;
     }
+}
 
-    .aboutMe .pointsContainer {
-        padding: 40px 70px;
-        max-width: 400px;
+@media (max-width: 850px) {
+    .aboutMe .row img {
+        height: 250px;
+    }
+}
+
+@media (max-width: 760px) {
+    .aboutMe .container > div {
+        flex-direction: column;
+    }
+
+    .aboutMe .container > div:nth-child(2) {
+        flex-direction: column-reverse;
+    }
+
+    .aboutMe .row img {
+        height: unset;
         width: 100%;
+        max-width: 100%;
+        max-height: 400px;
+    }
+}
+
+
+@media (max-width: 700px) {
+    .aboutMe .row img {
+        max-height: 375px;
+    }
+}
+
+@media (max-width: 650px) {
+    .aboutMe .row img {
+        max-height: 350px;
+    }
+}
+
+@media (max-width: 600px) {
+    .aboutMe .row img {
+        max-height: 315px;
     }
 }
 
@@ -144,14 +198,16 @@
     .aboutMe {
         padding: 50px 25px;
     }
-
-    .aboutMe .pointsContainer  {
-        padding: 20px 70px;
-    }
 }
 
 @media (max-width: 500px) {
-    .aboutMe .pointsContainer {
-        padding: 20px;
+    .aboutMe .row img {
+        max-height: 285px;
+    }
+}
+
+@media (max-width: 450px) {
+    .aboutMe .row img {
+        height: auto;
     }
 }
