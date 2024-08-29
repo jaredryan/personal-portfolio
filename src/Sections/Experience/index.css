@@ -95,11 +95,12 @@
     cursor: pointer;
     width: 28px;
     height: 28px;
+    border-radius: 6px;
 }
 
 .experience .icon:hover,
 .experience .icon.chosen {
-    border-radius: 2px;
+    border-radius: 6px;
     transition-duration: 0.3s;
 }
 
