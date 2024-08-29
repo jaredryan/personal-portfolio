@@ -183,9 +183,11 @@ const Experience = (props) => {
     const [value, setValue] = useState(experience[0].tab);
     const [loading, setLoading] = useState(false);
 
-    const handleChange = (value) => {
-        setLoading(true)
-        setValue(value)
+    const handleChange = (newValue) => {
+        if (value !== newValue) {
+            setLoading(true)
+            setValue(value)
+        }
     }
 
     return (
