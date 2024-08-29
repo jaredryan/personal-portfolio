@@ -186,7 +186,7 @@ const Experience = (props) => {
     const handleChange = (newValue) => {
         if (value !== newValue) {
             setLoading(true)
-            setValue(value)
+            setValue(newValue)
         }
     }
 
