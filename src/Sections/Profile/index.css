@@ -2,7 +2,8 @@
 
 .profile {
     width: 100%;
-    min-height: 100vh;
+    height: 100vh;
+    min-height: 700px;
     background: linear-gradient(rgba(158, 213, 247, 0.5), rgba(135, 206, 251, 0.1), rgba(135, 206, 251, 0.2)), url("../../Images/homeBackground.jpg") no-repeat center center;
     background-size: cover;
     position: relative;
@@ -103,6 +104,10 @@
 }
 
 @media (max-width: 1000px) {
+    .profile {
+        min-height: 650px;
+    }
+
     .profile .profilePic {
         height: 175px;
         width: 175px;
@@ -123,28 +128,21 @@
     }
 
     .profile h3 {
-        font-size: 22px;
-        width: 400px;
-    }
-
-    .profile .summary h4 {
         font-size: 18px;
     }
 }
 
 @media (max-width: 825px) {
+    .profile {
+        min-height: 600px;
+    }
+
     .profile .topSection {
-        padding: 50px;
+        padding: 25px 50px;
     }
 
     .profile .profileText {
         gap: 10px;
-        width: 100%;
-    }
-
-    .profile .row {
-        flex-direction: column;
-        align-items: center;
     }
 
     .profile .profileText {
@@ -168,45 +166,42 @@
 }
 
 @media (max-width: 650px) {
-    .profile .profilePic {
-        height: 200px;
-        width: 200px;
+    .profile {
+        min-height: 525px;
     }
-    
-    .profile .profilePic div {
-        -webkit-transform: scale(0.13);
-                transform: scale(0.13);
-        -moz-transform: scale(0.13);
-    }
-    
+
     .profile .profileText h2 {
         font-size: 24px;
     }
 
-    .profile .summary h3 {
-        font-size: 20px;
+    .profile h3 {
+        font-size: 16px;
     } 
 }
 
-@media (max-width: 550px) {
-    .profile .topSection {
-        padding: 50px 25px;
-    }
-}
-
 @media (max-width: 480px) {
-    .profile .profilePic {
-        height: 175px;
-        width: 175px;
+    .profile {
+        min-height: 500px;
     }
-    
-    .profile .profilePic div {
-        -webkit-transform: scale(0.1129);
-                transform: scale(0.1129);
-        -moz-transform: scale(0.1129);
+
+    .profile .row {
+        justify-content: center;
+        align-items: center;
+    }
+
+    .profile .profileText > div:first-child * {
+        text-align: center;
+    }
+
+    .profile .profileText {
+        gap: 2px;
     }
 
     .profile .profileText h2 {
         font-size: 22px;
+    }
+
+    .profile .profileText h3 {
+        margin-top: 7px;
     }
 }

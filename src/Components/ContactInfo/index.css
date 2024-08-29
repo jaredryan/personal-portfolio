@@ -88,15 +88,10 @@
 @media (max-width: 825px) {
     .fontAwesomeLogos {
         width: 100%;
-        justify-content: center;
     }
 }
 
 @media (max-width: 650px) {
-    .fontAwesomeLogos {
-        margin-top: 10px;
-    }
-
     .fontAwesomeLogos > a {
         width: 25px;
     }
@@ -107,6 +102,12 @@
 
     .fontAwesomeLogos i.fa-envelope {
         font-size: 25px;
+    }
+}
+
+@media (max-width: 480px) {
+    .fontAwesomeLogos {
+        justify-content: center;
     }
 }
 
