@@ -64,6 +64,10 @@
     box-shadow: 0px 2px 8px 3px black;
 }
 
+.experience .timelineContainer .horizontal {
+    display: none;
+}
+
 .experience .timelineContainer ul {
     padding: 40px 0px !important;
     margin: 0;
@@ -74,7 +78,7 @@
 }
 
 .experience .timelineContainer li > div:first-child {
-    width: 80px;
+    width: 70px;
 }
 
 .experience .timelineContainer li > div:nth-child(2) .MuiTimelineDot-filled {
@@ -131,7 +135,7 @@
     color: rgb(25, 118, 210);
 }
 
-.experienceContainer {
+.experience .experienceContainer {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -170,6 +174,10 @@
 }
 
 @media (max-width: 1000px) {
+    .experience .container {
+        padding: 40px 50px 100px;
+    }
+
     .experience h3  {
         font-size: 18px;
         line-height: 26px;
@@ -186,30 +194,87 @@
     }
 }
 
-@media (max-width: 825px) {
+@media (max-width: 880px) {
     .experience .container {
-        padding: 50px;
+        gap: 40px;
     }
 
-    .experience .container {
-        gap: 50px;
-    }
-
-    .experience .experienceToggle {
-        margin-top: 0;
-    }
-
-    .experience .container .experienceItems > div {
+    .experience .experienceContainer {
         padding: 40px;
+        width: 100%;
     }
 }
 
-@media (max-width: 550px) {
+@media (max-width: 670px) {
     .experience .container {
-        padding: 50px 25px;
+        padding: 40px 25px 100px;
+        gap: 20px;
     }
 
-    .experience .container .experienceItems > div {
+    .experience .timelineContainer ul {
+        padding: 20px 0px !important;
+        margin: 0;
+    }
+
+    .experience .experienceContainer {
         padding: 20px;
+    }
+}
+
+
+@media (max-width: 600px) { /* 600px */
+    /* Some sort of horizontal timeline at the top will be the way to go */
+    /* Maybe temporarily make the the timeline sticky, like only when you're scrolling in this section */
+    /* Or perhaps make the work description itself scrollable, instead of the page, so navigation between
+        positions remains on screen */
+    
+    .experience .timelineContainer .vertical {
+        display: none;
+    }
+
+    .experience .timelineContainer .horizontal {
+        display: flex;
+        flex-direction: row;
+        padding: 20px 20px 0 !important;
+        justify-content: center;
+    }
+
+    .experience .container .experienceItems {
+        flex-direction: column;
+    }
+
+    .experience .timelineContainer li {
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+    }
+
+    .experience .timelineContainer li > div:first-child {
+        min-height: 36px !important;
+        height: 36px !important;
+        max-height: 36px !important;
+        width: unset;
+    }
+
+    .experience .timelineContainer li .dotConnectorContainer {
+        position: relative;
+    }
+
+    .experience .timelineContainer li .dotConnectorContainer .customerHorizontalConnector {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateY(-50%) translateX(17.5px);
+        width: 32px;
+        height: 2px;
+        background-color: rgb(189, 189, 189);
+    }
+
+    .experience .timelineContainer li > div:nth-child(2) .MuiTimelineConnector-root {
+        height: 2px;
+    }
+
+    .experience .timelineContainer li > div:last-child {
+        
     }
 }

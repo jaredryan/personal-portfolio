@@ -32,6 +32,20 @@ const work = [{
     icon: (handleChange, value) =>
         <img src={MantlIcon} alt={'MANTL'} className={`icon${value === 'MANTL' ? ' chosen' : ''}`} onClick={() => handleChange('MANTL')}/>,
 }, {
+    tab: 'NTR',
+    title: 'Web Developer',
+    company: 'NTR',
+    start: 2018,
+    end: 2022,
+    location: 'Remote - Berkeley, CA',
+    listItems: [
+        'Sole developer on a web app for collecting, grading, and anonymizing peer feedback, which has been used by 600 students, across 7 schools, generating 6K evaluations',
+      	'Collaborated with non-technical UC Berkeley professor to define product requirements and designs, then again for updates and new features over the 4 years before handoff', 
+  	    'Learned troubleshooting without access to clients, and maintenance practices',
+    ],
+    icon: (handleChange, value) =>
+        <img src={NTRIcon} alt={'NTR'} className={`icon${value === 'NTR' ? ' chosen' : ''}`} onClick={() => handleChange('NTR')} />,
+}, {
     tab: 'IBM - CA',
     title: 'Software Developer II',
     company: 'IBM',
@@ -60,20 +74,6 @@ const work = [{
     ],
     icon: (handleChange, value) =>
         <img src={IBMIcon} alt={'IBM'} className={`icon${value === 'IBM - TX' ? ' chosen' : ''}`} onClick={() => handleChange('IBM - TX')} />,
-}, {
-    tab: 'NTR',
-    title: 'Web Developer',
-    company: 'NTR',
-    start: 2018,
-    end: 2022,
-    location: 'Remote - Berkeley, CA',
-    listItems: [
-        'Sole developer on a web app for collecting, grading, and anonymizing peer feedback, which has been used by 600 students, across 7 schools, generating 6K evaluations',
-      	'Collaborated with non-technical UC Berkeley professor to define product requirements and designs, then again for updates and new features over the 4 years before handoff', 
-  	    'Learned troubleshooting without access to clients, and maintenance practices',
-    ],
-    icon: (handleChange, value) =>
-        <img src={NTRIcon} alt={'NTR'} className={`icon${value === 'NTR' ? ' chosen' : ''}`} onClick={() => handleChange('NTR')} />,
 }]
 
 const education = [{
@@ -143,40 +143,69 @@ const mapExperienceEntry = (value, loading, setLoading) => (experience, index) =
 }
 
 const earliestYear = 2017
+const latestYearOfUpdates = 2021
 const timelineYears = Array.from(
-     {length: new Date().getFullYear() + 1 - earliestYear }, 
+     {length: latestYearOfUpdates + 1 - earliestYear }, 
     (v, k) => k + earliestYear
 )
 
-const timeline = (handleChange, value) => 
-    timelineYears.map((year, index) => {
+const verticalTimelineComponent = (year, content, last) => 
+    <TimelineItem key={year}>
+        <TimelineOppositeContent color="text.secondary">
+            {year}{last && '+'}
+        </TimelineOppositeContent>
+        <TimelineSeparator>
+        <TimelineDot />
+        {!last && <TimelineConnector />}
+        </TimelineSeparator>
+        <TimelineContent>
+            {content}{}
+        </TimelineContent>
+    </TimelineItem>
+
+const horizontalTimelineComponent = (year, content, last) => 
+    <TimelineItem key={year}>
+        <TimelineOppositeContent color="text.secondary">
+            {year}{last && '+'}
+        </TimelineOppositeContent>
+        <div className="dotConnectorContainer">
+            <TimelineSeparator>
+            <TimelineDot />
+            </TimelineSeparator>
+            {!last && <div className="customerHorizontalConnector" />}
+        </div>
+        <TimelineContent>
+            {content}
+        </TimelineContent>
+    </TimelineItem>
+
+const timeline = (handleChange, value) => {
+    const timelineEntries = timelineYears.map((year, index) => {
         const yearEducation = experience
             .filter(entry => entry?.date === year)
         
         const yearWork = experience
             .filter(entry => entry?.start === year)
         
-        const yearText = [
+        const content = [
             ...yearEducation,
             ...yearWork
         ]
             .map(entry => entry?.icon(handleChange, value))
 
-        return (
-            <TimelineItem key={year}>
-                <TimelineOppositeContent color="text.secondary">
-                    {year}
-                </TimelineOppositeContent>
-                <TimelineSeparator>
-                <TimelineDot />
-                {(index + 1) !== timelineYears.length && <TimelineConnector />}
-                </TimelineSeparator>
-                <TimelineContent>
-                    {yearText}
-                </TimelineContent>
-            </TimelineItem>
-        )
+        return { year, content }
     })
+
+    return <>
+        <Timeline className="vertical">
+            {timelineEntries.map(({ year, content }, index) => verticalTimelineComponent(year, content, index === (timelineEntries.length - 1)))}
+        </Timeline>
+        <Timeline className="horizontal">
+            {timelineEntries.map(({ year, content }, index) => horizontalTimelineComponent(year, content, index === (timelineEntries.length - 1)))}
+        </Timeline>
+    </>
+
+}
 
 
 const Experience = (props) => {
@@ -198,9 +227,7 @@ const Experience = (props) => {
                 <div className="contentContainer">
                     <div className="experienceItems">
                         <div className="timelineContainer">
-                            <Timeline>
-                                {timeline(handleChange, value)}
-                            </Timeline>
+                            {timeline(handleChange, value)}
                         </div>
                         {experience.map(mapExperienceEntry(value, loading, setLoading))}
                     </div>
