@@ -36,11 +36,45 @@
     flex-direction: column;
     align-items: center;
     gap: 20px;
-    min-width: 290px;
+    min-width: 265px;
 }
 
 .footer ul {
     list-style-type: none;
     padding: 0;
     margin: -5px 0 0;
+}
+
+@media (max-width: 1000px) {
+    .footer .emphasis {
+        font-size: 22px;
+    }
+
+    .footer h3 {
+        font-size: 18px
+    }
+}
+
+@media (max-width: 780px) {
+    .footer .emphasis {
+        font-size: 20px;
+    }
+
+    .footer {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 550px) {
+    .footer {
+        padding: 40px 50px 50px;
+    }
+
+    .footer .emphasis {
+        font-size: 20px;
+    }
+
+    .footer {
+        flex-direction: column;
+    }
 }
