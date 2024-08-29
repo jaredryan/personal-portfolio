@@ -120,26 +120,45 @@ const mapWorkEntry = (work, hidden, thisRef) =>
     </div>
 
 const mapExperienceEntry = (value, loading, setLoading) => (experience, index) => {
-    const thisRef = createRef(null)
+    const horizontalRef = createRef(null)
+    const verticalRef = createRef(null)
     const hidden = value !== experience.tab
+
+    const cssTransitionProps = {
+        key: experience.title + index,
+        in: !hidden && !loading,
+        timeout: 500,
+        mountOnEnter: true,
+        unmountOnExit: true,
+        onExited: () => setLoading(false),
+    }
+
+    const mapEntry = (thisRef) => 
+        experience?.company
+            ? mapWorkEntry(experience, hidden, thisRef)
+            : mapEducationEntry(experience, hidden, thisRef)
     
-    return (
+    return <>
         <CSSTransition
-            key={experience.title + index}
-            nodeRef={thisRef}
-            in={!hidden && !loading}
-            timeout={500}
-            mountOnEnter
-            unmountOnExit
+            {...cssTransitionProps}
+            key={cssTransitionProps.key + 'vertical'}
+            nodeRef={verticalRef}
+            className="vertical"
             classNames="fade-bounce-right"
-            onExited={() => setLoading(false)}
         >
-            {experience?.company
-                ? mapWorkEntry(experience, hidden, thisRef)
-                : mapEducationEntry(experience, hidden, thisRef)
-            }
+            {mapEntry(verticalRef)}
         </CSSTransition>
-    )
+        <CSSTransition
+            {...cssTransitionProps}
+            key={cssTransitionProps.key + 'horizontal'}
+            nodeRef={horizontalRef}
+            className="horizontal"
+            classNames="fade-bounce-down"
+        >
+            {mapEntry(horizontalRef)}
+        </CSSTransition>
+    </>
+    
 }
 
 const earliestYear = 2017

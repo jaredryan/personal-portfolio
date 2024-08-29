@@ -64,7 +64,7 @@
     box-shadow: 0px 2px 8px 3px black;
 }
 
-.experience .timelineContainer .horizontal {
+.experience .horizontal {
     display: none;
 }
 
@@ -199,6 +199,10 @@
         gap: 40px;
     }
 
+    .experience .container .experienceItems {
+        width: 100%;
+    }
+
     .experience .experienceContainer {
         padding: 40px;
         width: 100%;
@@ -228,8 +232,12 @@
     /* Or perhaps make the work description itself scrollable, instead of the page, so navigation between
         positions remains on screen */
     
-    .experience .timelineContainer .vertical {
+    .experience .vertical {
         display: none;
+    }
+
+    .experience .horizontal {
+        display: block;
     }
 
     .experience .timelineContainer .horizontal {
@@ -274,7 +282,11 @@
         height: 2px;
     }
 
-    .experience .timelineContainer li > div:last-child {
-        
+    .experience .container .experienceItems {
+        display: grid;
+    }
+    
+    .experience .container .experienceItems > div:not(:first-child) {
+        grid-column: 1/1
     }
 }
