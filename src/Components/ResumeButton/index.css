@@ -91,18 +91,3 @@
 .downloadOption:hover {
     background-color: var(--secondarylight);
 }
-
-@media (max-width: 825px) {
-    .resumeTooltip {
-        left: 50%;
-        transform: translateX(-50%);
-    }
-
-    .resumeTooltip a {
-        justify-content: center;
-    }
-
-    .resumeButtonContainer {
-        position: initial;
-    }
-}
