@@ -32,8 +32,8 @@ nav .container:hover,
 nav .container:focus {
     cursor: pointer;
     background-color: var(--secondarylight);
-    -webkit-transition-duration: 300ms;
-            transition-duration: 300ms;
+    -webkit-transition-duration: 500ms;
+            transition-duration: 500ms;
 }
 
 nav.open .container:hover {
@@ -42,8 +42,8 @@ nav.open .container:hover {
 
 /* nav:hover i,
 nav:focus i {
-    -webkit-transition-duration: 300ms;
-            transition-duration: 300ms;
+    -webkit-transition-duration: 500ms;
+            transition-duration: 500ms;
 } */
 
 nav ul {
@@ -52,40 +52,39 @@ nav ul {
 	background-color: transparent;
 	text-align: center;
     margin: 0;
-    top: 58px;
+    top: 60px;
     right: 0;
-    padding: 0;
+    padding: 4px 0;
+    background-color: white;
+    box-shadow: 0 1px 2px 0 grey;
+    border-radius: 6px;
 }
 
-nav ul.open {
+/* nav ul.open {
     display: block;
 }
 
 nav ul.closed {
     display: none;
-}
+} */
 
 nav ul li {
 	padding: 8px 16px;
-    box-shadow: 0 1px 2px 0 grey;
-    background-color: white;
     color: black;
-    border-radius: 6px;
-    font-size: 18px;
+    font-size: 16px;
     border: none;
-    padding: 6px 12px;
-    font-weight: 300;
+    padding: 8px 60px 8px 16px;
+    font-weight: 400;
     cursor: pointer;
     text-decoration: none;
-    font-family: 'Roboto Slab', serif;
     min-width: max-content;
-    margin: 2px 0;
+    text-align: left;
 }
 
 nav ul li:hover {
     background-color: var(--secondarylight);
-    -webkit-transition-duration: 300ms;
-            transition-duration: 300ms;
+    -webkit-transition-duration: 500ms;
+            transition-duration: 500ms;
 }
 
 @media (max-width: 1000px) {
@@ -98,4 +97,36 @@ nav ul li:hover {
         top: 48px;
         right: 0px;
     }
+}
+
+.nav-fade-enter {
+    opacity: 0;
+    transform: translateY(-10%);
+}
+
+.nav-fade-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: 500ms ease;
+}
+
+.nav-fade-enter-done {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.nav-fade-exit {
+    opacity: 1;
+    transform: translateY(0%);
+}
+
+.nav-fade-exit-active {
+    opacity: 0;
+    transform: translateY(-10%);
+    transition: 500ms ease;
+}
+
+.nav-fade-exit-done {
+    opacity: 0;
+    transform: translateY(-10%);
 }

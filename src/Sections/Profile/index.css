@@ -2,31 +2,40 @@
 
 .profile {
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    height: 100vh;
+    min-height: 700px;
+    background: linear-gradient(rgba(158, 213, 247, 0.5), rgba(135, 206, 251, 0.1), rgba(135, 206, 251, 0.2)), url("../../Images/homeBackground.jpg") no-repeat center center;
+    background-size: cover;
+    position: relative;
     /* gap: 100px; */
 }
 
 .profile .topSection {
-    padding: 100px;
+    padding: 50px 100px;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--primary);
+}
+
+.profile .bottomSection {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    border-bottom: 75px solid white;
+    border-left: 100vw solid transparent;
 }
 
 .profile .container {
     width: 100%;
-    max-width: 1000px;
+    /* max-width: 1000px; */
     display: flex;
     flex-direction: column;
 }
 
 .profile .topSection .container {
-    gap: 50px;
+    gap: 100px;
     align-items: start;
     justify-content: space-between;
 }
@@ -55,216 +64,50 @@
     gap: 16px;
 }
 
-.profile a {
-    color: black;
-}
-
 .profile h1,
 .profile .profileText h2,
 .profile h3,
 .profile h4 {
     margin: 0px;
+    color: white;
 }
 
 .profile h2 {
-    font-weight: 300;
+    font-weight: 400;
     font-size: 32px;
 }
 
 .profile h3,
 .profile h4 {
-    font-weight: 300;
+    font-weight: 400;
     font-family: "Muli", sans-serif;
+    margin-top: 10px;
 }
 
 .profile h3 {
-    font-size: 24px;
+    font-size: 20px;
 }
 
 .profile h4 {
-    font-size: 20px;
-}
-
-.profile .fontAwesomeLogos {
-    text-align: center;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: left;
-        -ms-flex-pack: left;
-            justify-content: left;
-}
-
-.profile .fontAwesomeLogos i {
-    margin: 0;
-    margin-bottom: 0;
-    text-align: center;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    font-size: 32px;
-}
-
-.profile .fontAwesomeLogos > a {
-    width: 30px;
-    margin-left: 20px;
-    margin-right: 7px;
-    text-decoration: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.profile .fontAwesomeLogos > a.left {
-    margin-left: 0px;
-}
-
-.profile .fontAwesomeLogos > a.right {
-    margin-right: 0px;
-}
-
-
-.profile .fontAwesomeLogos .resumeButtonContainer {
-    position: relative;
-}
-
-.profile .fontAwesomeLogos .resumeButton {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    border: none;
-    padding: 4px 12px;
-    font-weight: 300;
-    cursor: pointer;
-    text-decoration: none;
-    font-family: 'Roboto Slab', serif;
-    text-align: center;
-    border-radius: 6px;
-    width: fit-content;
-    color: black;
-}
-
-.profile .fontAwesomeLogos .resumeButton i {
-    font-size: 20px;
-    margin-left: 8px;
-}
-
-.profile .fontAwesomeLogos .resumeButton:hover,
-.profile .fontAwesomeLogos i:hover,
-.profile .fontAwesomeLogos .resumeTooltip a:hover {
-    -webkit-transition-duration: 300ms;
-            transition-duration: 300ms;
-}
-
-.profile .fontAwesomeLogos .resumeButton {
-    background-color: white;
-}
-
-.profile .fontAwesomeLogos > a {
-    color: white;
-}
-
-.profile .fontAwesomeLogos .resumeButton:hover {
-    background-color: var(--secondarylight);
-}
-
-.profile .fontAwesomeLogos .downloadOption:hover {
-    background-color: var(--secondarylight);
-}
-
-.profile .fontAwesomeLogos > a i:hover {
-    color: var(--secondarylight);
-}
-
-.profile .resumeTooltip.hidden {
-    display: none;
-}
-
-.profile .resumeTooltip {
-    display: flex;
-    position: absolute;
-    left: 0;
-    font-family: "Roboto Slab", serif;
-    font-weight: 300;
-    flex-direction: column;
-    box-shadow: 0 1px 2px 0 grey;
-    background-color: white;
-    color: black;
-    border-radius: 6px;
-    border: none;
-    cursor: pointer;
-    margin-top: 2px;
-    align-items: center;
-    width: max-content;
-    z-index: 1;
-}
-
-.profile .resumeTooltip,
-.profile .resumeTooltip a i {
-    font-size: 16px;
-}
-
-.profile .resumeTooltip a {
-    display: block;
-    margin: 0;
-    padding: 8px 12px;
-    border-radius: 6px 6px 0 0;
-    margin: 0;
-    background-color: white;
-    cursor: pointer;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-}
-
-.profile .resumeTooltip a:first-of-type {
-    border-radius: 6px 6px 0 0;
-}
-
-.profile .resumeTooltip a:last-of-type {
-    border-radius: 0 0 6px 6px;
-}
-
-.profile .resumeTooltip i {
-    margin-left: 8px;
-}
-
-.profile .profilePic {
-    height: 200px;
-    width: 200px;
-    border-radius: 50%;
-    overflow: hidden;
-    position: relative;
-    outline: 5px solid var(--primarylight)
-}
-
-.profile .profilePic div {
-    background: url("../../Images/profilePic.jpg") no-repeat center center;
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 1550px;
-    width: 1550px;
-    background-size: cover;
-    -webkit-transform: scale(0.13);
-            transform: scale(0.13);
-    -webkit-transform-origin: top left;
-            transform-origin: top left;
-    -moz-transform: scale(0.13);
-    -moz-transform-origin: top left;
+    font-size: 24px;
 }
 
 .profile .summary {
     display: flex;
-    gap: 8px;
+    gap: 10px;
+    justify-content: center;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: white;
+    padding: 8px 16px;
 }
 
 @media (max-width: 1000px) {
+    .profile {
+        min-height: 650px;
+    }
+
     .profile .profilePic {
         height: 175px;
         width: 175px;
@@ -284,50 +127,22 @@
         font-size: 27.5px;
     }
 
-    .profile .fontAwesomeLogos .resumeButton,
-    .profile .fontAwesomeLogos .resumeButton i {
-        font-size: 18px;
-    }
-
-    .profile .fontAwesomeLogos > a {
-        width: 27.5px;
-    }
-
-    .profile .fontAwesomeLogos i {
-        font-size: 27.5px;
-    }
-
-    .profile .fontAwesomeLogos i.fa-envelope {
-        font-size: 26.5px;
-    }
-
-    .profile .summary h3 {
-        font-size: 22px;
-    }
-
-    .profile .summary h4 {
+    .profile h3 {
         font-size: 18px;
     }
 }
 
 @media (max-width: 825px) {
+    .profile {
+        min-height: 600px;
+    }
+
     .profile .topSection {
-        padding: 50px;
+        padding: 25px 50px;
     }
 
     .profile .profileText {
         gap: 10px;
-        width: 100%;
-    }
-
-    .profile .fontAwesomeLogos {
-        width: 100%;
-        justify-content: center;
-    }
-
-    .profile .row {
-        flex-direction: column;
-        align-items: center;
     }
 
     .profile .profileText {
@@ -345,100 +160,48 @@
         -moz-transform: scale(0.14516);
     }
 
-    .profile .fontAwesomeLogos .resumeButtonContainer {
-        position: initial;
-    }
-
-    .profile .resumeTooltip {
-        left: 50%;
-        transform: translateX(-50%);
-    }
-
-    .profile .resumeTooltip a {
-        justify-content: center;
-    }
-
     .profile .summary {
         text-align: center;
     }
 }
 
 @media (max-width: 650px) {
-    .profile .profilePic {
-        height: 200px;
-        width: 200px;
+    .profile {
+        min-height: 525px;
     }
-    
-    .profile .profilePic div {
-        -webkit-transform: scale(0.13);
-                transform: scale(0.13);
-        -moz-transform: scale(0.13);
-    }
-    
+
     .profile .profileText h2 {
         font-size: 24px;
     }
 
-    .profile .summary h3 {
-        font-size: 20px;
-    }
-
-    .profile .fontAwesomeLogos {
-        margin-top: 10px;
-    }
-
-    .profile .fontAwesomeLogos > a {
-        width: 25px;
-    }
-
-    .profile .fontAwesomeLogos i {
-        font-size: 26px;
-    }
-
-    .profile .fontAwesomeLogos i.fa-envelope {
-        font-size: 25px;
-    }
-}
-
-@media (max-width: 550px) {
-    .profile .topSection {
-        padding: 50px 25px;
-    }
+    .profile h3 {
+        font-size: 16px;
+    } 
 }
 
 @media (max-width: 480px) {
-    .profile .profilePic {
-        height: 175px;
-        width: 175px;
+    .profile {
+        min-height: 500px;
     }
-    
-    .profile .profilePic div {
-        -webkit-transform: scale(0.1129);
-                transform: scale(0.1129);
-        -moz-transform: scale(0.1129);
+
+    .profile .row {
+        justify-content: center;
+        align-items: center;
+    }
+
+    .profile .profileText > div:first-child * {
+        text-align: center;
+    }
+
+    .profile .profileText {
+        gap: 2px;
     }
 
     .profile .profileText h2 {
         font-size: 22px;
     }
 
-    .profile .fontAwesomeLogos {
-        margin-top: 7.5px;
-    }
-
-    .profile .fontAwesomeLogos > a {
-        margin-right: 5px;
-        margin-left: 5px;
-        width: 21px;
-    }
-
-    .profile .fontAwesomeLogos > a i {
-        font-size: 22px;
-        margin-right: 0;
-        margin-left: 0;
-    }
-
-    .profile .fontAwesomeLogos i.fa-envelope {
-        font-size: 21px;
+    .profile .profileText h3 {
+        margin-top: 7px;
     }
 }

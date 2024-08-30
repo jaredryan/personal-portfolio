@@ -1,44 +1,160 @@
 /* Page */
 
 .experience {
-    background-color: var(--primary);
+    /* background-color: #f6f9fc; */
     margin: 0;
     width: 100%;
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
+    color: white;
+}
+
+.experience .background {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(135, 206, 251, 0.0), rgba(135, 206, 251, 0.0)), url("../../Images/experience.jpg") no-repeat center center;
+    background-size: cover;
+}
+
+.experience .bottomSection {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    border-bottom: 75px solid white;
+    border-left: 100vw solid transparent;
 }
 
 .experience .container {
     max-width: 1000px;
     width: 100%;
     position: relative;
-    padding: 100px;
+    padding: 50px 100px 115px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 100px;
+    gap: 50px;
 }
 
 .experience .container h1 {
     margin: 0 auto;
 }
 
-.experience .container .experienceItems {
+.experience .contentContainer { 
     display: flex;
-    flex-direction: column;
-    gap: 60px;
-    align-items: stretch;
+    flex-direction: row;
+    align-items: flex-start;
 }
 
-.experience .container .experienceItems > div {
+.experience .container .experienceItems {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    color: black;
     background-color: var(--background);
-    padding: 50px;
     border-radius: 50px;
-    outline: 5px solid var(--primarylight);
-    box-shadow: 0 11px 6px -4px grey;
+    outline: 5px solid var(--primary);
+    box-shadow: 0px 2px 8px 3px black;
+}
+
+.experience .experiencesContainer { 
+    display: grid;
+}
+
+.experience .experiencesContainer > * { 
+    visibility: hidden;
+    grid-column: 1/1;
+    grid-row: 1/1;
+}
+
+.experience .experiencesContainer > *.chosen { 
+    visibility: visible;
+}
+
+.experience .horizontal {
+    display: none;
+}
+
+.experience .timelineContainer ul {
+    padding: 40px 0px !important;
+    margin: 0;
+}
+
+.experience .timelineContainer li:last-child {
+    min-height: fit-content;
+}
+
+.experience .timelineContainer li > div:first-child {
+    width: 95px;
+}
+
+.experience .timelineContainer li > div:nth-child(2) .MuiTimelineDot-filled {
+    /* background: black; */
+}
+
+.experience .timelineContainer li > div:nth-child(2) .MuiTimelineConnector-root {
+    /* background: black; */
+}
+
+.experience .timelineContainer li > div:last-child {
+    width: 60px;
+}
+
+.experience .icon {
+    cursor: pointer;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+}
+
+.experience .icon:hover,
+.experience .icon.chosen {
+    border-radius: 6px;
+    transition-duration: 0.3s;
+}
+
+.experience .icon:hover {
+    outline: 5px solid var(--primaryfont) !important;
+}
+
+.experience .icon.chosen {
+    outline: 5px solid var(--primary);
+}
+
+.experience .container .experienceItems .tabContainer {
+    border-right: 1px solid grey;
+}
+
+.experience .container .experienceItems .tabContainer > div:first-child {
+    margin: 40px 0;
+    min-width: max-content;
+}
+
+.experience .container .experienceItems > div:first-child * {
+    font-family: "Roboto Slab", serif !important;
+    font-size: 16px;
+    color: black;
+}
+
+.experience .container .experienceItems > div:first-child *.Mui-selected {
+    color: rgb(25, 118, 210);
+}
+
+.experience .experienceContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 50px;
+    height: 100%;
+    width: 600px;
 }
 
 .experience .container ul {
@@ -51,7 +167,7 @@
     line-height: 30px;
     padding-top: 0px;
     margin: 0;
-    font-weight: 500;
+    font-weight: 600;
     text-align: center;
 }
 
@@ -59,7 +175,7 @@
     margin-bottom: 5px;
     margin-top: 0px;
     font-size: 18px;
-    font-weight: 300;
+    font-weight: 400;
     line-height: 28px;
     text-align: center;
 }
@@ -69,34 +185,11 @@
     margin-right: 10px;
 }
 
-.experience .experienceToggle {
-    background-color: var(--background);
-    margin: -50px 0 0;
-    display: block;
-    font-size: 20px;
-    border: none;
-    padding: 4px 12px;
-    font-weight: 300;
-    cursor: pointer;
-    text-decoration: none;
-    font-family: 'Roboto Slab', serif;
-    text-align: center;
-    border-radius: 6px;
-    width: fit-content;
-    color: black
-}
-
-.experience .experienceToggle:hover {
-    background-color: var(--secondarylight);
-    -webkit-transition-duration: 300ms;
-            transition-duration: 300ms;
-}
-
-.experience .experienceToggle i {
-    margin-left: 8px;
-}
-
 @media (max-width: 1000px) {
+    .experience .container {
+        padding: 40px 50px 100px;
+    }
+
     .experience h3  {
         font-size: 18px;
         line-height: 26px;
@@ -113,30 +206,99 @@
     }
 }
 
-@media (max-width: 825px) {
+@media (max-width: 880px) {
     .experience .container {
-        padding: 50px;
+        gap: 40px;
     }
 
-    .experience .container {
-        gap: 50px;
+    .experience .container .experienceItems {
+        width: 100%;
     }
 
-    .experience .experienceToggle {
-        margin-top: 0;
-    }
-
-    .experience .container .experienceItems > div {
+    .experience .experienceContainer {
         padding: 40px;
+        width: 100%;
     }
 }
 
-@media (max-width: 550px) {
+@media (max-width: 740px) {
     .experience .container {
-        padding: 50px 25px;
+        padding: 40px 25px 100px;
+        gap: 20px;
     }
 
-    .experience .container .experienceItems > div {
+    .experience .timelineContainer ul {
+        padding: 20px 0px !important;
+        margin: 0;
+    }
+
+    .experience .experienceContainer {
         padding: 20px;
+    }
+}
+
+
+@media (max-width: 670px) { /* 600px */
+    /* Some sort of horizontal timeline at the top will be the way to go */
+    /* Maybe temporarily make the the timeline sticky, like only when you're scrolling in this section */
+    /* Or perhaps make the work description itself scrollable, instead of the page, so navigation between
+        positions remains on screen */
+    
+    .experience .vertical {
+        display: none;
+    }
+
+    .experience .horizontal {
+        display: block;
+    }
+
+    .experience .timelineContainer .horizontal {
+        display: flex;
+        flex-direction: row;
+        padding: 20px 20px 0 !important;
+        justify-content: center;
+    }
+
+    .experience .container .experienceItems {
+        flex-direction: column;
+    }
+
+    .experience .timelineContainer li {
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+    }
+
+    .experience .timelineContainer li > div:first-child {
+        min-height: 36px !important;
+        height: 36px !important;
+        max-height: 36px !important;
+        width: unset;
+    }
+
+    .experience .timelineContainer li .dotConnectorContainer {
+        position: relative;
+    }
+
+    .experience .timelineContainer li .dotConnectorContainer .customerHorizontalConnector {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateY(-50%) translateX(17.5px);
+        width: 32px;
+        height: 2px;
+        background-color: rgb(189, 189, 189);
+    }
+
+    .experience .timelineContainer li > div:nth-child(2) .MuiTimelineConnector-root {
+        height: 2px;
+    }
+
+    .experience .container .experienceItems {
+        display: grid;
+    }
+    
+    .experience .container .experienceItems > div:not(:first-child) {
+        grid-column: 1/1
     }
 }

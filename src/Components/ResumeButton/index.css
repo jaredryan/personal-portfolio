@@ -1,0 +1,108 @@
+.resumeTooltip {
+    display: flex;
+    position: absolute;
+    left: 0;
+    font-weight: 400;
+    flex-direction: column;
+    box-shadow: 0 1px 2px 0 grey;
+    background-color: white;
+    color: black;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    margin-top: 2px;
+    align-items: center;
+    width: max-content;
+    z-index: 1;
+}
+
+.resumeTooltip,
+.resumeTooltip a i {
+    font-size: 16px;
+}
+
+.resumeTooltip a {
+    color: black;
+    display: block;
+    margin: 0;
+    padding: 8px 12px;
+    border-radius: 6px 6px 0 0;
+    margin: 0;
+    background-color: white;
+    cursor: pointer;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-family: "Muli", sans-serif;
+}
+
+.resumeTooltip a:first-of-type {
+    border-radius: 6px 6px 0 0;
+}
+
+.resumeTooltip a:last-of-type {
+    border-radius: 0 0 6px 6px;
+}
+
+.resumeTooltip i {
+    margin-left: 8px;
+}
+
+.resumeButtonContainer {
+    position: relative;
+    top: 1px;
+}
+
+.resumeButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    padding: 4px 12px;
+    font-weight: 400;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    border-radius: 6px;
+    width: fit-content;
+    color: black;
+}
+
+.resumeButton i {
+    font-size: 20px;
+    margin-left: 8px;
+}
+
+.resumeButton:hover,
+.resumeTooltip a:hover {
+    -webkit-transition-duration: 500ms;
+            transition-duration: 500ms;
+}
+
+.resumeButton {
+    background-color: white;
+}
+
+.resumeButton:hover {
+    background-color: var(--secondarylight);
+}
+
+.downloadOption:hover {
+    background-color: var(--secondarylight);
+}
+
+@media (max-width: 825px) {
+    .resumeTooltip {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .resumeTooltip a {
+        justify-content: center;
+    }
+
+    .resumeButtonContainer {
+        position: initial;
+    }
+}
