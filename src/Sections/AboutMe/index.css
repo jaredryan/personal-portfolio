@@ -124,7 +124,7 @@
     }
 
     .aboutMe {
-        padding: 40px 50px;
+        padding: 40px 50px 50px;
     }
 
     .aboutMe .container {
@@ -192,7 +192,7 @@
 
 @media (max-width: 550px) {
     .aboutMe {
-        padding: 40px 25px;
+        padding: 40px 25px 50px;
     }
 }
 
