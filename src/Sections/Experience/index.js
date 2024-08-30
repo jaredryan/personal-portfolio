@@ -128,9 +128,8 @@ const mapExperienceEntry = (value, loading, setLoading) => (experience, index) =
         key: experience.title + index,
         in: !hidden && !loading,
         timeout: 500,
-        mountOnEnter: true,
-        unmountOnExit: true,
         onExited: () => setLoading(false),
+        appear: true,
     }
 
     const mapEntry = (thisRef) => 
@@ -144,7 +143,7 @@ const mapExperienceEntry = (value, loading, setLoading) => (experience, index) =
             key={cssTransitionProps.key + 'vertical'}
             nodeRef={verticalRef}
             className="vertical"
-            classNames="fade-bounce-right"
+            classNames="fade-bounce-right-visibility"
         >
             {mapEntry(verticalRef)}
         </CSSTransition>
@@ -153,7 +152,7 @@ const mapExperienceEntry = (value, loading, setLoading) => (experience, index) =
             key={cssTransitionProps.key + 'horizontal'}
             nodeRef={horizontalRef}
             className="horizontal"
-            classNames="fade-bounce-down"
+            classNames="fade-bounce-down-visibility"
         >
             {mapEntry(horizontalRef)}
         </CSSTransition>
@@ -248,7 +247,9 @@ const Experience = (props) => {
                         <div className="timelineContainer">
                             {timeline(handleChange, value)}
                         </div>
-                        {experience.map(mapExperienceEntry(value, loading, setLoading))}
+                        <div className="experiencesContainer">
+                            {experience.map(mapExperienceEntry(value, loading, setLoading))}
+                        </div>
                     </div>
                 </div>
             </div>

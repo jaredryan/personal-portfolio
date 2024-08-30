@@ -221,38 +221,81 @@ h1 {
 
 
 
-
-
-
-
-.fade-bounce-right-enter {
+.fade-bounce-down-visibility-enter {
     opacity: 0;
+    visibility: visible !important;
+    transform: translateY(-10%);
+}
+
+.fade-bounce-down-visibility-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: 500ms ease;
+    visibility: visible !important;
+}
+
+.fade-bounce-down-visibility-enter-done {
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible !important;
+}
+
+.fade-bounce-down-visibility-exit {
+    opacity: 1;
+    transform: translateY(0%);
+    visibility: visible !important;
+}
+
+.fade-bounce-down-visibility-exit-active {
+    opacity: 0;
+    transform: translateY(-10%);
+    transition: 500ms ease;
+    visibility: visible !important;
+}
+
+.fade-bounce-down-visibility-exit-done {
+    opacity: 0;
+    transform: translateX(-10%);
+    visibility: hidden;
+}
+
+
+
+
+.fade-bounce-right-visibility-enter {
+    opacity: 0;
+    visibility: visible !important;
     transform: translateX(-10%);
 }
 
-.fade-bounce-right-enter-active {
+.fade-bounce-right-visibility-enter-active {
     opacity: 1;
     transform: translateX(0);
     transition: 500ms ease;
+    visibility: visible !important;
 }
 
-.fade-bounce-right-enter-done {
+.fade-bounce-right-visibility-enter-done {
     opacity: 1;
     transform: translateX(0);
+    visibility: visible !important;
 }
 
-.fade-bounce-right-exit {
+.fade-bounce-right-visibility-exit {
     opacity: 1;
     transform: translateX(0%);
+    visibility: visible !important;
 }
 
-.fade-bounce-right-exit-active {
+.fade-bounce-right-visibility-exit-active {
     opacity: 0;
     transform: translateX(-10%);
     transition: 500ms ease;
+    visibility: visible !important;
 }
 
-.fade-bounce-right-exit-done {
+.fade-bounce-right-visibility-exit-done {
     opacity: 0;
     transform: translateX(-10%);
+    visibility: hidden;
 }

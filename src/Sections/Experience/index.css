@@ -64,6 +64,20 @@
     box-shadow: 0px 2px 8px 3px black;
 }
 
+.experience .experiencesContainer { 
+    display: grid;
+}
+
+.experience .experiencesContainer > * { 
+    visibility: hidden;
+    grid-column: 1/1;
+    grid-row: 1/1;
+}
+
+.experience .experiencesContainer > *.chosen { 
+    visibility: visible;
+}
+
 .experience .horizontal {
     display: none;
 }
@@ -88,8 +102,6 @@
 .experience .timelineContainer li > div:nth-child(2) .MuiTimelineConnector-root {
     /* background: black; */
 }
-
-
 
 .experience .timelineContainer li > div:last-child {
     width: 60px;
