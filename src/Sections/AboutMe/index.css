@@ -167,26 +167,26 @@
         height: unset;
         width: 100%;
         max-width: 100%;
-        max-height: 400px;
+        height: 400px;
     }
 }
 
 
 @media (max-width: 700px) {
     .aboutMe .row img {
-        max-height: 375px;
+        height: 375px;
     }
 }
 
 @media (max-width: 650px) {
     .aboutMe .row img {
-        max-height: 350px;
+        height: 350px;
     }
 }
 
 @media (max-width: 600px) {
     .aboutMe .row img {
-        max-height: 315px;
+        height: 315px;
     }
 }
 
@@ -198,12 +198,13 @@
 
 @media (max-width: 500px) {
     .aboutMe .row img {
-        max-height: 285px;
+        height: 285px;
     }
 }
 
 @media (max-width: 450px) {
     .aboutMe .row img {
+        min-height: 250px;
         height: auto;
     }
 }
