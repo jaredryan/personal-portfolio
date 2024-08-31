@@ -8,6 +8,7 @@
         -ms-flex-pack: left;
             justify-content: left;
     align-items: center;
+    gap: 20px;
 }
 
 .fontAwesomeLogos i {
@@ -25,20 +26,10 @@
 
 .fontAwesomeLogos > a {
     width: 30px;
-    margin-left: 20px;
-    margin-right: 7px;
     text-decoration: none;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.fontAwesomeLogos > a.left {
-    margin-left: 0px;
-}
-
-.fontAwesomeLogos > a.right {
-    margin-right: 0px;
 }
 
 .fontAwesomeLogos i:hover {
@@ -114,11 +105,10 @@
 @media (max-width: 480px) {
     .fontAwesomeLogos {
         margin-top: 7.5px;
+        gap: 16px;
     }
 
     .fontAwesomeLogos > a {
-        margin-right: 5px;
-        margin-left: 5px;
         width: 21px;
     }
 
