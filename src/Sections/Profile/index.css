@@ -11,7 +11,7 @@
 }
 
 .profile .topSection {
-    padding: 50px 100px;
+    padding: 50px 100px 125px;
     width: 100%;
     display: flex;
     align-items: center;
@@ -138,7 +138,7 @@
     }
 
     .profile .topSection {
-        padding: 25px 50px;
+        padding: 25px 50px 125px;
     }
 
     .profile .profileText {
