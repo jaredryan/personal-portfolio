@@ -207,5 +207,6 @@
 
     .skills .skillsGrid .categoryContainer {
         padding: 20px;
+        min-width: unset;
     }
 }
