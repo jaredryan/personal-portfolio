@@ -41,6 +41,10 @@
     margin: -5px 0 0;
 }
 
+.footer p {
+    text-align: left;
+}
+
 @media (max-width: 1000px) {
     .footer h3 {
         font-size: 18px
