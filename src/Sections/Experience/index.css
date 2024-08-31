@@ -293,12 +293,4 @@
     .experience .timelineContainer li > div:nth-child(2) .MuiTimelineConnector-root {
         height: 2px;
     }
-
-    .experience .container .experienceItems {
-        display: grid;
-    }
-    
-    .experience .container .experienceItems > div:not(:first-child) {
-        grid-column: 1/1
-    }
 }
