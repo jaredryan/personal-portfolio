@@ -143,10 +143,7 @@
 
     .profile .profileText {
         gap: 10px;
-    }
-
-    .profile .profileText {
-        align-items: center;
+        align-items: flex-start;
     }
 
     .profile .profilePic {
@@ -195,6 +192,7 @@
 
     .profile .profileText {
         gap: 2px;
+        align-items: center;
     }
 
     .profile .profileText h2 {
