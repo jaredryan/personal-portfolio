@@ -224,7 +224,7 @@
 @media (max-width: 740px) {
     .experience .container {
         padding: 40px 25px 125px;
-        gap: 20px;
+        gap: 40px;
     }
 
     .experience .timelineContainer ul {

@@ -187,6 +187,14 @@
 }
 
 @media (max-width: 860px) {
+    .skills {
+        padding: 40px 25px;
+    }
+
+    .skills .container {
+        gap: 40px;
+    }
+    
     .skills .categoryTitle h3 { 
         font-size: 20px;
     }
@@ -201,10 +209,6 @@
 }
 
 @media (max-width: 550px) {
-    .skills {
-        padding: 50px 25px;
-    }
-
     .skills .skillsGrid .categoryContainer {
         padding: 20px;
         min-width: unset;
