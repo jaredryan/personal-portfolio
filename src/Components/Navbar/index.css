@@ -52,7 +52,8 @@ nav ul {
 	background-color: transparent;
 	text-align: center;
     margin: 0;
-    top: 60px;
+    bottom: 0;
+    translate: 0 calc(100% + 2px);
     right: 0;
     padding: 4px 0;
     background-color: white;
@@ -94,39 +95,6 @@ nav ul li:hover {
     }
 
     nav ul {
-        top: 48px;
-        right: 0px;
+        /* top: 48px; */
     }
-}
-
-.nav-fade-enter {
-    opacity: 0;
-    transform: translateY(-10%);
-}
-
-.nav-fade-enter-active {
-    opacity: 1;
-    transform: translateY(0);
-    transition: 500ms ease;
-}
-
-.nav-fade-enter-done {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.nav-fade-exit {
-    opacity: 1;
-    transform: translateY(0%);
-}
-
-.nav-fade-exit-active {
-    opacity: 0;
-    transform: translateY(-10%);
-    transition: 500ms ease;
-}
-
-.nav-fade-exit-done {
-    opacity: 0;
-    transform: translateY(-10%);
 }
