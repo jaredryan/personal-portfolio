@@ -103,7 +103,7 @@ class App extends Component {
                     self.setState({animation: {opacity: `${op}`, filter: `alpha(opacity=${op * 100})`}})
                     op -= op * 0.1;
                 }
-            }, 5);
+            }, 10);
         }, 300)
         setTimeout(() => {
             let op = 0.1;  // initial opacity
@@ -114,18 +114,19 @@ class App extends Component {
                     self.setState({pageAnimation: {opacity: `${op}`, filter: `alpha(opacity=${op * 100})`}})
                     op += op * 0.1;
                 }
-            }, 5);
-        }, 500)
+            }, 10);
+        }, 1000)
     }
 
     render() {
         if (this.state.firstLoaded === false) {
             setTimeout(() => this.setState({firstLoaded: true, loadingDisplay: "flex"}), 200);
-            setTimeout(() => this.setState({loadingMessage: "Still loading..."}), 2000);
-            setTimeout(() => this.setState({loadingMessage: "Getting tired..."}), 4000);
-            setTimeout(() => this.setState({loadingMessage: "Daydreaming..."}), 6000);
-            setTimeout(() => this.setState({loadingMessage: "Refocusing..."}), 8000);
-            setTimeout(() => this.setState({loadingMessage: "Almost there..."}), 10000);
+            setTimeout(() => this.setState({loadingMessage: "Still loading..."}), 5000);
+            setTimeout(() => this.setState({loadingMessage: "Getting tired..."}), 8000);
+            setTimeout(() => this.setState({loadingMessage: "Daydreaming..."}), 11000);
+            setTimeout(() => this.setState({loadingMessage: "Refocusing..."}), 14000);
+            setTimeout(() => this.setState({loadingMessage: "Almost there..."}), 17000);
+            setTimeout(() => this.setState({loadingMessage: "Something probably went wrong..."}), 20000);
         }
 
         if (!this.state.startedFinalLoad && this.state.domLoaded) {
@@ -137,7 +138,7 @@ class App extends Component {
                 <div className="scrollContainer" style={this.state.scrollContainer}></div>
                 <div className="loadingContainer" style={{...this.state.animation, display: this.state.loadingDisplay}}>
                     <div>
-                        <div className="loading"></div>
+                        <div className="loading" />
                         <h1>{this.state.loadingMessage}</h1>
                     </div>
                 </div>

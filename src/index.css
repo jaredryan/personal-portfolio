@@ -57,13 +57,14 @@
 }
 
 .loading {
-    -webkit-animation: loading 1s linear infinite;
-    animation: loading 1s linear infinite;
+    -webkit-animation: loading 1.5s linear infinite;
+    animation: loading 1.5s linear infinite;
     width: 150px;
     height: 150px;
     border-radius: 50%;
-    -webkit-box-shadow: inset -2.5px 1px 1px 1px var(--primary);
-            box-shadow: inset -2.5px 1px 1px 1px var(--primary);
+    -webkit-box-shadow: inset 4px 0 1px 0 var(--primary);
+            box-shadow: inset 4px 0 1px 0 var(--primary);
+            /* inset 4px 4px 1px -2px */
     margin: auto;
 }
 
