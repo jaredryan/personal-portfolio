@@ -22,7 +22,7 @@ const Footer = (props) => {
                 <ContactInfo className="footerContact"/>
                 <ul>
                     <li>jryantennis@gmail.com</li>
-                    <li>+1 (559) 348 3595</li>
+                    <li>+1 (559) 348-3595</li>
                 </ul>
             </div>
         </div>
