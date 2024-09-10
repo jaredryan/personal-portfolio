@@ -45,6 +45,10 @@
     text-align: left;
 }
 
+.footer li span {
+    margin: 0 1.5px;
+}
+
 @media (max-width: 1000px) {
     .footer h3 {
         font-size: 18px
