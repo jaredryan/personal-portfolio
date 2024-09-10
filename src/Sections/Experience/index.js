@@ -17,6 +17,7 @@ import VSchoolIcon from '../../Images/vSchoolIcon.png'
 import UCBerkeleyIcon from '../../Images/ucBerkeleyIcon.png'
 
 const work = [{
+    className: 'mantl',
     tab: 'MANTL',
     title: 'Software Developer II',
     company: 'MANTL',
@@ -32,6 +33,7 @@ const work = [{
     icon: (handleChange, value) =>
         <img src={MantlIcon} alt={'MANTL'} className={`icon${value === 'MANTL' ? ' chosen' : ''}`} onClick={() => handleChange('MANTL')}/>,
 }, {
+    className: 'ntr',
     tab: 'NTR',
     title: 'Web Developer',
     company: 'NTR',
@@ -46,6 +48,7 @@ const work = [{
     icon: (handleChange, value) =>
         <img src={NTRIcon} alt={'NTR'} className={`icon${value === 'NTR' ? ' chosen' : ''}`} onClick={() => handleChange('NTR')} />,
 }, {
+    className: 'ibmCa',
     tab: 'IBM - CA',
     title: 'Software Developer II',
     company: 'IBM',
@@ -61,7 +64,7 @@ const work = [{
     icon: (handleChange, value) => 
         <img src={IBMIcon} alt={'IBM'} className={`icon${value === 'IBM - CA' ? ' chosen' : ''}`} onClick={() => handleChange('IBM - CA')} />,
 }, {
-}, {
+    className: 'ibmTx',
     tab: 'IBM - TX',
     title: 'Software Developer I',
     company: 'IBM',
@@ -77,6 +80,7 @@ const work = [{
 }]
 
 const education = [{
+    className: 'vSchool',
     tab: 'V School',
     title: 'V School',
     date: 2018,
@@ -84,8 +88,9 @@ const education = [{
     icon: (handleChange, value) => 
         <img src={VSchoolIcon} alt={'V School'} className={`icon${value === 'V School' ? ' chosen' : ''}`} onClick={() => handleChange('V School')} />,
 }, {
+    className: 'ucBerkeley',
     tab: 'UC Berkeley',
-    title: 'UC Berkeley College of Engineering',
+    title: 'University of California, Berkeley',
     date: 2017,
     subject: 'B.S. Bioengineering, Computer Science Emphasis',
     icon: (handleChange, value) =>
@@ -93,6 +98,8 @@ const education = [{
 }]
 
 const experience = [...work, ...education]
+
+console.log(experience)
 
 const mapEducationEntry = (education, hidden, thisRef) => 
     <div
@@ -239,7 +246,25 @@ const Experience = (props) => {
 
     return (
         <div className="experience" id="experience" ref={props.refs.experience}>
-            <div className="background" />
+            {experience.map(item => {
+                const nodeRef = createRef(null)
+
+                return (
+                    <CSSTransition
+                        key={item.title}
+                        in={value === item.tab}
+                        timeout={1500}
+                        nodeRef={nodeRef}
+                        appear={true}
+                        classNames="transform"
+                    >
+                        <div 
+                            ref={nodeRef}
+                            className={`background ${item.className}`}
+                        />
+                    </CSSTransition>
+                )
+            })}
             <div className="container">
                 <h1>Timeline</h1>
                 <div className="contentContainer">

@@ -4,8 +4,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(var(--primarylight), var(--primarylight), var(--primarylight), var(--primarylight), white, white)
-    /* background-color: #f6f9fc; */
+    background-color: rgba(179, 232, 255, 0.65);
 }
 
 .skills .container {
@@ -72,6 +71,7 @@
 
 .skills .emphasis {
     margin: 0;
+    color: black;
 }
 
 /* .skills .skillCategoryContainer > div:first-child {

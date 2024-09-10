@@ -257,7 +257,7 @@ h1 {
 .fade-bounce-down-visibility-exit-done {
     opacity: 0;
     transform: translateX(-10%);
-    visibility: hidden;
+    visibility: hidden !important;
 }
 
 
@@ -298,5 +298,29 @@ h1 {
 .fade-bounce-right-visibility-exit-done {
     opacity: 0;
     transform: translateX(-10%);
-    visibility: hidden;
+    visibility: hidden !important;
+}
+
+
+
+.transform-enter {
+    opacity: 0 !important;;
+}
+
+.transform-enter-active {
+    opacity: 1 !important;;
+    transition: opacity 1.5s;
+}
+
+.transform-enter-done {
+    opacity: 1 !important;
+}
+
+.transform-exit {
+    opacity: 1 !important;;
+}
+
+.transform-exit-active {
+    opacity: 0 !important;
+    transition: opacity 1.5s;
 }
