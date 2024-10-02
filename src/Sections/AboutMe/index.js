@@ -21,9 +21,9 @@ const AboutMe = (props) => (
                         in design and product discussions.
                     </p>
                     <p>
-                        My curiosity drives me to learn the basics of how the code ecosystem works, then searching for the best
-                        gap I can fill. I also gravitate towards the work done before any code: determining customer needs,
-                        prioritizing them, creating user-friendly design solutions, and planning and coordinating the work.
+                        My curiosity drives me to learn the basics of how the code ecosystem works, then search for the best
+                        gap I can fill. I also gravitate towards the work done before coding: determining customer needs,
+                        prioritizing them, creating user-friendly design solutions, and planning and coordinating the technical work.
                     </p>
                     <p>
                         Let's dive into specifics.
