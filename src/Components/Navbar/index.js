@@ -31,9 +31,9 @@ const Navbar = (props) => {
             <CSSTransition nodeRef={nodeRef} in={isOpen} mountOnEnter unmountOnExit timeout={500} classNames="fade-bounce-down">
                 <ul ref={nodeRef} className={`dropdown-content ${isOpen ? "open" : "closed"}`}>
                     <div onClick={() => handleScroll(props.refs.profile)}><li>Home</li></div>
-                    <div onClick={() => handleScroll(props.refs.aboutMe)}><li>About Me</li></div>
+                    <div onClick={() => handleScroll(props.refs.aboutMe)}><li>About</li></div>
+                    <div onClick={() => handleScroll(props.refs.experience)}><li>Experience</li></div>
                     <div onClick={() => handleScroll(props.refs.skills)}><li>Skills</li></div>
-                    <div onClick={() => handleScroll(props.refs.experience)}><li>Timeline</li></div>
                     <div onClick={() => handleScroll(props.refs.contact)}><li>Contact</li></div>
                 </ul>
             </CSSTransition>

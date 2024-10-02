@@ -10,6 +10,8 @@
     align-items: center;
     position: relative;
     color: white;
+/* 
+    padding-top: 125px; */
 }
 
 .experience .background {
@@ -22,20 +24,11 @@
     background-size: cover;
 }
 
-.experience .bottomSection {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    border-bottom: 125px solid white;
-    border-left: 100vw solid transparent;
-}
-
 .experience .container {
     max-width: 1000px;
     width: 100%;
     position: relative;
-    padding: 50px 100px 125px;
+    padding: 50px 100px 65px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -187,7 +180,7 @@
 
 @media (max-width: 1000px) {
     .experience .container {
-        padding: 40px 50px 125px;
+        padding: 40px 50px 55px;
     }
 
     .experience h3  {
@@ -223,7 +216,7 @@
 
 @media (max-width: 740px) {
     .experience .container {
-        padding: 40px 25px 125px;
+        padding: 40px 25px 55px;
         gap: 40px;
     }
 

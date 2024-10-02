@@ -146,8 +146,8 @@ class App extends Component {
                     <Navbar refs={this.state.refs} onScroll={this.onScroll} />
                     <Profile refs={this.state.refs} />
                     <AboutMe refs={this.state.refs} />
-                    <Skills refs={this.state.refs} />
                     <Experience refs={this.state.refs} onScroll={this.onScroll} />
+                    <Skills refs={this.state.refs} />
                     <Footer refs={this.state.refs} />
                 </div>
             </div>

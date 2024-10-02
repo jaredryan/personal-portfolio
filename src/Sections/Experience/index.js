@@ -24,9 +24,9 @@ const work = [{
     end: 2023,
     location: 'Remote — Jupiter, FL',
     listItems: [
-        'Mentored a few engineers on frontend work and owned crucial frontend features, gaining a reputation for good PR reviews, careful testing, troubleshooting, good design and flows',
-        'Co-led work on introducing a design-component library that integrates with the prior one',
-	    'Co-led work on an automated testing pipeline: the pipeline itself, testing framework, database seeding / cleanup, tests, and teaching others how to contribute',
+        'Mentored engineers on frontend work and owned crucial frontend features, gaining a reputation for good PR reviews, careful testing, troubleshooting, good design and flows',
+        'Led work on introducing a design-component library that integrates with the prior one',
+	    'Led work on an automated testing pipeline: the pipeline itself, testing framework, database seeding / cleanup, tests, and teaching others how to contribute',
         'Proactively worked with cross-team stakeholders to identify, prioritize, and complete work to reduce number of days on our “activation” flow (time from request to completion)',
     ],
     icon: (handleChange, value) =>
@@ -55,7 +55,7 @@ const work = [{
     listItems: [
         'Refactored entire frontend for user management, which evolved to a small leadership role as work expanded and required additional engineers',
 	    'Architected user management technical solutions with product and backend lead, considering security, performance, sizing, business value, and usability',
-	    'Co-created conceptual models and user flows with design, providing guidance on attributes and relationships between users, roles, permissions, and groups',
+	    'Created conceptual models and user flows with design, providing guidance on attributes and relationships between users, roles, permissions, and groups',
         'Planned projects with 1-, 3-, and 6-month cycles, executed via Agile in 2-week sprints',
     ],
     icon: (handleChange, value) => 
@@ -241,7 +241,7 @@ const Experience = (props) => {
         <div className="experience" id="experience" ref={props.refs.experience}>
             <div className="background" />
             <div className="container">
-                <h1>Timeline</h1>
+                <h1>Experience</h1>
                 <div className="contentContainer">
                     <div className="experienceItems">
                         <div className="timelineContainer">

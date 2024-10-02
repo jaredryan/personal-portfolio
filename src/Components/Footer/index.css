@@ -6,7 +6,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 40px 100px 50px;
+    padding: 25px 100px 50px;
     width: 100%;
     max-width: 1250px;
     gap: 50px;
@@ -63,7 +63,7 @@
 
 @media (max-width: 550px) {
     .footer {
-        padding: 40px 50px 50px;
+        padding: 25px 50px 50px;
     }
 
     .footer {

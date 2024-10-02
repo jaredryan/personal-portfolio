@@ -7,8 +7,8 @@ import SoftImage from '../../Images/softIcon.jpg';
 
 const mapSkills = (skill) =>
     <div key={skill.title} className="skillCategoryContainer">
-        {/* <div className={skill.title.toLowerCase()}></div> */}
         {skill.image}
+        {skill.icon}
         <div className="categoryContainer">
             <div className="categoryTitle">
                 <h3>{skill.title}</h3>
@@ -53,13 +53,13 @@ const skills = [{
 }, {
     title: 'Soft',
     listItems: [
-        'Agile',
         'Discover client needs',
         'Technical planning',
         'Technical documentation',
-        'Demo presentations',
+        'Presentations',
         'Pairing',
         'Mentoring',
+        'Agile',
         'Independent',
         'When/how to seek help'
     ],
@@ -74,10 +74,8 @@ const Skills = (props) =>
             <div className="skillsGrid">
                 {skills.map(mapSkills)}
             </div>
-            <h3 className="emphasis">
-                Where did I pick up these skills?
-            </h3>
         </div>
+        <div className="bottomSection" />
     </div>
 
 export default Skills
