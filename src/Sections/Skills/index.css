@@ -94,9 +94,6 @@
 .skills .skillCategoryContainer .soft {
     background: linear-gradient(rgba(135, 206, 251, 0.5), rgba(135, 206, 251, 0.5)), url("../../Images/softIcon.png") no-repeat center center;
 } */
-
-
-
     
 
 .skills .categoryContainer {
@@ -104,7 +101,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    min-width: 370px;
     max-width: 830px;
     gap: 20px;
     padding: 40px 50px;
@@ -146,6 +142,7 @@
     color: black;
     display: block;
     border: 1px solid var(--primary);
+    text-align: center;
 }
 
 .skills .bottomSection {
@@ -185,10 +182,6 @@
 }
 
 @media (max-width: 1000px) {
-    .skills .skillsGrid i {
-        font-size: 42px;
-    }
-
     .skills .categoryTitle h3  {
         font-size: 22px;
     }
@@ -208,6 +201,7 @@
         background-color: var(--primary);
         padding: 16px;
         border-radius: 50%;
+        box-shadow: 0px 1px 5px -2px black;
     }
 
     .skills {
@@ -228,7 +222,7 @@
         outline: 5px solid var(--primary);
         box-shadow: 0px 2px 8px 2px black;
         border-radius: 50px;
-        padding: 40px;
+        padding: 20px;
         background-color: white;
     }
 
