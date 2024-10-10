@@ -19,11 +19,12 @@ const AboutMe = (props) => (
                         technical discussions, and mentoring other engineers.
                         5 years in, I expanded laterally into backend, deployment, and automation, and actively participated
                         in design and product discussions.
+                        6 years in now, I lead a team.
                     </p>
                     <p>
                         My curiosity drives me to learn the basics of how the code ecosystem works, then search for the best
-                        gap I can fill. I also gravitate towards the work done before coding: determining customer needs,
-                        prioritizing them, creating user-friendly design solutions, and planning and coordinating the technical work.
+                        gap I can fill. I also gravitate towards the work done outside of coding: determining customer needs,
+                        prioritizing them, creating user-friendly design solutions, growing a team, and the planning and coordination of the technical work.
                     </p>
                     <p>
                         Let's dive into specifics.

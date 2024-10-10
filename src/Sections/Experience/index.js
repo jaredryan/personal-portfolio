@@ -10,6 +10,7 @@ import TimelineContent from '@mui/lab/TimelineContent'
 import TimelineDot from '@mui/lab/TimelineDot'
 import TimelineOppositeContent from '@mui/lab/TimelineOppositeContent'
 
+import GoldOceanIcon from '../../Images/goldOceanIcon.png'
 import MantlIcon from '../../Images/mantlIcon.png'
 import IBMIcon from '../../Images/ibmIcon.png'
 import NTRIcon from '../../Images/ntrIcon.png'
@@ -17,17 +18,31 @@ import VSchoolIcon from '../../Images/vSchoolIcon.png'
 import UCBerkeleyIcon from '../../Images/ucBerkeleyIcon.png'
 
 const work = [{
+    tab: 'Gold Ocean Holdings',
+    title: 'Senior Software Engineer',
+    company: 'Gold Ocean Holdings',
+    start: 2023,
+    end: 'Present',
+    location: 'Remote',
+    listItems: [
+        'Managed team of 6+, facilitating growth by identifying individual strengths and gaps, discussion, planning, tracking, following up, as well as coordinating and pairing on work',
+        'Created automated data pipeline for real estate acquisitions: scrape listings, sanitize, and generate recommendations, which led to $1m+ investments',
+        'Refined mathematical model for generating recommendations for real estate acquisitions'
+    ],
+    icon: (handleChange, value) =>
+        <img src={GoldOceanIcon} alt={'Gold Ocean Holdings'} className={`icon${value === 'Gold Ocean Holdings' ? ' chosen' : ''}`} onClick={() => handleChange('Gold Ocean Holdings')}/>,
+}, {
     tab: 'MANTL',
     title: 'Software Developer II',
     company: 'MANTL',
     start: 2021,
     end: 2023,
-    location: 'Remote — Jupiter, FL',
+    location: 'Remote',
     listItems: [
         'Mentored engineers on frontend work and owned crucial frontend features, gaining a reputation for good PR reviews, careful testing, troubleshooting, good design and flows',
         'Led work on introducing a design-component library that integrates with the prior one',
-	    'Led work on an automated testing pipeline: the pipeline itself, testing framework, database seeding / cleanup, tests, and teaching others how to contribute',
-        'Proactively worked with cross-team stakeholders to identify, prioritize, and complete work to reduce number of days on our “activation” flow (time from request to completion)',
+        'Led work on an automated testing pipeline for 3+ teams and 150+ tests: the pipeline itself, testing framework, database seeding / cleanup, tests, teaching others how to contribute',
+        'Proactively worked with cross-team stakeholders to identify, prioritize, and complete work, reducing number of days on our “activation” flow (from intro to use) from 120 to 115 days.',
     ],
     icon: (handleChange, value) =>
         <img src={MantlIcon} alt={'MANTL'} className={`icon${value === 'MANTL' ? ' chosen' : ''}`} onClick={() => handleChange('MANTL')}/>,
@@ -39,9 +54,9 @@ const work = [{
     end: 2022,
     location: 'Remote - Berkeley, CA',
     listItems: [
-        'Sole developer on a web app for collecting, grading, and anonymizing peer feedback, which has been used by 600 students, across 7 schools, generating 6K evaluations',
-      	'Collaborated with non-technical UC Berkeley professor to define product requirements and designs, then again for updates and new features over the 4 years before handoff', 
-  	    'Learned troubleshooting without access to clients, and maintenance practices',
+        'Partnered with UC Berkeley professor and student to design website for collecting, grading, and anonymizing peer feedback. Students submit, teachers grade and release.',
+        'Sole developer and administrator for website used by 20+ colleges with 10,000+ submissions',
+  	    'Learned how to work with customers to identify new features and fix bugs, and best maintenance practices',
     ],
     icon: (handleChange, value) =>
         <img src={NTRIcon} alt={'NTR'} className={`icon${value === 'NTR' ? ' chosen' : ''}`} onClick={() => handleChange('NTR')} />,
@@ -53,10 +68,9 @@ const work = [{
     end: 2021,
     location: 'San Jose, CA',
     listItems: [
-        'Refactored entire frontend for user management, which evolved to a small leadership role as work expanded and required additional engineers',
-	    'Architected user management technical solutions with product and backend lead, considering security, performance, sizing, business value, and usability',
-	    'Created conceptual models and user flows with design, providing guidance on attributes and relationships between users, roles, permissions, and groups',
-        'Planned projects with 1-, 3-, and 6-month cycles, executed via Agile in 2-week sprints',
+        'Led frontend with 3+ engineers in 3-month cycles, executed via Agile in 2-week sprints',
+        'Architected technical solutions with product and backend lead, considering security, performance, sizing, business value, and usability',
+        'Created conceptual models and user flows with design and backend, providing guidance on attributes and relationships between users, roles, permissions, and groups',
     ],
     icon: (handleChange, value) => 
         <img src={IBMIcon} alt={'IBM'} className={`icon${value === 'IBM - CA' ? ' chosen' : ''}`} onClick={() => handleChange('IBM - CA')} />,
@@ -69,8 +83,8 @@ const work = [{
     end: 2019,
     location: 'Austin, Texas',
     listItems: [
-        'Prototyped a fullstack application in React, Node, and Python showcasing all uses of AppID, which was leveraged for sales pitches and demos',
-	    'Adapted to multiple technologies and protocols to quickly debug issues: OAuth, OpenID, Node, Angular, Java, Android, Swift, Kubernetes, Docker, Jenkins, Github, Zenhub',
+        'Created demo applications facilitating sales pitches to external customers',
+        'Adapted to multiple technologies and protocols to quickly debug issues: OAuth, OpenID, Node, Angular, Java, Android, Swift, Kubernetes, Docker, Jenkins',
     ],
     icon: (handleChange, value) =>
         <img src={IBMIcon} alt={'IBM'} className={`icon${value === 'IBM - TX' ? ' chosen' : ''}`} onClick={() => handleChange('IBM - TX')} />,
@@ -161,13 +175,13 @@ const mapExperienceEntry = (value, loading, setLoading) => (experience, index) =
 }
 
 const earliestYear = 2017
-const latestYearOfUpdates = 2021
+const latestYearOfUpdates = 2023
 const timelineYears = Array.from(
      {length: latestYearOfUpdates + 1 - earliestYear }, 
     (v, k) => k + earliestYear
 )
 
-const verticalTimelineComponent = (year, content, last) => 
+const verticalTimelineComponent = (year, content, last) => !content.length ? null : 
     <TimelineItem key={year}>
         <TimelineOppositeContent color="text.secondary">
             {year}{last && '+'}
@@ -181,7 +195,7 @@ const verticalTimelineComponent = (year, content, last) =>
         </TimelineContent>
     </TimelineItem>
 
-const horizontalTimelineComponent = (year, content, last) => 
+const horizontalTimelineComponent = (year, content, last) => !content.length ? null : 
     <TimelineItem key={year}>
         <TimelineOppositeContent color="text.secondary">
             {year}{last && '+'}

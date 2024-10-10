@@ -154,7 +154,7 @@
     border-left: 100vw solid transparent;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1225px) {
     .skills .skillsGrid .skillCategoryContainer {
         background-color: transparent;
         max-width: unset;
