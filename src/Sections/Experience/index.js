@@ -26,7 +26,7 @@ const work = [{
     location: 'Remote',
     listItems: [
         'Managed team of 6+, facilitating growth by identifying individual strengths and gaps, discussion, planning, tracking, following up, as well as coordinating and pairing on work',
-        'Created automated data pipeline for real estate acquisitions: scrape listings, sanitize, and generate recommendations, which led to $1m+ investments',
+        'Created automated data pipeline for real estate acquisitions: scrape listings, sanitize, and generate recommendations, leading to $XXm+ funds invested',
         'Refined mathematical model for generating recommendations for real estate acquisitions'
     ],
     icon: (handleChange, value) =>
@@ -39,10 +39,10 @@ const work = [{
     end: 2023,
     location: 'Remote',
     listItems: [
-        'Mentored engineers on frontend work and owned crucial frontend features, gaining a reputation for good PR reviews, careful testing, troubleshooting, good design and flows',
-        'Led work on introducing a design-component library that integrates with the prior one',
-        'Led work on an automated testing pipeline for 3+ teams and 150+ tests: the pipeline itself, testing framework, database seeding / cleanup, tests, teaching others how to contribute',
-        'Proactively worked with cross-team stakeholders to identify, prioritize, and complete work, reducing number of days on our “activation” flow (from intro to use) from 120 to 115 days.',
+        'Mentored engineers on frontend work and owned crucial frontend features, gaining a reputation for good PR reviews, careful testing, troubleshooting, and good design and flows',
+        'Led work on introducing a design-component library that integrates with the prior library',
+        'Led work on an automated testing pipeline for 3+ teams and 150+ tests: the pipeline itself, testing framework, database seeding / cleanup, tests, and teaching others how to contribute',
+        'Reduced customer activation by 10+% by taking initiative on identifying, prioritizing, and filling key technical gaps by discovery across key team and organizational stakeholders',
     ],
     icon: (handleChange, value) =>
         <img src={MantlIcon} alt={'MANTL'} className={`icon${value === 'MANTL' ? ' chosen' : ''}`} onClick={() => handleChange('MANTL')}/>,
