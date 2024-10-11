@@ -25,9 +25,10 @@ const work = [{
     end: 'Present',
     location: 'Remote',
     listItems: [
-        'Managed team of 6+, facilitating growth by identifying individual strengths and gaps, discussion, planning, tracking, following up, as well as coordinating and pairing on work',
-        'Created automated data pipeline for real estate acquisitions: scrape listings, sanitize, and generate recommendations, leading to $XXm+ funds invested',
-        'Refined mathematical model for generating recommendations for real estate acquisitions'
+        'Managed team of 6+, increased productivity by 15% by jointly crafting improvement and career plans with structured tracking for each engineer, combined with pairing sessions',
+        'Developed an automated data pipeline for real estate acquisitions: scrape listings, sanitize, and generate recommendations, leading to $XXm funds invested',
+        'Refined mathematical model for real estate acquisitions recommendations, which properly filters out 20% more properties, saving 1hr+ of manual evaluation for each listing filtered',
+
     ],
     icon: (handleChange, value) =>
         <img src={GoldOceanIcon} alt={'Gold Ocean Holdings'} className={`icon${value === 'Gold Ocean Holdings' ? ' chosen' : ''}`} onClick={() => handleChange('Gold Ocean Holdings')}/>,
@@ -39,27 +40,12 @@ const work = [{
     end: 2023,
     location: 'Remote',
     listItems: [
-        'Mentored engineers on frontend work and owned crucial frontend features, gaining a reputation for good PR reviews, careful testing, troubleshooting, and good design and flows',
-        'Led work on introducing a design-component library that integrates with the prior library',
-        'Led work on an automated testing pipeline for 3+ teams and 150+ tests: the pipeline itself, testing framework, database seeding / cleanup, tests, and teaching others how to contribute',
-        'Reduced customer activation by 10+% by taking initiative on identifying, prioritizing, and filling key technical gaps by discovery across key team and organizational stakeholders',
+        'Mentored 4+ engineers on frontend work and owned crucial frontend features, receiving team recognition for good PR reviews, pairing sessions, testing, and good design and flows',
+        'Led work on an automated testing pipeline for 3+ teams and 150+ tests and advocated for tests as mandatory for PRs, leading to automated test coverage jumping from 25% to 80%',
+        'Reduced customer activation by 10+% by leading discussions with key team and organizational stakeholders to identify, prioritize, and fill gaps through automation',
     ],
     icon: (handleChange, value) =>
         <img src={MantlIcon} alt={'MANTL'} className={`icon${value === 'MANTL' ? ' chosen' : ''}`} onClick={() => handleChange('MANTL')}/>,
-}, {
-    tab: 'NTR',
-    title: 'Web Developer',
-    company: 'NTR',
-    start: 2018,
-    end: 2022,
-    location: 'Remote - Berkeley, CA',
-    listItems: [
-        'Partnered with UC Berkeley professor and student to design website for collecting, grading, and anonymizing peer feedback. Students submit, teachers grade and release.',
-        'Sole developer and administrator for website used by 20+ colleges with 10,000+ submissions',
-  	    'Learned how to work with customers to identify new features and fix bugs, and best maintenance practices',
-    ],
-    icon: (handleChange, value) =>
-        <img src={NTRIcon} alt={'NTR'} className={`icon${value === 'NTR' ? ' chosen' : ''}`} onClick={() => handleChange('NTR')} />,
 }, {
     tab: 'IBM - CA',
     title: 'Software Developer II',
@@ -68,13 +54,12 @@ const work = [{
     end: 2021,
     location: 'San Jose, CA',
     listItems: [
-        'Led frontend with 3+ engineers in 3-month cycles, executed via Agile in 2-week sprints',
-        'Architected technical solutions with product and backend lead, considering security, performance, sizing, business value, and usability',
-        'Created conceptual models and user flows with design and backend, providing guidance on attributes and relationships between users, roles, permissions, and groups',
+        'Led frontend with 3+ engineers through Agile methodology on 3-month cycles, improving team velocity by 15% and team estimation accuracy by 30%',
+        'Architected technical solutions with product and backend lead, considering security, performance, sizing, business value, and usability, expanding platform capabilities by 33%',
+        'Partnered with design to reduce design iteration cycles by 20% through active participation in design conception, providing guidance on models, relationships, and technical limits',
     ],
     icon: (handleChange, value) => 
         <img src={IBMIcon} alt={'IBM'} className={`icon${value === 'IBM - CA' ? ' chosen' : ''}`} onClick={() => handleChange('IBM - CA')} />,
-}, {
 }, {
     tab: 'IBM - TX',
     title: 'Software Developer I',
@@ -83,11 +68,24 @@ const work = [{
     end: 2019,
     location: 'Austin, Texas',
     listItems: [
-        'Created demo applications facilitating sales pitches to external customers',
-        'Adapted to multiple technologies and protocols to quickly debug issues: OAuth, OpenID, Node, Angular, Java, Android, Swift, Kubernetes, Docker, Jenkins',
+        'Increased sales by 10% by pioneering demo applications showcasing product capabilities',
+        'Quickly debugged issues across multiple technologies (OAuth, OpenID, Node, Angular, Java, Android, Swift, Docker, Jenkins), increasing passing automation tests by 15%',
     ],
     icon: (handleChange, value) =>
         <img src={IBMIcon} alt={'IBM'} className={`icon${value === 'IBM - TX' ? ' chosen' : ''}`} onClick={() => handleChange('IBM - TX')} />,
+}, {
+    tab: 'NTR',
+    title: 'Web Developer',
+    company: 'NTR',
+    start: 2018,
+    end: 2022,
+    location: 'Remote - Berkeley, CA',
+    listItems: [
+        'Partnered with UC Berkeley professor to design website for collecting, grading, releasing, and anonymizing feedback, now used by 20+ colleges with 10,000+ submissions',
+        'Singlehandedly developed the website from scratch with React, Node, and MongoDB, and administered it for 4 years with 99.999% availability and 0 bugs after the 1st year',
+    ],
+    icon: (handleChange, value) =>
+        <img src={NTRIcon} alt={'NTR'} className={`icon${value === 'NTR' ? ' chosen' : ''}`} onClick={() => handleChange('NTR')} />,
 }]
 
 const education = [{
