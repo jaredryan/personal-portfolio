@@ -256,7 +256,7 @@ h1 {
 
 .fade-bounce-down-visibility-exit-done {
     opacity: 0;
-    transform: translateX(-10%);
+    transform: translateY(-10%);
     visibility: hidden;
 }
 
