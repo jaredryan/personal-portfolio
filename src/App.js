@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Routes, Route } from 'react-router-dom';
 
 import Navbar from './Components/Navbar'
 import Footer from './Components/Footer'
@@ -133,6 +134,13 @@ class App extends Component {
             this.handleLoad()
         }
 
+        const softwareSinglePageApp = <>
+            <Profile refs={this.state.refs} />
+            <AboutMe refs={this.state.refs} />
+            <Experience refs={this.state.refs} onScroll={this.onScroll} />
+            <Skills refs={this.state.refs} />
+        </>
+
         return (
             <div>
                 <div className="scrollContainer" style={this.state.scrollContainer}></div>
@@ -144,10 +152,11 @@ class App extends Component {
                 </div>
                 <div className="contentContainer" style={{display: this.state.pagesDisplay, ...this.state.pageAnimation}}>
                     <Navbar refs={this.state.refs} onScroll={this.onScroll} />
-                    <Profile refs={this.state.refs} />
-                    <AboutMe refs={this.state.refs} />
-                    <Experience refs={this.state.refs} onScroll={this.onScroll} />
-                    <Skills refs={this.state.refs} />
+                    <Routes>
+                        <Route path="/" element={softwareSinglePageApp} />
+                        <Route path="/software" element={softwareSinglePageApp} />
+                        <Route path="/product" element={<>Emptiness</>} />
+                    </Routes>
                     <Footer refs={this.state.refs} />
                 </div>
             </div>
