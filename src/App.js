@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
 import Navbar from './Components/Navbar'
 import Footer from './Components/Footer'
@@ -8,6 +8,11 @@ import Profile from './Sections/Profile'
 import AboutMe from './Sections/AboutMe'
 import Skills from './Sections/Skills'
 import Experience from './Sections/Experience'
+
+const gameUrls = [
+    'galaga_knockoff',
+    'when_bunnies_attack',
+]
 
 class App extends Component {
     constructor() {
@@ -155,6 +160,12 @@ class App extends Component {
                     <Routes>
                         <Route path="/software" element={softwareSinglePageApp} />
                         <Route path="/product" element={<>Product Manager Resume</>} />
+                        {gameUrls.map(url => (
+                            <Route
+                                path={`/games/${url}`}
+                                element={<Navigate to={`/games/${url}/`} replace />}
+                            />
+                        ))}
                         <Route path="*" element={softwareSinglePageApp} />
                     </Routes>
                     <Footer refs={this.state.refs} />
