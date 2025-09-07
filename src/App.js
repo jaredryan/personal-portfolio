@@ -153,9 +153,9 @@ class App extends Component {
                 <div className="contentContainer" style={{display: this.state.pagesDisplay, ...this.state.pageAnimation}}>
                     <Navbar refs={this.state.refs} onScroll={this.onScroll} />
                     <Routes>
-                        <Route path="/" element={softwareSinglePageApp} />
                         <Route path="/software" element={softwareSinglePageApp} />
-                        <Route path="/product" element={<>Emptiness</>} />
+                        <Route path="/product" element={<>Product Manager Resume</>} />
+                        <Route path="*" element={softwareSinglePageApp} />
                     </Routes>
                     <Footer refs={this.state.refs} />
                 </div>

@@ -1,0 +1,49 @@
+[build]
+  command = "npm run build"
+  publish = "build"
+
+# --- FORCE TRAILING SLASH (regex safe) ---
+[[redirects]]
+  from = "/games/galaga_knockoff"
+  to = "/games/galaga_knockoff/"
+  status = 301
+  force = true
+  conditions = { Path = "^/games/galaga_knockoff$" }
+
+[[redirects]]
+  from = "/games/when_bunnies_attack"
+  to = "/games/when_bunnies_attack/"
+  status = 301
+  force = true
+  conditions = { Path = "^/games/when_bunnies_attack$" }
+
+# --- GAME PROXIES ---
+[[redirects]]
+  from = "/games/galaga_knockoff/*"
+  to = "https://galagaknockoff.netlify.app/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/games/galaga_knockoff/static/*"
+  to = "https://galagaknockoff.netlify.app/static/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/games/when_bunnies_attack/*"
+  to = "https://whenbunniesattack.netlify.app/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/games/when_bunnies_attack/static/*"
+  to = "https://whenbunniesattack.netlify.app/static/:splat"
+  status = 200
+  force = true
+
+# --- PORTFOLIO SPA FALLBACK ---
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
