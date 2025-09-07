@@ -4,14 +4,14 @@
 
 # --- GAME PROXIES ---
 [[redirects]]
-  from = "/games/galaga_knockoff/*"
-  to = "https://galagaknockoff.netlify.app/:splat"
+  from = "/games/nest_invaders/*"
+  to = "https://nestinvaders.netlify.app/:splat"
   status = 200
   force = true
 
 [[redirects]]
-  from = "/games/galaga_knockoff/static/*"
-  to = "https://galagaknockoff.netlify.app/static/:splat"
+  from = "/games/nest_invaders/static/*"
+  to = "https://nestinvaders.netlify.app/static/:splat"
   status = 200
   force = true
 
