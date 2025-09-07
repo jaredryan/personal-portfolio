@@ -152,7 +152,6 @@ class App extends Component {
                 </div>
                 <div className="contentContainer" style={{display: this.state.pagesDisplay, ...this.state.pageAnimation}}>
                     <Navbar refs={this.state.refs} onScroll={this.onScroll} />
-                    <a href={'/games/galaga_knockoff/'}>Galaga Knockoff</a>
                     <Routes>
                         <Route path="/software" element={softwareSinglePageApp} />
                         <Route path="/product" element={<>Product Manager Resume</>} />
