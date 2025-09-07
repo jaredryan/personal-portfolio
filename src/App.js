@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 import Navbar from './Components/Navbar'
 import Footer from './Components/Footer'
@@ -152,7 +152,7 @@ class App extends Component {
                 </div>
                 <div className="contentContainer" style={{display: this.state.pagesDisplay, ...this.state.pageAnimation}}>
                     <Navbar refs={this.state.refs} onScroll={this.onScroll} />
-                    <Link to={'/games/galaga_knockoff/'}>Galaga Knockoff</Link>
+                    <a href={'/games/galaga_knockoff/'}>Galaga Knockoff</a>
                     <Routes>
                         <Route path="/software" element={softwareSinglePageApp} />
                         <Route path="/product" element={<>Product Manager Resume</>} />
