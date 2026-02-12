@@ -1,0 +1,34 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# --- GAME PROXIES ---
+[[redirects]]
+  from = "/games/nest_invaders/*"
+  to = "https://nestinvaders.netlify.app/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/games/nest_invaders/static/*"
+  to = "https://nestinvaders.netlify.app/static/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/games/when_bunnies_attack/*"
+  to = "https://whenbunniesattack.netlify.app/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/games/when_bunnies_attack/static/*"
+  to = "https://whenbunniesattack.netlify.app/static/:splat"
+  status = 200
+  force = true
+
+# --- PORTFOLIO SPA FALLBACK ---
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
