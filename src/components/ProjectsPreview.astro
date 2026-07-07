@@ -1,4 +1,5 @@
 ---
+import { Icon } from "astro-icon/components";
 import type { Project } from "../data/projects";
 // Imported for its is:global CSS only — this component builds pill markup
 // by hand (build-time and client-side), but PillList.astro's styles are
@@ -17,40 +18,41 @@ const defaultProject = projects.find((p) => p.slug === "lpa-tracker") ?? project
   <div class="projects-preview__header">
     <h2 class="eyebrow">Projects</h2>
     <a class="projects-preview__expand" data-preview-expand href="/projects" aria-label="Open full Projects page">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6h9v9M18 6 7 17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <Icon name="lucide:arrow-up-right" aria-hidden="true" />
     </a>
   </div>
 
-  <div class="projects-preview__thumbs">
-    {projects.map((project) => (
-      <button
-        type="button"
-        class="projects-preview__thumb"
-        data-preview-project={project.slug}
-        aria-pressed={project.slug === defaultProject.slug ? "true" : "false"}
-        aria-label={`Preview ${project.title}`}
-      >
-        <img src={project.screenshots.cover} alt="" width="120" height="75" />
-      </button>
-    ))}
-  </div>
+  <div class="projects-preview__body">
+    <div class="projects-preview__media">
+      <img
+        id="projects-preview-cover"
+        src={defaultProject.screenshots.cover}
+        alt={`${defaultProject.title} screenshot`}
+        width="640"
+        height="400"
+      />
+      <div class="projects-preview__thumbs">
+        {projects.map((project) => (
+          <button
+            type="button"
+            class="projects-preview__thumb"
+            data-preview-project={project.slug}
+            aria-pressed={project.slug === defaultProject.slug ? "true" : "false"}
+            aria-label={`Preview ${project.title}`}
+          >
+            <img src={project.screenshots.cover} alt="" width="120" height="75" />
+          </button>
+        ))}
+      </div>
+    </div>
 
-  <div class="projects-preview__media">
-    <img
-      id="projects-preview-cover"
-      src={defaultProject.screenshots.cover}
-      alt={`${defaultProject.title} screenshot`}
-      width="640"
-      height="400"
-    />
-  </div>
-
-  <div class="projects-preview__info">
-    <p class="projects-preview__title" id="projects-preview-title">{defaultProject.title}</p>
-    <p class="projects-preview__oneliner prose" id="projects-preview-oneliner">{defaultProject.oneLiner}</p>
-    <ul class="pill-list pill-list--preview" id="projects-preview-pills">
-      {defaultProject.previewPills.map((pill) => <li class="pill">{pill}</li>)}
-    </ul>
+    <div class="projects-preview__info">
+      <p class="projects-preview__title" id="projects-preview-title">{defaultProject.title}</p>
+      <p class="projects-preview__oneliner prose" id="projects-preview-oneliner">{defaultProject.oneLiner}</p>
+      <ul class="pill-list pill-list--preview" id="projects-preview-pills">
+        {defaultProject.previewPills.map((pill) => <li class="pill">{pill}</li>)}
+      </ul>
+    </div>
   </div>
 </div>
 
@@ -80,7 +82,6 @@ const defaultProject = projects.find((p) => p.slug === "lpa-tracker") ?? project
     display: flex;
     align-items: center;
     justify-content: space-between;
-    order: 0;
   }
 
   .projects-preview__expand {
@@ -93,20 +94,44 @@ const defaultProject = projects.find((p) => p.slug === "lpa-tracker") ?? project
     color: var(--color-accent-coral);
   }
 
-  .projects-preview__expand svg {
-    width: 1rem;
-    height: 1rem;
+  .projects-preview__expand :global(svg) {
+    width: 1.125rem;
+    height: 1.125rem;
   }
 
   .projects-preview__expand:hover {
     background: var(--color-surface-alt);
   }
 
+  .projects-preview__body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    min-width: 0;
+  }
+
+  .projects-preview__media {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    min-width: 0;
+  }
+
+  .projects-preview__media img#projects-preview-cover {
+    width: 100%;
+    /* height: auto — see ProjectCarousel.astro's carousel__slide comment;
+       without it the HTML height attribute overrides aspect-ratio. */
+    height: auto;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+  }
+
   .projects-preview__thumbs {
-    order: 1;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: var(--space-2);
+    gap: var(--space-1);
   }
 
   .projects-preview__thumb {
@@ -120,6 +145,7 @@ const defaultProject = projects.find((p) => p.slug === "lpa-tracker") ?? project
 
   .projects-preview__thumb img {
     width: 100%;
+    height: auto;
     aspect-ratio: 16 / 10;
     object-fit: cover;
     border-radius: calc(var(--radius-sm) - 2px);
@@ -129,24 +155,11 @@ const defaultProject = projects.find((p) => p.slug === "lpa-tracker") ?? project
     border-color: var(--color-accent-coral);
   }
 
-  .projects-preview__media {
-    order: 2;
-  }
-
-  .projects-preview__media img#projects-preview-cover {
-    width: 100%;
-    max-height: 200px;
-    aspect-ratio: 16 / 10;
-    object-fit: cover;
-    border-radius: var(--radius-md);
-    border: 1px solid var(--color-border);
-  }
-
   .projects-preview__info {
-    order: 3;
     display: flex;
     flex-direction: column;
     gap: var(--space-2);
+    min-width: 0;
   }
 
   .projects-preview__title {
@@ -160,8 +173,19 @@ const defaultProject = projects.find((p) => p.slug === "lpa-tracker") ?? project
   }
 
   @media (min-width: 1024px) {
-    .projects-preview__thumbs {
-      order: 4;
+    .projects-preview__body {
+      flex-direction: row;
+      align-items: flex-start;
+      gap: var(--space-4);
+    }
+
+    .projects-preview__media {
+      width: 42%;
+      flex-shrink: 0;
+    }
+
+    .projects-preview__info {
+      flex: 1;
     }
   }
 </style>

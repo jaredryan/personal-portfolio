@@ -21,7 +21,7 @@ body {
   margin: 0;
   background: var(--color-bg);
   color: var(--color-text);
-  font-family: var(--font-sans);
+  font-family: var(--font-body);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
@@ -30,10 +30,17 @@ main {
   display: block;
 }
 
-h1, h2, h3, h4 {
+h1, h2, h3, h4,
+.page-title,
+.project-card__title,
+.projects-preview__title,
+.experience-preview__row-line1,
+.experience-preview__detail-title,
+.experience-spine__line1 {
+  font-family: var(--font-heading);
   line-height: 1.2;
   margin: 0;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.03em;
 }
 
 p {
@@ -117,11 +124,11 @@ section[id] {
 .eyebrow {
   display: inline-flex;
   align-items: center;
-  gap: var(--space-1);
-  font-size: 0.7rem;
+  gap: var(--space-2);
+  font-size: 0.85rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.04em;
   color: var(--color-text-muted);
 }
 

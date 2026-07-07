@@ -3,7 +3,7 @@ import type { ExperienceEntry } from "../data/experience";
 import Breadcrumbs from "./Breadcrumbs.astro";
 import PillList from "./PillList.astro";
 import MetricChips from "./MetricChips.astro";
-import { dateLabel, monogram, orgName } from "../utils/experienceDisplay";
+import { dateLabel, monogram, spineLine1 } from "../utils/experienceDisplay";
 
 interface Props {
   entries: ExperienceEntry[];
@@ -27,7 +27,7 @@ const defaultSlug = "gold-ocean";
         >
           <span class="experience-spine__logo" aria-hidden="true">{monogram(entry)}</span>
           <span class="experience-spine__text">
-            <span class="experience-spine__line1">{entry.title} · {orgName(entry)}</span>
+            <span class="experience-spine__line1">{spineLine1(entry)}</span>
             <span class="experience-spine__line2">{dateLabel(entry)}</span>
           </span>
         </button>
@@ -50,7 +50,7 @@ const defaultSlug = "gold-ocean";
             {dateLabel(entry)}{entry.location ? ` · ${entry.location}` : ""}
           </p>
           <p class="experience-detail__oneliner prose">{entry.oneLiner}</p>
-          {entry.metricChips.length > 0 && <MetricChips chips={entry.metricChips} />}
+          {entry.kind === "work" && entry.metricChips.length > 0 && <MetricChips chips={entry.metricChips} />}
           {entry.bullets.length > 0 && (
             <ul class="experience-detail__bullets">
               {entry.bullets.map((bullet) => <li>{bullet}</li>)}
@@ -68,12 +68,12 @@ const defaultSlug = "gold-ocean";
         <summary>
           <span class="experience-spine__logo" aria-hidden="true">{monogram(entry)}</span>
           <span class="experience-spine__text">
-            <span class="experience-spine__line1">{entry.title} · {orgName(entry)}</span>
+            <span class="experience-spine__line1">{spineLine1(entry)}</span>
             <span class="experience-spine__line2">{dateLabel(entry)}</span>
           </span>
         </summary>
         <p class="experience-detail__oneliner prose">{entry.oneLiner}</p>
-        {entry.metricChips.length > 0 && <MetricChips chips={entry.metricChips} />}
+        {entry.kind === "work" && entry.metricChips.length > 0 && <MetricChips chips={entry.metricChips} />}
         {entry.bullets.length > 0 && (
           <ul class="experience-detail__bullets">
             {entry.bullets.map((bullet) => <li>{bullet}</li>)}
@@ -95,11 +95,23 @@ const defaultSlug = "gold-ocean";
     gap: var(--space-6);
   }
 
+  /* minmax(180px, 240px) lets the spine shrink down to a still-legible 180px
+     before the (much larger) detail column gets cramped, instead of holding
+     a fixed/min width that ate space disproportionately at medium viewport
+     widths and forced the detail panel's content to wrap taller than needed. */
+  @media (min-width: 900px) {
+    .experience-layout {
+      display: grid;
+      grid-template-columns: minmax(180px, 240px) minmax(0, 1fr);
+      align-items: start;
+    }
+  }
+
   .experience-spine {
     display: flex;
     flex-direction: column;
     gap: var(--space-1);
-    min-width: 260px;
+    min-width: 0;
   }
 
   .experience-spine__item {
@@ -161,7 +173,7 @@ const defaultSlug = "gold-ocean";
   }
 
   .experience-detail {
-    flex: 1;
+    min-width: 0;
   }
 
   .experience-detail__panel {
@@ -217,9 +229,6 @@ const defaultSlug = "gold-ocean";
   }
 
   @media (min-width: 900px) {
-    .experience-layout {
-      display: flex;
-    }
     .experience-accordion {
       display: none;
     }

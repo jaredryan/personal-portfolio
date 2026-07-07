@@ -11,7 +11,13 @@ describe("experience", () => {
       expect(entry.title.length).toBeGreaterThan(0);
       expect(entry.oneLiner.length).toBeGreaterThan(0);
       expect(entry.pills.length).toBeGreaterThan(0);
-      expect(entry.metricChips.length).toBeGreaterThan(0);
+      // Metric chips are a work-entry pattern only — education entries
+      // intentionally carry no metricChips (nothing renders them).
+      if (entry.kind === "work") {
+        expect(entry.metricChips.length).toBeGreaterThan(0);
+      } else {
+        expect(entry.metricChips.length).toBe(0);
+      }
     }
   });
 });

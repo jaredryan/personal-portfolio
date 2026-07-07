@@ -117,6 +117,8 @@ const linkButtonClass: Record<Project["links"][number]["kind"], string> = {
   }
 
   .project-card img {
+    width: 100%;
+    height: auto;
     border-radius: var(--radius-sm);
     aspect-ratio: 16 / 10;
     object-fit: cover;
@@ -203,14 +205,19 @@ const linkButtonClass: Record<Project["links"][number]["kind"], string> = {
     cursor: default;
   }
 
-  @media (min-width: 1000px) {
+  /* Lower than the dashboard's 1024px card breakpoints on purpose — this is
+     a full page with much more horizontal room than a bento card, so the
+     two-column split can survive down to a genuinely narrow (~iPad mini
+     portrait) width before the screenshot column gets cramped. */
+  @media (min-width: 820px) {
     .project-detail__layout {
       flex-direction: row;
       align-items: flex-start;
     }
 
     .project-detail__media {
-      width: 55%;
+      width: min(55%, 460px);
+      min-width: 300px;
       flex-shrink: 0;
     }
 
@@ -248,7 +255,19 @@ const linkButtonClass: Record<Project["links"][number]["kind"], string> = {
     detailPanels.forEach((p) => {
       p.hidden = true;
     });
-    if (focusHeading) moveFocusTo("#projects-heading");
+    if (focusHeading) {
+      // Returning to the grid should reset to a clean top-of-page view, not
+      // scrollIntoView the heading specifically — that flush-aligns the
+      // heading to the viewport's top edge and scrolls the breadcrumb above
+      // it out of view, which reads as a stray partial scroll rather than a
+      // natural "back to the grid" landing.
+      const heading = document.querySelector<HTMLElement>("#projects-heading");
+      window.scrollTo({ top: 0, behavior: "auto" });
+      if (heading) {
+        if (!heading.hasAttribute("tabindex")) heading.setAttribute("tabindex", "-1");
+        heading.focus({ preventScroll: true });
+      }
+    }
   }
 
   function syncFromUrl() {

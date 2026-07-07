@@ -1,6 +1,7 @@
 ---
+import { Icon } from "astro-icon/components";
 import type { ExperienceEntry } from "../data/experience";
-import { dateLabel, monogram, orgName } from "../utils/experienceDisplay";
+import { dateLabel, monogram, spineLine1 } from "../utils/experienceDisplay";
 // Imported for their is:global CSS only — this component builds pill/chip
 // markup by hand via document.createElement, but the styles live in these
 // components' bundles and are only included on a page when the component
@@ -20,11 +21,11 @@ const { entries } = Astro.props;
   <div class="experience-preview__header">
     <h2 class="eyebrow experience-preview__heading" data-preview-heading>Experience</h2>
     <button type="button" class="experience-preview__back" data-preview-back hidden>
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <Icon name="lucide:arrow-left" aria-hidden="true" />
       Experience
     </button>
     <a class="experience-preview__expand" data-preview-expand href="/experience" aria-label="Open full Experience page">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6h9v9M18 6 7 17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <Icon name="lucide:arrow-up-right" aria-hidden="true" />
     </a>
   </div>
 
@@ -34,7 +35,7 @@ const { entries } = Astro.props;
         <button type="button" class="experience-preview__row" data-preview-role={entry.slug}>
           <span class="experience-preview__logo" aria-hidden="true">{monogram(entry)}</span>
           <span class="experience-preview__row-text">
-            <span class="experience-preview__row-line1">{entry.title} · {orgName(entry)}</span>
+            <span class="experience-preview__row-line1">{spineLine1(entry)}</span>
             <span class="experience-preview__row-line2">{dateLabel(entry)}</span>
           </span>
         </button>
@@ -58,8 +59,8 @@ const { entries } = Astro.props;
 <script type="application/json" id="experience-preview-data" set:html={JSON.stringify(
   entries.map((entry) => ({
     slug: entry.slug,
-    title: entry.title,
-    org: orgName(entry),
+    kind: entry.kind,
+    titleLine: spineLine1(entry),
     dates: dateLabel(entry),
     oneLiner: entry.oneLiner,
     metricChips: entry.metricChips,
@@ -82,8 +83,11 @@ const { entries } = Astro.props;
 
   @media (min-width: 1024px) {
     .experience-preview {
+      /* height: 100% (not a fixed max-height) — the grid gives this card
+         the combined height of Hero + gap + Projects (see BentoDashboard's
+         grid-row: 1 / span 2), so it always matches the left column instead
+         of the two drifting out of sync as either side's content changes. */
       height: 100%;
-      max-height: 600px;
       overflow: hidden;
     }
   }
@@ -104,15 +108,15 @@ const { entries } = Astro.props;
     padding: 0;
     cursor: pointer;
     font-weight: 700;
-    font-size: 0.7rem;
+    font-size: 0.85rem;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.04em;
     color: var(--color-text-muted);
   }
 
-  .experience-preview__back svg {
-    width: 0.9rem;
-    height: 0.9rem;
+  .experience-preview__back :global(svg) {
+    width: 1.125rem;
+    height: 1.125rem;
   }
 
   .experience-preview__back:hover {
@@ -129,9 +133,9 @@ const { entries } = Astro.props;
     color: var(--color-accent-coral);
   }
 
-  .experience-preview__expand svg {
-    width: 1rem;
-    height: 1rem;
+  .experience-preview__expand :global(svg) {
+    width: 1.125rem;
+    height: 1.125rem;
   }
 
   .experience-preview__expand:hover {
@@ -249,6 +253,7 @@ const { entries } = Astro.props;
 
   .experience-preview__seemore {
     align-self: flex-start;
+    margin-top: var(--space-2);
     color: var(--color-accent-teal);
     font-weight: 600;
     text-decoration: none;
@@ -259,8 +264,8 @@ const { entries } = Astro.props;
 <script>
   type EntrySummary = {
     slug: string;
-    title: string;
-    org: string;
+    kind: "work" | "education";
+    titleLine: string;
     dates: string;
     oneLiner: string;
     metricChips: string[];
@@ -311,10 +316,15 @@ const { entries } = Astro.props;
     backBtn.hidden = false;
     expandLink.href = `/experience?role=${slug}`;
 
-    if (detailTitle) detailTitle.textContent = `${entry.title} · ${entry.org}`;
+    if (detailTitle) detailTitle.textContent = entry.titleLine;
     if (detailDates) detailDates.textContent = entry.dates;
     if (detailOneliner) detailOneliner.textContent = entry.oneLiner;
-    if (detailChips) fillChipList(detailChips, entry.metricChips.slice(0, 3), "metric-chip", "metric-chips");
+    if (detailChips) {
+      detailChips.innerHTML = "";
+      if (entry.kind === "work" && entry.metricChips.length > 0) {
+        fillChipList(detailChips, entry.metricChips.slice(0, 3), "metric-chip", "metric-chips");
+      }
+    }
     if (detailPills) fillChipList(detailPills, entry.pills.slice(0, 5), "pill", "pill-list pill-list--preview");
     if (detailSeeMore) detailSeeMore.href = `/experience?role=${slug}`;
 
