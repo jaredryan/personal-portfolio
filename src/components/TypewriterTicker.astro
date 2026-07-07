@@ -1,0 +1,93 @@
+---
+interface Props {
+  label: string;
+  lines: string[];
+}
+
+const { label, lines } = Astro.props;
+---
+<div class="typewriter" data-lines={JSON.stringify(lines)}>
+  <span class="typewriter__label">{label}</span>
+  <span class="typewriter__text" aria-live="polite">{lines[0]}</span>
+  <span class="typewriter__cursor" aria-hidden="true">|</span>
+</div>
+
+<style>
+  .typewriter {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-2);
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    min-height: 1.5em;
+  }
+
+  .typewriter__label {
+    font-weight: 700;
+    color: var(--color-text);
+    white-space: nowrap;
+  }
+
+  .typewriter__text {
+    overflow-wrap: anywhere;
+  }
+
+  .typewriter__cursor {
+    color: var(--color-accent-coral);
+    animation: blink 1s step-end infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .typewriter__cursor {
+      animation: none;
+    }
+  }
+
+  @keyframes blink {
+    50% { opacity: 0; }
+  }
+</style>
+
+<script>
+  const root = document.querySelector<HTMLElement>(".typewriter");
+  const textEl = root?.querySelector<HTMLElement>(".typewriter__text");
+  const cursorEl = root?.querySelector<HTMLElement>(".typewriter__cursor");
+  const lines: string[] = JSON.parse(root?.dataset.lines ?? "[]");
+
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (root && textEl && lines.length > 0 && !prefersReducedMotion) {
+    const TYPE_MS = 35;
+    const DELETE_MS = 18;
+    const HOLD_MS = 1800;
+    let lineIndex = 0;
+    let timeoutId: ReturnType<typeof setTimeout>;
+
+    function typeLine(line: string, charIndex: number) {
+      textEl!.textContent = line.slice(0, charIndex);
+      if (charIndex < line.length) {
+        timeoutId = setTimeout(() => typeLine(line, charIndex + 1), TYPE_MS);
+      } else {
+        timeoutId = setTimeout(() => deleteLine(line, line.length), HOLD_MS);
+      }
+    }
+
+    function deleteLine(line: string, charIndex: number) {
+      textEl!.textContent = line.slice(0, charIndex);
+      if (charIndex > 0) {
+        timeoutId = setTimeout(() => deleteLine(line, charIndex - 1), DELETE_MS);
+      } else {
+        lineIndex = (lineIndex + 1) % lines.length;
+        timeoutId = setTimeout(() => typeLine(lines[lineIndex], 0), TYPE_MS);
+      }
+    }
+
+    typeLine(lines[0], 0);
+
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) clearTimeout(timeoutId);
+    });
+  } else if (cursorEl && prefersReducedMotion) {
+    cursorEl.style.display = "none";
+  }
+</script>
