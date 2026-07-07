@@ -1,14 +1,28 @@
 ---
+import fs from "node:fs";
+import path from "node:path";
 import { Icon } from "astro-icon/components";
 import { profile } from "../data/profile";
 import ThemeToggle from "./ThemeToggle.astro";
 import TypewriterTicker from "./TypewriterTicker.astro";
+
+// Optional headshot: rendered only if the asset actually exists at build
+// time, so there's never a broken-image icon or an empty alt-text node —
+// drop a file at public/images/headshot.jpg to turn it on, no code change
+// needed.
+const headshotSrc = "/images/headshot.jpg";
+const hasHeadshot = fs.existsSync(path.join(process.cwd(), "public", headshotSrc));
 ---
 <article class="hero-card">
   <div class="hero-card__top">
-    <div>
-      <h1>{profile.name}</h1>
-      <p class="hero-card__role">{profile.role}</p>
+    <div class="hero-card__identity">
+      {hasHeadshot && (
+        <img class="hero-card__headshot" src={headshotSrc} alt="Jared Ryan" width="64" height="64" />
+      )}
+      <div>
+        <h1>{profile.name}</h1>
+        <p class="hero-card__role">{profile.role}</p>
+      </div>
     </div>
     <ThemeToggle />
   </div>
@@ -55,6 +69,24 @@ import TypewriterTicker from "./TypewriterTicker.astro";
     justify-content: space-between;
     align-items: flex-start;
     gap: var(--space-4);
+  }
+
+  .hero-card__identity {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    min-width: 0;
+  }
+
+  /* Fixed 64px at every width, not responsive — matches the name/role text,
+     which doesn't scale responsively either, so the two stay proportional. */
+  .hero-card__headshot {
+    width: 64px;
+    height: 64px;
+    flex: 0 0 auto;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid var(--color-border);
   }
 
   .hero-card__role {

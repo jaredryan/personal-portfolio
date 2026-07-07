@@ -240,6 +240,7 @@ const linkButtonClass: Record<Project["links"][number]["kind"], string> = {
 
 <script>
   import { getQueryParam } from "../utils/urlState";
+  import { playEnterAnimation } from "../utils/motion";
 
   const gridView = document.getElementById("projects-grid-view");
   const detailView = document.getElementById("projects-detail-view");
@@ -255,6 +256,9 @@ const linkButtonClass: Record<Project["links"][number]["kind"], string> = {
     detailPanels.forEach((p) => {
       p.hidden = p.dataset.projectDetail !== slug;
     });
+    // Only animate on a genuine user click (focusPanel), not on initial
+    // page load/URL sync — the static HTML should just appear on first paint.
+    if (focusPanel) playEnterAnimation(panel);
     if (focusPanel) {
       // Focus the panel itself (aria-labelledby its own heading, so it
       // still announces sensibly) without letting focus() scroll on its
@@ -278,6 +282,9 @@ const linkButtonClass: Record<Project["links"][number]["kind"], string> = {
     detailPanels.forEach((p) => {
       p.hidden = true;
     });
+    // Only animate on a genuine "back to grid" click, not on initial
+    // page load/URL sync.
+    if (focusHeading && gridView) playEnterAnimation(gridView);
     if (focusHeading) {
       // Returning to the grid should reset to a clean top-of-page view, not
       // scrollIntoView the heading specifically — that flush-aligns the

@@ -250,6 +250,7 @@ const defaultSlug = "gold-ocean";
 <script>
   import { getQueryParam, setSectionState } from "../utils/urlState";
   import { moveFocusTo } from "../utils/focus";
+  import { playEnterAnimation } from "../utils/motion";
 
   const spineItems = document.querySelectorAll<HTMLButtonElement>("[data-spine-role]");
   const detailPanels = document.querySelectorAll<HTMLElement>("[data-role-detail]");
@@ -264,7 +265,12 @@ const defaultSlug = "gold-ocean";
       item.setAttribute("aria-pressed", String(item.dataset.spineRole === target));
     });
     detailPanels.forEach((panel) => {
-      panel.hidden = panel.dataset.roleDetail !== target;
+      const isTarget = panel.dataset.roleDetail === target;
+      panel.hidden = !isTarget;
+      // Only animate on a genuine user-initiated spine click (focusPanel),
+      // not on initial page load/URL sync — the static HTML should just
+      // appear, not fade in, on first paint.
+      if (isTarget && focusPanel) playEnterAnimation(panel);
     });
     // Setting .open on every item (not just the target) is what keeps the
     // mobile accordion single-selection: any other item that was previously
@@ -301,6 +307,11 @@ const defaultSlug = "gold-ocean";
       // DOM at once, just hidden by CSS at this breakpoint) in sync too.
       selectRole(slug);
       setSectionState({ key: "role", value: slug });
+      // <details> opens instantly with no built-in transition; fading the
+      // revealed content in (not attempting to animate the native
+      // open/close itself) is the restrained, low-risk way to make it feel
+      // less abrupt.
+      playEnterAnimation(item.querySelector(".experience-detail-content"));
     });
   });
 

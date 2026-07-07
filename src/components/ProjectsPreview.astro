@@ -199,6 +199,8 @@ const defaultProject = projects.find((p) => p.slug === "lpa-tracker") ?? project
 </style>
 
 <script>
+  import { playEnterAnimation } from "../utils/motion";
+
   type PreviewProject = {
     slug: string;
     title: string;
@@ -219,6 +221,7 @@ const defaultProject = projects.find((p) => p.slug === "lpa-tracker") ?? project
   // would hijack the Experience card's expand link.
   const root = document.getElementById("projects-preview");
   const cover = root?.querySelector<HTMLImageElement>("#projects-preview-cover");
+  const info = root?.querySelector<HTMLElement>(".projects-preview__info");
   const title = root?.querySelector<HTMLElement>("#projects-preview-title");
   const oneLiner = root?.querySelector<HTMLElement>("#projects-preview-oneliner");
   const pillsList = root?.querySelector<HTMLElement>("#projects-preview-pills");
@@ -241,6 +244,9 @@ const defaultProject = projects.find((p) => p.slug === "lpa-tracker") ?? project
       pillsList.appendChild(li);
     }
     if (expandLink) expandLink.href = `/projects?project=${slug}`;
+
+    playEnterAnimation(cover);
+    playEnterAnimation(info);
 
     thumbs?.forEach((thumb) => {
       thumb.setAttribute("aria-pressed", String(thumb.dataset.previewProject === slug));

@@ -273,6 +273,8 @@ const { entries } = Astro.props;
 </style>
 
 <script>
+  import { playEnterAnimation } from "../utils/motion";
+
   type EntrySummary = {
     slug: string;
     kind: "work" | "education";
@@ -326,6 +328,7 @@ const { entries } = Astro.props;
     heading.hidden = true;
     backBtn.hidden = false;
     expandLink.href = `/experience?role=${slug}`;
+    playEnterAnimation(detail);
 
     if (detailTitle) detailTitle.textContent = entry.titleLine;
     if (detailDates) detailDates.textContent = entry.dates;
@@ -362,6 +365,7 @@ const { entries } = Astro.props;
     heading.hidden = false;
     backBtn.hidden = true;
     expandLink.href = "/experience";
+    playEnterAnimation(list);
   }
 
   rows?.forEach((row) => {

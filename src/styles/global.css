@@ -172,6 +172,27 @@ section[id] {
   background: var(--color-accent-coral);
 }
 
+/* Restrained content-swap entrance animation — opacity + a few px of
+   vertical movement only. Retriggered via utils/motion.ts's
+   playEnterAnimation() whenever JS swaps which content is visible
+   (dashboard bento previews, Experience spine/accordion, Projects
+   grid/detail). prefers-reduced-motion below already clamps every
+   animation's duration to ~0, so call sites don't need their own check. */
+@keyframes motion-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.motion-fade-up {
+  animation: motion-fade-up 200ms ease-out;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.001ms !important;
