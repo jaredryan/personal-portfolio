@@ -2,11 +2,7 @@
 type Crumb = {
   label: string;
   href?: string;
-  roleLink?: string;
-  projectLink?: string;
-  clearRole?: boolean;
   clearProject?: boolean;
-  dashboardLink?: boolean;
 };
 
 interface Props {
@@ -26,11 +22,7 @@ const { trail } = Astro.props;
           ) : (
             <a
               href={crumb.href ?? "#"}
-              data-role-link={crumb.roleLink}
-              data-project-link={crumb.projectLink}
-              data-clear-role={crumb.clearRole ? "" : undefined}
               data-clear-project={crumb.clearProject ? "" : undefined}
-              data-dashboard-link={crumb.dashboardLink ? "" : undefined}
             >
               {crumb.label}
             </a>
@@ -49,9 +41,9 @@ const { trail } = Astro.props;
     align-items: center;
     gap: var(--space-2);
     list-style: none;
-    margin: 0 0 var(--space-4);
+    margin: 0 0 var(--space-6);
     padding: 0;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: var(--color-text-muted);
   }
 
@@ -67,7 +59,7 @@ const { trail } = Astro.props;
   }
 
   .breadcrumbs a:hover {
-    color: var(--color-primary);
+    color: var(--color-accent-teal);
     text-decoration: underline;
   }
 

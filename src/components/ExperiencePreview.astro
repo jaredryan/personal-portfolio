@@ -1,53 +1,72 @@
 ---
 import type { ExperienceEntry } from "../data/experience";
+import { dateLabel, monogram, orgName } from "../utils/experienceDisplay";
+// Imported for their is:global CSS only — this component builds pill/chip
+// markup by hand via document.createElement, but the styles live in these
+// components' bundles and are only included on a page when the component
+// module is actually imported (see PillList.astro's is:global comment).
 import PillList from "./PillList.astro";
+import MetricChips from "./MetricChips.astro";
+void PillList;
+void MetricChips;
 
 interface Props {
   entries: ExperienceEntry[];
 }
 
 const { entries } = Astro.props;
-const workEntries = entries.filter((entry) => entry.kind === "work");
-// Matches ExperienceSection's default selected role (Task 14) so the expand
-// link is never a dead click before the user has previewed a specific role.
-const defaultRoleSlug = "gold-ocean";
 ---
 <div class="experience-preview" id="experience-preview">
-  <h2 class="experience-preview__heading">Experience</h2>
+  <div class="experience-preview__header">
+    <h2 class="eyebrow experience-preview__heading" data-preview-heading>Experience</h2>
+    <button type="button" class="experience-preview__back" data-preview-back hidden>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Experience
+    </button>
+    <a class="experience-preview__expand" data-preview-expand href="/experience" aria-label="Open full Experience page">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6h9v9M18 6 7 17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
 
-  <ul class="experience-preview__list">
-    {workEntries.map((entry) => (
+  <ul class="experience-preview__list" data-preview-list>
+    {entries.map((entry) => (
       <li>
-        <button
-          type="button"
-          class="experience-preview__item"
-          data-preview-role={entry.slug}
-          aria-pressed="false"
-        >
-          <span class="experience-preview__company">{entry.company}</span>
-          <span class="experience-preview__title">{entry.title}</span>
-          <span class="experience-preview__dates">
-            {entry.start}—{entry.end}
+        <button type="button" class="experience-preview__row" data-preview-role={entry.slug}>
+          <span class="experience-preview__logo" aria-hidden="true">{monogram(entry)}</span>
+          <span class="experience-preview__row-text">
+            <span class="experience-preview__row-line1">{entry.title} · {orgName(entry)}</span>
+            <span class="experience-preview__row-line2">{dateLabel(entry)}</span>
           </span>
         </button>
       </li>
     ))}
   </ul>
 
-  <div class="experience-preview__teaser" data-preview-teaser hidden>
-    <p class="experience-preview__teaser-oneliner"></p>
-    <div class="experience-preview__teaser-pills"></div>
+  <div class="experience-preview__detail" data-preview-detail hidden>
+    <p class="experience-preview__detail-title" data-detail-title></p>
+    <p class="experience-preview__detail-dates" data-detail-dates></p>
+    <p class="experience-preview__detail-oneliner" data-detail-oneliner></p>
+    <div class="experience-preview__detail-chips" data-detail-chips></div>
+    <div class="experience-preview__detail-bullets-wrap" data-detail-bullets-wrap>
+      <ul class="experience-preview__detail-bullets" data-detail-bullets></ul>
+    </div>
+    <div class="experience-preview__detail-pills" data-detail-pills></div>
+    <a class="experience-preview__seemore" data-detail-seemore href="/experience">See more →</a>
   </div>
-
-  <a
-    class="experience-preview__expand"
-    href={`?role=${defaultRoleSlug}#experience`}
-    data-role-link={defaultRoleSlug}
-    aria-label="View full Experience section"
-  >
-    View full experience →
-  </a>
 </div>
+
+<script type="application/json" id="experience-preview-data" set:html={JSON.stringify(
+  entries.map((entry) => ({
+    slug: entry.slug,
+    title: entry.title,
+    org: orgName(entry),
+    dates: dateLabel(entry),
+    oneLiner: entry.oneLiner,
+    metricChips: entry.metricChips,
+    pills: entry.pills,
+    bullets: entry.bullets,
+  }))
+)} />
 
 <style>
   .experience-preview {
@@ -58,8 +77,65 @@ const defaultRoleSlug = "gold-ocean";
     padding: var(--space-6);
     display: flex;
     flex-direction: column;
-    gap: var(--space-4);
-    height: 100%;
+    gap: var(--space-3);
+  }
+
+  @media (min-width: 1024px) {
+    .experience-preview {
+      height: 100%;
+      max-height: 600px;
+      overflow: hidden;
+    }
+  }
+
+  .experience-preview__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+  }
+
+  .experience-preview__back {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-muted);
+  }
+
+  .experience-preview__back svg {
+    width: 0.9rem;
+    height: 0.9rem;
+  }
+
+  .experience-preview__back:hover {
+    color: var(--color-accent-teal);
+  }
+
+  .experience-preview__expand {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: var(--radius-sm);
+    color: var(--color-accent-coral);
+  }
+
+  .experience-preview__expand svg {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .experience-preview__expand:hover {
+    background: var(--color-surface-alt);
   }
 
   .experience-preview__list {
@@ -68,99 +144,211 @@ const defaultRoleSlug = "gold-ocean";
     padding: 0;
     display: flex;
     flex-direction: column;
-    gap: var(--space-2);
+    gap: var(--space-1);
+    overflow-y: auto;
+    min-height: 0;
   }
 
-  .experience-preview__item {
+  .experience-preview__row {
     width: 100%;
     text-align: left;
     background: transparent;
-    border: 1px solid var(--color-border);
+    border: 1px solid transparent;
     border-radius: var(--radius-sm);
-    padding: var(--space-2) var(--space-3);
+    padding: var(--space-1) var(--space-2);
     cursor: pointer;
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
   }
 
-  .experience-preview__item[aria-pressed="true"] {
-    border-color: var(--color-accent-teal);
+  .experience-preview__row:hover {
     background: var(--color-surface-alt);
+    border-color: var(--color-border);
   }
 
-  .experience-preview__company {
+  .experience-preview__logo {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: var(--radius-sm);
+    background: var(--color-surface-alt);
+    color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
     font-weight: 700;
   }
 
-  .experience-preview__dates {
+  .experience-preview__row-text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  .experience-preview__row-line1 {
+    font-weight: 600;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .experience-preview__row-line2 {
+    color: var(--color-text-muted);
+    font-size: 0.78rem;
+  }
+
+  .experience-preview__detail {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    min-height: 0;
+    flex: 1;
+  }
+
+  .experience-preview__detail-title {
+    font-weight: 700;
+  }
+
+  .experience-preview__detail-dates {
     color: var(--color-text-muted);
     font-size: 0.85rem;
   }
 
-  .experience-preview__teaser {
-    background: var(--color-surface-alt);
-    border-radius: var(--radius-sm);
-    padding: var(--space-3);
+  .experience-preview__detail-oneliner {
+    color: var(--color-text-muted);
   }
 
-  .experience-preview__expand {
+  .experience-preview__detail-bullets-wrap {
+    position: relative;
+    overflow: hidden;
+    flex: 1;
+    min-height: 2.6rem;
+  }
+
+  .experience-preview__detail-bullets-wrap.is-truncated::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 2.5rem;
+    background: linear-gradient(to bottom, transparent, var(--color-surface));
+    pointer-events: none;
+  }
+
+  .experience-preview__detail-bullets {
+    margin: 0;
+    padding-left: 1.1rem;
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  .experience-preview__seemore {
     align-self: flex-start;
-    color: var(--color-primary);
+    color: var(--color-accent-teal);
     font-weight: 600;
     text-decoration: none;
+    font-size: 0.9rem;
   }
 </style>
 
-<script type="application/json" id="experience-preview-data" set:html={JSON.stringify(
-  workEntries.map((entry) => ({ slug: entry.slug, oneLiner: entry.oneLiner, pills: entry.pills }))
-)} />
-
 <script>
-  // This script runs after the JSON data block above in document order, so
-  // `experience-preview-data`'s textContent is already in the DOM by the
-  // time this executes — do not reorder these two <script> tags.
-  const root = document.getElementById("experience-preview");
-  const items = root?.querySelectorAll<HTMLButtonElement>("[data-preview-role]");
-  const teaser = root?.querySelector<HTMLElement>("[data-preview-teaser]");
-  const teaserOneLiner = teaser?.querySelector<HTMLElement>(".experience-preview__teaser-oneliner");
-  const teaserPills = teaser?.querySelector<HTMLElement>(".experience-preview__teaser-pills");
-  const expandLink = root?.querySelector<HTMLAnchorElement>(".experience-preview__expand");
+  type EntrySummary = {
+    slug: string;
+    title: string;
+    org: string;
+    dates: string;
+    oneLiner: string;
+    metricChips: string[];
+    pills: string[];
+    bullets: string[];
+  };
 
-  type EntrySummary = { slug: string; oneLiner: string; pills: string[] };
+  const root = document.getElementById("experience-preview");
+  const heading = root?.querySelector<HTMLElement>("[data-preview-heading]");
+  const backBtn = root?.querySelector<HTMLButtonElement>("[data-preview-back]");
+  const expandLink = root?.querySelector<HTMLAnchorElement>("[data-preview-expand]");
+  const list = root?.querySelector<HTMLElement>("[data-preview-list]");
+  const detail = root?.querySelector<HTMLElement>("[data-preview-detail]");
+  const detailTitle = root?.querySelector<HTMLElement>("[data-detail-title]");
+  const detailDates = root?.querySelector<HTMLElement>("[data-detail-dates]");
+  const detailOneliner = root?.querySelector<HTMLElement>("[data-detail-oneliner]");
+  const detailChips = root?.querySelector<HTMLElement>("[data-detail-chips]");
+  const detailBulletsWrap = root?.querySelector<HTMLElement>("[data-detail-bullets-wrap]");
+  const detailBullets = root?.querySelector<HTMLElement>("[data-detail-bullets]");
+  const detailPills = root?.querySelector<HTMLElement>("[data-detail-pills]");
+  const detailSeeMore = root?.querySelector<HTMLAnchorElement>("[data-detail-seemore]");
+  const rows = root?.querySelectorAll<HTMLButtonElement>("[data-preview-role]");
+
   const entryData: EntrySummary[] = JSON.parse(
     document.getElementById("experience-preview-data")?.textContent ?? "[]"
   );
 
-  function selectPreview(slug: string) {
-    items?.forEach((item) => {
-      item.setAttribute("aria-pressed", String(item.dataset.previewRole === slug));
-    });
-
-    const entry = entryData.find((e) => e.slug === slug);
-    if (!entry || !teaser || !teaserOneLiner || !teaserPills) return;
-
-    teaser.hidden = false;
-    teaserOneLiner.textContent = entry.oneLiner;
-    teaserPills.innerHTML = "";
-    const list = document.createElement("ul");
-    list.className = "pill-list pill-list--preview";
-    for (const pill of entry.pills.slice(0, 4)) {
+  function fillChipList(container: Element, items: string[], itemClass: string, listClass: string) {
+    container.innerHTML = "";
+    const ul = document.createElement("ul");
+    ul.className = listClass;
+    for (const item of items) {
       const li = document.createElement("li");
-      li.className = "pill";
-      li.textContent = pill;
-      list.appendChild(li);
+      li.className = itemClass;
+      li.textContent = item;
+      ul.appendChild(li);
     }
-    teaserPills.appendChild(list);
+    container.appendChild(ul);
+  }
 
-    if (expandLink) {
-      expandLink.dataset.roleLink = slug;
+  function showPreview(slug: string) {
+    const entry = entryData.find((e) => e.slug === slug);
+    if (!entry || !detail || !list || !heading || !backBtn || !expandLink) return;
+
+    list.hidden = true;
+    detail.hidden = false;
+    heading.hidden = true;
+    backBtn.hidden = false;
+    expandLink.href = `/experience?role=${slug}`;
+
+    if (detailTitle) detailTitle.textContent = `${entry.title} · ${entry.org}`;
+    if (detailDates) detailDates.textContent = entry.dates;
+    if (detailOneliner) detailOneliner.textContent = entry.oneLiner;
+    if (detailChips) fillChipList(detailChips, entry.metricChips.slice(0, 3), "metric-chip", "metric-chips");
+    if (detailPills) fillChipList(detailPills, entry.pills.slice(0, 5), "pill", "pill-list pill-list--preview");
+    if (detailSeeMore) detailSeeMore.href = `/experience?role=${slug}`;
+
+    if (detailBullets && detailBulletsWrap) {
+      detailBullets.innerHTML = "";
+      for (const bullet of entry.bullets) {
+        const li = document.createElement("li");
+        li.textContent = bullet;
+        detailBullets.appendChild(li);
+      }
+      detailBulletsWrap.classList.remove("is-truncated");
+      requestAnimationFrame(() => {
+        if (detailBulletsWrap.scrollHeight > detailBulletsWrap.clientHeight + 1) {
+          detailBulletsWrap.classList.add("is-truncated");
+        }
+      });
     }
   }
 
-  items?.forEach((item) => {
-    item.addEventListener("click", () => {
-      const slug = item.dataset.previewRole;
-      if (slug) selectPreview(slug);
+  function showList() {
+    if (!list || !detail || !heading || !backBtn || !expandLink) return;
+    list.hidden = false;
+    detail.hidden = true;
+    heading.hidden = false;
+    backBtn.hidden = true;
+    expandLink.href = "/experience";
+  }
+
+  rows?.forEach((row) => {
+    row.addEventListener("click", () => {
+      const slug = row.dataset.previewRole;
+      if (slug) showPreview(slug);
     });
   });
+
+  backBtn?.addEventListener("click", showList);
 </script>

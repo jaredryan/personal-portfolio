@@ -1,11 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import BentoDashboard from "../components/BentoDashboard.astro";
-import ExperienceSection from "../components/ExperienceSection.astro";
-import ProjectsSection from "../components/ProjectsSection.astro";
 import { profile } from "../data/profile";
-import { projects } from "../data/projects";
-import { experience } from "../data/experience";
 
 const structuredData = {
   "@context": "https://schema.org",
@@ -23,12 +19,5 @@ const structuredData = {
 >
   <main>
     <BentoDashboard />
-    <ExperienceSection entries={experience} />
-    <ProjectsSection projects={projects} />
   </main>
 </BaseLayout>
-
-<script>
-  import { initSectionNav } from "../utils/sectionNav";
-  initSectionNav();
-</script>

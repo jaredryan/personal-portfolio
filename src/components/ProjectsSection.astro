@@ -9,11 +9,18 @@ interface Props {
 }
 
 const { projects } = Astro.props;
+
+const linkButtonClass: Record<Project["links"][number]["kind"], string> = {
+  demo: "btn btn--primary",
+  github: "btn btn--secondary",
+  private: "btn btn--quiet",
+  request: "btn btn--quiet",
+};
 ---
-<section id="projects" class="projects-section" aria-labelledby="projects-heading">
+<section class="projects-section page-shell" aria-labelledby="projects-heading">
   <div id="projects-grid-view">
-    <Breadcrumbs trail={[{ label: "Dashboard", href: "#dashboard", dashboardLink: true }, { label: "Projects" }]} />
-    <h2 id="projects-heading" tabindex="-1">Projects</h2>
+    <Breadcrumbs trail={[{ label: "Dashboard", href: "/" }, { label: "Projects" }]} />
+    <h2 id="projects-heading" class="page-title" tabindex="-1">Projects</h2>
 
     <ul class="projects-grid">
       {projects.map((project) => (
@@ -40,30 +47,37 @@ const { projects } = Astro.props;
       <div class="project-detail" id={`project-detail-${project.slug}`} data-project-detail={project.slug} hidden>
         <Breadcrumbs
           trail={[
-            { label: "Dashboard", href: "#dashboard", dashboardLink: true },
-            { label: "Projects", href: "#projects", clearProject: true },
+            { label: "Dashboard", href: "/" },
+            { label: "Projects", href: "/projects", clearProject: true },
             { label: project.title },
           ]}
         />
-        <h2 id={`project-detail-heading-${project.slug}`} tabindex="-1">{project.title}</h2>
-        <p class="project-detail__oneliner">{project.oneLiner}</p>
 
-        <ProjectCarousel images={project.screenshots.images} alt={project.title} />
+        <div class="project-detail__layout">
+          <div class="project-detail__media">
+            <ProjectCarousel images={project.screenshots.images} alt={project.title} />
+          </div>
 
-        <ul class="project-detail__bullets">
-          {project.details.map((detail) => <li>{detail}</li>)}
-        </ul>
+          <div class="project-detail__content">
+            <h2 id={`project-detail-heading-${project.slug}`} tabindex="-1">{project.title}</h2>
+            <p class="project-detail__oneliner prose">{project.oneLiner}</p>
 
-        <PillList pills={project.detailPills} variant="detail" />
+            <ul class="project-detail__bullets">
+              {project.details.map((detail) => <li>{detail}</li>)}
+            </ul>
 
-        <div class="project-detail__links">
-          {project.links.map((link) => (
-            link.href ? (
-              <a href={link.href} target="_blank" rel="noreferrer">{link.label}</a>
-            ) : (
-              <span class="project-detail__link-disabled">{link.label}</span>
-            )
-          ))}
+            <PillList pills={project.detailPills} variant="detail" />
+
+            <div class="project-detail__links">
+              {project.links.map((link) => (
+                link.href ? (
+                  <a class={linkButtonClass[link.kind]} href={link.href} target="_blank" rel="noreferrer">{link.label}</a>
+                ) : (
+                  <span class={linkButtonClass[link.kind]} aria-disabled="true">{link.label}</span>
+                )
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     ))}
@@ -73,7 +87,6 @@ const { projects } = Astro.props;
 <style>
   .projects-section {
     min-height: 100svh;
-    padding-block: var(--space-8);
   }
 
   .projects-grid {
@@ -99,9 +112,13 @@ const { projects } = Astro.props;
     cursor: pointer;
   }
 
+  .project-card:hover {
+    border-color: var(--color-accent-teal);
+  }
+
   .project-card img {
     border-radius: var(--radius-sm);
-    aspect-ratio: 8 / 5;
+    aspect-ratio: 16 / 10;
     object-fit: cover;
   }
 
@@ -114,6 +131,22 @@ const { projects } = Astro.props;
     font-size: 0.9rem;
   }
 
+  .project-detail__layout {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .project-detail__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .project-detail__content h2 {
+    margin-bottom: var(--space-1);
+  }
+
   .project-detail__bullets {
     padding-left: 1.2rem;
     color: var(--color-text-muted);
@@ -124,29 +157,81 @@ const { projects } = Astro.props;
 
   .project-detail__links {
     display: flex;
+    flex-wrap: wrap;
     gap: var(--space-3);
-    margin-top: var(--space-3);
+    margin-top: var(--space-2);
   }
 
-  .project-detail__link-disabled {
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    border-radius: var(--radius-sm);
+    padding: var(--space-2) var(--space-4);
+    font-weight: 600;
+    text-decoration: none;
+    border: 1px solid transparent;
+  }
+
+  .btn--primary {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: white;
+  }
+
+  .btn--primary:hover {
+    background: var(--color-accent-teal);
+    border-color: var(--color-accent-teal);
+  }
+
+  .btn--secondary {
+    background: transparent;
+    border-color: var(--color-border);
+    color: var(--color-text);
+  }
+
+  .btn--secondary:hover {
+    border-color: var(--color-accent-teal);
+    color: var(--color-accent-teal);
+  }
+
+  .btn--quiet {
+    background: var(--color-surface-alt);
+    border-color: var(--color-border);
     color: var(--color-text-muted);
     font-style: italic;
+    font-weight: 400;
+    cursor: default;
+  }
+
+  @media (min-width: 1000px) {
+    .project-detail__layout {
+      flex-direction: row;
+      align-items: flex-start;
+    }
+
+    .project-detail__media {
+      width: 55%;
+      flex-shrink: 0;
+    }
+
+    .project-detail__content {
+      flex: 1;
+      min-width: 0;
+    }
   }
 </style>
 
 <script>
-  import {
-    CLEAR_PROJECT_EVENT,
-    SELECT_PROJECT_EVENT,
-    SYNC_FROM_URL_EVENT,
-  } from "../utils/sectionNav";
   import { getQueryParam } from "../utils/urlState";
+  import { moveFocusTo } from "../utils/focus";
 
   const gridView = document.getElementById("projects-grid-view");
   const detailView = document.getElementById("projects-detail-view");
   const detailPanels = document.querySelectorAll<HTMLElement>("[data-project-detail]");
+  const gridCards = document.querySelectorAll<HTMLButtonElement>("[data-project-link]");
+  const clearLinks = document.querySelectorAll<HTMLAnchorElement>("[data-clear-project]");
 
-  function showProject(slug: string) {
+  function showProject(slug: string, focusPanel = false) {
     const panel = document.getElementById(`project-detail-${slug}`);
     if (!panel) return;
     if (gridView) gridView.hidden = true;
@@ -154,14 +239,16 @@ const { projects } = Astro.props;
     detailPanels.forEach((p) => {
       p.hidden = p.dataset.projectDetail !== slug;
     });
+    if (focusPanel) moveFocusTo(`#project-detail-heading-${slug}`);
   }
 
-  function showGrid() {
+  function showGrid(focusHeading = false) {
     if (gridView) gridView.hidden = false;
     if (detailView) detailView.hidden = true;
     detailPanels.forEach((p) => {
       p.hidden = true;
     });
+    if (focusHeading) moveFocusTo("#projects-heading");
   }
 
   function syncFromUrl() {
@@ -174,12 +261,24 @@ const { projects } = Astro.props;
     }
   }
 
-  window.addEventListener(SELECT_PROJECT_EVENT, ((event: CustomEvent<{ slug: string }>) => {
-    showProject(event.detail.slug);
-  }) as EventListener);
+  gridCards.forEach((card) => {
+    card.addEventListener("click", () => {
+      const slug = card.dataset.projectLink;
+      if (!slug) return;
+      showProject(slug, true);
+      window.history.pushState(null, "", `?project=${slug}`);
+    });
+  });
 
-  window.addEventListener(CLEAR_PROJECT_EVENT, showGrid);
-  window.addEventListener(SYNC_FROM_URL_EVENT, syncFromUrl);
+  clearLinks.forEach((link) => {
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+      showGrid(true);
+      window.history.pushState(null, "", window.location.pathname);
+    });
+  });
+
+  window.addEventListener("popstate", syncFromUrl);
 
   syncFromUrl();
 </script>

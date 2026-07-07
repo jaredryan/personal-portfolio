@@ -13,6 +13,9 @@ export type ExperienceEntry = {
   metricChips: string[];
   pills: string[];
   bullets: string[];
+  /** Optional ~28px square logo path. No files exist yet — every entry falls
+   * back to a monogram tile until real logos are added. */
+  logo?: string;
 };
 
 export const experience: ExperienceEntry[] = [

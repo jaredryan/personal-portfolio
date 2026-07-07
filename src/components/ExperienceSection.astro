@@ -3,6 +3,7 @@ import type { ExperienceEntry } from "../data/experience";
 import Breadcrumbs from "./Breadcrumbs.astro";
 import PillList from "./PillList.astro";
 import MetricChips from "./MetricChips.astro";
+import { dateLabel, monogram, orgName } from "../utils/experienceDisplay";
 
 interface Props {
   entries: ExperienceEntry[];
@@ -10,20 +11,10 @@ interface Props {
 
 const { entries } = Astro.props;
 const defaultSlug = "gold-ocean";
-
-function dateLabel(entry: ExperienceEntry): string {
-  if (entry.kind === "education") return String(entry.date ?? "");
-  return `${entry.start} — ${entry.end}`;
-}
 ---
-<section id="experience" class="experience-section" aria-labelledby="experience-heading">
-  <Breadcrumbs
-    trail={[
-      { label: "Dashboard", href: "#dashboard", dashboardLink: true },
-      { label: "Experience" },
-    ]}
-  />
-  <h2 id="experience-heading" tabindex="-1">Experience</h2>
+<section class="experience-section page-shell" aria-labelledby="experience-heading">
+  <Breadcrumbs trail={[{ label: "Dashboard", href: "/" }, { label: "Experience" }]} />
+  <h2 id="experience-heading" class="page-title" tabindex="-1">Experience</h2>
 
   <div class="experience-layout">
     <nav class="experience-spine" aria-label="Career timeline">
@@ -34,9 +25,11 @@ function dateLabel(entry: ExperienceEntry): string {
           data-spine-role={entry.slug}
           aria-pressed={entry.slug === defaultSlug ? "true" : "false"}
         >
-          <span class="experience-spine__kind">{entry.kind === "work" ? "Work" : "Education"}</span>
-          <span class="experience-spine__title">{entry.company ?? entry.institution}</span>
-          <span class="experience-spine__dates">{dateLabel(entry)}</span>
+          <span class="experience-spine__logo" aria-hidden="true">{monogram(entry)}</span>
+          <span class="experience-spine__text">
+            <span class="experience-spine__line1">{entry.title} · {orgName(entry)}</span>
+            <span class="experience-spine__line2">{dateLabel(entry)}</span>
+          </span>
         </button>
       ))}
     </nav>
@@ -49,13 +42,14 @@ function dateLabel(entry: ExperienceEntry): string {
           data-role-detail={entry.slug}
           hidden={entry.slug !== defaultSlug}
         >
+          <span class="eyebrow">{entry.kind === "work" ? "Work" : "Education"}</span>
           <h3 id={`experience-detail-heading-${entry.slug}`} tabindex="-1">
             {entry.title} {entry.company ? `· ${entry.company}` : ""}
           </h3>
           <p class="experience-detail__dates">
             {dateLabel(entry)}{entry.location ? ` · ${entry.location}` : ""}
           </p>
-          <p class="experience-detail__oneliner">{entry.oneLiner}</p>
+          <p class="experience-detail__oneliner prose">{entry.oneLiner}</p>
           {entry.metricChips.length > 0 && <MetricChips chips={entry.metricChips} />}
           {entry.bullets.length > 0 && (
             <ul class="experience-detail__bullets">
@@ -72,10 +66,13 @@ function dateLabel(entry: ExperienceEntry): string {
     {entries.map((entry) => (
       <details class="experience-accordion__item" data-accordion-role={entry.slug} open={entry.slug === defaultSlug}>
         <summary>
-          <span class="experience-spine__title">{entry.company ?? entry.institution}</span>
-          <span class="experience-spine__dates">{dateLabel(entry)}</span>
+          <span class="experience-spine__logo" aria-hidden="true">{monogram(entry)}</span>
+          <span class="experience-spine__text">
+            <span class="experience-spine__line1">{entry.title} · {orgName(entry)}</span>
+            <span class="experience-spine__line2">{dateLabel(entry)}</span>
+          </span>
         </summary>
-        <p class="experience-detail__oneliner">{entry.oneLiner}</p>
+        <p class="experience-detail__oneliner prose">{entry.oneLiner}</p>
         {entry.metricChips.length > 0 && <MetricChips chips={entry.metricChips} />}
         {entry.bullets.length > 0 && (
           <ul class="experience-detail__bullets">
@@ -91,7 +88,6 @@ function dateLabel(entry: ExperienceEntry): string {
 <style>
   .experience-section {
     min-height: 100svh;
-    padding-block: var(--space-8);
   }
 
   .experience-layout {
@@ -102,11 +98,12 @@ function dateLabel(entry: ExperienceEntry): string {
   .experience-spine {
     display: flex;
     flex-direction: column;
-    gap: var(--space-2);
-    min-width: 220px;
+    gap: var(--space-1);
+    min-width: 260px;
   }
 
   .experience-spine__item {
+    position: relative;
     text-align: left;
     background: var(--color-surface);
     border: 1px solid var(--color-border);
@@ -114,7 +111,8 @@ function dateLabel(entry: ExperienceEntry): string {
     padding: var(--space-2) var(--space-3);
     cursor: pointer;
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
   }
 
   .experience-spine__item[aria-pressed="true"] {
@@ -122,10 +120,43 @@ function dateLabel(entry: ExperienceEntry): string {
     background: var(--color-surface-alt);
   }
 
-  .experience-spine__kind {
+  .experience-spine__item[aria-pressed="true"]::before {
+    content: "";
+    position: absolute;
+    inset-block: var(--space-2);
+    left: 0;
+    width: 3px;
+    border-radius: 999px;
+    background: var(--color-accent-coral);
+  }
+
+  .experience-spine__logo {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: var(--radius-sm);
+    background: var(--color-surface-alt);
+    color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+    font-weight: 700;
+  }
+
+  .experience-spine__text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  .experience-spine__line1 {
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+
+  .experience-spine__line2 {
+    font-size: 0.78rem;
     color: var(--color-text-muted);
   }
 
@@ -142,6 +173,10 @@ function dateLabel(entry: ExperienceEntry): string {
     display: flex;
     flex-direction: column;
     gap: var(--space-3);
+  }
+
+  .experience-detail__panel h3 {
+    margin-top: var(--space-1);
   }
 
   .experience-detail__bullets {
@@ -168,8 +203,17 @@ function dateLabel(entry: ExperienceEntry): string {
   .experience-accordion__item summary {
     cursor: pointer;
     display: flex;
-    justify-content: space-between;
-    font-weight: 700;
+    align-items: center;
+    gap: var(--space-2);
+    list-style: none;
+  }
+
+  .experience-accordion__item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .experience-accordion__item[open] summary {
+    margin-bottom: var(--space-3);
   }
 
   @media (min-width: 900px) {
@@ -183,19 +227,15 @@ function dateLabel(entry: ExperienceEntry): string {
 </style>
 
 <script>
-  import {
-    CLEAR_ROLE_EVENT,
-    SELECT_ROLE_EVENT,
-    SYNC_FROM_URL_EVENT,
-  } from "../utils/sectionNav";
   import { getQueryParam, setSectionState } from "../utils/urlState";
+  import { moveFocusTo } from "../utils/focus";
 
   const spineItems = document.querySelectorAll<HTMLButtonElement>("[data-spine-role]");
   const detailPanels = document.querySelectorAll<HTMLElement>("[data-role-detail]");
   const accordionItems = document.querySelectorAll<HTMLDetailsElement>("[data-accordion-role]");
   const defaultSlug = "gold-ocean";
 
-  function selectRole(slug: string) {
+  function selectRole(slug: string, focusPanel = false) {
     const validSlugs = Array.from(detailPanels).map((p) => p.dataset.roleDetail);
     const target = validSlugs.includes(slug) ? slug : defaultSlug;
 
@@ -212,6 +252,8 @@ function dateLabel(entry: ExperienceEntry): string {
     accordionItems.forEach((item) => {
       item.open = item.dataset.accordionRole === target;
     });
+
+    if (focusPanel) moveFocusTo(`#experience-detail-heading-${target}`);
   }
 
   function syncFromUrl() {
@@ -223,8 +265,8 @@ function dateLabel(entry: ExperienceEntry): string {
     item.addEventListener("click", () => {
       const slug = item.dataset.spineRole;
       if (!slug) return;
-      selectRole(slug);
-      setSectionState({ key: "role", value: slug, hash: "#experience" });
+      selectRole(slug, true);
+      setSectionState({ key: "role", value: slug });
     });
   });
 
@@ -237,16 +279,11 @@ function dateLabel(entry: ExperienceEntry): string {
       // open, and keeps the desktop spine/detail panel (both present in the
       // DOM at once, just hidden by CSS at this breakpoint) in sync too.
       selectRole(slug);
-      setSectionState({ key: "role", value: slug, hash: "#experience" });
+      setSectionState({ key: "role", value: slug });
     });
   });
 
-  window.addEventListener(SELECT_ROLE_EVENT, ((event: CustomEvent<{ slug: string }>) => {
-    selectRole(event.detail.slug);
-  }) as EventListener);
-
-  window.addEventListener(CLEAR_ROLE_EVENT, () => selectRole(defaultSlug));
-  window.addEventListener(SYNC_FROM_URL_EVENT, syncFromUrl);
+  window.addEventListener("popstate", syncFromUrl);
 
   syncFromUrl();
 </script>

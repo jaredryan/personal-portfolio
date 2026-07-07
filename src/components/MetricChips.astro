@@ -11,7 +11,13 @@ const { chips } = Astro.props;
   ))}
 </ul>
 
-<style>
+<style is:global>
+  /*
+   * is:global because ExperiencePreview's bento card rebuilds metric chips
+   * client-side via document.createElement when previewing a role — those
+   * elements never receive Astro's scoped-style attribute (same reasoning
+   * as PillList.astro).
+   */
   .metric-chips {
     display: flex;
     flex-wrap: wrap;

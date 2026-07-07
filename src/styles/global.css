@@ -33,11 +33,11 @@ main {
 h1, h2, h3, h4 {
   line-height: 1.2;
   margin: 0;
+  letter-spacing: -0.01em;
 }
 
 p {
   margin: 0;
-  max-width: 62ch;
 }
 
 a {
@@ -47,6 +47,20 @@ a {
 img {
   max-width: 100%;
   display: block;
+}
+
+/*
+ * Global safety net: any component that sets `display` on the same element
+ * it also toggles `hidden` on (e.g. `.foo { display: flex }` + `hidden`)
+ * would otherwise stay visible — author-origin rules always beat the
+ * browser's built-in `[hidden] { display: none }` default regardless of
+ * selector specificity. This was caught live (carousel slides, the
+ * Experience preview's back button and detail panel all stayed visually
+ * present while `hidden` was true) and is fixed once here instead of
+ * patching every component that happens to set `display`.
+ */
+[hidden] {
+  display: none !important;
 }
 
 button {
@@ -76,11 +90,71 @@ section[id] {
   scroll-margin-top: var(--space-8);
 }
 
-.container {
-  width: 100%;
-  max-width: 1200px;
+/* Reusable page container — keeps content off the browser edges on every
+   route (dashboard, /experience, /projects) without each page reinventing it. */
+.page-shell {
+  width: min(1200px, calc(100% - 2rem));
   margin-inline: auto;
-  padding-inline: var(--space-4);
+  padding-block: clamp(1rem, 3vw, 2rem);
+}
+
+@media (min-width: 768px) {
+  .page-shell {
+    width: min(1200px, calc(100% - 4rem));
+  }
+}
+
+/* Local prose max-width, applied only where long-form text actually needs
+   a comfortable measure — never globally, so wide layouts (e.g. project
+   descriptions next to a screenshot) can use their full column width. */
+.prose {
+  max-width: 62ch;
+}
+
+/* Small uppercase label used for card/section eyebrows ("Work", "Education",
+   kind markers) — one shared, deliberate typographic voice instead of plain
+   text doing double duty as both label and heading. */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+}
+
+.eyebrow::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-accent-coral);
+  flex-shrink: 0;
+}
+
+/* Page-level heading with breathing room before whatever follows it —
+   headings should never touch their own body content. */
+.page-title {
+  margin-bottom: var(--space-6);
+}
+
+/* Signature "you are here" marker: a coral left-edge bar used consistently
+   on selected/active rows and cards across the bento dashboard and full
+   Experience/Projects pages (spine items, list rows, thumbnails). */
+.is-selected {
+  position: relative;
+}
+
+.is-selected::before {
+  content: "";
+  position: absolute;
+  inset-block: var(--space-2);
+  left: 0;
+  width: 3px;
+  border-radius: 999px;
+  background: var(--color-accent-coral);
 }
 
 @media (prefers-reduced-motion: reduce) {

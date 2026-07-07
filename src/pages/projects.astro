@@ -1,0 +1,13 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ProjectsSection from "../components/ProjectsSection.astro";
+import { projects } from "../data/projects";
+---
+<BaseLayout
+  title="Projects | Jared Ryan"
+  description="Selected projects by Jared Ryan — AI-assisted product builds, games, and full-stack applications."
+>
+  <main>
+    <ProjectsSection projects={projects} />
+  </main>
+</BaseLayout>

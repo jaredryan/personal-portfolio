@@ -7,23 +7,21 @@ describe("urlState", () => {
   });
 
   it("reads a query param, or null if absent", () => {
-    window.history.replaceState(null, "", "/?role=mantl#experience");
+    window.history.replaceState(null, "", "/experience?role=mantl");
     expect(getQueryParam("role")).toBe("mantl");
     expect(getQueryParam("project")).toBeNull();
   });
 
-  it("sets a section param + hash via pushState, preserving unrelated params", () => {
-    window.history.replaceState(null, "", "/?utm_source=test");
-    setSectionState({ key: "project", value: "campfire", hash: "#projects" });
+  it("sets a section param via pushState, preserving unrelated params", () => {
+    window.history.replaceState(null, "", "/projects?utm_source=test");
+    setSectionState({ key: "project", value: "campfire" });
     expect(window.location.search).toContain("utm_source=test");
     expect(window.location.search).toContain("project=campfire");
-    expect(window.location.hash).toBe("#projects");
   });
 
-  it("clears a section param but keeps the hash", () => {
-    window.history.replaceState(null, "", "/?role=mantl#experience");
-    clearSectionState({ key: "role", hash: "#experience" });
+  it("clears a section param", () => {
+    window.history.replaceState(null, "", "/experience?role=mantl");
+    clearSectionState({ key: "role" });
     expect(getQueryParam("role")).toBeNull();
-    expect(window.location.hash).toBe("#experience");
   });
 });

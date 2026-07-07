@@ -1,0 +1,13 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ExperienceSection from "../components/ExperienceSection.astro";
+import { experience } from "../data/experience";
+---
+<BaseLayout
+  title="Experience | Jared Ryan"
+  description="Jared Ryan's professional experience — engineering leadership, frontend architecture, and full-stack product work."
+>
+  <main>
+    <ExperienceSection entries={experience} />
+  </main>
+</BaseLayout>

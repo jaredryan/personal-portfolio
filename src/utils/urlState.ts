@@ -5,13 +5,11 @@ export function getQueryParam(key: string): string | null {
 export function setSectionState(options: {
   key: "project" | "role";
   value: string;
-  hash: "#projects" | "#experience";
   replace?: boolean;
 }): void {
-  const { key, value, hash, replace = false } = options;
+  const { key, value, replace = false } = options;
   const url = new URL(window.location.href);
   url.searchParams.set(key, value);
-  url.hash = hash;
   if (replace) {
     window.history.replaceState(null, "", url);
   } else {
@@ -21,13 +19,11 @@ export function setSectionState(options: {
 
 export function clearSectionState(options: {
   key: "project" | "role";
-  hash: "#projects" | "#experience";
   replace?: boolean;
 }): void {
-  const { key, hash, replace = false } = options;
+  const { key, replace = false } = options;
   const url = new URL(window.location.href);
   url.searchParams.delete(key);
-  url.hash = hash;
   if (replace) {
     window.history.replaceState(null, "", url);
   } else {

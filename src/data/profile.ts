@@ -23,8 +23,7 @@ export const profile: Profile = {
     resume: "/resume/Jared_Ryan_Resume.pdf",
     email: "mailto:jryantennis@gmail.com",
     github: "https://github.com/jaredryan",
-    // TODO: replace with real LinkedIn URL (FRONTEND_SPEC.md §15).
-    linkedin: "",
+    linkedin: "https://www.linkedin.com/in/jared-m-ryan",
   },
   currentlyLabel: "Currently:",
   currentlyLines: [
