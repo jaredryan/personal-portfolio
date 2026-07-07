@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="600" viewBox="0 0 960 600">
+  <rect width="960" height="600" fill="#EEF6F8"/>
+  <rect x="24" y="24" width="912" height="552" rx="16" fill="none" stroke="#D7E3EA" stroke-width="2"/>
+  <text x="480" y="290" font-family="sans-serif" font-size="28" fill="#102033" text-anchor="middle">Unity 2D Roguelike</text>
+  <text x="480" y="330" font-family="sans-serif" font-size="16" fill="#526173" text-anchor="middle">cover — placeholder screenshot</text>
+</svg>

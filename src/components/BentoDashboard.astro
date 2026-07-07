@@ -1,0 +1,57 @@
+---
+import HeroCard from "./HeroCard.astro";
+import ExperiencePreview from "./ExperiencePreview.astro";
+import ProjectsPreview from "./ProjectsPreview.astro";
+import { experience } from "../data/experience";
+import { projects } from "../data/projects";
+---
+<section id="dashboard" class="bento" aria-label="Overview">
+  <HeroCard />
+  <ExperiencePreview entries={experience} />
+  <ProjectsPreview projects={projects} />
+</section>
+
+<style>
+  /*
+   * Source order above is Hero, ExperiencePreview, ProjectsPreview — this is
+   * also the required mobile/no-CSS/screen-reader order (CLAUDE.md mobile
+   * layout: Hero, Experience Preview, Projects Preview). Below 1024px there
+   * is no grid-column/grid-row override, so the single-column layout simply
+   * follows this DOM order. The desktop 2-column bento look (Hero top-left,
+   * Projects bottom-left, Experience spanning the right column) is achieved
+   * purely through explicit grid placement at ≥1024px — never by reordering
+   * the DOM to fake a visual layout, which would desync what mobile/screen
+   * readers see from what sighted desktop users see.
+   */
+  .bento {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+    padding-block: var(--space-8);
+    min-height: 100svh;
+  }
+
+  @media (min-width: 1024px) {
+    .bento {
+      grid-template-columns: 2fr 1fr;
+      grid-template-rows: auto 1fr;
+      align-items: start;
+    }
+
+    .bento :global(.hero-card) {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    .bento :global(.experience-preview) {
+      grid-column: 2;
+      grid-row: 1 / span 2;
+      height: 100%;
+    }
+
+    .bento :global(.projects-preview) {
+      grid-column: 1;
+      grid-row: 2;
+    }
+  }
+</style>

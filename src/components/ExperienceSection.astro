@@ -1,0 +1,252 @@
+---
+import type { ExperienceEntry } from "../data/experience";
+import Breadcrumbs from "./Breadcrumbs.astro";
+import PillList from "./PillList.astro";
+import MetricChips from "./MetricChips.astro";
+
+interface Props {
+  entries: ExperienceEntry[];
+}
+
+const { entries } = Astro.props;
+const defaultSlug = "gold-ocean";
+
+function dateLabel(entry: ExperienceEntry): string {
+  if (entry.kind === "education") return String(entry.date ?? "");
+  return `${entry.start} — ${entry.end}`;
+}
+---
+<section id="experience" class="experience-section" aria-labelledby="experience-heading">
+  <Breadcrumbs
+    trail={[
+      { label: "Dashboard", href: "#dashboard", dashboardLink: true },
+      { label: "Experience" },
+    ]}
+  />
+  <h2 id="experience-heading" tabindex="-1">Experience</h2>
+
+  <div class="experience-layout">
+    <nav class="experience-spine" aria-label="Career timeline">
+      {entries.map((entry) => (
+        <button
+          type="button"
+          class="experience-spine__item"
+          data-spine-role={entry.slug}
+          aria-pressed={entry.slug === defaultSlug ? "true" : "false"}
+        >
+          <span class="experience-spine__kind">{entry.kind === "work" ? "Work" : "Education"}</span>
+          <span class="experience-spine__title">{entry.company ?? entry.institution}</span>
+          <span class="experience-spine__dates">{dateLabel(entry)}</span>
+        </button>
+      ))}
+    </nav>
+
+    <div class="experience-detail">
+      {entries.map((entry) => (
+        <article
+          class="experience-detail__panel"
+          id={`experience-detail-${entry.slug}`}
+          data-role-detail={entry.slug}
+          hidden={entry.slug !== defaultSlug}
+        >
+          <h3 id={`experience-detail-heading-${entry.slug}`} tabindex="-1">
+            {entry.title} {entry.company ? `· ${entry.company}` : ""}
+          </h3>
+          <p class="experience-detail__dates">
+            {dateLabel(entry)}{entry.location ? ` · ${entry.location}` : ""}
+          </p>
+          <p class="experience-detail__oneliner">{entry.oneLiner}</p>
+          {entry.metricChips.length > 0 && <MetricChips chips={entry.metricChips} />}
+          {entry.bullets.length > 0 && (
+            <ul class="experience-detail__bullets">
+              {entry.bullets.map((bullet) => <li>{bullet}</li>)}
+            </ul>
+          )}
+          <PillList pills={entry.pills} variant="detail" />
+        </article>
+      ))}
+    </div>
+  </div>
+
+  <div class="experience-accordion">
+    {entries.map((entry) => (
+      <details class="experience-accordion__item" data-accordion-role={entry.slug} open={entry.slug === defaultSlug}>
+        <summary>
+          <span class="experience-spine__title">{entry.company ?? entry.institution}</span>
+          <span class="experience-spine__dates">{dateLabel(entry)}</span>
+        </summary>
+        <p class="experience-detail__oneliner">{entry.oneLiner}</p>
+        {entry.metricChips.length > 0 && <MetricChips chips={entry.metricChips} />}
+        {entry.bullets.length > 0 && (
+          <ul class="experience-detail__bullets">
+            {entry.bullets.map((bullet) => <li>{bullet}</li>)}
+          </ul>
+        )}
+        <PillList pills={entry.pills} variant="detail" />
+      </details>
+    ))}
+  </div>
+</section>
+
+<style>
+  .experience-section {
+    min-height: 100svh;
+    padding-block: var(--space-8);
+  }
+
+  .experience-layout {
+    display: none;
+    gap: var(--space-6);
+  }
+
+  .experience-spine {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    min-width: 220px;
+  }
+
+  .experience-spine__item {
+    text-align: left;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: var(--space-2) var(--space-3);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .experience-spine__item[aria-pressed="true"] {
+    border-color: var(--color-accent-teal);
+    background: var(--color-surface-alt);
+  }
+
+  .experience-spine__kind {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-muted);
+  }
+
+  .experience-detail {
+    flex: 1;
+  }
+
+  .experience-detail__panel {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    padding: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .experience-detail__bullets {
+    padding-left: 1.2rem;
+    color: var(--color-text-muted);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .experience-accordion {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .experience-accordion__item {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-4);
+  }
+
+  .experience-accordion__item summary {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    font-weight: 700;
+  }
+
+  @media (min-width: 900px) {
+    .experience-layout {
+      display: flex;
+    }
+    .experience-accordion {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  import {
+    CLEAR_ROLE_EVENT,
+    SELECT_ROLE_EVENT,
+    SYNC_FROM_URL_EVENT,
+  } from "../utils/sectionNav";
+  import { getQueryParam, setSectionState } from "../utils/urlState";
+
+  const spineItems = document.querySelectorAll<HTMLButtonElement>("[data-spine-role]");
+  const detailPanels = document.querySelectorAll<HTMLElement>("[data-role-detail]");
+  const accordionItems = document.querySelectorAll<HTMLDetailsElement>("[data-accordion-role]");
+  const defaultSlug = "gold-ocean";
+
+  function selectRole(slug: string) {
+    const validSlugs = Array.from(detailPanels).map((p) => p.dataset.roleDetail);
+    const target = validSlugs.includes(slug) ? slug : defaultSlug;
+
+    spineItems.forEach((item) => {
+      item.setAttribute("aria-pressed", String(item.dataset.spineRole === target));
+    });
+    detailPanels.forEach((panel) => {
+      panel.hidden = panel.dataset.roleDetail !== target;
+    });
+    // Setting .open on every item (not just the target) is what keeps the
+    // mobile accordion single-selection: any other item that was previously
+    // open gets closed here, so at most one role is ever expanded at a time —
+    // matching the desktop career-spine model where exactly one is selected.
+    accordionItems.forEach((item) => {
+      item.open = item.dataset.accordionRole === target;
+    });
+  }
+
+  function syncFromUrl() {
+    const slug = getQueryParam("role");
+    selectRole(slug ?? defaultSlug);
+  }
+
+  spineItems.forEach((item) => {
+    item.addEventListener("click", () => {
+      const slug = item.dataset.spineRole;
+      if (!slug) return;
+      selectRole(slug);
+      setSectionState({ key: "role", value: slug, hash: "#experience" });
+    });
+  });
+
+  accordionItems.forEach((item) => {
+    item.addEventListener("toggle", () => {
+      if (!item.open) return;
+      const slug = item.dataset.accordionRole;
+      if (!slug) return;
+      // selectRole() closes every other accordion item so only one stays
+      // open, and keeps the desktop spine/detail panel (both present in the
+      // DOM at once, just hidden by CSS at this breakpoint) in sync too.
+      selectRole(slug);
+      setSectionState({ key: "role", value: slug, hash: "#experience" });
+    });
+  });
+
+  window.addEventListener(SELECT_ROLE_EVENT, ((event: CustomEvent<{ slug: string }>) => {
+    selectRole(event.detail.slug);
+  }) as EventListener);
+
+  window.addEventListener(CLEAR_ROLE_EVENT, () => selectRole(defaultSlug));
+  window.addEventListener(SYNC_FROM_URL_EVENT, syncFromUrl);
+
+  syncFromUrl();
+</script>

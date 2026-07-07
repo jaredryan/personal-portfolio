@@ -1,0 +1,187 @@
+---
+interface Props {
+  images: string[];
+  alt: string;
+  autoRotateMs?: number;
+}
+
+const { images, alt, autoRotateMs = 6000 } = Astro.props;
+---
+<div class="carousel" data-carousel data-autorotate-ms={autoRotateMs}>
+  <div class="carousel__viewport">
+    {images.map((src, index) => (
+      <img
+        src={src}
+        alt={`${alt} — screenshot ${index + 1} of ${images.length}`}
+        class="carousel__slide"
+        data-slide-index={index}
+        hidden={index !== 0}
+        loading={index === 0 ? "eager" : "lazy"}
+        width="960"
+        height="600"
+      />
+    ))}
+  </div>
+
+  <div class="carousel__controls">
+    <button type="button" class="carousel__prev" aria-label="Previous screenshot">‹</button>
+    <div class="carousel__dots" role="tablist" aria-label="Screenshot selector">
+      {images.map((_, index) => (
+        <button
+          type="button"
+          class="carousel__dot"
+          role="tab"
+          aria-selected={index === 0 ? "true" : "false"}
+          aria-label={`Show screenshot ${index + 1}`}
+          data-dot-index={index}
+        />
+      ))}
+    </div>
+    <button type="button" class="carousel__next" aria-label="Next screenshot">›</button>
+  </div>
+</div>
+
+<style>
+  .carousel {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .carousel__viewport {
+    position: relative;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+  }
+
+  .carousel__slide {
+    width: 100%;
+    aspect-ratio: 8 / 5;
+    object-fit: cover;
+  }
+
+  .carousel__controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3);
+  }
+
+  .carousel__prev,
+  .carousel__next {
+    background: var(--color-surface-alt);
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    width: 2.25rem;
+    height: 2.25rem;
+    cursor: pointer;
+    font-size: 1.1rem;
+  }
+
+  .carousel__dots {
+    display: flex;
+    gap: var(--space-2);
+  }
+
+  .carousel__dot {
+    width: 0.6rem;
+    height: 0.6rem;
+    border-radius: 50%;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface-alt);
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .carousel__dot[aria-selected="true"] {
+    background: var(--color-accent-coral);
+    border-color: var(--color-accent-coral);
+  }
+</style>
+
+<script>
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // ProjectsSection (Task 13) pre-renders all 5 project detail panels at once
+  // and toggles each one's `hidden` attribute — it does not unmount/remount
+  // this component. Without the visibility awareness below, every carousel's
+  // setInterval would start immediately on page load and keep advancing while
+  // its panel is hidden, so by the time a user opens a given project its
+  // carousel would already be on some arbitrary slide, and 5 timers would be
+  // running in the background for no visible benefit. Each carousel instead
+  // only runs while the `[data-project-detail]` panel that contains it is
+  // visible, and resets to slide 0 each time that panel becomes visible.
+  document.querySelectorAll<HTMLElement>("[data-carousel]").forEach((carousel) => {
+    const slides = Array.from(carousel.querySelectorAll<HTMLImageElement>(".carousel__slide"));
+    const dots = Array.from(carousel.querySelectorAll<HTMLButtonElement>(".carousel__dot"));
+    const prevBtn = carousel.querySelector<HTMLButtonElement>(".carousel__prev");
+    const nextBtn = carousel.querySelector<HTMLButtonElement>(".carousel__next");
+    const autoRotateMs = Number(carousel.dataset.autorotateMs ?? 0);
+    const panel = carousel.closest<HTMLElement>("[data-project-detail]");
+    let current = 0;
+    let timerId: ReturnType<typeof setInterval> | undefined;
+
+    function isPanelVisible(): boolean {
+      return !panel || !panel.hidden;
+    }
+
+    function show(index: number) {
+      current = (index + slides.length) % slides.length;
+      slides.forEach((slide, i) => {
+        slide.hidden = i !== current;
+      });
+      dots.forEach((dot, i) => {
+        dot.setAttribute("aria-selected", String(i === current));
+      });
+    }
+
+    function startAutoRotate() {
+      if (prefersReducedMotion || !autoRotateMs || slides.length < 2 || !isPanelVisible()) return;
+      stopAutoRotate();
+      timerId = setInterval(() => show(current + 1), autoRotateMs);
+    }
+
+    function stopAutoRotate() {
+      if (timerId) clearInterval(timerId);
+      timerId = undefined;
+    }
+
+    prevBtn?.addEventListener("click", () => {
+      show(current - 1);
+      startAutoRotate();
+    });
+    nextBtn?.addEventListener("click", () => {
+      show(current + 1);
+      startAutoRotate();
+    });
+    dots.forEach((dot, i) => {
+      dot.addEventListener("click", () => {
+        show(i);
+        startAutoRotate();
+      });
+    });
+
+    carousel.addEventListener("mouseenter", stopAutoRotate);
+    carousel.addEventListener("mouseleave", startAutoRotate);
+    carousel.addEventListener("focusin", stopAutoRotate);
+    carousel.addEventListener("focusout", startAutoRotate);
+
+    if (panel) {
+      // React to ProjectsSection toggling `hidden` on the ancestor panel.
+      const observer = new MutationObserver(() => {
+        if (isPanelVisible()) {
+          show(0);
+          startAutoRotate();
+        } else {
+          stopAutoRotate();
+        }
+      });
+      observer.observe(panel, { attributes: true, attributeFilter: ["hidden"] });
+    }
+
+    if (isPanelVisible()) {
+      startAutoRotate();
+    }
+  });
+</script>

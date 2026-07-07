@@ -1,0 +1,193 @@
+---
+import type { Project } from "../data/projects";
+
+interface Props {
+  projects: Project[];
+}
+
+const { projects } = Astro.props;
+const defaultProject = projects.find((p) => p.slug === "lpa-tracker") ?? projects[0];
+---
+<div class="projects-preview" id="projects-preview">
+  <h2 class="projects-preview__heading">Projects</h2>
+
+  <div class="projects-preview__body">
+    <div class="projects-preview__media">
+      <img
+        id="projects-preview-cover"
+        src={defaultProject.screenshots.cover}
+        alt={`${defaultProject.title} screenshot`}
+        width="640"
+        height="400"
+      />
+      <div class="projects-preview__thumbs">
+        {projects.map((project) => (
+          <button
+            type="button"
+            class="projects-preview__thumb"
+            data-preview-project={project.slug}
+            aria-pressed={project.slug === defaultProject.slug ? "true" : "false"}
+            aria-label={`Preview ${project.title}`}
+          >
+            <img src={project.screenshots.cover} alt="" width="96" height="60" />
+          </button>
+        ))}
+      </div>
+    </div>
+
+    <div class="projects-preview__info">
+      <p class="projects-preview__title" id="projects-preview-title">{defaultProject.title}</p>
+      <p class="projects-preview__oneliner" id="projects-preview-oneliner">{defaultProject.oneLiner}</p>
+      <ul class="pill-list pill-list--preview" id="projects-preview-pills">
+        {defaultProject.previewPills.map((pill) => <li class="pill">{pill}</li>)}
+      </ul>
+      <a
+        class="projects-preview__expand"
+        id="projects-preview-expand"
+        href="#projects"
+        data-project-link={defaultProject.slug}
+      >
+        View full project →
+      </a>
+    </div>
+  </div>
+</div>
+
+<script type="application/json" id="projects-preview-data" set:html={JSON.stringify(
+  projects.map((p) => ({
+    slug: p.slug,
+    title: p.title,
+    oneLiner: p.oneLiner,
+    previewPills: p.previewPills,
+    cover: p.screenshots.cover,
+  }))
+)} />
+
+<style>
+  .projects-preview {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    padding: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .projects-preview__body {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: var(--space-4);
+  }
+
+  .projects-preview__media img#projects-preview-cover {
+    width: 100%;
+    aspect-ratio: 8 / 5;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+  }
+
+  .projects-preview__thumbs {
+    display: flex;
+    gap: var(--space-2);
+    margin-top: var(--space-2);
+    overflow-x: auto;
+  }
+
+  .projects-preview__thumb {
+    border: 2px solid transparent;
+    border-radius: var(--radius-sm);
+    padding: 0;
+    background: none;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .projects-preview__thumb img {
+    border-radius: var(--radius-sm);
+    display: block;
+  }
+
+  .projects-preview__thumb[aria-pressed="true"] {
+    border-color: var(--color-accent-coral);
+  }
+
+  .projects-preview__info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .projects-preview__title {
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+
+  .projects-preview__oneliner {
+    color: var(--color-text-muted);
+  }
+
+  .projects-preview__expand {
+    color: var(--color-primary);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  @media (max-width: 768px) {
+    .projects-preview__body {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  type PreviewProject = {
+    slug: string;
+    title: string;
+    oneLiner: string;
+    previewPills: string[];
+    cover: string;
+  };
+
+  const data: PreviewProject[] = JSON.parse(
+    document.getElementById("projects-preview-data")?.textContent ?? "[]"
+  );
+
+  const cover = document.getElementById("projects-preview-cover") as HTMLImageElement | null;
+  const title = document.getElementById("projects-preview-title");
+  const oneLiner = document.getElementById("projects-preview-oneliner");
+  const pillsList = document.getElementById("projects-preview-pills");
+  const expandLink = document.getElementById("projects-preview-expand") as HTMLAnchorElement | null;
+  const thumbs = document.querySelectorAll<HTMLButtonElement>("[data-preview-project]");
+
+  function selectPreview(slug: string) {
+    const project = data.find((p) => p.slug === slug);
+    if (!project || !cover || !title || !oneLiner || !pillsList || !expandLink) return;
+
+    cover.src = project.cover;
+    cover.alt = `${project.title} screenshot`;
+    title.textContent = project.title;
+    oneLiner.textContent = project.oneLiner;
+    pillsList.innerHTML = "";
+    for (const pill of project.previewPills) {
+      const li = document.createElement("li");
+      li.className = "pill";
+      li.textContent = pill;
+      pillsList.appendChild(li);
+    }
+    expandLink.dataset.projectLink = slug;
+
+    thumbs.forEach((thumb) => {
+      thumb.setAttribute("aria-pressed", String(thumb.dataset.previewProject === slug));
+    });
+  }
+
+  thumbs.forEach((thumb) => {
+    thumb.addEventListener("click", () => {
+      const slug = thumb.dataset.previewProject;
+      if (slug) selectPreview(slug);
+    });
+  });
+</script>

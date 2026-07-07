@@ -1,0 +1,185 @@
+---
+import type { Project } from "../data/projects";
+import Breadcrumbs from "./Breadcrumbs.astro";
+import PillList from "./PillList.astro";
+import ProjectCarousel from "./ProjectCarousel.astro";
+
+interface Props {
+  projects: Project[];
+}
+
+const { projects } = Astro.props;
+---
+<section id="projects" class="projects-section" aria-labelledby="projects-heading">
+  <div id="projects-grid-view">
+    <Breadcrumbs trail={[{ label: "Dashboard", href: "#dashboard", dashboardLink: true }, { label: "Projects" }]} />
+    <h2 id="projects-heading" tabindex="-1">Projects</h2>
+
+    <ul class="projects-grid">
+      {projects.map((project) => (
+        <li>
+          <button type="button" class="project-card" data-project-link={project.slug}>
+            <img
+              src={project.screenshots.cover}
+              alt={`${project.title} screenshot`}
+              width="480"
+              height="300"
+              loading="lazy"
+            />
+            <span class="project-card__title">{project.title}</span>
+            <span class="project-card__oneliner">{project.oneLiner}</span>
+            <PillList pills={project.previewPills} />
+          </button>
+        </li>
+      ))}
+    </ul>
+  </div>
+
+  <div id="projects-detail-view" hidden>
+    {projects.map((project) => (
+      <div class="project-detail" id={`project-detail-${project.slug}`} data-project-detail={project.slug} hidden>
+        <Breadcrumbs
+          trail={[
+            { label: "Dashboard", href: "#dashboard", dashboardLink: true },
+            { label: "Projects", href: "#projects", clearProject: true },
+            { label: project.title },
+          ]}
+        />
+        <h2 id={`project-detail-heading-${project.slug}`} tabindex="-1">{project.title}</h2>
+        <p class="project-detail__oneliner">{project.oneLiner}</p>
+
+        <ProjectCarousel images={project.screenshots.images} alt={project.title} />
+
+        <ul class="project-detail__bullets">
+          {project.details.map((detail) => <li>{detail}</li>)}
+        </ul>
+
+        <PillList pills={project.detailPills} variant="detail" />
+
+        <div class="project-detail__links">
+          {project.links.map((link) => (
+            link.href ? (
+              <a href={link.href} target="_blank" rel="noreferrer">{link.label}</a>
+            ) : (
+              <span class="project-detail__link-disabled">{link.label}</span>
+            )
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .projects-section {
+    min-height: 100svh;
+    padding-block: var(--space-8);
+  }
+
+  .projects-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: var(--space-4);
+  }
+
+  .project-card {
+    width: 100%;
+    text-align: left;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-card);
+    padding: var(--space-4);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    cursor: pointer;
+  }
+
+  .project-card img {
+    border-radius: var(--radius-sm);
+    aspect-ratio: 8 / 5;
+    object-fit: cover;
+  }
+
+  .project-card__title {
+    font-weight: 700;
+  }
+
+  .project-card__oneliner {
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+  }
+
+  .project-detail__bullets {
+    padding-left: 1.2rem;
+    color: var(--color-text-muted);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .project-detail__links {
+    display: flex;
+    gap: var(--space-3);
+    margin-top: var(--space-3);
+  }
+
+  .project-detail__link-disabled {
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+</style>
+
+<script>
+  import {
+    CLEAR_PROJECT_EVENT,
+    SELECT_PROJECT_EVENT,
+    SYNC_FROM_URL_EVENT,
+  } from "../utils/sectionNav";
+  import { getQueryParam } from "../utils/urlState";
+
+  const gridView = document.getElementById("projects-grid-view");
+  const detailView = document.getElementById("projects-detail-view");
+  const detailPanels = document.querySelectorAll<HTMLElement>("[data-project-detail]");
+
+  function showProject(slug: string) {
+    const panel = document.getElementById(`project-detail-${slug}`);
+    if (!panel) return;
+    if (gridView) gridView.hidden = true;
+    if (detailView) detailView.hidden = false;
+    detailPanels.forEach((p) => {
+      p.hidden = p.dataset.projectDetail !== slug;
+    });
+  }
+
+  function showGrid() {
+    if (gridView) gridView.hidden = false;
+    if (detailView) detailView.hidden = true;
+    detailPanels.forEach((p) => {
+      p.hidden = true;
+    });
+  }
+
+  function syncFromUrl() {
+    const slug = getQueryParam("project");
+    const validSlugs = Array.from(detailPanels).map((p) => p.dataset.projectDetail);
+    if (slug && validSlugs.includes(slug)) {
+      showProject(slug);
+    } else {
+      showGrid();
+    }
+  }
+
+  window.addEventListener(SELECT_PROJECT_EVENT, ((event: CustomEvent<{ slug: string }>) => {
+    showProject(event.detail.slug);
+  }) as EventListener);
+
+  window.addEventListener(CLEAR_PROJECT_EVENT, showGrid);
+  window.addEventListener(SYNC_FROM_URL_EVENT, syncFromUrl);
+
+  syncFromUrl();
+</script>
