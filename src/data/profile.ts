@@ -28,11 +28,11 @@ export const profile: Profile = {
   },
   currentlyLabel: "Currently:",
   currentlyLines: [
-    "First things first: make sure you're building something somebody actually wants.",
+    "First things first: make sure you’re building something somebody actually wants.",
     "I love software where the flows feel obvious and natural.",
-    "When I have the energy, you'll find me on a local hike or locked into a game on the living room chair.",
-    "When I don't have the energy, same chair — Netflix, Webtoons, and pretending one more episode was planned.",
-    "I'm serious about clean code, but not very serious about pretending to be serious.",
+    "When I have the energy, you’ll find me on a local hike or locked into a game on the living room chair.",
+    "When I don’t have the energy, same chair — Netflix, Webtoons, and pretending one more episode was planned.",
+    "I’m serious about clean code, but not very serious about pretending to be serious.",
     "Somehow, even meal prep turned into a modular system of bases, sauces, vegetables, and macros.",
   ],
 };

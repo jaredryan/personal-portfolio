@@ -93,7 +93,7 @@ export const projects: Project[] = [
       ],
     },
     details: [
-      "Built from Unity's 2D Roguelike tutorial, then extended with main, pause, game over, and how-to-play menus.",
+      "Built from Unity’s 2D Roguelike tutorial, then extended with main, pause, game over, and how-to-play menus.",
       "Added keyboard/mouse, gamepad, and touch support for broader playability.",
       "Added smoother movement, difficulty jumps every two levels, and save support for downloaded builds.",
     ],
