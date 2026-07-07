@@ -1,0 +1,17 @@
+import { describe, expect, it } from "vitest";
+import { experience } from "./experience";
+
+describe("experience", () => {
+  it("has 5 work entries then 2 education entries, all with required fields", () => {
+    const kinds = experience.map((e) => e.kind);
+    expect(kinds.filter((k) => k === "work")).toHaveLength(5);
+    expect(kinds.filter((k) => k === "education")).toHaveLength(2);
+    expect(experience[0].slug).toBe("gold-ocean");
+    for (const entry of experience) {
+      expect(entry.title.length).toBeGreaterThan(0);
+      expect(entry.oneLiner.length).toBeGreaterThan(0);
+      expect(entry.pills.length).toBeGreaterThan(0);
+      expect(entry.metricChips.length).toBeGreaterThan(0);
+    }
+  });
+});
