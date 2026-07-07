@@ -1,0 +1,47 @@
+:root {
+  /* Light theme (default) — PRODUCT_SPEC.md §8 */
+  --color-bg: #F7FAF8;
+  --color-surface: #FFFFFF;
+  --color-surface-alt: #EEF6F8;
+  --color-text: #102033;
+  --color-text-muted: #526173;
+  --color-border: #D7E3EA;
+
+  --color-primary: #2563EB;
+  --color-accent-teal: #14B8A6;
+  --color-accent-coral: #F9735B;
+  --color-accent-sand: #F3C98B;
+
+  --font-sans: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+
+  --shadow-card: 0 1px 2px rgba(16, 32, 51, 0.06), 0 8px 24px rgba(16, 32, 51, 0.08);
+  --focus-ring: 0 0 0 3px color-mix(in srgb, var(--color-accent-teal) 55%, transparent);
+}
+
+[data-theme="dark"] {
+  --color-bg: #07111F;
+  --color-surface: #0D1B2E;
+  --color-surface-alt: #10243A;
+  --color-text: #EAF2FF;
+  --color-text-muted: #9FB3C8;
+  --color-border: #22364F;
+
+  --color-primary: #60A5FA;
+  --color-accent-teal: #2DD4BF;
+  --color-accent-coral: #FB7A68;
+  --color-accent-sand: #E5B96B;
+
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.35);
+}
