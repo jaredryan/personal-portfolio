@@ -85,7 +85,10 @@ const { label, lines } = Astro.props;
     typeLine(lines[0], 0);
 
     document.addEventListener("visibilitychange", () => {
-      if (document.hidden) clearTimeout(timeoutId);
+      clearTimeout(timeoutId);
+      if (!document.hidden) {
+        typeLine(lines[lineIndex], 0);
+      }
     });
   } else if (cursorEl && prefersReducedMotion) {
     cursorEl.style.display = "none";
