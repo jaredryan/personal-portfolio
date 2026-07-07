@@ -33,7 +33,11 @@ const { entries } = Astro.props;
     {entries.map((entry) => (
       <li>
         <button type="button" class="experience-preview__row" data-preview-role={entry.slug}>
-          <span class="experience-preview__logo" aria-hidden="true">{monogram(entry)}</span>
+          {entry.logo ? (
+            <img class="experience-preview__logo" src={entry.logo} alt="" width="28" height="28" loading="lazy" />
+          ) : (
+            <span class="experience-preview__logo" aria-hidden="true">{monogram(entry)}</span>
+          )}
           <span class="experience-preview__row-text">
             <span class="experience-preview__row-line1">{spineLine1(entry)}</span>
             <span class="experience-preview__row-line2">{dateLabel(entry)}</span>
@@ -163,7 +167,7 @@ const { entries } = Astro.props;
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: var(--space-2);
+    gap: var(--space-3);
   }
 
   .experience-preview__row:hover,
@@ -178,12 +182,21 @@ const { entries } = Astro.props;
     height: 28px;
     border-radius: var(--radius-sm);
     background: var(--color-surface-alt);
+    /* Real logo files vary — some are transparent, some carry their own
+       flat/grey background baked in — so a consistent frame around every
+       tile reads as "this is an icon container" regardless of what's
+       inside, instead of individual logos looking like stray boxes against
+       the card. */
+    border: 1px solid var(--color-border);
     color: var(--color-primary);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 0.7rem;
     font-weight: 700;
+    /* object-fit only matters for the <img> variant (real logo) — harmless
+       no-op on the monogram <span> fallback. */
+    object-fit: cover;
   }
 
   .experience-preview__row-text {
