@@ -114,6 +114,12 @@ const defaultSlug = "gold-ocean";
     gap: var(--space-2);
   }
 
+  .experience-spine__item:hover,
+  .experience-spine__item:focus-visible {
+    border-color: var(--color-accent-teal);
+    background: var(--color-surface-alt);
+  }
+
   .experience-spine__item[aria-pressed="true"] {
     border-color: var(--color-accent-teal);
     background: var(--color-surface-alt);
@@ -198,14 +204,32 @@ const defaultSlug = "gold-ocean";
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
     padding: var(--space-4);
+    cursor: pointer;
+  }
+
+  /* Hover feedback lives on the <details> element itself (the whole card),
+     matching how spine items and project cards show hover on their own
+     full extent. */
+  .experience-accordion__item:hover,
+  .experience-accordion__item:focus-within {
+    border-color: var(--color-accent-teal);
+    background: var(--color-surface-alt);
   }
 
   .experience-accordion__item summary {
-    cursor: pointer;
     display: flex;
     align-items: center;
     gap: var(--space-2);
     list-style: none;
+  }
+
+  /* The card's own :focus-within border/background above is the focus
+     indicator for this control — suppress the global :focus-visible ring
+     on the summary itself so tabbing here doesn't show two overlapping
+     "you are here" signals (the card border change and an inner ring). */
+  .experience-accordion__item summary:focus-visible {
+    outline: none;
+    box-shadow: none;
   }
 
   .experience-accordion__item summary::-webkit-details-marker {

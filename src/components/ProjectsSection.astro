@@ -240,7 +240,6 @@ const linkButtonClass: Record<Project["links"][number]["kind"], string> = {
 
 <script>
   import { getQueryParam } from "../utils/urlState";
-  import { moveFocusTo } from "../utils/focus";
 
   const gridView = document.getElementById("projects-grid-view");
   const detailView = document.getElementById("projects-detail-view");
@@ -256,12 +255,21 @@ const linkButtonClass: Record<Project["links"][number]["kind"], string> = {
     detailPanels.forEach((p) => {
       p.hidden = p.dataset.projectDetail !== slug;
     });
-    // Focus the panel itself, not the heading inside it — the heading sits
-    // below the screenshot/carousel in the single-column (mobile) layout,
-    // so scrolling straight to it skipped past the screenshot entirely.
-    // The panel is aria-labelledby its own heading, so it still announces
-    // sensibly to screen readers once focused.
-    if (focusPanel) moveFocusTo(`#project-detail-${slug}`);
+    if (focusPanel) {
+      // Focus the panel itself (aria-labelledby its own heading, so it
+      // still announces sensibly) without letting focus() scroll on its
+      // own, then explicitly scroll the whole page to the top on the next
+      // frame — scrollIntoView on the heading landed below the screenshot
+      // in the single-column (mobile) layout, and scrollIntoView on the
+      // panel still only scrolled to the panel's own top, not the page's,
+      // leaving the breadcrumb at the very edge of the viewport.
+      if (!panel.hasAttribute("tabindex")) panel.setAttribute("tabindex", "-1");
+      panel.focus({ preventScroll: true });
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      requestAnimationFrame(() => {
+        window.scrollTo({ top: 0, left: 0, behavior: prefersReducedMotion ? "auto" : "smooth" });
+      });
+    }
   }
 
   function showGrid(focusHeading = false) {
