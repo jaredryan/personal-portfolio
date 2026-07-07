@@ -1,0 +1,88 @@
+---
+import { profile } from "../data/profile";
+import ThemeToggle from "./ThemeToggle.astro";
+import TypewriterTicker from "./TypewriterTicker.astro";
+---
+<article class="hero-card">
+  <div class="hero-card__top">
+    <div>
+      <h1>{profile.name}</h1>
+      <p class="hero-card__role">{profile.role}</p>
+    </div>
+    <ThemeToggle />
+  </div>
+
+  {profile.heroParagraphs.map((paragraph) => (
+    <p class="hero-card__paragraph">{paragraph}</p>
+  ))}
+
+  <div class="hero-card__actions">
+    <a class="hero-card__action hero-card__action--primary" href={profile.links.resume} download>
+      Resume
+    </a>
+    <a class="hero-card__action" href={profile.links.email}>Email</a>
+    <a class="hero-card__action" href={profile.links.github} target="_blank" rel="noreferrer">GitHub</a>
+    {profile.links.linkedin && (
+      <a class="hero-card__action" href={profile.links.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
+    )}
+  </div>
+
+  <TypewriterTicker label={profile.currentlyLabel} lines={profile.currentlyLines} />
+</article>
+
+<style>
+  .hero-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    padding: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .hero-card__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--space-4);
+  }
+
+  .hero-card__role {
+    margin-top: var(--space-1);
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+
+  .hero-card__paragraph {
+    color: var(--color-text-muted);
+  }
+
+  .hero-card__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .hero-card__action {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: var(--space-2) var(--space-4);
+    text-decoration: none;
+    color: var(--color-text);
+    font-weight: 600;
+  }
+
+  .hero-card__action:hover {
+    border-color: var(--color-accent-teal);
+  }
+
+  .hero-card__action--primary {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: white;
+  }
+</style>
