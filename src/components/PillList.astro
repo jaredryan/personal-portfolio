@@ -1,0 +1,48 @@
+---
+interface Props {
+  pills: string[];
+  variant?: "preview" | "detail";
+}
+
+const { pills, variant = "preview" } = Astro.props;
+---
+<ul class={`pill-list pill-list--${variant}`}>
+  {pills.map((pill) => (
+    <li class="pill">{pill}</li>
+  ))}
+</ul>
+
+<style is:global>
+  /*
+   * is:global is required here, not just a style choice: ExperiencePreview
+   * (Task 9) and ProjectsPreview (Task 10) rebuild pill lists client-side
+   * via document.createElement when the user swaps the selected role/project.
+   * Elements created that way never receive Astro's per-component scoping
+   * attribute, so a normally-scoped <style> block in this file would only
+   * style the pills Astro rendered at build time, not ones JS adds later.
+   * Making the rule global means any element with class="pill"/"pill-list"
+   * anywhere on the page is styled consistently, regardless of who created it.
+   */
+  .pill-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .pill {
+    background: var(--color-surface-alt);
+    color: var(--color-text-muted);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-1) var(--space-3);
+    font-size: 0.8rem;
+    line-height: 1.4;
+  }
+
+  .pill-list--detail .pill {
+    font-size: 0.85rem;
+  }
+</style>

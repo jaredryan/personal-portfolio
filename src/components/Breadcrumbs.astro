@@ -1,0 +1,92 @@
+---
+type Crumb = {
+  label: string;
+  href?: string;
+  roleLink?: string;
+  projectLink?: string;
+  clearRole?: boolean;
+  clearProject?: boolean;
+  dashboardLink?: boolean;
+};
+
+interface Props {
+  trail: Crumb[];
+}
+
+const { trail } = Astro.props;
+---
+<nav aria-label="Breadcrumb" class="breadcrumbs">
+  <ol>
+    {trail.map((crumb, index) => {
+      const isCurrent = index === trail.length - 1;
+      return (
+        <li>
+          {isCurrent ? (
+            <span aria-current="page">{crumb.label}</span>
+          ) : (
+            <a
+              href={crumb.href ?? "#"}
+              data-role-link={crumb.roleLink}
+              data-project-link={crumb.projectLink}
+              data-clear-role={crumb.clearRole ? "" : undefined}
+              data-clear-project={crumb.clearProject ? "" : undefined}
+              data-dashboard-link={crumb.dashboardLink ? "" : undefined}
+            >
+              {crumb.label}
+            </a>
+          )}
+          {!isCurrent && <span class="sep" aria-hidden="true">›</span>}
+        </li>
+      );
+    })}
+  </ol>
+</nav>
+
+<style>
+  .breadcrumbs ol {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2);
+    list-style: none;
+    margin: 0 0 var(--space-4);
+    padding: 0;
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+  }
+
+  .breadcrumbs li {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .breadcrumbs a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+  }
+
+  .breadcrumbs a:hover {
+    color: var(--color-primary);
+    text-decoration: underline;
+  }
+
+  .breadcrumbs [aria-current="page"] {
+    color: var(--color-text);
+    font-weight: 600;
+  }
+
+  .breadcrumbs .sep {
+    color: var(--color-border);
+  }
+
+  @media (max-width: 480px) {
+    .breadcrumbs li:not(:last-child):not(:nth-last-child(2)) {
+      display: none;
+    }
+    .breadcrumbs li:nth-last-child(2)::before {
+      content: "\2026 \203A ";
+      color: var(--color-border);
+    }
+  }
+</style>
