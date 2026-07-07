@@ -14,11 +14,11 @@ import { projects } from "../data/projects";
 <style>
   /*
    * Source order above is Hero, ExperiencePreview, ProjectsPreview — this is
-   * also the required mobile/no-CSS/screen-reader order. Below 1024px there
+   * also the required mobile/no-CSS/screen-reader order. Below 950px there
    * is no grid-column/grid-row override, so the single-column layout simply
    * follows this DOM order. The desktop 2-column bento look (Hero top-left,
    * Projects bottom-left, Experience spanning the right column) is achieved
-   * purely through explicit grid placement at ≥1024px — never by reordering
+   * purely through explicit grid placement at ≥950px — never by reordering
    * the DOM to fake a visual layout, which would desync what mobile/screen
    * readers see from what sighted desktop users see.
    */
@@ -37,7 +37,7 @@ import { projects } from "../data/projects";
     min-width: 0;
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: 950px) {
     .bento {
       /* No min-height here on purpose — forcing the grid taller than its
          content (to "fill the viewport") decouples the row tracks from

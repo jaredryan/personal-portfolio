@@ -81,7 +81,7 @@ const { entries } = Astro.props;
     gap: var(--space-3);
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: 950px) {
     .experience-preview {
       /* height: 100% (not a fixed max-height) — the grid gives this card
          the combined height of Hero + gap + Projects (see BentoDashboard's
@@ -166,9 +166,9 @@ const { entries } = Astro.props;
     gap: var(--space-2);
   }
 
-  .experience-preview__row:hover {
-    background: var(--color-surface-alt);
-    border-color: var(--color-border);
+  .experience-preview__row:hover,
+  .experience-preview__row:focus-visible {
+    border-color: var(--color-accent-teal);
   }
 
   .experience-preview__logo {

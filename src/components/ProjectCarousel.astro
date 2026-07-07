@@ -23,6 +23,19 @@ const { images, alt, autoRotateMs = 6000 } = Astro.props;
         height="600"
       />
     ))}
+    <button type="button" class="carousel__expand" data-carousel-expand aria-label="Expand screenshot">
+      <Icon name="lucide:arrow-up-right" aria-hidden="true" />
+    </button>
+  </div>
+
+  <div class="carousel__lightbox" data-carousel-lightbox hidden>
+    <button type="button" class="carousel__lightbox-backdrop" data-lightbox-backdrop aria-label="Close expanded view"></button>
+    <div class="carousel__lightbox-panel" role="dialog" aria-modal="true" aria-label={`${alt} screenshot, expanded view`}>
+      <button type="button" class="carousel__lightbox-close" data-lightbox-close aria-label="Close expanded view">
+        <Icon name="lucide:x" aria-hidden="true" />
+      </button>
+      <img data-lightbox-img alt="" />
+    </div>
   </div>
 
   <div class="carousel__controls">
@@ -70,6 +83,92 @@ const { images, alt, autoRotateMs = 6000 } = Astro.props;
     height: auto;
     aspect-ratio: 16 / 10;
     object-fit: cover;
+  }
+
+  .carousel__expand {
+    position: absolute;
+    top: var(--space-2);
+    right: var(--space-2);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    background: color-mix(in srgb, var(--color-surface) 85%, transparent);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    color: var(--color-text);
+  }
+
+  .carousel__expand :global(svg) {
+    width: 1.125rem;
+    height: 1.125rem;
+  }
+
+  .carousel__expand:hover {
+    border-color: var(--color-accent-teal);
+    color: var(--color-accent-teal);
+  }
+
+  .carousel__lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-6);
+  }
+
+  .carousel__lightbox-backdrop {
+    position: absolute;
+    inset: 0;
+    background: color-mix(in srgb, black 65%, transparent);
+    border: none;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  .carousel__lightbox-panel {
+    position: relative;
+    z-index: 1;
+    max-width: min(1100px, 92vw);
+    max-height: 88vh;
+  }
+
+  .carousel__lightbox-panel img {
+    display: block;
+    max-width: 100%;
+    max-height: 88vh;
+    width: auto;
+    height: auto;
+    border-radius: var(--radius-md);
+    object-fit: contain;
+  }
+
+  .carousel__lightbox-close {
+    position: absolute;
+    top: calc(-1 * var(--space-4));
+    right: calc(-1 * var(--space-4));
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    color: var(--color-text);
+  }
+
+  .carousel__lightbox-close :global(svg) {
+    width: 1.125rem;
+    height: 1.125rem;
+  }
+
+  .carousel__lightbox-close:hover {
+    border-color: var(--color-accent-teal);
+    color: var(--color-accent-teal);
   }
 
   .carousel__controls {
@@ -138,6 +237,11 @@ const { images, alt, autoRotateMs = 6000 } = Astro.props;
     const nextBtn = carousel.querySelector<HTMLButtonElement>(".carousel__next");
     const autoRotateMs = Number(carousel.dataset.autorotateMs ?? 0);
     const panel = carousel.closest<HTMLElement>("[data-project-detail]");
+    const expandBtn = carousel.querySelector<HTMLButtonElement>("[data-carousel-expand]");
+    const lightbox = carousel.querySelector<HTMLElement>("[data-carousel-lightbox]");
+    const lightboxImg = lightbox?.querySelector<HTMLImageElement>("[data-lightbox-img]");
+    const lightboxClose = lightbox?.querySelector<HTMLButtonElement>("[data-lightbox-close]");
+    const lightboxBackdrop = lightbox?.querySelector<HTMLButtonElement>("[data-lightbox-backdrop]");
     let current = 0;
     let timerId: ReturnType<typeof setInterval> | undefined;
 
@@ -165,6 +269,33 @@ const { images, alt, autoRotateMs = 6000 } = Astro.props;
       if (timerId) clearInterval(timerId);
       timerId = undefined;
     }
+
+    function onLightboxKeydown(event: KeyboardEvent) {
+      if (event.key === "Escape") closeLightbox();
+    }
+
+    function openLightbox() {
+      const activeSlide = slides[current];
+      if (!lightbox || !lightboxImg || !activeSlide) return;
+      lightboxImg.src = activeSlide.src;
+      lightboxImg.alt = activeSlide.alt;
+      lightbox.hidden = false;
+      stopAutoRotate();
+      document.addEventListener("keydown", onLightboxKeydown);
+      lightboxClose?.focus();
+    }
+
+    function closeLightbox() {
+      if (!lightbox) return;
+      lightbox.hidden = true;
+      document.removeEventListener("keydown", onLightboxKeydown);
+      startAutoRotate();
+      expandBtn?.focus();
+    }
+
+    expandBtn?.addEventListener("click", openLightbox);
+    lightboxClose?.addEventListener("click", closeLightbox);
+    lightboxBackdrop?.addEventListener("click", closeLightbox);
 
     prevBtn?.addEventListener("click", () => {
       show(current - 1);

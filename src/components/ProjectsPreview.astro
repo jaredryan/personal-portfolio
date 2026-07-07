@@ -155,6 +155,14 @@ const defaultProject = projects.find((p) => p.slug === "lpa-tracker") ?? project
     border-color: var(--color-accent-coral);
   }
 
+  /* :not([aria-pressed="true"]) keeps the selected (coral) state visually
+     dominant even while that same thumbnail is hovered/focused — selected
+     and hover are deliberately distinct signals. */
+  .projects-preview__thumb:not([aria-pressed="true"]):hover,
+  .projects-preview__thumb:not([aria-pressed="true"]):focus-visible {
+    border-color: var(--color-accent-teal);
+  }
+
   .projects-preview__info {
     display: flex;
     flex-direction: column;
@@ -172,7 +180,7 @@ const defaultProject = projects.find((p) => p.slug === "lpa-tracker") ?? project
     font-size: 0.9rem;
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: 950px) {
     .projects-preview__body {
       flex-direction: row;
       align-items: flex-start;
@@ -203,12 +211,19 @@ const defaultProject = projects.find((p) => p.slug === "lpa-tracker") ?? project
     document.getElementById("projects-preview-data")?.textContent ?? "[]"
   );
 
-  const cover = document.getElementById("projects-preview-cover") as HTMLImageElement | null;
-  const title = document.getElementById("projects-preview-title");
-  const oneLiner = document.getElementById("projects-preview-oneliner");
-  const pillsList = document.getElementById("projects-preview-pills");
-  const expandLink = document.querySelector<HTMLAnchorElement>("[data-preview-expand]");
-  const thumbs = document.querySelectorAll<HTMLButtonElement>("[data-preview-project]");
+  // Scoped to this component's own root — ExperiencePreview.astro uses the
+  // same `data-preview-expand` attribute name for its own expand link, so an
+  // unscoped document-wide query here would silently grab Experience's
+  // anchor instead (whichever renders first in the DOM wins) and rewrite
+  // its href to a /projects URL. Caught live: clicking a project thumbnail
+  // would hijack the Experience card's expand link.
+  const root = document.getElementById("projects-preview");
+  const cover = root?.querySelector<HTMLImageElement>("#projects-preview-cover");
+  const title = root?.querySelector<HTMLElement>("#projects-preview-title");
+  const oneLiner = root?.querySelector<HTMLElement>("#projects-preview-oneliner");
+  const pillsList = root?.querySelector<HTMLElement>("#projects-preview-pills");
+  const expandLink = root?.querySelector<HTMLAnchorElement>("[data-preview-expand]");
+  const thumbs = root?.querySelectorAll<HTMLButtonElement>("[data-preview-project]");
 
   function selectPreview(slug: string) {
     const project = data.find((p) => p.slug === slug);
@@ -227,12 +242,12 @@ const defaultProject = projects.find((p) => p.slug === "lpa-tracker") ?? project
     }
     if (expandLink) expandLink.href = `/projects?project=${slug}`;
 
-    thumbs.forEach((thumb) => {
+    thumbs?.forEach((thumb) => {
       thumb.setAttribute("aria-pressed", String(thumb.dataset.previewProject === slug));
     });
   }
 
-  thumbs.forEach((thumb) => {
+  thumbs?.forEach((thumb) => {
     thumb.addEventListener("click", () => {
       const slug = thumb.dataset.previewProject;
       if (slug) selectPreview(slug);

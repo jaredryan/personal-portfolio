@@ -108,7 +108,7 @@ const linkButtonClass: Record<Project["links"][number]["kind"], string> = {
     padding: var(--space-4);
     display: flex;
     flex-direction: column;
-    gap: var(--space-2);
+    gap: var(--space-3);
     cursor: pointer;
   }
 
@@ -186,7 +186,7 @@ const linkButtonClass: Record<Project["links"][number]["kind"], string> = {
   }
 
   .btn--secondary {
-    background: transparent;
+    background: var(--color-surface);
     border-color: var(--color-border);
     color: var(--color-text);
   }
@@ -205,11 +205,14 @@ const linkButtonClass: Record<Project["links"][number]["kind"], string> = {
     cursor: default;
   }
 
-  /* Lower than the dashboard's 1024px card breakpoints on purpose — this is
-     a full page with much more horizontal room than a bento card, so the
-     two-column split can survive down to a genuinely narrow (~iPad mini
-     portrait) width before the screenshot column gets cramped. */
-  @media (min-width: 820px) {
+  /* Breakpoint derived from the two columns' own minimums, not picked by
+     eye: media can shrink to 350px and content to 400px before either gets
+     cramped, so the page-shell needs >= 350+400+24(gap) = 774px of content
+     width, which happens at a viewport of ~840px (page-shell subtracts 64px
+     of side padding at this width). Below that, single column; the media
+     column's width constraint only applies inside this query, so it's free
+     to go full-width again in the single-column layout. */
+  @media (min-width: 840px) {
     .project-detail__layout {
       flex-direction: row;
       align-items: flex-start;
@@ -217,13 +220,13 @@ const linkButtonClass: Record<Project["links"][number]["kind"], string> = {
 
     .project-detail__media {
       width: min(55%, 460px);
-      min-width: 300px;
-      flex-shrink: 0;
+      min-width: 350px;
+      flex-shrink: 1;
     }
 
     .project-detail__content {
       flex: 1;
-      min-width: 0;
+      min-width: 400px;
     }
   }
 </style>

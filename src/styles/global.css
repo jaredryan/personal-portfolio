@@ -75,6 +75,14 @@ button {
   color: inherit;
 }
 
+/* One shared, modest transition for every interactive control (buttons,
+   links, and anything acting as one — cards, thumbnails, carousel controls)
+   instead of each component declaring its own duration/easing. The
+   reduced-motion override below still zeroes this out. */
+a, button {
+  transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease;
+}
+
 .visually-hidden {
   position: absolute;
   width: 1px;
