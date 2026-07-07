@@ -24,8 +24,10 @@ import { Icon } from "astro-icon/components";
     cursor: pointer;
   }
 
-  .theme-toggle:hover {
+  .theme-toggle:hover,
+  .theme-toggle:focus-visible {
     border-color: var(--color-accent-teal);
+    color: var(--color-accent-teal);
   }
 
   /* Icon size is shared across the theme toggle, hero social icons, and the

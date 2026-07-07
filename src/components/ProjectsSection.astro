@@ -44,7 +44,13 @@ const linkButtonClass: Record<Project["links"][number]["kind"], string> = {
 
   <div id="projects-detail-view" hidden>
     {projects.map((project) => (
-      <div class="project-detail" id={`project-detail-${project.slug}`} data-project-detail={project.slug} hidden>
+      <div
+        class="project-detail"
+        id={`project-detail-${project.slug}`}
+        data-project-detail={project.slug}
+        aria-labelledby={`project-detail-heading-${project.slug}`}
+        hidden
+      >
         <Breadcrumbs
           trail={[
             { label: "Dashboard", href: "/" },
@@ -114,6 +120,7 @@ const linkButtonClass: Record<Project["links"][number]["kind"], string> = {
 
   .project-card:hover {
     border-color: var(--color-accent-teal);
+    background: var(--color-surface-alt);
   }
 
   .project-card img {
@@ -249,7 +256,12 @@ const linkButtonClass: Record<Project["links"][number]["kind"], string> = {
     detailPanels.forEach((p) => {
       p.hidden = p.dataset.projectDetail !== slug;
     });
-    if (focusPanel) moveFocusTo(`#project-detail-heading-${slug}`);
+    // Focus the panel itself, not the heading inside it — the heading sits
+    // below the screenshot/carousel in the single-column (mobile) layout,
+    // so scrolling straight to it skipped past the screenshot entirely.
+    // The panel is aria-labelledby its own heading, so it still announces
+    // sensibly to screen readers once focused.
+    if (focusPanel) moveFocusTo(`#project-detail-${slug}`);
   }
 
   function showGrid(focusHeading = false) {

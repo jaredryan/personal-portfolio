@@ -169,6 +169,7 @@ const { entries } = Astro.props;
   .experience-preview__row:hover,
   .experience-preview__row:focus-visible {
     border-color: var(--color-accent-teal);
+    background: var(--color-surface-alt);
   }
 
   .experience-preview__logo {
@@ -254,10 +255,23 @@ const { entries } = Astro.props;
   .experience-preview__seemore {
     align-self: flex-start;
     margin-top: var(--space-2);
-    color: var(--color-accent-teal);
+    display: inline-flex;
+    align-items: center;
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--radius-sm);
+    color: var(--color-accent-coral);
     font-weight: 600;
     text-decoration: none;
     font-size: 0.9rem;
+    cursor: pointer;
+  }
+
+  /* Coral, not teal, on hover — "See more" is conceptually an expand/open
+     action like the header's expand icon (also coral), so it keeps its
+     base color and only gains a background instead of switching hue. */
+  .experience-preview__seemore:hover,
+  .experience-preview__seemore:focus-visible {
+    background: var(--color-surface-alt);
   }
 </style>
 

@@ -36,7 +36,7 @@ h1, h2, h3, h4,
 .projects-preview__title,
 .experience-preview__row-line1,
 .experience-preview__detail-title,
-.experience-spine__line1 {
+.experience-spine__role {
   font-family: var(--font-heading);
   line-height: 1.2;
   margin: 0;

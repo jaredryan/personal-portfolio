@@ -1,0 +1,46 @@
+---
+import type { ExperienceEntry } from "../data/experience";
+import PillList from "./PillList.astro";
+import MetricChips from "./MetricChips.astro";
+
+interface Props {
+  entry: ExperienceEntry;
+}
+
+const { entry } = Astro.props;
+---
+<div class="experience-detail-content">
+  <p class="experience-detail-content__oneliner prose">{entry.oneLiner}</p>
+  {entry.kind === "work" && entry.metricChips.length > 0 && <MetricChips chips={entry.metricChips} />}
+  {entry.bullets.length > 0 && (
+    <ul class="experience-detail-content__bullets">
+      {entry.bullets.map((bullet) => <li>{bullet}</li>)}
+    </ul>
+  )}
+  <PillList pills={entry.pills} variant="detail" />
+</div>
+
+<style>
+  /* Single source of vertical rhythm between one-liner, metric chips,
+     bullets, and pills — shared by the desktop selected panel and the
+     mobile accordion in ExperienceSection.astro, which previously
+     duplicated this markup with no explicit gap between them at all. */
+  .experience-detail-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .experience-detail-content__oneliner {
+    color: var(--color-text-muted);
+  }
+
+  .experience-detail-content__bullets {
+    margin: 0;
+    padding-left: 1.2rem;
+    color: var(--color-text-muted);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+</style>
