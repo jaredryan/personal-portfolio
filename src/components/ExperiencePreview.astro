@@ -1,0 +1,166 @@
+---
+import type { ExperienceEntry } from "../data/experience";
+import PillList from "./PillList.astro";
+
+interface Props {
+  entries: ExperienceEntry[];
+}
+
+const { entries } = Astro.props;
+const workEntries = entries.filter((entry) => entry.kind === "work");
+// Matches ExperienceSection's default selected role (Task 14) so the expand
+// link is never a dead click before the user has previewed a specific role.
+const defaultRoleSlug = "gold-ocean";
+---
+<div class="experience-preview" id="experience-preview">
+  <h2 class="experience-preview__heading">Experience</h2>
+
+  <ul class="experience-preview__list">
+    {workEntries.map((entry) => (
+      <li>
+        <button
+          type="button"
+          class="experience-preview__item"
+          data-preview-role={entry.slug}
+          aria-pressed="false"
+        >
+          <span class="experience-preview__company">{entry.company}</span>
+          <span class="experience-preview__title">{entry.title}</span>
+          <span class="experience-preview__dates">
+            {entry.start}—{entry.end}
+          </span>
+        </button>
+      </li>
+    ))}
+  </ul>
+
+  <div class="experience-preview__teaser" data-preview-teaser hidden>
+    <p class="experience-preview__teaser-oneliner"></p>
+    <div class="experience-preview__teaser-pills"></div>
+  </div>
+
+  <a
+    class="experience-preview__expand"
+    href={`?role=${defaultRoleSlug}#experience`}
+    data-role-link={defaultRoleSlug}
+    aria-label="View full Experience section"
+  >
+    View full experience →
+  </a>
+</div>
+
+<style>
+  .experience-preview {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    padding: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    height: 100%;
+  }
+
+  .experience-preview__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .experience-preview__item {
+    width: 100%;
+    text-align: left;
+    background: transparent;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: var(--space-2) var(--space-3);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .experience-preview__item[aria-pressed="true"] {
+    border-color: var(--color-accent-teal);
+    background: var(--color-surface-alt);
+  }
+
+  .experience-preview__company {
+    font-weight: 700;
+  }
+
+  .experience-preview__dates {
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+  }
+
+  .experience-preview__teaser {
+    background: var(--color-surface-alt);
+    border-radius: var(--radius-sm);
+    padding: var(--space-3);
+  }
+
+  .experience-preview__expand {
+    align-self: flex-start;
+    color: var(--color-primary);
+    font-weight: 600;
+    text-decoration: none;
+  }
+</style>
+
+<script type="application/json" id="experience-preview-data" set:html={JSON.stringify(
+  workEntries.map((entry) => ({ slug: entry.slug, oneLiner: entry.oneLiner, pills: entry.pills }))
+)} />
+
+<script>
+  // This script runs after the JSON data block above in document order, so
+  // `experience-preview-data`'s textContent is already in the DOM by the
+  // time this executes — do not reorder these two <script> tags.
+  const root = document.getElementById("experience-preview");
+  const items = root?.querySelectorAll<HTMLButtonElement>("[data-preview-role]");
+  const teaser = root?.querySelector<HTMLElement>("[data-preview-teaser]");
+  const teaserOneLiner = teaser?.querySelector<HTMLElement>(".experience-preview__teaser-oneliner");
+  const teaserPills = teaser?.querySelector<HTMLElement>(".experience-preview__teaser-pills");
+  const expandLink = root?.querySelector<HTMLAnchorElement>(".experience-preview__expand");
+
+  type EntrySummary = { slug: string; oneLiner: string; pills: string[] };
+  const entryData: EntrySummary[] = JSON.parse(
+    document.getElementById("experience-preview-data")?.textContent ?? "[]"
+  );
+
+  function selectPreview(slug: string) {
+    items?.forEach((item) => {
+      item.setAttribute("aria-pressed", String(item.dataset.previewRole === slug));
+    });
+
+    const entry = entryData.find((e) => e.slug === slug);
+    if (!entry || !teaser || !teaserOneLiner || !teaserPills) return;
+
+    teaser.hidden = false;
+    teaserOneLiner.textContent = entry.oneLiner;
+    teaserPills.innerHTML = "";
+    const list = document.createElement("ul");
+    list.className = "pill-list pill-list--preview";
+    for (const pill of entry.pills.slice(0, 4)) {
+      const li = document.createElement("li");
+      li.className = "pill";
+      li.textContent = pill;
+      list.appendChild(li);
+    }
+    teaserPills.appendChild(list);
+
+    if (expandLink) {
+      expandLink.dataset.roleLink = slug;
+    }
+  }
+
+  items?.forEach((item) => {
+    item.addEventListener("click", () => {
+      const slug = item.dataset.previewRole;
+      if (slug) selectPreview(slug);
+    });
+  });
+</script>
