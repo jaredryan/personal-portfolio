@@ -74,7 +74,11 @@ const defaultSlug = "gold-ocean";
             <span class="experience-spine__dates">{dateLabel(entry)}</span>
           </span>
         </summary>
-        <ExperienceDetailContent entry={entry} />
+        <div class="experience-accordion__panel" data-accordion-panel>
+          <div class="experience-accordion__panel-inner">
+            <ExperienceDetailContent entry={entry} />
+          </div>
+        </div>
       </details>
     ))}
   </div>
@@ -255,8 +259,33 @@ const defaultSlug = "gold-ocean";
     display: none;
   }
 
-  .experience-accordion__item[open] summary {
-    margin-bottom: var(--space-3);
+  /* grid-template-rows 1fr -> 0fr is the standard CSS-only technique for
+     animating to/from "auto" height without JS measuring scrollHeight.
+     Default is 1fr (fully shown) so a no-JS/JS-failure fallback renders
+     every panel's content immediately and correctly — the .is-collapsing
+     modifier that drives the actual accordion look is only ever added by
+     script (see this component's <script> below), never present in the
+     server-rendered HTML. */
+  .experience-accordion__panel {
+    display: grid;
+    grid-template-rows: 1fr;
+    transition: grid-template-rows 240ms ease-out;
+  }
+
+  .experience-accordion__panel.is-collapsing {
+    grid-template-rows: 0fr;
+  }
+
+  .experience-accordion__panel-inner {
+    overflow: hidden;
+    min-height: 0;
+    padding-top: var(--space-3);
+    opacity: 1;
+    transition: opacity 200ms ease-out;
+  }
+
+  .experience-accordion__panel.is-collapsing .experience-accordion__panel-inner {
+    opacity: 0;
   }
 
   @media (min-width: 900px) {
@@ -276,6 +305,47 @@ const defaultSlug = "gold-ocean";
   const accordionItems = document.querySelectorAll<HTMLDetailsElement>("[data-accordion-role]");
   const defaultSlug = "gold-ocean";
 
+  // Animate <details> open/close instead of relying on the browser's
+  // instant native toggle. Opening: force the panel to its collapsed (0fr)
+  // state on the same frame `open` becomes true, then release it on the
+  // next frame so the transition has something to animate from. Closing:
+  // <details> hides non-summary content the instant `open` goes false, so
+  // we hold `open` true, animate the panel to collapsed, and only flip
+  // `open` off once the transition actually finishes.
+  function openAccordionItem(item: HTMLDetailsElement) {
+    const panel = item.querySelector<HTMLElement>("[data-accordion-panel]");
+    item.open = true;
+    if (!panel) return;
+    panel.classList.add("is-collapsing");
+    void panel.offsetHeight;
+    requestAnimationFrame(() => {
+      panel.classList.remove("is-collapsing");
+    });
+  }
+
+  function closeAccordionItem(item: HTMLDetailsElement) {
+    const panel = item.querySelector<HTMLElement>("[data-accordion-panel]");
+    if (!panel) {
+      item.open = false;
+      return;
+    }
+    panel.classList.add("is-collapsing");
+    const onEnd = (event: TransitionEvent) => {
+      if (event.propertyName !== "grid-template-rows") return;
+      panel.removeEventListener("transitionend", onEnd);
+      // Only close if this element is still the one collapsing — guards
+      // against a stale listener firing after a rapid re-open reversed it.
+      if (panel.classList.contains("is-collapsing")) {
+        item.open = false;
+        // <details> stops rendering this content the instant open is false,
+        // so this has no visual effect — it just leaves the panel in a
+        // clean (non-collapsing) state for the next time it's opened.
+        panel.classList.remove("is-collapsing");
+      }
+    };
+    panel.addEventListener("transitionend", onEnd);
+  }
+
   function selectRole(slug: string, focusPanel = false) {
     const validSlugs = Array.from(detailPanels).map((p) => p.dataset.roleDetail);
     const target = validSlugs.includes(slug) ? slug : defaultSlug;
@@ -291,12 +361,17 @@ const defaultSlug = "gold-ocean";
       // appear, not fade in, on first paint.
       if (isTarget && focusPanel) playEnterAnimation(panel);
     });
-    // Setting .open on every item (not just the target) is what keeps the
-    // mobile accordion single-selection: any other item that was previously
-    // open gets closed here, so at most one role is ever expanded at a time —
+    // Syncing every item (not just the target) is what keeps the mobile
+    // accordion single-selection: any other item that was previously open
+    // gets closed here, so at most one role is ever expanded at a time —
     // matching the desktop career-spine model where exactly one is selected.
+    // Only items whose state is actually changing get animated; items
+    // already in the right state (e.g. the default on initial load) are
+    // left untouched so nothing animates on first paint.
     accordionItems.forEach((item) => {
-      item.open = item.dataset.accordionRole === target;
+      const isTarget = item.dataset.accordionRole === target;
+      if (isTarget && !item.open) openAccordionItem(item);
+      else if (!isTarget && item.open) closeAccordionItem(item);
     });
 
     if (focusPanel) moveFocusTo(`#experience-detail-heading-${target}`);
@@ -317,20 +392,30 @@ const defaultSlug = "gold-ocean";
   });
 
   accordionItems.forEach((item) => {
-    item.addEventListener("toggle", () => {
-      if (!item.open) return;
+    const summary = item.querySelector("summary");
+    // Intercept the click rather than listening for "toggle" — native
+    // <details> toggles (and hides its content) the instant the summary is
+    // clicked, before any JS runs, which is exactly the "jumps open, then
+    // the content animates in afterward" problem. preventDefault() here
+    // hands control to openAccordionItem/closeAccordionItem so the panel's
+    // height animates instead of snapping. If JS never loads, this listener
+    // never attaches and the native click-to-toggle still works, just
+    // without the animation.
+    summary?.addEventListener("click", (event) => {
+      event.preventDefault();
       const slug = item.dataset.accordionRole;
       if (!slug) return;
+      if (item.open) {
+        // Matches the prior native behavior: clicking the open item closes
+        // it, leaving nothing expanded.
+        closeAccordionItem(item);
+        return;
+      }
       // selectRole() closes every other accordion item so only one stays
       // open, and keeps the desktop spine/detail panel (both present in the
       // DOM at once, just hidden by CSS at this breakpoint) in sync too.
       selectRole(slug);
       setSectionState({ key: "role", value: slug });
-      // <details> opens instantly with no built-in transition; fading the
-      // revealed content in (not attempting to animate the native
-      // open/close itself) is the restrained, low-risk way to make it feel
-      // less abrupt.
-      playEnterAnimation(item.querySelector(".experience-detail-content"));
     });
   });
 

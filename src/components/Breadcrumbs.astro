@@ -1,4 +1,6 @@
 ---
+import { Icon } from "astro-icon/components";
+
 type Crumb = {
   label: string;
   href?: string;
@@ -27,7 +29,7 @@ const { trail } = Astro.props;
               {crumb.label}
             </a>
           )}
-          {!isCurrent && <span class="sep" aria-hidden="true">›</span>}
+          {!isCurrent && <Icon name="lucide:chevron-right" aria-hidden="true" class="breadcrumbs__sep" />}
         </li>
       );
     })}
@@ -68,8 +70,13 @@ const { trail } = Astro.props;
     font-weight: 600;
   }
 
-  .breadcrumbs .sep {
-    color: var(--color-border);
+  /* var(--color-text-muted), not var(--color-border) — the border color is
+     too low-contrast against the page background to read as a visible
+     separator, it was basically invisible in both themes. */
+  .breadcrumbs__sep {
+    width: 0.9em;
+    height: 0.9em;
+    color: var(--color-text-muted);
   }
 
   @media (max-width: 480px) {
@@ -78,7 +85,7 @@ const { trail } = Astro.props;
     }
     .breadcrumbs li:nth-last-child(2)::before {
       content: "\2026 \203A ";
-      color: var(--color-border);
+      color: var(--color-text-muted);
     }
   }
 </style>

@@ -72,17 +72,35 @@ const { images, alt, autoRotateMs = 6000 } = Astro.props;
     border-radius: var(--radius-md);
     overflow: hidden;
     border: 1px solid var(--color-border);
+    /* Slides are stacked with position: absolute below so the outgoing and
+       incoming slide can overlap mid-transition — the viewport itself now
+       owns the aspect ratio that used to live on the (in-flow) <img>. */
+    aspect-ratio: 16 / 10;
   }
 
   .carousel__slide {
+    position: absolute;
+    inset: 0;
     width: 100%;
-    /* height: auto is required, not cosmetic — the img's HTML height
-       attribute otherwise wins over aspect-ratio once width is overridden
-       by CSS, since aspect-ratio only fills in a dimension that's truly
-       auto (caught live: this silently broke every aspect-ratio image). */
-    height: auto;
-    aspect-ratio: 16 / 10;
+    height: 100%;
     object-fit: cover;
+    transform: translateX(0);
+    opacity: 1;
+    transition: transform 260ms ease-out, opacity 260ms ease-out;
+  }
+
+  /* Shared offset used both as the incoming slide's starting point and the
+     outgoing slide's ending point for a given direction, so two classes
+     cover all four transition roles (next-enter/prev-exit share one,
+     prev-enter/next-exit share the other). */
+  .carousel__slide--from-right {
+    transform: translateX(28px);
+    opacity: 0;
+  }
+
+  .carousel__slide--from-left {
+    transform: translateX(-28px);
+    opacity: 0;
   }
 
   .carousel__expand {
@@ -251,20 +269,57 @@ const { images, alt, autoRotateMs = 6000 } = Astro.props;
       return !panel || !panel.hidden;
     }
 
-    function show(index: number) {
-      current = (index + slides.length) % slides.length;
-      slides.forEach((slide, i) => {
-        slide.hidden = i !== current;
-      });
+    // direction is "next"/"previous" for an explicit prev/next click, a
+    // computed next/previous for dot clicks that skip forward or back, or
+    // null when there's no meaningful direction (dot click landing on the
+    // current slide, or the auto-reset to slide 0 when a project panel
+    // opens) — null just crossfades via the hidden toggle, no slide.
+    function show(index: number, direction: "next" | "previous" | null = null) {
+      const nextIndex = (index + slides.length) % slides.length;
+      if (nextIndex === current) return;
+
+      const outgoing = slides[current];
+      const incoming = slides[nextIndex];
+      current = nextIndex;
+
       dots.forEach((dot, i) => {
         dot.setAttribute("aria-selected", String(i === current));
       });
+
+      if (!direction) {
+        outgoing.hidden = true;
+        incoming.hidden = false;
+        incoming.classList.remove("carousel__slide--from-right", "carousel__slide--from-left");
+        return;
+      }
+
+      const enterClass = direction === "next" ? "carousel__slide--from-right" : "carousel__slide--from-left";
+      const exitClass = direction === "next" ? "carousel__slide--from-left" : "carousel__slide--from-right";
+
+      incoming.classList.remove("carousel__slide--from-right", "carousel__slide--from-left");
+      incoming.hidden = false;
+      incoming.classList.add(enterClass);
+      // Force layout so the offset start-state is committed before removing
+      // it triggers a transition — otherwise there's no "from" value to
+      // animate from and the slide just appears already in place.
+      void incoming.offsetWidth;
+      incoming.classList.remove(enterClass);
+      outgoing.classList.add(exitClass);
+
+      outgoing.addEventListener(
+        "transitionend",
+        () => {
+          outgoing.hidden = true;
+          outgoing.classList.remove(exitClass);
+        },
+        { once: true },
+      );
     }
 
     function startAutoRotate() {
       if (prefersReducedMotion || !autoRotateMs || slides.length < 2 || !isPanelVisible()) return;
       stopAutoRotate();
-      timerId = setInterval(() => show(current + 1), autoRotateMs);
+      timerId = setInterval(() => show(current + 1, "next"), autoRotateMs);
     }
 
     function stopAutoRotate() {
@@ -300,16 +355,19 @@ const { images, alt, autoRotateMs = 6000 } = Astro.props;
     lightboxBackdrop?.addEventListener("click", closeLightbox);
 
     prevBtn?.addEventListener("click", () => {
-      show(current - 1);
+      show(current - 1, "previous");
       startAutoRotate();
     });
     nextBtn?.addEventListener("click", () => {
-      show(current + 1);
+      show(current + 1, "next");
       startAutoRotate();
     });
     dots.forEach((dot, i) => {
       dot.addEventListener("click", () => {
-        show(i);
+        // Infer direction from index so jumping ahead/back several slides
+        // via a dot still slides the expected way; landing on the current
+        // dot is a no-op inside show() regardless.
+        show(i, i > current ? "next" : i < current ? "previous" : null);
         startAutoRotate();
       });
     });

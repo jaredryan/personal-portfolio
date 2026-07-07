@@ -17,7 +17,7 @@ const defaultProject = projects.find((p) => p.slug === "lpa-tracker") ?? project
 <div class="projects-preview" id="projects-preview">
   <div class="projects-preview__header">
     <h2 class="eyebrow">Projects</h2>
-    <a class="projects-preview__expand" data-preview-expand href="/projects" aria-label="Open full Projects page">
+    <a class="projects-preview__expand" href="/projects" aria-label="Open full Projects page">
       <Icon name="lucide:arrow-up-right" aria-hidden="true" />
     </a>
   </div>
@@ -52,6 +52,7 @@ const defaultProject = projects.find((p) => p.slug === "lpa-tracker") ?? project
       <ul class="pill-list pill-list--preview" id="projects-preview-pills">
         {defaultProject.previewPills.map((pill) => <li class="pill">{pill}</li>)}
       </ul>
+      <a class="projects-preview__seemore" data-preview-seemore href={`/projects?project=${defaultProject.slug}`}>See more →</a>
     </div>
   </div>
 </div>
@@ -180,6 +181,28 @@ const defaultProject = projects.find((p) => p.slug === "lpa-tracker") ?? project
     font-size: 0.9rem;
   }
 
+  /* Matches .experience-preview__seemore exactly — same contextual-deep-link
+     pattern: coral base color, subtle surface-alt hover, distinct from the
+     header's expand arrow which always points at the base /projects route. */
+  .projects-preview__seemore {
+    align-self: flex-start;
+    margin-top: var(--space-2);
+    display: inline-flex;
+    align-items: center;
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--radius-sm);
+    color: var(--color-accent-coral);
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 0.9rem;
+    cursor: pointer;
+  }
+
+  .projects-preview__seemore:hover,
+  .projects-preview__seemore:focus-visible {
+    background: var(--color-surface-alt);
+  }
+
   @media (min-width: 950px) {
     .projects-preview__body {
       flex-direction: row;
@@ -214,18 +237,18 @@ const defaultProject = projects.find((p) => p.slug === "lpa-tracker") ?? project
   );
 
   // Scoped to this component's own root — ExperiencePreview.astro uses the
-  // same `data-preview-expand` attribute name for its own expand link, so an
-  // unscoped document-wide query here would silently grab Experience's
-  // anchor instead (whichever renders first in the DOM wins) and rewrite
-  // its href to a /projects URL. Caught live: clicking a project thumbnail
-  // would hijack the Experience card's expand link.
+  // same attribute-based selectors (e.g. `[data-preview-project]`'s sibling
+  // `[data-preview-role]`) for its own preview state, so an unscoped
+  // document-wide query here risks silently grabbing Experience's elements
+  // instead (whichever renders first in the DOM wins). Caught live once
+  // already with the header expand link before it was made static.
   const root = document.getElementById("projects-preview");
   const cover = root?.querySelector<HTMLImageElement>("#projects-preview-cover");
   const info = root?.querySelector<HTMLElement>(".projects-preview__info");
   const title = root?.querySelector<HTMLElement>("#projects-preview-title");
   const oneLiner = root?.querySelector<HTMLElement>("#projects-preview-oneliner");
   const pillsList = root?.querySelector<HTMLElement>("#projects-preview-pills");
-  const expandLink = root?.querySelector<HTMLAnchorElement>("[data-preview-expand]");
+  const seeMoreLink = root?.querySelector<HTMLAnchorElement>("[data-preview-seemore]");
   const thumbs = root?.querySelectorAll<HTMLButtonElement>("[data-preview-project]");
 
   function selectPreview(slug: string) {
@@ -243,7 +266,11 @@ const defaultProject = projects.find((p) => p.slug === "lpa-tracker") ?? project
       li.textContent = pill;
       pillsList.appendChild(li);
     }
-    if (expandLink) expandLink.href = `/projects?project=${slug}`;
+    // The header's expand arrow (.projects-preview__expand) intentionally
+    // stays a static link to the base /projects route regardless of
+    // selection — only this contextual "See more" link follows the
+    // currently previewed project.
+    if (seeMoreLink) seeMoreLink.href = `/projects?project=${slug}`;
 
     playEnterAnimation(cover);
     playEnterAnimation(info);

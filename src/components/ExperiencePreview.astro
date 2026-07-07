@@ -24,7 +24,7 @@ const { entries } = Astro.props;
       <Icon name="lucide:arrow-left" aria-hidden="true" />
       Experience
     </button>
-    <a class="experience-preview__expand" data-preview-expand href="/experience" aria-label="Open full Experience page">
+    <a class="experience-preview__expand" href="/experience" aria-label="Open full Experience page">
       <Icon name="lucide:arrow-up-right" aria-hidden="true" />
     </a>
   </div>
@@ -302,7 +302,6 @@ const { entries } = Astro.props;
   const root = document.getElementById("experience-preview");
   const heading = root?.querySelector<HTMLElement>("[data-preview-heading]");
   const backBtn = root?.querySelector<HTMLButtonElement>("[data-preview-back]");
-  const expandLink = root?.querySelector<HTMLAnchorElement>("[data-preview-expand]");
   const list = root?.querySelector<HTMLElement>("[data-preview-list]");
   const detail = root?.querySelector<HTMLElement>("[data-preview-detail]");
   const detailTitle = root?.querySelector<HTMLElement>("[data-detail-title]");
@@ -334,13 +333,15 @@ const { entries } = Astro.props;
 
   function showPreview(slug: string) {
     const entry = entryData.find((e) => e.slug === slug);
-    if (!entry || !detail || !list || !heading || !backBtn || !expandLink) return;
+    if (!entry || !detail || !list || !heading || !backBtn) return;
 
     list.hidden = true;
     detail.hidden = false;
     heading.hidden = true;
     backBtn.hidden = false;
-    expandLink.href = `/experience?role=${slug}`;
+    // The header's expand arrow (.experience-preview__expand) intentionally
+    // stays a static link to the base /experience route regardless of
+    // selection — only "See more" below follows the previewed role.
     playEnterAnimation(detail);
 
     if (detailTitle) detailTitle.textContent = entry.titleLine;
@@ -372,12 +373,11 @@ const { entries } = Astro.props;
   }
 
   function showList() {
-    if (!list || !detail || !heading || !backBtn || !expandLink) return;
+    if (!list || !detail || !heading || !backBtn) return;
     list.hidden = false;
     detail.hidden = true;
     heading.hidden = false;
     backBtn.hidden = true;
-    expandLink.href = "/experience";
     playEnterAnimation(list);
   }
 
