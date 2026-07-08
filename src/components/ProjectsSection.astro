@@ -2,6 +2,8 @@
 import { Icon } from "astro-icon/components";
 import type { Project } from "../data/projects";
 import Breadcrumbs from "./Breadcrumbs.astro";
+import ContactDrawer from "./ContactDrawer.astro";
+import ContactTrigger from "./ContactTrigger.astro";
 import PillList from "./PillList.astro";
 import ProjectDetailView from "./ProjectDetailView.astro";
 
@@ -19,7 +21,10 @@ const defaultProjectSlug = projects[0]?.slug ?? "";
        3-level breadcrumb is mobile-only, preserved unchanged below. -->
   <div class="projects-desktop">
     <Breadcrumbs trail={[{ label: "Dashboard", href: "/" }, { label: "Projects" }]} />
-    <h2 id="projects-heading-desktop" class="page-title" tabindex="-1">Projects</h2>
+    <div class="page-header-row">
+      <h2 id="projects-heading-desktop" class="page-title" tabindex="-1">Projects</h2>
+      <ContactTrigger />
+    </div>
 
     <nav class="projects-switcher" aria-label="Projects">
       {projects.map((project) => (
@@ -57,7 +62,10 @@ const defaultProjectSlug = projects[0]?.slug ?? "";
   <div class="projects-mobile">
     <div id="projects-grid-view">
       <Breadcrumbs trail={[{ label: "Dashboard", href: "/" }, { label: "Projects" }]} />
-      <h2 id="projects-heading" class="page-title" tabindex="-1">Projects</h2>
+      <div class="page-header-row">
+        <h2 id="projects-heading" class="page-title" tabindex="-1">Projects</h2>
+        <ContactTrigger />
+      </div>
 
       <ul class="projects-grid">
         {projects.map((project) => (
@@ -104,11 +112,30 @@ const defaultProjectSlug = projects[0]?.slug ?? "";
       ))}
     </div>
   </div>
+
+  <ContactDrawer currentPage="projects" />
 </section>
 
 <style>
   .projects-section {
     min-height: 100svh;
+  }
+
+  /* Contact is a secondary utility action, far-right on the same row as
+     the page title — not crowding the breadcrumb row above it. The row
+     itself carries the spacing .page-title normally holds on its own,
+     since the title is now a flex item sharing the row with the button.
+     Used in both the mobile grid header and the desktop header. */
+  .page-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    margin-bottom: var(--space-6);
+  }
+
+  .page-header-row .page-title {
+    margin-bottom: 0;
   }
 
   /* 900px matches the Experience page's breakpoint — the two pages should

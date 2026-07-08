@@ -1,6 +1,8 @@
 ---
 import type { ExperienceEntry } from "../data/experience";
 import Breadcrumbs from "./Breadcrumbs.astro";
+import ContactDrawer from "./ContactDrawer.astro";
+import ContactTrigger from "./ContactTrigger.astro";
 import ExperienceDetailContent from "./ExperienceDetailContent.astro";
 import SpineNav, { type SpineItem } from "./SpineNav.astro";
 import { dateLabel, monogram, orgName } from "../utils/experienceDisplay";
@@ -23,7 +25,10 @@ const spineItems: SpineItem[] = entries.map((entry) => ({
 ---
 <section class="experience-section page-shell" aria-labelledby="experience-heading">
   <Breadcrumbs trail={[{ label: "Dashboard", href: "/" }, { label: "Experience" }]} />
-  <h2 id="experience-heading" class="page-title" tabindex="-1">Experience</h2>
+  <div class="page-header-row">
+    <h2 id="experience-heading" class="page-title" tabindex="-1">Experience</h2>
+    <ContactTrigger />
+  </div>
 
   <div class="experience-layout">
     <SpineNav items={spineItems} defaultSlug={defaultSlug} dataAttr="data-spine-role" ariaLabel="Career timeline" />
@@ -72,11 +77,29 @@ const spineItems: SpineItem[] = entries.map((entry) => ({
       </details>
     ))}
   </div>
+
+  <ContactDrawer currentPage="experience" />
 </section>
 
 <style>
   .experience-section {
     min-height: 100svh;
+  }
+
+  /* Contact is a secondary utility action, far-right on the same row as
+     the page title — not crowding the breadcrumb row above it. The row
+     itself carries the spacing .page-title normally holds on its own,
+     since the title is now a flex item sharing the row with the button. */
+  .page-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    margin-bottom: var(--space-6);
+  }
+
+  .page-header-row .page-title {
+    margin-bottom: 0;
   }
 
   .experience-layout {

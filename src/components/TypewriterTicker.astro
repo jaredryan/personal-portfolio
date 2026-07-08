@@ -8,8 +8,7 @@ const { label, lines } = Astro.props;
 ---
 <div class="typewriter" data-lines={JSON.stringify(lines)}>
   <span class="typewriter__label">{label}</span>
-  <span class="typewriter__text" aria-live="polite">{lines[0]}</span>
-  <span class="typewriter__cursor" aria-hidden="true">|</span>
+  <span class="typewriter__line"><span class="typewriter__text" aria-live="polite">{lines[0]}</span><span class="typewriter__cursor" aria-hidden="true">|</span></span>
 </div>
 
 <style>
@@ -34,7 +33,14 @@ const { label, lines } = Astro.props;
     white-space: nowrap;
   }
 
-  .typewriter__text {
+  /* min-width: 0 lets this flex item actually shrink below its text's
+     natural width so long lines wrap instead of overflowing the row.
+     Text and cursor are plain inline spans (not separate flex items)
+     inside here, so they flow and wrap together as one unit — the cursor
+     stays immediately after the last typed character even when the line
+     wraps, instead of parking at the far right of the flex row. */
+  .typewriter__line {
+    min-width: 0;
     overflow-wrap: anywhere;
   }
 

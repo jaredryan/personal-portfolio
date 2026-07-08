@@ -1,0 +1,357 @@
+---
+import fs from "node:fs";
+import path from "node:path";
+import { Icon } from "astro-icon/components";
+import { profile } from "../data/profile";
+
+// This component renders the drawer/backdrop only — the trigger button is
+// a separate <ContactTrigger /> component, since ProjectsSection.astro has
+// two of them (mobile grid header, desktop header; only one is ever
+// visible at a given viewport width), all opening this one shared drawer.
+// The script below queries all [data-contact-trigger] buttons on the page.
+
+interface Props {
+  currentPage: "experience" | "projects";
+}
+
+const { currentPage } = Astro.props;
+
+// Same existence check as HeroCard's headshot — only render the image if
+// the real file has actually been dropped in, no broken-image icon.
+const headshotSrc = "/images/headshot.jpg";
+const hasHeadshot = fs.existsSync(path.join(process.cwd(), "public", headshotSrc));
+
+const navItems = [
+  { href: "/", label: "Dashboard", key: "dashboard" },
+  { href: "/experience", label: "Experience", key: "experience" },
+  { href: "/projects", label: "Projects", key: "projects" },
+] as const;
+---
+<div class="contact-drawer-backdrop" data-contact-backdrop hidden></div>
+
+<div
+  class="contact-drawer"
+  id="contact-drawer"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Contact Jared Ryan"
+  data-contact-drawer
+  hidden
+  tabindex="-1"
+>
+  <button type="button" class="contact-drawer__close" data-contact-close aria-label="Close contact drawer">
+    <Icon name="lucide:x" aria-hidden="true" />
+  </button>
+
+  <div class="contact-drawer__profile">
+    {hasHeadshot && (
+      <img class="contact-drawer__headshot" src={headshotSrc} alt="Jared Ryan" width="64" height="64" />
+    )}
+    <div>
+      <p class="contact-drawer__name">{profile.name}</p>
+      <p class="contact-drawer__role">{profile.role}</p>
+    </div>
+  </div>
+
+  <div class="contact-drawer__actions">
+    <a class="contact-drawer__resume" href={profile.links.resume} download>
+      <Icon name="lucide:download" aria-hidden="true" />
+      Resume
+    </a>
+    <a class="contact-drawer__icon-btn" href={profile.links.email} aria-label="Email Jared Ryan">
+      <Icon name="lucide:mail" aria-hidden="true" />
+    </a>
+    <a class="contact-drawer__icon-btn" href={profile.links.github} target="_blank" rel="noreferrer" aria-label="Jared Ryan on GitHub">
+      <Icon name="simple-icons:github" aria-hidden="true" />
+    </a>
+    {profile.links.linkedin && (
+      <a class="contact-drawer__icon-btn" href={profile.links.linkedin} target="_blank" rel="noreferrer" aria-label="Jared Ryan on LinkedIn">
+        <Icon name="simple-icons:linkedin" aria-hidden="true" />
+      </a>
+    )}
+  </div>
+
+  <nav class="contact-drawer__nav" aria-label="Site sections">
+    <p class="eyebrow">Navigation</p>
+    <ul>
+      {navItems.map((item) => (
+        <li>
+          <a href={item.href} aria-current={item.key === currentPage ? "page" : undefined}>{item.label}</a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+</div>
+
+<style>
+  .contact-drawer-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 109;
+    background: color-mix(in srgb, black 45%, transparent);
+    opacity: 0;
+    transition: opacity 240ms ease-out;
+  }
+
+  .contact-drawer-backdrop.is-open {
+    opacity: 1;
+  }
+
+  .contact-drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 110;
+    width: min(390px, 90vw);
+    background: var(--color-surface);
+    border-left: 1px solid var(--color-border);
+    box-shadow: var(--shadow-card);
+    padding: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    overflow-y: auto;
+    transform: translateX(100%);
+    opacity: 0;
+    transition: transform 240ms ease-out, opacity 240ms ease-out;
+  }
+
+  .contact-drawer.is-open {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  .contact-drawer__close {
+    align-self: flex-end;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    background: var(--color-surface-alt);
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    color: var(--color-text);
+    cursor: pointer;
+  }
+
+  .contact-drawer__close :global(svg) {
+    width: 1.125rem;
+    height: 1.125rem;
+  }
+
+  .contact-drawer__close:hover,
+  .contact-drawer__close:focus-visible {
+    border-color: var(--color-accent-teal);
+    color: var(--color-accent-teal);
+  }
+
+  .contact-drawer__profile {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+  }
+
+  .contact-drawer__headshot {
+    width: 64px;
+    height: 64px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid var(--color-border);
+  }
+
+  .contact-drawer__name {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+
+  .contact-drawer__role {
+    margin-top: var(--space-1);
+    color: var(--color-primary);
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+
+  .contact-drawer__actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .contact-drawer__resume {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    background: var(--color-primary);
+    border: 1px solid var(--color-primary);
+    border-radius: var(--radius-sm);
+    padding: var(--space-2) var(--space-4);
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+  }
+
+  .contact-drawer__resume :global(svg) {
+    width: 1.125rem;
+    height: 1.125rem;
+  }
+
+  .contact-drawer__resume:hover {
+    background: var(--color-accent-teal);
+    border-color: var(--color-accent-teal);
+  }
+
+  .contact-drawer__icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: var(--color-surface-alt);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    color: var(--color-text);
+  }
+
+  .contact-drawer__icon-btn :global(svg) {
+    width: 1.125rem;
+    height: 1.125rem;
+  }
+
+  .contact-drawer__icon-btn:hover,
+  .contact-drawer__icon-btn:focus-visible {
+    border-color: var(--color-accent-teal);
+    color: var(--color-accent-teal);
+  }
+
+  .contact-drawer__nav ul {
+    list-style: none;
+    margin: var(--space-2) 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  .contact-drawer__nav a {
+    display: block;
+    padding: var(--space-2) var(--space-5);
+    border-radius: var(--radius-sm);
+    color: var(--color-text);
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .contact-drawer__nav a:hover,
+  .contact-drawer__nav a:focus-visible {
+    background: var(--color-surface-alt);
+    color: var(--color-accent-teal);
+  }
+
+  .contact-drawer__nav a[aria-current="page"] {
+    color: var(--color-accent-coral);
+  }
+</style>
+
+<script>
+  // Each page renders exactly one drawer, but Projects has two trigger
+  // buttons (mobile grid header, desktop header — only one is ever
+  // visible/reachable at a given viewport width, per the existing
+  // .projects-mobile/.projects-desktop CSS toggle). Track whichever one
+  // was actually clicked so focus returns to that specific button, not
+  // just "the first trigger in the DOM" (which could be the hidden one).
+  const triggers = document.querySelectorAll<HTMLButtonElement>("[data-contact-trigger]");
+  const drawer = document.querySelector<HTMLElement>("[data-contact-drawer]");
+  const backdrop = document.querySelector<HTMLElement>("[data-contact-backdrop]");
+  const closeBtn = document.querySelector<HTMLButtonElement>("[data-contact-close]");
+  let lastTrigger: HTMLElement | null = null;
+
+  function getFocusable(): HTMLElement[] {
+    if (!drawer) return [];
+    return Array.from(drawer.querySelectorAll<HTMLElement>("a[href], button:not([disabled])"));
+  }
+
+  function onKeydown(event: KeyboardEvent) {
+    if (event.key === "Escape") {
+      closeDrawer();
+      return;
+    }
+    if (event.key !== "Tab") return;
+    const focusable = getFocusable();
+    if (focusable.length === 0) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    // Trap focus inside the drawer while it's open.
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  }
+
+  let openFrameId: number | null = null;
+
+  function openDrawer(event: Event) {
+    if (!drawer || !backdrop) return;
+    lastTrigger = event.currentTarget as HTMLElement;
+    drawer.hidden = false;
+    backdrop.hidden = false;
+    // Force layout before adding the open class so the transform/opacity
+    // transition has a committed starting state to animate from — same
+    // technique used for the Experience accordion panel elsewhere in the
+    // codebase.
+    void drawer.offsetWidth;
+    openFrameId = requestAnimationFrame(() => {
+      openFrameId = null;
+      drawer.classList.add("is-open");
+      backdrop.classList.add("is-open");
+    });
+    document.addEventListener("keydown", onKeydown);
+    const focusable = getFocusable();
+    (focusable[0] ?? drawer).focus();
+  }
+
+  function closeDrawer() {
+    if (!drawer || !backdrop) return;
+    document.removeEventListener("keydown", onKeydown);
+    (lastTrigger ?? triggers[0])?.focus();
+    // If close happens before the opening frame ever ran (e.g. closed
+    // immediately after opening), .is-open was never added, so removing it
+    // triggers no transition and transitionend would never fire — cancel
+    // the pending frame and hide immediately instead of waiting forever.
+    if (openFrameId !== null) {
+      cancelAnimationFrame(openFrameId);
+      openFrameId = null;
+      drawer.hidden = true;
+      backdrop.hidden = true;
+      return;
+    }
+    if (!drawer.classList.contains("is-open")) {
+      drawer.hidden = true;
+      backdrop.hidden = true;
+      return;
+    }
+    drawer.classList.remove("is-open");
+    backdrop.classList.remove("is-open");
+    const onEnd = (event: TransitionEvent) => {
+      if (event.propertyName !== "transform") return;
+      drawer.removeEventListener("transitionend", onEnd);
+      // Guards against a stale listener firing after a rapid re-open.
+      if (!drawer.classList.contains("is-open")) {
+        drawer.hidden = true;
+        backdrop.hidden = true;
+      }
+    };
+    drawer.addEventListener("transitionend", onEnd);
+  }
+
+  triggers.forEach((trigger) => trigger.addEventListener("click", openDrawer));
+  closeBtn?.addEventListener("click", closeDrawer);
+  backdrop?.addEventListener("click", closeDrawer);
+</script>

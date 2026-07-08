@@ -1,0 +1,41 @@
+---
+import { Icon } from "astro-icon/components";
+---
+<button
+  type="button"
+  class="contact-trigger"
+  data-contact-trigger
+  aria-haspopup="dialog"
+  aria-controls="contact-drawer"
+  aria-label="Open contact options"
+>
+  <Icon name="lucide:mail" aria-hidden="true" />
+  Contact
+</button>
+
+<style>
+  .contact-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    background: var(--color-surface-alt);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: var(--space-2) var(--space-4);
+    font-weight: 600;
+    color: var(--color-text);
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .contact-trigger :global(svg) {
+    width: 1.125rem;
+    height: 1.125rem;
+  }
+
+  .contact-trigger:hover,
+  .contact-trigger:focus-visible {
+    border-color: var(--color-accent-teal);
+    color: var(--color-accent-teal);
+  }
+</style>
