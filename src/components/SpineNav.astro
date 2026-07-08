@@ -1,0 +1,135 @@
+---
+// Shared by ExperienceSection.astro's desktop career spine and
+// ProjectsSection.astro's desktop project spine — same card style,
+// selected-state coral bar, hover/focus treatment, and logo tile concept.
+// line2/line3 are both optional: Experience uses line1 (role), line2 (org,
+// work entries only), line3 (dates); Projects uses only line1 (title) and
+// line2 (short descriptor).
+export interface SpineItem {
+  slug: string;
+  logoSrc?: string;
+  /** Fallback tile content when logoSrc isn't set (e.g. Experience's
+   * monogram). Ignored when logoSrc is present. */
+  monogram?: string;
+  line1: string;
+  line2?: string;
+  line3?: string;
+}
+
+interface Props {
+  items: SpineItem[];
+  defaultSlug: string;
+  /** Attribute name each item button is stamped with (its value is the
+   * item's slug) — callers use this to scope their own click handlers,
+   * e.g. "data-spine-role" for Experience, "data-project-spine" for
+   * Projects. Keeps this component agnostic of any one page's script. */
+  dataAttr: string;
+  ariaLabel: string;
+}
+
+const { items, defaultSlug, dataAttr, ariaLabel } = Astro.props;
+---
+<nav class="spine" aria-label={ariaLabel}>
+  {items.map((item) => (
+    <button
+      type="button"
+      class="spine__item"
+      {...{ [dataAttr]: item.slug }}
+      aria-pressed={item.slug === defaultSlug ? "true" : "false"}
+    >
+      {item.logoSrc ? (
+        <img class="spine__logo" src={item.logoSrc} alt="" width="28" height="28" loading="lazy" />
+      ) : (
+        <span class="spine__logo" aria-hidden="true">{item.monogram}</span>
+      )}
+      <span class="spine__text">
+        <span class="spine__line1">{item.line1}</span>
+        {item.line2 && <span class="spine__line2">{item.line2}</span>}
+        {item.line3 && <span class="spine__line3">{item.line3}</span>}
+      </span>
+    </button>
+  ))}
+</nav>
+
+<style>
+  .spine {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    min-width: 0;
+  }
+
+  .spine__item {
+    position: relative;
+    text-align: left;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: var(--space-2) var(--space-3);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .spine__item:hover,
+  .spine__item:focus-visible {
+    border-color: var(--color-accent-teal);
+    background: var(--color-surface-alt);
+  }
+
+  .spine__item[aria-pressed="true"] {
+    border-color: var(--color-accent-teal);
+    background: var(--color-surface-alt);
+  }
+
+  .spine__item[aria-pressed="true"]::before {
+    content: "";
+    position: absolute;
+    inset-block: var(--space-2);
+    left: 0;
+    width: 3px;
+    border-radius: 999px;
+    background: var(--color-accent-coral);
+  }
+
+  .spine__logo {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: var(--radius-sm);
+    background: var(--color-surface-alt);
+    border: 1px solid var(--color-border);
+    color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: 700;
+    object-fit: cover;
+  }
+
+  .spine__text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  .spine__line1 {
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+
+  /* No truncation — items are written short on purpose, and an occasional
+     wrap is preferable to clipping text with an ellipsis. */
+  .spine__line2 {
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: var(--color-text-muted);
+  }
+
+  .spine__line3 {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+  }
+</style>

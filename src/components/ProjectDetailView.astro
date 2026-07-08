@@ -1,0 +1,133 @@
+---
+import type { Project } from "../data/projects";
+import PillList from "./PillList.astro";
+import ProjectCarousel from "./ProjectCarousel.astro";
+
+interface Props {
+  project: Project;
+  headingId: string;
+  /** h2 for the mobile detail view (nested directly under the page's own
+   * h2 "Projects" — matches existing, unchanged mobile markup). h3 for the
+   * desktop spine+detail layout, matching Experience's per-item h3 under
+   * its own page h2, since desktop is meant to structurally mirror
+   * Experience. */
+  headingTag?: "h2" | "h3";
+}
+
+const { project, headingId, headingTag = "h2" } = Astro.props;
+const Heading = headingTag;
+
+const linkButtonClass: Record<Project["links"][number]["kind"], string> = {
+  demo: "btn btn--primary",
+  github: "btn btn--secondary",
+  private: "btn btn--quiet",
+  request: "btn btn--quiet",
+};
+---
+<div class="project-detail__layout">
+  <Heading id={headingId} tabindex="-1">{project.title}</Heading>
+  <p class="project-detail__oneliner prose">{project.oneLiner}</p>
+
+  <div class="project-detail__links">
+    {project.links.map((link) => (
+      link.href ? (
+        <a class={linkButtonClass[link.kind]} href={link.href} target="_blank" rel="noreferrer">{link.label}</a>
+      ) : (
+        <span class={linkButtonClass[link.kind]} aria-disabled="true">{link.label}</span>
+      )
+    ))}
+  </div>
+
+  <div class="project-detail__media">
+    <ProjectCarousel images={project.screenshots.images} alt={project.title} />
+  </div>
+
+  <ul class="project-detail__bullets">
+    {project.details.map((detail) => <li>{detail}</li>)}
+  </ul>
+
+  <PillList pills={project.detailPills} variant="detail" />
+</div>
+
+<style>
+  .project-detail__layout {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    align-items: center;
+  }
+
+  .project-detail__layout h2,
+  .project-detail__layout h3 {
+    margin-bottom: var(--space-1);
+    text-align: center;
+  }
+
+  .project-detail__oneliner {
+    text-align: center;
+  }
+
+  /* Constrained so the carousel stays prominent without dominating the
+     panel — the expand/lightbox button exists precisely so the inline
+     copy doesn't need to be huge. */
+  .project-detail__media {
+    width: 100%;
+    max-width: 480px;
+  }
+
+  .project-detail__bullets {
+    padding-left: 1.2rem;
+    color: var(--color-text-muted);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .project-detail__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    border-radius: var(--radius-sm);
+    padding: var(--space-2) var(--space-4);
+    font-weight: 600;
+    text-decoration: none;
+    border: 1px solid transparent;
+  }
+
+  .btn--primary {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: white;
+  }
+
+  .btn--primary:hover {
+    background: var(--color-accent-teal);
+    border-color: var(--color-accent-teal);
+  }
+
+  .btn--secondary {
+    background: var(--color-surface);
+    border-color: var(--color-border);
+    color: var(--color-text);
+  }
+
+  .btn--secondary:hover {
+    border-color: var(--color-accent-teal);
+    color: var(--color-accent-teal);
+  }
+
+  .btn--quiet {
+    background: var(--color-surface-alt);
+    border-color: var(--color-border);
+    color: var(--color-text-muted);
+    font-style: italic;
+    font-weight: 400;
+    cursor: default;
+  }
+
+</style>

@@ -2,6 +2,7 @@
 import type { ExperienceEntry } from "../data/experience";
 import Breadcrumbs from "./Breadcrumbs.astro";
 import ExperienceDetailContent from "./ExperienceDetailContent.astro";
+import SpineNav, { type SpineItem } from "./SpineNav.astro";
 import { dateLabel, monogram, orgName } from "../utils/experienceDisplay";
 
 interface Props {
@@ -10,33 +11,22 @@ interface Props {
 
 const { entries } = Astro.props;
 const defaultSlug = "gold-ocean";
+
+const spineItems: SpineItem[] = entries.map((entry) => ({
+  slug: entry.slug,
+  logoSrc: entry.logo,
+  monogram: entry.logo ? undefined : monogram(entry),
+  line1: entry.title,
+  line2: entry.kind === "work" ? orgName(entry) : undefined,
+  line3: dateLabel(entry),
+}));
 ---
 <section class="experience-section page-shell" aria-labelledby="experience-heading">
   <Breadcrumbs trail={[{ label: "Dashboard", href: "/" }, { label: "Experience" }]} />
   <h2 id="experience-heading" class="page-title" tabindex="-1">Experience</h2>
 
   <div class="experience-layout">
-    <nav class="experience-spine" aria-label="Career timeline">
-      {entries.map((entry) => (
-        <button
-          type="button"
-          class="experience-spine__item"
-          data-spine-role={entry.slug}
-          aria-pressed={entry.slug === defaultSlug ? "true" : "false"}
-        >
-          {entry.logo ? (
-            <img class="experience-spine__logo" src={entry.logo} alt="" width="28" height="28" loading="lazy" />
-          ) : (
-            <span class="experience-spine__logo" aria-hidden="true">{monogram(entry)}</span>
-          )}
-          <span class="experience-spine__text">
-            <span class="experience-spine__role">{entry.title}</span>
-            {entry.kind === "work" && <span class="experience-spine__org">{orgName(entry)}</span>}
-            <span class="experience-spine__dates">{dateLabel(entry)}</span>
-          </span>
-        </button>
-      ))}
-    </nav>
+    <SpineNav items={spineItems} defaultSlug={defaultSlug} dataAttr="data-spine-role" ariaLabel="Career timeline" />
 
     <div class="experience-detail">
       {entries.map((entry) => (
@@ -108,47 +98,11 @@ const defaultSlug = "gold-ocean";
     }
   }
 
-  .experience-spine {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-1);
-    min-width: 0;
-  }
-
-  .experience-spine__item {
-    position: relative;
-    text-align: left;
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-sm);
-    padding: var(--space-2) var(--space-3);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: var(--space-3);
-  }
-
-  .experience-spine__item:hover,
-  .experience-spine__item:focus-visible {
-    border-color: var(--color-accent-teal);
-    background: var(--color-surface-alt);
-  }
-
-  .experience-spine__item[aria-pressed="true"] {
-    border-color: var(--color-accent-teal);
-    background: var(--color-surface-alt);
-  }
-
-  .experience-spine__item[aria-pressed="true"]::before {
-    content: "";
-    position: absolute;
-    inset-block: var(--space-2);
-    left: 0;
-    width: 3px;
-    border-radius: 999px;
-    background: var(--color-accent-coral);
-  }
-
+  /* .experience-spine__logo/__text/__role/__org/__dates below are still
+     used by the mobile accordion's <summary> (its own markup, further
+     down) — the desktop nav itself now lives in SpineNav.astro, which has
+     its own equivalent (spine__logo etc.) styles, but the accordion's
+     markup wasn't touched, so its classes and their styles stay here. */
   .experience-spine__logo {
     flex-shrink: 0;
     width: 28px;

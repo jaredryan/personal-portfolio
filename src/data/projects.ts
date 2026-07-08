@@ -7,6 +7,10 @@ export type ProjectLink = {
 export type Project = {
   slug: string;
   title: string;
+  /** ~10 words or fewer, no trailing period — used as the second line of the
+   * desktop Projects spine item, under the title. Not the same as oneLiner,
+   * which is a full sentence used in the detail view. */
+  shortDescriptor: string;
   oneLiner: string;
   previewPills: string[];
   detailPills: string[];
@@ -21,7 +25,8 @@ export type Project = {
 export const projects: Project[] = [
   {
     slug: "lpa-tracker",
-    title: "LPA Tracker / Broadspan AI Demo",
+    title: "LPA Tracker Demo",
+    shortDescriptor: "Document intelligence workflow demo",
     oneLiner:
       "AI document intelligence platform that extracts provisions, supports review workflows, and turns deadlines into trackable tasks.",
     previewPills: ["Next.js", "TypeScript", "PostgreSQL", "Prisma", "Auth.js", "Document Workflows"],
@@ -46,6 +51,7 @@ export const projects: Project[] = [
   {
     slug: "campfire",
     title: "Campfire",
+    shortDescriptor: "Personal growth journaling app",
     oneLiner:
       "Personal growth journaling app that turns daily reflection, habits, streaks, and AI-assisted insight into a lightweight RPG-inspired loop.",
     previewPills: ["Next.js", "TypeScript", "PostgreSQL", "Prisma", "Product Design", "Built with AI"],
@@ -69,7 +75,8 @@ export const projects: Project[] = [
   },
   {
     slug: "unity-roguelike",
-    title: "Unity 2D Roguelike Prototype",
+    title: "Unity 2D Roguelike Game",
+    shortDescriptor: "Unity tutorial with personal enhancements",
     oneLiner:
       "Unity 2D roguelike prototype with procedural tilemaps, enemy encounters, items, menus, multi-input support, difficulty scaling, and save support.",
     previewPills: ["Unity", "C#", "Game Systems", "Input Handling", "UI Menus", "Level Generation"],
@@ -101,6 +108,7 @@ export const projects: Project[] = [
   {
     slug: "nest-invaders",
     title: "Nest Invaders",
+    shortDescriptor: "React arcade shooter",
     oneLiner:
       "Galaga-inspired React arcade game with responsive UI and controls, enemy waves, multiple levels, collision logic, and scoring.",
     previewPills: ["React", "JavaScript", "Game Loops", "Collision Logic", "Responsive Controls", "Animation"],
@@ -129,6 +137,7 @@ export const projects: Project[] = [
   {
     slug: "when-bunnies-attack",
     title: "When Bunnies Attack",
+    shortDescriptor: "Text-based React RPG",
     oneLiner: "Playful, text-based React RPG with exploration, environment interaction, inventory, combat, and bunnies.",
     previewPills: ["React", "JavaScript", "Combat Logic", "Exploration", "Inventory", "Branching Dialogue"],
     detailPills: [

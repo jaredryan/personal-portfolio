@@ -2,97 +2,154 @@
 import type { Project } from "../data/projects";
 import Breadcrumbs from "./Breadcrumbs.astro";
 import PillList from "./PillList.astro";
-import ProjectCarousel from "./ProjectCarousel.astro";
+import ProjectDetailView from "./ProjectDetailView.astro";
+import SpineNav, { type SpineItem } from "./SpineNav.astro";
 
 interface Props {
   projects: Project[];
 }
 
 const { projects } = Astro.props;
+const defaultProjectSlug = projects[0]?.slug ?? "";
 
-const linkButtonClass: Record<Project["links"][number]["kind"], string> = {
-  demo: "btn btn--primary",
-  github: "btn btn--secondary",
-  private: "btn btn--quiet",
-  request: "btn btn--quiet",
-};
+const spineItems: SpineItem[] = projects.map((project) => ({
+  slug: project.slug,
+  logoSrc: "/images/project-placeholder.png",
+  line1: project.title,
+  line2: project.shortDescriptor,
+}));
 ---
-<section class="projects-section page-shell" aria-labelledby="projects-heading">
-  <div id="projects-grid-view">
+<section class="projects-section page-shell" aria-label="Projects">
+  <!-- Desktop/tablet-wide: spine + selected detail, mirroring the
+       Experience page's interaction pattern. The breadcrumb here is
+       static (Dashboard > Projects) and never appends the selected
+       project — that contextual 3-level breadcrumb is mobile-only,
+       preserved unchanged below. -->
+  <div class="projects-desktop">
     <Breadcrumbs trail={[{ label: "Dashboard", href: "/" }, { label: "Projects" }]} />
-    <h2 id="projects-heading" class="page-title" tabindex="-1">Projects</h2>
+    <h2 id="projects-heading-desktop" class="page-title" tabindex="-1">Projects</h2>
 
-    <ul class="projects-grid">
-      {projects.map((project) => (
-        <li>
-          <button type="button" class="project-card" data-project-link={project.slug}>
-            <img
-              src={project.screenshots.cover}
-              alt={`${project.title} screenshot`}
-              width="480"
-              height="300"
-              loading="lazy"
+    <div class="projects-layout">
+      <SpineNav items={spineItems} defaultSlug={defaultProjectSlug} dataAttr="data-project-spine" ariaLabel="Project list" />
+
+      <div class="projects-detail-desktop">
+        {projects.map((project) => (
+          <div
+            class="projects-detail-desktop__panel"
+            id={`project-detail-desktop-${project.slug}`}
+            data-project-detail-desktop={project.slug}
+            hidden={project.slug !== defaultProjectSlug}
+          >
+            <ProjectDetailView
+              project={project}
+              headingId={`project-detail-desktop-heading-${project.slug}`}
+              headingTag="h3"
             />
-            <span class="project-card__title">{project.title}</span>
-            <span class="project-card__oneliner">{project.oneLiner}</span>
-            <PillList pills={project.previewPills} />
-          </button>
-        </li>
-      ))}
-    </ul>
+          </div>
+        ))}
+      </div>
+    </div>
   </div>
 
-  <div id="projects-detail-view" hidden>
-    {projects.map((project) => (
-      <div
-        class="project-detail"
-        id={`project-detail-${project.slug}`}
-        data-project-detail={project.slug}
-        aria-labelledby={`project-detail-heading-${project.slug}`}
-        hidden
-      >
-        <Breadcrumbs
-          trail={[
-            { label: "Dashboard", href: "/" },
-            { label: "Projects", href: "/projects", clearProject: true },
-            { label: project.title },
-          ]}
-        />
+  <!-- Mobile: existing card grid <-> detail flow. Unchanged. -->
+  <div class="projects-mobile">
+    <div id="projects-grid-view">
+      <Breadcrumbs trail={[{ label: "Dashboard", href: "/" }, { label: "Projects" }]} />
+      <h2 id="projects-heading" class="page-title" tabindex="-1">Projects</h2>
 
-        <div class="project-detail__layout">
-          <div class="project-detail__media">
-            <ProjectCarousel images={project.screenshots.images} alt={project.title} />
-          </div>
+      <ul class="projects-grid">
+        {projects.map((project) => (
+          <li>
+            <button type="button" class="project-card" data-project-link={project.slug}>
+              <img
+                src={project.screenshots.cover}
+                alt={`${project.title} screenshot`}
+                width="480"
+                height="300"
+                loading="lazy"
+              />
+              <span class="project-card__title">{project.title}</span>
+              <span class="project-card__oneliner">{project.oneLiner}</span>
+              <PillList pills={project.previewPills} />
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
 
-          <div class="project-detail__content">
-            <h2 id={`project-detail-heading-${project.slug}`} tabindex="-1">{project.title}</h2>
-            <p class="project-detail__oneliner prose">{project.oneLiner}</p>
-
-            <ul class="project-detail__bullets">
-              {project.details.map((detail) => <li>{detail}</li>)}
-            </ul>
-
-            <PillList pills={project.detailPills} variant="detail" />
-
-            <div class="project-detail__links">
-              {project.links.map((link) => (
-                link.href ? (
-                  <a class={linkButtonClass[link.kind]} href={link.href} target="_blank" rel="noreferrer">{link.label}</a>
-                ) : (
-                  <span class={linkButtonClass[link.kind]} aria-disabled="true">{link.label}</span>
-                )
-              ))}
-            </div>
-          </div>
+    <div id="projects-detail-view" hidden>
+      {projects.map((project) => (
+        <div
+          class="project-detail"
+          id={`project-detail-${project.slug}`}
+          data-project-detail={project.slug}
+          aria-labelledby={`project-detail-heading-${project.slug}`}
+          hidden
+        >
+          <Breadcrumbs
+            trail={[
+              { label: "Dashboard", href: "/" },
+              { label: "Projects", href: "/projects", clearProject: true },
+              { label: project.title },
+            ]}
+          />
+          <ProjectDetailView
+            project={project}
+            headingId={`project-detail-heading-${project.slug}`}
+            headingTag="h2"
+          />
         </div>
-      </div>
-    ))}
+      ))}
+    </div>
   </div>
 </section>
 
 <style>
   .projects-section {
     min-height: 100svh;
+  }
+
+  /* 900px matches the Experience page's breakpoint — the two pages should
+     switch to their desktop layout at the same viewport width, since
+     they're meant to feel like siblings. */
+  .projects-mobile {
+    display: block;
+  }
+
+  .projects-desktop {
+    display: none;
+  }
+
+  @media (min-width: 900px) {
+    .projects-mobile {
+      display: none;
+    }
+
+    .projects-desktop {
+      display: block;
+    }
+  }
+
+  /* The spine itself (.spine, .spine__item, etc.) is SpineNav.astro's own
+     scoped component — shared verbatim with Experience's desktop spine, no
+     duplicated styles here. */
+  .projects-layout {
+    display: grid;
+    grid-template-columns: minmax(180px, 250px) minmax(0, 1fr);
+    gap: var(--space-6);
+    align-items: start;
+  }
+
+  .projects-detail-desktop {
+    min-width: 0;
+  }
+
+  .projects-detail-desktop__panel {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    padding: var(--space-6);
   }
 
   .projects-grid {
@@ -139,108 +196,24 @@ const linkButtonClass: Record<Project["links"][number]["kind"], string> = {
     color: var(--color-text-muted);
     font-size: 0.9rem;
   }
-
-  .project-detail__layout {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-6);
-  }
-
-  .project-detail__content {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-3);
-  }
-
-  .project-detail__content h2 {
-    margin-bottom: var(--space-1);
-  }
-
-  .project-detail__bullets {
-    padding-left: 1.2rem;
-    color: var(--color-text-muted);
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2);
-  }
-
-  .project-detail__links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-3);
-    margin-top: var(--space-2);
-  }
-
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    border-radius: var(--radius-sm);
-    padding: var(--space-2) var(--space-4);
-    font-weight: 600;
-    text-decoration: none;
-    border: 1px solid transparent;
-  }
-
-  .btn--primary {
-    background: var(--color-primary);
-    border-color: var(--color-primary);
-    color: white;
-  }
-
-  .btn--primary:hover {
-    background: var(--color-accent-teal);
-    border-color: var(--color-accent-teal);
-  }
-
-  .btn--secondary {
-    background: var(--color-surface);
-    border-color: var(--color-border);
-    color: var(--color-text);
-  }
-
-  .btn--secondary:hover {
-    border-color: var(--color-accent-teal);
-    color: var(--color-accent-teal);
-  }
-
-  .btn--quiet {
-    background: var(--color-surface-alt);
-    border-color: var(--color-border);
-    color: var(--color-text-muted);
-    font-style: italic;
-    font-weight: 400;
-    cursor: default;
-  }
-
-  /* Breakpoint derived from the two columns' own minimums, not picked by
-     eye: media can shrink to 350px and content to 400px before either gets
-     cramped, so the page-shell needs >= 350+400+24(gap) = 774px of content
-     width, which happens at a viewport of ~840px (page-shell subtracts 64px
-     of side padding at this width). Below that, single column; the media
-     column's width constraint only applies inside this query, so it's free
-     to go full-width again in the single-column layout. */
-  @media (min-width: 840px) {
-    .project-detail__layout {
-      flex-direction: row;
-      align-items: flex-start;
-    }
-
-    .project-detail__media {
-      width: min(55%, 460px);
-      min-width: 350px;
-      flex-shrink: 1;
-    }
-
-    .project-detail__content {
-      flex: 1;
-      min-width: 400px;
-    }
-  }
 </style>
 
 <script>
-  import { getQueryParam } from "../utils/urlState";
+  import { getQueryParam, setSectionState } from "../utils/urlState";
   import { playEnterAnimation } from "../utils/motion";
+
+  // Deliberately not utils/focus.ts's moveFocusTo — that calls
+  // scrollIntoView, which is fine for Experience's shorter panels but on
+  // the desktop Projects detail (carousel stacked above a long content
+  // block) it produced a jarring jump down to wherever the heading landed.
+  // The spine stays in view when a different item is picked, so there's no
+  // need to scroll at all — just move focus, don't move the page.
+  function focusPanelNoScroll(selector: string) {
+    const target = document.querySelector<HTMLElement>(selector);
+    if (!target) return;
+    if (!target.hasAttribute("tabindex")) target.setAttribute("tabindex", "-1");
+    target.focus({ preventScroll: true });
+  }
 
   const gridView = document.getElementById("projects-grid-view");
   const detailView = document.getElementById("projects-detail-view");
@@ -300,6 +273,32 @@ const linkButtonClass: Record<Project["links"][number]["kind"], string> = {
     }
   }
 
+  // Desktop spine + selected detail — same interaction model as
+  // ExperienceSection.astro's selectRole(): every spine item and detail
+  // panel gets synced together on every call, regardless of which one
+  // triggered it, so the two never drift out of sync.
+  const spineItems = document.querySelectorAll<HTMLButtonElement>("[data-project-spine]");
+  const desktopDetailPanels = document.querySelectorAll<HTMLElement>("[data-project-detail-desktop]");
+  const defaultProjectSlug = spineItems[0]?.dataset.projectSpine ?? "";
+
+  function selectProjectDesktop(slug: string, focusPanel = false) {
+    const validSlugs = Array.from(desktopDetailPanels).map((p) => p.dataset.projectDetailDesktop);
+    const target = validSlugs.includes(slug) ? slug : defaultProjectSlug;
+
+    spineItems.forEach((item) => {
+      item.setAttribute("aria-pressed", String(item.dataset.projectSpine === target));
+    });
+    desktopDetailPanels.forEach((panel) => {
+      const isTarget = panel.dataset.projectDetailDesktop === target;
+      panel.hidden = !isTarget;
+      // Only animate on a genuine user-initiated spine click (focusPanel),
+      // not on initial page load/URL sync.
+      if (isTarget && focusPanel) playEnterAnimation(panel);
+    });
+
+    if (focusPanel) focusPanelNoScroll(`#project-detail-desktop-heading-${target}`);
+  }
+
   function syncFromUrl() {
     const slug = getQueryParam("project");
     const validSlugs = Array.from(detailPanels).map((p) => p.dataset.projectDetail);
@@ -308,6 +307,7 @@ const linkButtonClass: Record<Project["links"][number]["kind"], string> = {
     } else {
       showGrid();
     }
+    selectProjectDesktop(slug ?? defaultProjectSlug);
   }
 
   gridCards.forEach((card) => {
@@ -324,6 +324,15 @@ const linkButtonClass: Record<Project["links"][number]["kind"], string> = {
       event.preventDefault();
       showGrid(true);
       window.history.pushState(null, "", window.location.pathname);
+    });
+  });
+
+  spineItems.forEach((item) => {
+    item.addEventListener("click", () => {
+      const slug = item.dataset.projectSpine;
+      if (!slug) return;
+      selectProjectDesktop(slug, true);
+      setSectionState({ key: "project", value: slug });
     });
   });
 
