@@ -17,9 +17,19 @@
   color-scheme: dark;
 }
 
+/* Ambient "systems" texture — a near-invisible dot grid on the page
+   background only. Every card/panel has its own opaque background color,
+   so this is naturally only ever visible in empty page background space,
+   never behind card content. color-mix against --color-text means it
+   stays a faint version of the current theme's own ink color, so light
+   and dark mode both get a consistent, correctly-low-contrast dot without
+   a separate override. Deliberately just dots, not lines/brackets/ticks —
+   texture, not decoration. */
 body {
   margin: 0;
-  background: var(--color-bg);
+  background-color: var(--color-bg);
+  background-image: radial-gradient(circle, color-mix(in srgb, var(--color-text) 6%, transparent) 1px, transparent 1px);
+  background-size: 24px 24px;
   color: var(--color-text);
   font-family: var(--font-body);
   line-height: 1.5;

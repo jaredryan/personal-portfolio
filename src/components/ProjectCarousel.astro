@@ -5,9 +5,16 @@ interface Props {
   images: string[];
   alt: string;
   autoRotateMs?: number;
+  /** Lucide icon name shown inline in the caption row ("[icon] Preview N
+   * of M") — reuses the same icon already shown for this project in the
+   * switcher tab, so the identity carries from tab to screenshot without
+   * overlaying the image itself. Purely a visual tie-back (the project
+   * name is already announced by the tab/heading), so it's aria-hidden
+   * rather than adding a redundant label. */
+  icon?: string;
 }
 
-const { images, alt, autoRotateMs = 6000 } = Astro.props;
+const { images, alt, autoRotateMs = 6000, icon } = Astro.props;
 ---
 <div class="carousel" data-carousel data-autorotate-ms={autoRotateMs}>
   <div class="carousel__viewport">
@@ -58,6 +65,11 @@ const { images, alt, autoRotateMs = 6000 } = Astro.props;
       <Icon name="lucide:chevron-right" aria-hidden="true" />
     </button>
   </div>
+
+  <p class="carousel__caption" data-carousel-caption aria-live="polite">
+    {icon && <Icon name={icon} class="carousel__caption-icon" aria-hidden="true" />}
+    <span data-carousel-caption-text>Preview 1 of {images.length}</span>
+  </p>
 </div>
 
 <style>
@@ -127,6 +139,24 @@ const { images, alt, autoRotateMs = 6000 } = Astro.props;
   .carousel__expand:hover {
     border-color: var(--color-accent-teal);
     color: var(--color-accent-teal);
+  }
+
+  .carousel__caption {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-1);
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+  }
+
+  /* Quiet identity marker inline with the counter, not overlaying the
+     screenshot — currentColor keeps it the same muted tone as the text. */
+  .carousel__caption-icon {
+    width: 0.85rem;
+    height: 0.85rem;
+    flex-shrink: 0;
+    color: currentColor;
   }
 
   .carousel__lightbox {
@@ -262,6 +292,7 @@ const { images, alt, autoRotateMs = 6000 } = Astro.props;
     // simultaneously, only one of which is ever actually visible at a
     // given viewport width.
     const panel = carousel.closest<HTMLElement>("[data-project-detail], [data-project-detail-showcase]");
+    const captionText = carousel.querySelector<HTMLElement>("[data-carousel-caption-text]");
     const expandBtn = carousel.querySelector<HTMLButtonElement>("[data-carousel-expand]");
     const lightbox = carousel.querySelector<HTMLElement>("[data-carousel-lightbox]");
     const lightboxImg = lightbox?.querySelector<HTMLImageElement>("[data-lightbox-img]");
@@ -290,6 +321,7 @@ const { images, alt, autoRotateMs = 6000 } = Astro.props;
       dots.forEach((dot, i) => {
         dot.setAttribute("aria-selected", String(i === current));
       });
+      if (captionText) captionText.textContent = `Preview ${current + 1} of ${slides.length}`;
 
       if (!direction) {
         outgoing.hidden = true;

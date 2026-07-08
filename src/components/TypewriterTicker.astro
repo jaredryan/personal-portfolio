@@ -13,13 +13,19 @@ const { label, lines } = Astro.props;
 </div>
 
 <style>
+  /* A quiet "status/log" treatment, not a fake terminal — just monospace
+     type and a hint of tinted surface, confined to this one element. */
   .typewriter {
     display: flex;
     align-items: baseline;
     gap: var(--space-2);
-    font-size: 0.95rem;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
     color: var(--color-text-muted);
     min-height: 1.5em;
+    padding: var(--space-2) var(--space-3);
+    background: var(--color-surface-alt);
+    border-radius: var(--radius-sm);
   }
 
   .typewriter__label {
