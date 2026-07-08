@@ -12,10 +12,13 @@ describe("projects", () => {
     ]);
     for (const project of projects) {
       expect(project.title.length).toBeGreaterThan(0);
+      expect(project.icon.length).toBeGreaterThan(0);
+      expect(project.switcherLabel.length).toBeGreaterThan(0);
       expect(project.oneLiner.length).toBeGreaterThan(0);
+      expect(project.built.length).toBeGreaterThan(0);
+      expect(project.interestingBecause.length).toBeGreaterThan(0);
       expect(project.previewPills.length).toBeGreaterThan(0);
       expect(project.detailPills.length).toBeGreaterThan(0);
-      expect(project.details.length).toBeGreaterThan(0);
       expect(project.screenshots.cover).toBe(`/projects/${project.slug}/cover.svg`);
       expect(project.screenshots.images).toHaveLength(3);
     }

@@ -257,10 +257,11 @@ const { images, alt, autoRotateMs = 6000 } = Astro.props;
     const nextBtn = carousel.querySelector<HTMLButtonElement>(".carousel__next");
     const autoRotateMs = Number(carousel.dataset.autorotateMs ?? 0);
     // Matches both the mobile detail panel (data-project-detail) and the
-    // desktop spine+detail panel (data-project-detail-desktop) — the same
-    // project can have a carousel instance rendered in each simultaneously,
-    // only one of which is ever actually visible at a given viewport width.
-    const panel = carousel.closest<HTMLElement>("[data-project-detail], [data-project-detail-desktop]");
+    // desktop/tablet showcase panel (data-project-detail-showcase) — the
+    // same project can have a carousel instance rendered in each
+    // simultaneously, only one of which is ever actually visible at a
+    // given viewport width.
+    const panel = carousel.closest<HTMLElement>("[data-project-detail], [data-project-detail-showcase]");
     const expandBtn = carousel.querySelector<HTMLButtonElement>("[data-carousel-expand]");
     const lightbox = carousel.querySelector<HTMLElement>("[data-carousel-lightbox]");
     const lightboxImg = lightbox?.querySelector<HTMLImageElement>("[data-lightbox-img]");

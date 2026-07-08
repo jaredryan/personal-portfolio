@@ -8,9 +8,8 @@ interface Props {
   headingId: string;
   /** h2 for the mobile detail view (nested directly under the page's own
    * h2 "Projects" — matches existing, unchanged mobile markup). h3 for the
-   * desktop spine+detail layout, matching Experience's per-item h3 under
-   * its own page h2, since desktop is meant to structurally mirror
-   * Experience. */
+   * desktop/tablet showcase, matching Experience's per-item h3 under its
+   * own page h2. */
   headingTag?: "h2" | "h3";
 }
 
@@ -25,46 +24,93 @@ const linkButtonClass: Record<Project["links"][number]["kind"], string> = {
 };
 ---
 <div class="project-detail__layout">
-  <Heading id={headingId} tabindex="-1">{project.title}</Heading>
-  <p class="project-detail__oneliner prose">{project.oneLiner}</p>
+  <div class="project-detail__header">
+    <div class="project-detail__intro">
+      <Heading id={headingId} tabindex="-1">{project.title}</Heading>
+      <p class="project-detail__oneliner prose">{project.oneLiner}</p>
+    </div>
 
-  <div class="project-detail__links">
-    {project.links.map((link) => (
-      link.href ? (
-        <a class={linkButtonClass[link.kind]} href={link.href} target="_blank" rel="noreferrer">{link.label}</a>
-      ) : (
-        <span class={linkButtonClass[link.kind]} aria-disabled="true">{link.label}</span>
-      )
-    ))}
+    <div class="project-detail__links">
+      {project.links.map((link) => (
+        link.href ? (
+          <a class={linkButtonClass[link.kind]} href={link.href} target="_blank" rel="noreferrer">{link.label}</a>
+        ) : (
+          <span class={linkButtonClass[link.kind]} aria-disabled="true">{link.label}</span>
+        )
+      ))}
+    </div>
   </div>
 
-  <div class="project-detail__media">
-    <ProjectCarousel images={project.screenshots.images} alt={project.title} />
+  <div class="project-detail__main">
+    <div class="project-detail__media">
+      <ProjectCarousel images={project.screenshots.images} alt={project.title} />
+    </div>
+
+    <div class="project-detail__copy">
+      <div class="project-detail__editorial">
+        <p class="eyebrow">Built</p>
+        <p>{project.built}</p>
+      </div>
+      <div class="project-detail__editorial">
+        <p class="eyebrow">Interesting because</p>
+        <p>{project.interestingBecause}</p>
+      </div>
+      <div class="project-detail__editorial">
+        <p class="eyebrow">Stack</p>
+        <PillList pills={project.detailPills} variant="detail" />
+      </div>
+    </div>
   </div>
-
-  <ul class="project-detail__bullets">
-    {project.details.map((detail) => <li>{detail}</li>)}
-  </ul>
-
-  <PillList pills={project.detailPills} variant="detail" />
 </div>
 
 <style>
   .project-detail__layout {
     display: flex;
     flex-direction: column;
-    gap: var(--space-3);
-    align-items: center;
+    gap: var(--space-6);
   }
 
-  .project-detail__layout h2,
-  .project-detail__layout h3 {
-    margin-bottom: var(--space-1);
+  /* Centered by default (mobile/stacked) — on a narrow single-column
+     screen, a left-hugging title/one-liner with a wall of empty space
+     beside it reads as unfinished. Switches to left-aligned + a
+     title/actions row once the two-column showcase kicks in below, where
+     the composition uses the full page width. */
+  .project-detail__header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-4);
+  }
+
+  .project-detail__intro {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    align-items: center;
     text-align: center;
+  }
+
+  .project-detail__intro h2,
+  .project-detail__intro h3 {
+    margin: 0;
   }
 
   .project-detail__oneliner {
-    text-align: center;
+    color: var(--color-text-muted);
+  }
+
+  .project-detail__links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-3);
+  }
+
+  .project-detail__main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-4);
   }
 
   /* Constrained so the carousel stays prominent without dominating the
@@ -75,18 +121,69 @@ const linkButtonClass: Record<Project["links"][number]["kind"], string> = {
     max-width: 480px;
   }
 
-  .project-detail__bullets {
-    padding-left: 1.2rem;
-    color: var(--color-text-muted);
+  .project-detail__copy {
     display: flex;
     flex-direction: column;
-    gap: var(--space-2);
+    gap: var(--space-4);
+    min-width: 0;
+    width: 100%;
   }
 
-  .project-detail__links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-3);
+  .project-detail__editorial p:last-child {
+    margin-top: var(--space-1);
+    color: var(--color-text-muted);
+  }
+
+  .project-detail__editorial :global(.pill-list) {
+    margin-top: var(--space-1);
+  }
+
+  /* Stack's label needs its own margin-bottom (rather than relying on the
+     pill-list's margin-top, as Built/Interesting because do with their
+     paragraph's margin-top) — a row of pills doesn't read with the same
+     visual gap as a text paragraph at the same margin value, so the two
+     ended up looking uneven. 6px was the closest visual match. */
+  .project-detail__editorial:last-child .eyebrow {
+    margin-bottom: 6px;
+  }
+
+  /* Two-column once there's enough room for a 350px media column and a
+     400px copy column side by side (350+400+24 gap ≈ 774px) — below that,
+     stack. Also switches the header from a centered stack (title, one-
+     liner, actions) to a row with actions aligned top-right. */
+  @media (min-width: 800px) {
+    .project-detail__header {
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: var(--space-6);
+    }
+
+    .project-detail__intro {
+      align-items: flex-start;
+      text-align: left;
+    }
+
+    .project-detail__links {
+      flex-shrink: 0;
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+    }
+
+    .project-detail__main {
+      flex-direction: row;
+      align-items: flex-start;
+    }
+
+    .project-detail__media {
+      width: min(50%, 480px);
+      flex-shrink: 0;
+    }
+
+    .project-detail__copy {
+      flex: 1;
+      min-width: 280px;
+    }
   }
 
   .btn {
@@ -129,5 +226,4 @@ const linkButtonClass: Record<Project["links"][number]["kind"], string> = {
     font-weight: 400;
     cursor: default;
   }
-
 </style>

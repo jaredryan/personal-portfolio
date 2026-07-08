@@ -203,7 +203,12 @@ const defaultProject = projects.find((p) => p.slug === "lpa-tracker") ?? project
     background: var(--color-surface-alt);
   }
 
-  @media (min-width: 950px) {
+  /* min-aspect-ratio matches BentoDashboard's own desktop-tier condition —
+     the media/info row-split assumes the full desktop-width column. In the
+     tablet-portrait tier this card sits side by side with Experience
+     instead, at roughly half width, where the screenshot naturally reads
+     better stacked above the text (same as the mobile default below). */
+  @media (min-width: 950px) and (min-aspect-ratio: 4/5) {
     .projects-preview__body {
       flex-direction: row;
       align-items: flex-start;

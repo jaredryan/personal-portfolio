@@ -14,13 +14,29 @@ import { projects } from "../data/projects";
 <style>
   /*
    * Source order above is Hero, ExperiencePreview, ProjectsPreview — this is
-   * also the required mobile/no-CSS/screen-reader order. Below 950px there
-   * is no grid-column/grid-row override, so the single-column layout simply
-   * follows this DOM order. The desktop 2-column bento look (Hero top-left,
-   * Projects bottom-left, Experience spanning the right column) is achieved
-   * purely through explicit grid placement at ≥950px — never by reordering
-   * the DOM to fake a visual layout, which would desync what mobile/screen
-   * readers see from what sighted desktop users see.
+   * also the required mobile/no-CSS/screen-reader order. Three visual
+   * layouts, all achieved purely through grid-template-areas (never by
+   * reordering the DOM to fake a visual layout, which would desync what
+   * mobile/screen readers see from what sighted users see):
+   *
+   *  - Phone/mobile (default, no media query matches): single column,
+   *    simply follows DOM order — Hero, Experience, Projects.
+   *  - Tablet/medium (700–949px wide, any shape — this range is below the
+   *    desktop tier's own width floor, so it can never collide with it —
+   *    plus 950px+ but tall/portrait-shaped, e.g. iPad portrait): Hero
+   *    full-width on top, Experience and Projects side by side below.
+   *    This is also what a laptop browser narrowed to "look at two things
+   *    at once" lands in — nothing here is iPad-specific, it's purely
+   *    viewport width/shape, so any window in this range gets it.
+   *  - Laptop/desktop (950px+ AND landscape-ish): Hero top-left, Projects
+   *    bottom-left, Experience spanning the full-height right column.
+   *
+   * The two conditions in the tablet/medium query below are OR'd via the
+   * comma: either the width alone puts it below the desktop tier's floor,
+   * or (once wide enough to reach that floor) the shape is still
+   * portrait-ish rather than landscape. That second clause is what keeps
+   * a tall, narrow desktop-width viewport (e.g. iPad Pro 12.9" portrait)
+   * out of the desktop tier instead of getting squeezed into it.
    */
   .bento {
     display: grid;
@@ -37,7 +53,28 @@ import { projects } from "../data/projects";
     min-width: 0;
   }
 
-  @media (min-width: 950px) {
+  @media (min-width: 700px) and (max-width: 949px), (min-width: 950px) and (max-aspect-ratio: 4/5) {
+    .bento {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      grid-template-areas:
+        "hero hero"
+        "experience projects";
+    }
+
+    .bento :global(.hero-card) {
+      grid-area: hero;
+    }
+
+    .bento :global(.experience-preview) {
+      grid-area: experience;
+    }
+
+    .bento :global(.projects-preview) {
+      grid-area: projects;
+    }
+  }
+
+  @media (min-width: 950px) and (min-aspect-ratio: 4/5) {
     .bento {
       /* No min-height here on purpose — forcing the grid taller than its
          content (to "fill the viewport") decouples the row tracks from
@@ -46,23 +83,23 @@ import { projects } from "../data/projects";
          of matching it. Sizing purely from content keeps them in sync. */
       grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
       grid-template-rows: auto 1fr;
+      grid-template-areas:
+        "hero experience"
+        "projects experience";
       align-items: start;
     }
 
     .bento :global(.hero-card) {
-      grid-column: 1;
-      grid-row: 1;
+      grid-area: hero;
     }
 
     .bento :global(.experience-preview) {
-      grid-column: 2;
-      grid-row: 1 / span 2;
+      grid-area: experience;
       height: 100%;
     }
 
     .bento :global(.projects-preview) {
-      grid-column: 1;
-      grid-row: 2;
+      grid-area: projects;
     }
   }
 </style>

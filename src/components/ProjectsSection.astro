@@ -1,9 +1,9 @@
 ---
+import { Icon } from "astro-icon/components";
 import type { Project } from "../data/projects";
 import Breadcrumbs from "./Breadcrumbs.astro";
 import PillList from "./PillList.astro";
 import ProjectDetailView from "./ProjectDetailView.astro";
-import SpineNav, { type SpineItem } from "./SpineNav.astro";
 
 interface Props {
   projects: Project[];
@@ -11,43 +11,45 @@ interface Props {
 
 const { projects } = Astro.props;
 const defaultProjectSlug = projects[0]?.slug ?? "";
-
-const spineItems: SpineItem[] = projects.map((project) => ({
-  slug: project.slug,
-  logoSrc: "/images/project-placeholder.png",
-  line1: project.title,
-  line2: project.shortDescriptor,
-}));
 ---
 <section class="projects-section page-shell" aria-label="Projects">
-  <!-- Desktop/tablet-wide: spine + selected detail, mirroring the
-       Experience page's interaction pattern. The breadcrumb here is
-       static (Dashboard > Projects) and never appends the selected
-       project — that contextual 3-level breadcrumb is mobile-only,
-       preserved unchanged below. -->
+  <!-- Desktop/tablet-wide: compact icon-pill switcher + full-width selected
+       showcase below it. The breadcrumb here is static (Dashboard >
+       Projects) and never appends the selected project — that contextual
+       3-level breadcrumb is mobile-only, preserved unchanged below. -->
   <div class="projects-desktop">
     <Breadcrumbs trail={[{ label: "Dashboard", href: "/" }, { label: "Projects" }]} />
     <h2 id="projects-heading-desktop" class="page-title" tabindex="-1">Projects</h2>
 
-    <div class="projects-layout">
-      <SpineNav items={spineItems} defaultSlug={defaultProjectSlug} dataAttr="data-project-spine" ariaLabel="Project list" />
+    <nav class="projects-switcher" aria-label="Projects">
+      {projects.map((project) => (
+        <button
+          type="button"
+          class="projects-switcher__item"
+          data-project-tab={project.slug}
+          aria-pressed={project.slug === defaultProjectSlug ? "true" : "false"}
+        >
+          <Icon name={project.icon} aria-hidden="true" />
+          <span>{project.switcherLabel}</span>
+        </button>
+      ))}
+    </nav>
 
-      <div class="projects-detail-desktop">
-        {projects.map((project) => (
-          <div
-            class="projects-detail-desktop__panel"
-            id={`project-detail-desktop-${project.slug}`}
-            data-project-detail-desktop={project.slug}
-            hidden={project.slug !== defaultProjectSlug}
-          >
-            <ProjectDetailView
-              project={project}
-              headingId={`project-detail-desktop-heading-${project.slug}`}
-              headingTag="h3"
-            />
-          </div>
-        ))}
-      </div>
+    <div class="projects-showcase">
+      {projects.map((project) => (
+        <div
+          class="projects-showcase__panel"
+          id={`project-detail-showcase-${project.slug}`}
+          data-project-detail-showcase={project.slug}
+          hidden={project.slug !== defaultProjectSlug}
+        >
+          <ProjectDetailView
+            project={project}
+            headingId={`project-detail-showcase-heading-${project.slug}`}
+            headingTag="h3"
+          />
+        </div>
+      ))}
     </div>
   </div>
 
@@ -110,8 +112,7 @@ const spineItems: SpineItem[] = projects.map((project) => ({
   }
 
   /* 900px matches the Experience page's breakpoint — the two pages should
-     switch to their desktop layout at the same viewport width, since
-     they're meant to feel like siblings. */
+     switch to their desktop/tablet layout at the same viewport width. */
   .projects-mobile {
     display: block;
   }
@@ -130,26 +131,55 @@ const spineItems: SpineItem[] = projects.map((project) => ({
     }
   }
 
-  /* The spine itself (.spine, .spine__item, etc.) is SpineNav.astro's own
-     scoped component — shared verbatim with Experience's desktop spine, no
-     duplicated styles here. */
-  .projects-layout {
-    display: grid;
-    grid-template-columns: minmax(180px, 250px) minmax(0, 1fr);
-    gap: var(--space-6);
-    align-items: start;
+  .projects-switcher {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-bottom: var(--space-6);
   }
 
-  .projects-detail-desktop {
-    min-width: 0;
-  }
-
-  .projects-detail-desktop__panel {
+  /* Compact pill/tab, not a mini card — icon + short label on one line,
+     wraps to a second row at tablet widths rather than scrolling. */
+  .projects-switcher__item {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
     background: var(--color-surface);
     border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-card);
-    padding: var(--space-6);
+    border-radius: 999px;
+    padding: var(--space-2) var(--space-4);
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+  }
+
+  .projects-switcher__item :global(svg) {
+    width: 1rem;
+    height: 1rem;
+    flex-shrink: 0;
+  }
+
+  /* :not([aria-pressed="true"]) keeps the selected (coral) state visually
+     dominant even while that same tab is hovered/focused — matches the
+     same guard used on the dashboard Projects preview thumbnails. */
+  .projects-switcher__item:not([aria-pressed="true"]):hover,
+  .projects-switcher__item:not([aria-pressed="true"]):focus-visible {
+    border-color: var(--color-accent-teal);
+    background: var(--color-surface-alt);
+  }
+
+  .projects-switcher__item[aria-pressed="true"] {
+    border-color: var(--color-accent-coral);
+    color: var(--color-text);
+    background: color-mix(in srgb, var(--color-accent-coral) 8%, transparent);
+  }
+
+  /* Deliberately no card background/border/shadow here — the selected
+     project should feel like part of the page (switcher, header, showcase
+     content), not one giant card. The carousel and pills still read as
+     contained objects on their own. */
+  .projects-showcase {
+    min-width: 0;
   }
 
   .projects-grid {
@@ -204,9 +234,9 @@ const spineItems: SpineItem[] = projects.map((project) => ({
 
   // Deliberately not utils/focus.ts's moveFocusTo — that calls
   // scrollIntoView, which is fine for Experience's shorter panels but on
-  // the desktop Projects detail (carousel stacked above a long content
-  // block) it produced a jarring jump down to wherever the heading landed.
-  // The spine stays in view when a different item is picked, so there's no
+  // the Projects showcase (carousel + copy above a long pill list) it
+  // produced a jarring jump down to wherever the heading landed. The
+  // switcher stays in view when a different item is picked, so there's no
   // need to scroll at all — just move focus, don't move the page.
   function focusPanelNoScroll(selector: string) {
     const target = document.querySelector<HTMLElement>(selector);
@@ -273,30 +303,30 @@ const spineItems: SpineItem[] = projects.map((project) => ({
     }
   }
 
-  // Desktop spine + selected detail — same interaction model as
-  // ExperienceSection.astro's selectRole(): every spine item and detail
-  // panel gets synced together on every call, regardless of which one
-  // triggered it, so the two never drift out of sync.
-  const spineItems = document.querySelectorAll<HTMLButtonElement>("[data-project-spine]");
-  const desktopDetailPanels = document.querySelectorAll<HTMLElement>("[data-project-detail-desktop]");
-  const defaultProjectSlug = spineItems[0]?.dataset.projectSpine ?? "";
+  // Desktop/tablet switcher + selected showcase — same interaction model as
+  // ExperienceSection.astro's selectRole(): every tab and showcase panel
+  // gets synced together on every call, regardless of which one triggered
+  // it, so the two never drift out of sync.
+  const tabItems = document.querySelectorAll<HTMLButtonElement>("[data-project-tab]");
+  const showcasePanels = document.querySelectorAll<HTMLElement>("[data-project-detail-showcase]");
+  const defaultProjectSlug = tabItems[0]?.dataset.projectTab ?? "";
 
-  function selectProjectDesktop(slug: string, focusPanel = false) {
-    const validSlugs = Array.from(desktopDetailPanels).map((p) => p.dataset.projectDetailDesktop);
+  function selectProjectShowcase(slug: string, focusPanel = false) {
+    const validSlugs = Array.from(showcasePanels).map((p) => p.dataset.projectDetailShowcase);
     const target = validSlugs.includes(slug) ? slug : defaultProjectSlug;
 
-    spineItems.forEach((item) => {
-      item.setAttribute("aria-pressed", String(item.dataset.projectSpine === target));
+    tabItems.forEach((item) => {
+      item.setAttribute("aria-pressed", String(item.dataset.projectTab === target));
     });
-    desktopDetailPanels.forEach((panel) => {
-      const isTarget = panel.dataset.projectDetailDesktop === target;
+    showcasePanels.forEach((panel) => {
+      const isTarget = panel.dataset.projectDetailShowcase === target;
       panel.hidden = !isTarget;
-      // Only animate on a genuine user-initiated spine click (focusPanel),
+      // Only animate on a genuine user-initiated tab click (focusPanel),
       // not on initial page load/URL sync.
       if (isTarget && focusPanel) playEnterAnimation(panel);
     });
 
-    if (focusPanel) focusPanelNoScroll(`#project-detail-desktop-heading-${target}`);
+    if (focusPanel) focusPanelNoScroll(`#project-detail-showcase-heading-${target}`);
   }
 
   function syncFromUrl() {
@@ -307,7 +337,7 @@ const spineItems: SpineItem[] = projects.map((project) => ({
     } else {
       showGrid();
     }
-    selectProjectDesktop(slug ?? defaultProjectSlug);
+    selectProjectShowcase(slug ?? defaultProjectSlug);
   }
 
   gridCards.forEach((card) => {
@@ -327,11 +357,11 @@ const spineItems: SpineItem[] = projects.map((project) => ({
     });
   });
 
-  spineItems.forEach((item) => {
+  tabItems.forEach((item) => {
     item.addEventListener("click", () => {
-      const slug = item.dataset.projectSpine;
+      const slug = item.dataset.projectTab;
       if (!slug) return;
-      selectProjectDesktop(slug, true);
+      selectProjectShowcase(slug, true);
       setSectionState({ key: "project", value: slug });
     });
   });

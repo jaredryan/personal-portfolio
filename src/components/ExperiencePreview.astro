@@ -85,7 +85,13 @@ const { entries } = Astro.props;
     gap: var(--space-3);
   }
 
-  @media (min-width: 950px) {
+  /* min-aspect-ratio matches BentoDashboard's own desktop-tier condition —
+     this card's height: 100% only makes sense when the dashboard grid
+     actually spans it across both rows (the desktop tier). In the
+     tablet-portrait tier this card sits side by side with Projects
+     instead, at roughly half width, where forcing full-column height
+     would just stretch/clip it for no reason. */
+  @media (min-width: 950px) and (min-aspect-ratio: 4/5) {
     .experience-preview {
       /* height: 100% (not a fixed max-height) — the grid gives this card
          the combined height of Hero + gap + Projects (see BentoDashboard's
