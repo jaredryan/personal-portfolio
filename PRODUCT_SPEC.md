@@ -537,9 +537,9 @@ Placeholder screenshot paths:
 /public/projects/unity-roguelike/03.png
 ```
 
-### 10.4 Nest Invaders
+### 10.4 Snack Attack
 
-Slug: `nest-invaders`
+Slug: `snack-attack`
 
 One-liner:
 
@@ -574,17 +574,17 @@ Animation
 Links:
 
 ```text
-Demo: https://nestinvaders.netlify.app/
-GitHub: https://github.com/jaredryan/nest-invaders/tree/standaloneGame
+Demo: https://snackattackgame.netlify.app/
+GitHub: https://github.com/jaredryan/snack-attack/tree/standaloneGame
 ```
 
 Placeholder screenshot paths:
 
 ```text
-/public/projects/nest-invaders/cover.png
-/public/projects/nest-invaders/01.png
-/public/projects/nest-invaders/02.png
-/public/projects/nest-invaders/03.png
+/public/projects/snack-attack/cover.png
+/public/projects/snack-attack/01.png
+/public/projects/snack-attack/02.png
+/public/projects/snack-attack/03.png
 ```
 
 ### 10.5 When Bunnies Attack

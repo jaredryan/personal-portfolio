@@ -235,7 +235,7 @@ export const projects: Project[] = [
   },
   {
     slug: "nest-invaders",
-    title: "Nest Invaders",
+    title: "Snack Attack",
     oneLiner: "Galaga-inspired React arcade game with responsive UI and controls, enemy waves, multiple levels, collision logic, and scoring.",
     previewPills: ["React", "JavaScript", "Game Loops", "Collision Logic", "Responsive Controls", "Animation"],
     detailPills: ["React", "JavaScript", "Game Loops", "Collision Logic", "Responsive UI", "Responsive Controls", "CSS", "Animation"],

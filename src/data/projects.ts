@@ -115,9 +115,9 @@ export const projects: Project[] = [
   },
   {
     slug: "nest-invaders",
-    title: "Nest Invaders",
-    icon: "lucide:rocket",
-    switcherLabel: "Nest Invaders",
+    title: "Snack Attack",
+    icon: "lucide:chef-hat",
+    switcherLabel: "Snack Attack",
     oneLiner:
       "Galaga-inspired React arcade shooter with waves, levels, collision logic, scoring, and responsive controls.",
     built:
@@ -130,8 +130,8 @@ export const projects: Project[] = [
       "Responsive Controls", "CSS", "Animation",
     ],
     links: [
-      { label: "Demo", href: "https://nestinvaders.netlify.app/", kind: "demo" },
-      { label: "GitHub", href: "https://github.com/jaredryan/nest-invaders/tree/standaloneGame", kind: "github" },
+      { label: "Demo", href: "https://snackattackgame.netlify.app/", kind: "demo" },
+      { label: "GitHub", href: "https://github.com/jaredryan/snack-attack/tree/standaloneGame", kind: "github" },
     ],
     screenshots: {
       cover: "/projects/nest-invaders/cover.svg",

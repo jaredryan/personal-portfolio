@@ -702,7 +702,7 @@ export const projects: Project[] = [
   },
   {
     slug: "nest-invaders",
-    title: "Nest Invaders",
+    title: "Snack Attack",
     oneLiner:
       "Galaga-inspired React arcade game with responsive UI and controls, enemy waves, multiple levels, collision logic, and scoring.",
     previewPills: ["React", "JavaScript", "Game Loops", "Collision Logic", "Responsive Controls", "Animation"],
@@ -3083,7 +3083,7 @@ declare -A titles=(
   [lpa-tracker]="LPA Tracker"
   [campfire]="Campfire"
   [unity-roguelike]="Unity 2D Roguelike"
-  [nest-invaders]="Nest Invaders"
+  [nest-invaders]="Snack Attack"
   [when-bunnies-attack]="When Bunnies Attack"
 )
 
