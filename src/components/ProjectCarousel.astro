@@ -37,12 +37,25 @@ const { images, alt, autoRotateMs = 6000, icon } = Astro.props;
 
   <div class="carousel__lightbox" data-carousel-lightbox hidden>
     <button type="button" class="carousel__lightbox-backdrop" data-lightbox-backdrop aria-label="Close expanded view"></button>
+    {images.length > 1 && (
+      <button type="button" class="carousel__lightbox-nav carousel__lightbox-nav--prev" data-lightbox-prev aria-label="Previous screenshot">
+        <Icon name="lucide:chevron-left" aria-hidden="true" />
+      </button>
+    )}
     <div class="carousel__lightbox-panel" role="dialog" aria-modal="true" aria-label={`${alt} screenshot, expanded view`}>
       <button type="button" class="carousel__lightbox-close" data-lightbox-close aria-label="Close expanded view">
         <Icon name="lucide:x" aria-hidden="true" />
       </button>
       <img data-lightbox-img alt="" />
+      {images.length > 1 && (
+        <p class="carousel__lightbox-caption" data-lightbox-caption aria-live="polite"></p>
+      )}
     </div>
+    {images.length > 1 && (
+      <button type="button" class="carousel__lightbox-nav carousel__lightbox-nav--next" data-lightbox-next aria-label="Next screenshot">
+        <Icon name="lucide:chevron-right" aria-hidden="true" />
+      </button>
+    )}
   </div>
 
   <div class="carousel__controls">
@@ -221,6 +234,54 @@ const { images, alt, autoRotateMs = 6000, icon } = Astro.props;
     color: var(--color-accent-teal);
   }
 
+  /* Anchored to the lightbox overlay itself (not the panel) so the arrows
+     sit near the screen edges regardless of how wide the image/panel is. */
+  .carousel__lightbox-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    color: var(--color-text);
+    cursor: pointer;
+  }
+
+  .carousel__lightbox-nav :global(svg) {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  .carousel__lightbox-nav:hover,
+  .carousel__lightbox-nav:focus-visible {
+    border-color: var(--color-accent-teal);
+    color: var(--color-accent-teal);
+  }
+
+  .carousel__lightbox-nav--prev {
+    left: var(--space-4);
+  }
+
+  .carousel__lightbox-nav--next {
+    right: var(--space-4);
+  }
+
+  .carousel__lightbox-caption {
+    margin-top: var(--space-3);
+    text-align: center;
+    font-size: 0.8rem;
+    /* Fixed light tone rather than the theme token: the lightbox backdrop
+       is always a dark overlay regardless of light/dark mode, so the muted
+       text color (dark in light mode) would be unreadable against it. */
+    color: rgba(255, 255, 255, 0.85);
+  }
+
   .carousel__controls {
     display: flex;
     align-items: center;
@@ -298,6 +359,9 @@ const { images, alt, autoRotateMs = 6000, icon } = Astro.props;
     const lightboxImg = lightbox?.querySelector<HTMLImageElement>("[data-lightbox-img]");
     const lightboxClose = lightbox?.querySelector<HTMLButtonElement>("[data-lightbox-close]");
     const lightboxBackdrop = lightbox?.querySelector<HTMLButtonElement>("[data-lightbox-backdrop]");
+    const lightboxPrev = lightbox?.querySelector<HTMLButtonElement>("[data-lightbox-prev]");
+    const lightboxNext = lightbox?.querySelector<HTMLButtonElement>("[data-lightbox-next]");
+    const lightboxCaption = lightbox?.querySelector<HTMLElement>("[data-lightbox-caption]");
     let current = 0;
     let timerId: ReturnType<typeof setInterval> | undefined;
 
@@ -364,16 +428,56 @@ const { images, alt, autoRotateMs = 6000, icon } = Astro.props;
       timerId = undefined;
     }
 
+    // Keeps the lightbox's own image/caption in sync with `current` — used
+    // both when opening (to seed it) and whenever prev/next/swipe navigate
+    // while the lightbox is open, so the regular carousel index (dots,
+    // caption, and the slide it resumes on if closed) never drifts from
+    // what's shown expanded.
+    function syncLightbox() {
+      const activeSlide = slides[current];
+      if (!lightboxImg || !activeSlide) return;
+      lightboxImg.src = activeSlide.src;
+      lightboxImg.alt = activeSlide.alt;
+      if (lightboxCaption) lightboxCaption.textContent = `Preview ${current + 1} of ${slides.length}`;
+    }
+
+    function lightboxShow(direction: "next" | "previous") {
+      if (slides.length < 2) return;
+      show(direction === "next" ? current + 1 : current - 1, direction);
+      syncLightbox();
+    }
+
     function onLightboxKeydown(event: KeyboardEvent) {
       if (event.key === "Escape") closeLightbox();
+      else if (event.key === "ArrowLeft") lightboxShow("previous");
+      else if (event.key === "ArrowRight") lightboxShow("next");
+    }
+
+    let touchStartX = 0;
+    let touchStartY = 0;
+
+    function onLightboxTouchStart(event: TouchEvent) {
+      const touch = event.touches[0];
+      if (!touch) return;
+      touchStartX = touch.clientX;
+      touchStartY = touch.clientY;
+    }
+
+    function onLightboxTouchEnd(event: TouchEvent) {
+      const touch = event.changedTouches[0];
+      if (!touch) return;
+      const deltaX = touch.clientX - touchStartX;
+      const deltaY = touch.clientY - touchStartY;
+      const SWIPE_THRESHOLD = 40;
+      if (Math.abs(deltaX) > SWIPE_THRESHOLD && Math.abs(deltaX) > Math.abs(deltaY)) {
+        lightboxShow(deltaX < 0 ? "next" : "previous");
+      }
     }
 
     function openLightbox() {
-      const activeSlide = slides[current];
-      if (!lightbox || !lightboxImg || !activeSlide) return;
-      lightboxImg.src = activeSlide.src;
-      lightboxImg.alt = activeSlide.alt;
+      if (!lightbox || !lightboxImg) return;
       lightbox.hidden = false;
+      syncLightbox();
       stopAutoRotate();
       document.addEventListener("keydown", onLightboxKeydown);
       lightboxClose?.focus();
@@ -390,6 +494,10 @@ const { images, alt, autoRotateMs = 6000, icon } = Astro.props;
     expandBtn?.addEventListener("click", openLightbox);
     lightboxClose?.addEventListener("click", closeLightbox);
     lightboxBackdrop?.addEventListener("click", closeLightbox);
+    lightboxPrev?.addEventListener("click", () => lightboxShow("previous"));
+    lightboxNext?.addEventListener("click", () => lightboxShow("next"));
+    lightbox?.addEventListener("touchstart", onLightboxTouchStart, { passive: true });
+    lightbox?.addEventListener("touchend", onLightboxTouchEnd, { passive: true });
 
     prevBtn?.addEventListener("click", () => {
       show(current - 1, "previous");
