@@ -205,6 +205,16 @@ const { entries } = Astro.props;
     object-fit: cover;
   }
 
+  /* Fixed light backing (not the theme-reactive surface-alt above) — some
+     logo marks are dark line-art on a transparent PNG with no color info of
+     their own, so they'd read fine in light mode but nearly vanish against
+     the dark-mode tile. Matches the same fix already applied to this logo
+     on the full Experience page (SpineNav.astro, ExperienceSection.astro's
+     mobile accordion) — this dashboard preview just hadn't gotten it. */
+  img.experience-preview__logo {
+    background: #EEF6F8;
+  }
+
   .experience-preview__row-text {
     display: flex;
     flex-direction: column;
