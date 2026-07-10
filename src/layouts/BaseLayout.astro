@@ -2,6 +2,8 @@
 import "@fontsource-variable/sora/index.css";
 import "@fontsource-variable/inter/index.css";
 import "../styles/global.css";
+import { Icon } from "astro-icon/components";
+import { profile } from "../data/profile";
 
 interface Props {
   title: string;
@@ -55,5 +57,85 @@ const { title, description, ogImage, structuredData } = Astro.props;
   </head>
   <body>
     <slot />
+    <footer class="site-footer">
+      <p class="site-footer__copyright">© {new Date().getFullYear()} {profile.name}</p>
+      <nav class="site-footer__links" aria-label="Footer">
+        <a href={profile.links.email} aria-label={`Email ${profile.name}`}>
+          <Icon name="lucide:mail" aria-hidden="true" />
+        </a>
+        <a href={profile.links.github} target="_blank" rel="noreferrer" aria-label={`${profile.name} on GitHub`}>
+          <Icon name="simple-icons:github" aria-hidden="true" />
+        </a>
+        {profile.links.linkedin && (
+          <a href={profile.links.linkedin} target="_blank" rel="noreferrer" aria-label={`${profile.name} on LinkedIn`}>
+            <Icon name="simple-icons:linkedin" aria-hidden="true" />
+          </a>
+        )}
+      </nav>
+    </footer>
   </body>
 </html>
+
+<style>
+  /* Flex-column body so a tall viewport with short page content still gets
+     the footer pinned to the true bottom of the screen (via footer's
+     margin-top: auto below) instead of it trailing right after the
+     content. :global() on main because it's defined per-page (slotted in),
+     not by this component, so a plain scoped selector wouldn't reach it. */
+  body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100svh;
+  }
+
+  body :global(main) {
+    flex: 1;
+  }
+
+  /* Hidden below the "spacious" threshold (see global.css) on purpose —
+     laptop-height viewports already fit their page content almost exactly,
+     and adding footer height there would newly force a scroll that wasn't
+     there before. It only appears where there's genuine leftover vertical
+     room to spare. */
+  .site-footer {
+    display: none;
+  }
+
+  @media (min-width: 760px) and (min-height: 850px) {
+    .site-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-4);
+      padding: var(--space-4) clamp(1rem, 3vw, 2rem);
+      border-top: 1px solid var(--color-border);
+      color: var(--color-text-muted);
+      font-size: 0.85rem;
+    }
+  }
+
+  .site-footer__copyright {
+    margin: 0;
+  }
+
+  .site-footer__links {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .site-footer__links a {
+    display: inline-flex;
+    color: var(--color-text-muted);
+  }
+
+  .site-footer__links a:hover,
+  .site-footer__links a:focus-visible {
+    color: var(--color-accent-teal);
+  }
+
+  .site-footer__links :global(svg) {
+    width: 1.125rem;
+    height: 1.125rem;
+  }
+</style>

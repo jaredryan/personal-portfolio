@@ -30,52 +30,58 @@ const spineItems: SpineItem[] = entries.map((entry) => ({
     <ContactTrigger />
   </div>
 
-  <div class="experience-layout">
-    <SpineNav items={spineItems} defaultSlug={defaultSlug} dataAttr="data-spine-role" ariaLabel="Career timeline" />
+  <!-- Groups both layout variants as one unit, distinct from the
+       breadcrumb/title row above — on tall/large screens (see the
+       "spacious" query below) this whole group centers in the leftover
+       vertical space while the breadcrumb/header stays pinned at the top. -->
+  <div class="experience-content">
+    <div class="experience-layout">
+      <SpineNav items={spineItems} defaultSlug={defaultSlug} dataAttr="data-spine-role" ariaLabel="Career timeline" />
 
-    <div class="experience-detail">
+      <div class="experience-detail">
+        {entries.map((entry) => (
+          <article
+            class="experience-detail__panel"
+            id={`experience-detail-${entry.slug}`}
+            data-role-detail={entry.slug}
+            hidden={entry.slug !== defaultSlug}
+          >
+            <span class="eyebrow">{entry.kind === "work" ? "Work" : "Education"}</span>
+            <h3 id={`experience-detail-heading-${entry.slug}`} tabindex="-1">
+              {entry.title} {entry.company ? `· ${entry.company}` : ""}
+            </h3>
+            <p class="experience-detail__dates">
+              {dateLabel(entry)}{entry.location ? ` · ${entry.location}` : ""}
+            </p>
+            <ExperienceDetailContent entry={entry} />
+          </article>
+        ))}
+      </div>
+    </div>
+
+    <div class="experience-accordion">
       {entries.map((entry) => (
-        <article
-          class="experience-detail__panel"
-          id={`experience-detail-${entry.slug}`}
-          data-role-detail={entry.slug}
-          hidden={entry.slug !== defaultSlug}
-        >
-          <span class="eyebrow">{entry.kind === "work" ? "Work" : "Education"}</span>
-          <h3 id={`experience-detail-heading-${entry.slug}`} tabindex="-1">
-            {entry.title} {entry.company ? `· ${entry.company}` : ""}
-          </h3>
-          <p class="experience-detail__dates">
-            {dateLabel(entry)}{entry.location ? ` · ${entry.location}` : ""}
-          </p>
-          <ExperienceDetailContent entry={entry} />
-        </article>
+        <details class="experience-accordion__item" data-accordion-role={entry.slug} open={entry.slug === defaultSlug}>
+          <summary>
+            {entry.logo ? (
+              <img class="experience-spine__logo" src={entry.logo} alt="" width="28" height="28" loading="lazy" />
+            ) : (
+              <span class="experience-spine__logo" aria-hidden="true">{monogram(entry)}</span>
+            )}
+            <span class="experience-spine__text">
+              <span class="experience-spine__role">{entry.title}</span>
+              {entry.kind === "work" && <span class="experience-spine__org">{orgName(entry)}</span>}
+              <span class="experience-spine__dates">{dateLabel(entry)}</span>
+            </span>
+          </summary>
+          <div class="experience-accordion__panel" data-accordion-panel>
+            <div class="experience-accordion__panel-inner">
+              <ExperienceDetailContent entry={entry} />
+            </div>
+          </div>
+        </details>
       ))}
     </div>
-  </div>
-
-  <div class="experience-accordion">
-    {entries.map((entry) => (
-      <details class="experience-accordion__item" data-accordion-role={entry.slug} open={entry.slug === defaultSlug}>
-        <summary>
-          {entry.logo ? (
-            <img class="experience-spine__logo" src={entry.logo} alt="" width="28" height="28" loading="lazy" />
-          ) : (
-            <span class="experience-spine__logo" aria-hidden="true">{monogram(entry)}</span>
-          )}
-          <span class="experience-spine__text">
-            <span class="experience-spine__role">{entry.title}</span>
-            {entry.kind === "work" && <span class="experience-spine__org">{orgName(entry)}</span>}
-            <span class="experience-spine__dates">{dateLabel(entry)}</span>
-          </span>
-        </summary>
-        <div class="experience-accordion__panel" data-accordion-panel>
-          <div class="experience-accordion__panel-inner">
-            <ExperienceDetailContent entry={entry} />
-          </div>
-        </div>
-      </details>
-    ))}
   </div>
 
   <ContactDrawer currentPage="experience" />
@@ -107,6 +113,25 @@ const spineItems: SpineItem[] = entries.map((entry) => ({
     gap: var(--space-6);
   }
 
+  /* "Spacious" viewport mode (see global.css) — breadcrumb/title row stays
+     pinned at the top, the layout/accordion group below (whichever is
+     visible at this width) centers in the leftover vertical space. Unlike
+     Projects, Experience only has one shared header regardless of width,
+     so this needs no width-bounded split. */
+  @media (min-width: 760px) and (min-height: 850px) {
+    .experience-section {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .experience-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+  }
+
   /* minmax(180px, 250px) lets the spine shrink down to a still-legible 180px
      before the (much larger) detail column gets cramped, instead of holding
      a fixed/min width that ate space disproportionately at medium viewport
@@ -118,6 +143,18 @@ const spineItems: SpineItem[] = entries.map((entry) => ({
       display: grid;
       grid-template-columns: minmax(180px, 250px) minmax(0, 1fr);
       align-items: start;
+    }
+  }
+
+  /* Widens the spine column's cap to match the "spacious" font-size bump
+     (see global.css) — that bump grows the spine row text (rem-based) but
+     not this fixed-px column, so the longest title (Senior Software
+     Engineer) started wrapping onto an extra line it didn't need at 100%
+     scale. 280px gives it the room back; there's plenty of width to spare
+     at these sizes anyway. */
+  @media (min-width: 900px) and (min-height: 850px) {
+    .experience-layout {
+      grid-template-columns: minmax(180px, 280px) minmax(0, 1fr);
     }
   }
 

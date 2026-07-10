@@ -21,3 +21,17 @@ const structuredData = {
     <BentoDashboard />
   </main>
 </BaseLayout>
+
+<style>
+  /* Dashboard has no pinned page header of its own (unlike Experience/
+     Projects), so the whole bento block centers as one unit in the
+     "spacious" viewport range (see global.css) instead of sitting flush at
+     the top with the leftover room trailing below it. */
+  @media (min-width: 760px) and (min-height: 850px) {
+    main {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+  }
+</style>

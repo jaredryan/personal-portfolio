@@ -239,12 +239,16 @@ const linkButtonClass: Record<Project["links"][number]["kind"], string> = {
        container width — the Built/Interesting because paragraphs aren't
        wrapped in .prose like the one-liner is, so left uncapped at these
        wider-than-phone containers they'd run to an uncomfortable line
-       length. */
+       length. Same 62ch as the media cap above (not an independent px
+       value) so the two scale together under the "spacious" font-size
+       bump in global.css instead of drifting apart — media is ch-based
+       already, so a flat px cap here would fall behind it as the root
+       font-size grows. */
     .project-detail__copy {
       flex: 0 1 auto;
       min-width: 0;
       width: 100%;
-      max-width: 640px;
+      max-width: 62ch;
       margin-inline: auto;
     }
   }

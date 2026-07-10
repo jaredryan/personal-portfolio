@@ -26,35 +26,42 @@ const defaultProjectSlug = projects[0]?.slug ?? "";
       <ContactTrigger />
     </div>
 
-    <nav class="projects-switcher" aria-label="Projects">
-      {projects.map((project) => (
-        <button
-          type="button"
-          class="projects-switcher__item"
-          data-project-tab={project.slug}
-          aria-pressed={project.slug === defaultProjectSlug ? "true" : "false"}
-        >
-          <Icon name={project.icon} aria-hidden="true" />
-          <span>{project.switcherLabel}</span>
-        </button>
-      ))}
-    </nav>
+    <!-- Groups the switcher + selected showcase as one unit, distinct from
+         the breadcrumb/title/contact row above — on tall/large desktop
+         monitors (see the "spacious" query below) this whole group centers
+         in the leftover vertical space while the breadcrumb/header stays
+         pinned at the top, where wayfinding chrome belongs. -->
+    <div class="projects-content">
+      <nav class="projects-switcher" aria-label="Projects">
+        {projects.map((project) => (
+          <button
+            type="button"
+            class="projects-switcher__item"
+            data-project-tab={project.slug}
+            aria-pressed={project.slug === defaultProjectSlug ? "true" : "false"}
+          >
+            <Icon name={project.icon} aria-hidden="true" />
+            <span>{project.switcherLabel}</span>
+          </button>
+        ))}
+      </nav>
 
-    <div class="projects-showcase">
-      {projects.map((project) => (
-        <div
-          class="projects-showcase__panel"
-          id={`project-detail-showcase-${project.slug}`}
-          data-project-detail-showcase={project.slug}
-          hidden={project.slug !== defaultProjectSlug}
-        >
-          <ProjectDetailView
-            project={project}
-            headingId={`project-detail-showcase-heading-${project.slug}`}
-            headingTag="h3"
-          />
-        </div>
-      ))}
+      <div class="projects-showcase">
+        {projects.map((project) => (
+          <div
+            class="projects-showcase__panel"
+            id={`project-detail-showcase-${project.slug}`}
+            data-project-detail-showcase={project.slug}
+            hidden={project.slug !== defaultProjectSlug}
+          >
+            <ProjectDetailView
+              project={project}
+              headingId={`project-detail-showcase-heading-${project.slug}`}
+              headingTag="h3"
+            />
+          </div>
+        ))}
+      </div>
     </div>
   </div>
 
@@ -155,6 +162,68 @@ const defaultProjectSlug = projects[0]?.slug ?? "";
 
     .projects-desktop {
       display: block;
+    }
+  }
+
+  /* "Spacious" viewport mode (see global.css) — the breadcrumb/title row
+     stays pinned at the top where wayfinding belongs, everything below it
+     centers in the leftover vertical space instead of sitting flush at the
+     top with dead space trailing below. Split into two width-bounded
+     blocks below (760–899px, 900px+) matching the mobile/desktop toggle
+     above exactly, so each block only ever touches the tree that's
+     actually visible at that width. */
+  @media (min-width: 760px) and (min-height: 850px) {
+    .projects-section {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  /* Mobile grid<->detail flow (still what's visible at these widths). Both
+     the grid view and every per-project detail panel (rendered once each
+     via .map(), so this one rule covers all of them) get the same
+     pin-header/center-content treatment. */
+  @media (min-width: 760px) and (max-width: 899px) and (min-height: 850px) {
+    .projects-mobile,
+    #projects-grid-view,
+    #projects-detail-view,
+    .project-detail {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .projects-grid {
+      flex: 1;
+      align-content: center;
+    }
+
+    /* .project-detail__layout is ProjectDetailView.astro's own root, hence
+       :global() — this file doesn't own that class, but every mobile detail
+       panel wraps one. */
+    .project-detail :global(.project-detail__layout) {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+  }
+
+  /* Desktop/tablet switcher + showcase — centers as one group so the
+     switcher stays visually attached to the project it's driving, rather
+     than the switcher pinning separately from a centered showcase below. */
+  @media (min-width: 900px) and (min-height: 850px) {
+    .projects-desktop {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .projects-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
   }
 

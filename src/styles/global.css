@@ -4,6 +4,22 @@
   box-sizing: border-box;
 }
 
+/* "Spacious" viewport mode — tall tablets and tall/large desktop monitors
+   with real vertical room to spare. Width alone can't distinguish this from
+   a same-width but shorter laptop window (which should stay exactly as-is),
+   so both dimensions gate it, and 760/850 deliberately match the
+   thresholds ProjectDetailView.astro's tall-tablet layout already uses.
+   Referenced by: BaseLayout.astro (footer), index/ProjectsSection/
+   ExperienceSection (content centering). A single, restrained bump — rem
+   and ch-based spacing/type/measure all scale with it since they're
+   already tokenized, so this reads as "everything breathes a bit more,"
+   not a jump in visual weight. */
+@media (min-width: 760px) and (min-height: 850px) {
+  html {
+    font-size: 110%;
+  }
+}
+
 /*
  * color-scheme is set per-theme (not `light dark` on <html>) so browser-native
  * controls (scrollbars, form controls, etc.) always match the theme actually
@@ -126,6 +142,18 @@ section[id] {
 @media (min-width: 768px) {
   .page-shell {
     width: min(1200px, calc(100% - 4rem));
+  }
+}
+
+/* Widens the page-shell's cap to match the "spacious" font-size bump above
+   — that bump only scales rem/ch-based type and spacing, not this hardcoded
+   px max-width, so without this the extra vertical/typographic room
+   wouldn't come with any extra horizontal canvas. Same 10% factor as the
+   font-size bump, for one consistent "spacious" scale rather than two
+   independently-tuned numbers. */
+@media (min-width: 760px) and (min-height: 850px) {
+  .page-shell {
+    width: min(1320px, calc(100% - 4rem));
   }
 }
 
