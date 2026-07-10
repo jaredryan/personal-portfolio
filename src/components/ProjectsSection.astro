@@ -4,7 +4,6 @@ import type { Project } from "../data/projects";
 import Breadcrumbs from "./Breadcrumbs.astro";
 import ContactDrawer from "./ContactDrawer.astro";
 import ContactTrigger from "./ContactTrigger.astro";
-import PillList from "./PillList.astro";
 import ProjectDetailView from "./ProjectDetailView.astro";
 
 interface Props {
@@ -12,97 +11,67 @@ interface Props {
 }
 
 const { projects } = Astro.props;
-const defaultProjectSlug = projects[0]?.slug ?? "";
+
+// Curated display order for the bento grid only — alternates the two
+// palest/lowest-contrast covers (Campfire, LPA Tracker) with the darker,
+// higher-contrast ones (the three games) so the grid doesn't cluster its
+// two palest tiles next to each other. Everything else (detail view, deep
+// links, breadcrumb) keys off slug, so this order has no effect elsewhere.
+const gridOrder = ["campfire", "when-bunnies-attack", "lpa-tracker", "nest-invaders", "unity-roguelike"];
+const gridProjects = gridOrder
+  .map((slug) => projects.find((p) => p.slug === slug))
+  .filter((p): p is Project => Boolean(p));
 ---
 <section class="projects-section page-shell" aria-label="Projects">
-  <!-- Desktop/tablet-wide: compact icon-pill switcher + full-width selected
-       showcase below it. The breadcrumb here is static (Dashboard >
-       Projects) and never appends the selected project — that contextual
-       3-level breadcrumb is mobile-only, preserved unchanged below. -->
-  <div class="projects-desktop">
-    <Breadcrumbs trail={[{ label: "Dashboard", href: "/" }, { label: "Projects" }]} />
-    <div class="page-header-row">
-      <h2 id="projects-heading-desktop" class="page-title" tabindex="-1">Projects</h2>
+  <div id="projects-grid-view">
+    <div class="projects-utility-row">
+      <Breadcrumbs trail={[{ label: "Dashboard", href: "/" }, { label: "Projects" }]} />
       <ContactTrigger />
     </div>
 
-    <!-- Groups the switcher + selected showcase as one unit, distinct from
-         the breadcrumb/title/contact row above — on tall/large desktop
-         monitors (see the "spacious" query below) this whole group centers
-         in the leftover vertical space while the breadcrumb/header stays
-         pinned at the top, where wayfinding chrome belongs. -->
-    <div class="projects-content">
-      <nav class="projects-switcher" aria-label="Projects">
-        {projects.map((project) => (
-          <button
-            type="button"
-            class="projects-switcher__item"
-            data-project-tab={project.slug}
-            aria-pressed={project.slug === defaultProjectSlug ? "true" : "false"}
-          >
-            <Icon name={project.icon} aria-hidden="true" />
-            <span>{project.switcherLabel}</span>
-          </button>
-        ))}
-      </nav>
-
-      <div class="projects-showcase">
-        {projects.map((project) => (
-          <div
-            class="projects-showcase__panel"
-            id={`project-detail-showcase-${project.slug}`}
-            data-project-detail-showcase={project.slug}
-            hidden={project.slug !== defaultProjectSlug}
-          >
-            <ProjectDetailView
-              project={project}
-              headingId={`project-detail-showcase-heading-${project.slug}`}
-              headingTag="h3"
-            />
-          </div>
-        ))}
+    <!-- Bento grid: the "Projects" title tile (item 1) plus one tile per
+         project. 6 items divides cleanly into 2 or 3 columns — the title
+         tile isn't just decorative, it's what makes 5 (an awkward number
+         for any grid) resolve into a clean, gap-free layout. -->
+    <div class="projects-bento">
+      <div class="projects-title-tile">
+        <Icon name="lucide:layout-grid" aria-hidden="true" />
+        <h2 id="projects-heading" tabindex="-1">Projects</h2>
       </div>
+
+      {gridProjects.map((project) => (
+        <button
+          type="button"
+          class="project-tile"
+          data-project-link={project.slug}
+          aria-label={`View ${project.title}`}
+        >
+          <img
+            src={project.screenshots.cover}
+            alt=""
+            width="480"
+            height="300"
+            loading="lazy"
+          />
+          <span class="project-tile__body">
+            <span class="project-tile__title">{project.title}</span>
+            <span class="project-tile__oneliner">{project.oneLiner}</span>
+          </span>
+        </button>
+      ))}
     </div>
   </div>
 
-  <!-- Mobile: existing card grid <-> detail flow. Unchanged. -->
-  <div class="projects-mobile">
-    <div id="projects-grid-view">
-      <Breadcrumbs trail={[{ label: "Dashboard", href: "/" }, { label: "Projects" }]} />
-      <div class="page-header-row">
-        <h2 id="projects-heading" class="page-title" tabindex="-1">Projects</h2>
-        <ContactTrigger />
-      </div>
-
-      <ul class="projects-grid">
-        {projects.map((project) => (
-          <li>
-            <button type="button" class="project-card" data-project-link={project.slug}>
-              <img
-                src={project.screenshots.cover}
-                alt={`${project.title} screenshot`}
-                width="480"
-                height="300"
-                loading="lazy"
-              />
-              <span class="project-card__title">{project.title}</span>
-              <span class="project-card__oneliner">{project.oneLiner}</span>
-              <PillList pills={project.previewPills} />
-            </button>
-          </li>
-        ))}
-      </ul>
-    </div>
-
-    <div id="projects-detail-view" hidden>
-      {projects.map((project) => (
-        <div
-          class="project-detail"
-          id={`project-detail-${project.slug}`}
-          data-project-detail={project.slug}
-          aria-labelledby={`project-detail-heading-${project.slug}`}
-          hidden
-        >
+  <div id="projects-detail-view" hidden>
+    {projects.map((project) => (
+      <div
+        class="project-detail"
+        id={`project-detail-${project.slug}`}
+        data-project-detail={project.slug}
+        aria-labelledby={`project-detail-heading-${project.slug}`}
+        hidden
+      >
+        <div class="projects-utility-row">
           <Breadcrumbs
             trail={[
               { label: "Dashboard", href: "/" },
@@ -110,14 +79,11 @@ const defaultProjectSlug = projects[0]?.slug ?? "";
               { label: project.title },
             ]}
           />
-          <ProjectDetailView
-            project={project}
-            headingId={`project-detail-heading-${project.slug}`}
-            headingTag="h2"
-          />
+          <ContactTrigger />
         </div>
-      ))}
-    </div>
+        <ProjectDetailView project={project} headingId={`project-detail-heading-${project.slug}`} />
+      </div>
+    ))}
   </div>
 
   <ContactDrawer currentPage="projects" />
@@ -128,12 +94,7 @@ const defaultProjectSlug = projects[0]?.slug ?? "";
     min-height: 100svh;
   }
 
-  /* Contact is a secondary utility action, far-right on the same row as
-     the page title — not crowding the breadcrumb row above it. The row
-     itself carries the spacing .page-title normally holds on its own,
-     since the title is now a flex item sharing the row with the button.
-     Used in both the mobile grid header and the desktop header. */
-  .page-header-row {
+  .projects-utility-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -141,50 +102,152 @@ const defaultProjectSlug = projects[0]?.slug ?? "";
     margin-bottom: var(--space-6);
   }
 
-  .page-header-row .page-title {
-    margin-bottom: 0;
+  .projects-bento {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
   }
 
-  /* 900px matches the Experience page's breakpoint — the two pages should
-     switch to their desktop/tablet layout at the same viewport width. */
-  .projects-mobile {
+  @media (min-width: 700px) {
+    .projects-bento {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1100px) {
+    .projects-bento {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  /* Mobile/default: reads as a plain heading, not a card — a solid tile
+     would just be dead weight taking up a full row by itself in a single-
+     column layout. Becomes a real bento tile once the grid is 2+ columns
+     below, where it shares a row with actual content instead of
+     monopolizing one. */
+  .projects-title-tile {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-2);
+  }
+
+  .projects-title-tile h2 {
+    margin: 0;
+  }
+
+  .projects-title-tile :global(svg) {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: var(--color-primary);
+    flex-shrink: 0;
+  }
+
+  @media (min-width: 700px) {
+    .projects-title-tile {
+      margin-bottom: 0;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: var(--space-3);
+      background: var(--color-primary);
+      border: 1px solid var(--color-primary);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-card);
+      padding: var(--space-4);
+    }
+
+    .projects-title-tile h2 {
+      color: white;
+      font-size: 1.5rem;
+    }
+
+    .projects-title-tile :global(svg) {
+      width: 2rem;
+      height: 2rem;
+      color: white;
+    }
+  }
+
+  .project-tile {
+    width: 100%;
+    text-align: left;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-card);
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  .project-tile:hover,
+  .project-tile:focus-visible {
+    border-color: var(--color-accent-teal);
+    background: var(--color-surface-alt);
+  }
+
+  .project-tile img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
     display: block;
+    transition: filter 180ms ease;
   }
 
-  .projects-desktop {
-    display: none;
+  /* Extends the hover/focus feedback to the image too, so the whole tile
+     reacts as one unit instead of just the text panel below it — a plain
+     brightness dim rather than a color overlay, so it reads consistently
+     whether the screenshot is pale (Campfire, LPA Tracker) or dark. */
+  .project-tile:hover img,
+  .project-tile:focus-visible img {
+    filter: brightness(0.92);
   }
 
-  @media (min-width: 900px) {
-    .projects-mobile {
-      display: none;
-    }
-
-    .projects-desktop {
-      display: block;
-    }
+  /* Dark mode's --color-surface-alt is lighter than --color-surface (see
+     tokens.css), so the text panel already lightens on hover there —
+     darkening the image on top of that would move the two halves of the
+     tile in opposite directions. Brightening instead keeps both halves
+     moving the same way, matching the "both darken together" cohesion
+     light mode already has. */
+  :global([data-theme="dark"]) .project-tile:hover img,
+  :global([data-theme="dark"]) .project-tile:focus-visible img {
+    filter: brightness(1.1);
   }
 
-  /* "Spacious" viewport mode (see global.css) — the breadcrumb/title row
-     stays pinned at the top where wayfinding belongs, everything below it
-     centers in the leftover vertical space instead of sitting flush at the
-     top with dead space trailing below. Split into two width-bounded
-     blocks below (760–899px, 900px+) matching the mobile/desktop toggle
-     above exactly, so each block only ever touches the tree that's
-     actually visible at that width. */
+  .project-tile__body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    padding: var(--space-4);
+  }
+
+  .project-tile__title {
+    font-weight: 700;
+    color: var(--color-text);
+  }
+
+  .project-tile__oneliner {
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+  }
+
+  /* "Spacious" viewport mode (see global.css) — the breadcrumb/contact row
+     stays pinned at the top where wayfinding belongs, the bento grid (or
+     selected project) below it centers in the leftover vertical space.
+     One unified block now instead of the old width-bounded pair — both the
+     grid and every detail panel share the same structure, so there's no
+     longer a separate desktop tree that needed its own centering rules. */
   @media (min-width: 760px) and (min-height: 850px) {
     .projects-section {
       display: flex;
       flex-direction: column;
     }
-  }
 
-  /* Mobile grid<->detail flow (still what's visible at these widths). Both
-     the grid view and every per-project detail panel (rendered once each
-     via .map(), so this one rule covers all of them) get the same
-     pin-header/center-content treatment. */
-  @media (min-width: 760px) and (max-width: 899px) and (min-height: 850px) {
-    .projects-mobile,
     #projects-grid-view,
     #projects-detail-view,
     .project-detail {
@@ -193,14 +256,13 @@ const defaultProjectSlug = projects[0]?.slug ?? "";
       flex: 1;
     }
 
-    .projects-grid {
+    .projects-bento {
       flex: 1;
       align-content: center;
     }
 
     /* .project-detail__layout is ProjectDetailView.astro's own root, hence
-       :global() — this file doesn't own that class, but every mobile detail
-       panel wraps one. */
+       :global() — this file doesn't own that class. */
     .project-detail :global(.project-detail__layout) {
       flex: 1;
       display: flex;
@@ -208,144 +270,16 @@ const defaultProjectSlug = projects[0]?.slug ?? "";
       justify-content: center;
     }
   }
-
-  /* Desktop/tablet switcher + showcase — centers as one group so the
-     switcher stays visually attached to the project it's driving, rather
-     than the switcher pinning separately from a centered showcase below. */
-  @media (min-width: 900px) and (min-height: 850px) {
-    .projects-desktop {
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-    }
-
-    .projects-content {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-  }
-
-  .projects-switcher {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-2);
-    margin-bottom: var(--space-6);
-  }
-
-  /* Compact pill/tab, not a mini card — icon + short label on one line,
-     wraps to a second row at tablet widths rather than scrolling. */
-  .projects-switcher__item {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-2);
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: 999px;
-    padding: var(--space-2) var(--space-4);
-    font-weight: 600;
-    font-size: 0.9rem;
-    cursor: pointer;
-  }
-
-  .projects-switcher__item :global(svg) {
-    width: 1rem;
-    height: 1rem;
-    flex-shrink: 0;
-  }
-
-  /* :not([aria-pressed="true"]) keeps the selected (coral) state visually
-     dominant even while that same tab is hovered/focused — matches the
-     same guard used on the dashboard Projects preview thumbnails. */
-  .projects-switcher__item:not([aria-pressed="true"]):hover,
-  .projects-switcher__item:not([aria-pressed="true"]):focus-visible {
-    border-color: var(--color-accent-teal);
-    background: var(--color-surface-alt);
-  }
-
-  .projects-switcher__item[aria-pressed="true"] {
-    border-color: var(--color-accent-coral);
-    color: var(--color-text);
-    background: color-mix(in srgb, var(--color-accent-coral) 8%, transparent);
-  }
-
-  /* Deliberately no card background/border/shadow here — the selected
-     project should feel like part of the page (switcher, header, showcase
-     content), not one giant card. The carousel and pills still read as
-     contained objects on their own. */
-  .projects-showcase {
-    min-width: 0;
-  }
-
-  .projects-grid {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: var(--space-4);
-  }
-
-  .project-card {
-    width: 100%;
-    text-align: left;
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-card);
-    padding: var(--space-4);
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-3);
-    cursor: pointer;
-  }
-
-  .project-card:hover {
-    border-color: var(--color-accent-teal);
-    background: var(--color-surface-alt);
-  }
-
-  .project-card img {
-    width: 100%;
-    height: auto;
-    border-radius: var(--radius-sm);
-    aspect-ratio: 16 / 10;
-    object-fit: cover;
-  }
-
-  .project-card__title {
-    font-weight: 700;
-    text-align: center;
-  }
-
-  .project-card__oneliner {
-    color: var(--color-text-muted);
-    font-size: 0.9rem;
-  }
 </style>
 
 <script>
-  import { getQueryParam, setSectionState } from "../utils/urlState";
+  import { clearSectionState, getQueryParam, setSectionState } from "../utils/urlState";
   import { playEnterAnimation } from "../utils/motion";
-
-  // Deliberately not utils/focus.ts's moveFocusTo — that calls
-  // scrollIntoView, which is fine for Experience's shorter panels but on
-  // the Projects showcase (carousel + copy above a long pill list) it
-  // produced a jarring jump down to wherever the heading landed. The
-  // switcher stays in view when a different item is picked, so there's no
-  // need to scroll at all — just move focus, don't move the page.
-  function focusPanelNoScroll(selector: string) {
-    const target = document.querySelector<HTMLElement>(selector);
-    if (!target) return;
-    if (!target.hasAttribute("tabindex")) target.setAttribute("tabindex", "-1");
-    target.focus({ preventScroll: true });
-  }
 
   const gridView = document.getElementById("projects-grid-view");
   const detailView = document.getElementById("projects-detail-view");
   const detailPanels = document.querySelectorAll<HTMLElement>("[data-project-detail]");
-  const gridCards = document.querySelectorAll<HTMLButtonElement>("[data-project-link]");
+  const gridTiles = document.querySelectorAll<HTMLButtonElement>("[data-project-link]");
   const clearLinks = document.querySelectorAll<HTMLAnchorElement>("[data-clear-project]");
 
   function showProject(slug: string, focusPanel = false) {
@@ -364,9 +298,9 @@ const defaultProjectSlug = projects[0]?.slug ?? "";
       // still announces sensibly) without letting focus() scroll on its
       // own, then explicitly scroll the whole page to the top on the next
       // frame — scrollIntoView on the heading landed below the screenshot
-      // in the single-column (mobile) layout, and scrollIntoView on the
-      // panel still only scrolled to the panel's own top, not the page's,
-      // leaving the breadcrumb at the very edge of the viewport.
+      // in the single-column layout, and scrollIntoView on the panel still
+      // only scrolled to the panel's own top, leaving the breadcrumb at
+      // the very edge of the viewport.
       if (!panel.hasAttribute("tabindex")) panel.setAttribute("tabindex", "-1");
       panel.focus({ preventScroll: true });
       const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -400,32 +334,6 @@ const defaultProjectSlug = projects[0]?.slug ?? "";
     }
   }
 
-  // Desktop/tablet switcher + selected showcase — same interaction model as
-  // ExperienceSection.astro's selectRole(): every tab and showcase panel
-  // gets synced together on every call, regardless of which one triggered
-  // it, so the two never drift out of sync.
-  const tabItems = document.querySelectorAll<HTMLButtonElement>("[data-project-tab]");
-  const showcasePanels = document.querySelectorAll<HTMLElement>("[data-project-detail-showcase]");
-  const defaultProjectSlug = tabItems[0]?.dataset.projectTab ?? "";
-
-  function selectProjectShowcase(slug: string, focusPanel = false) {
-    const validSlugs = Array.from(showcasePanels).map((p) => p.dataset.projectDetailShowcase);
-    const target = validSlugs.includes(slug) ? slug : defaultProjectSlug;
-
-    tabItems.forEach((item) => {
-      item.setAttribute("aria-pressed", String(item.dataset.projectTab === target));
-    });
-    showcasePanels.forEach((panel) => {
-      const isTarget = panel.dataset.projectDetailShowcase === target;
-      panel.hidden = !isTarget;
-      // Only animate on a genuine user-initiated tab click (focusPanel),
-      // not on initial page load/URL sync.
-      if (isTarget && focusPanel) playEnterAnimation(panel);
-    });
-
-    if (focusPanel) focusPanelNoScroll(`#project-detail-showcase-heading-${target}`);
-  }
-
   function syncFromUrl() {
     const slug = getQueryParam("project");
     const validSlugs = Array.from(detailPanels).map((p) => p.dataset.projectDetail);
@@ -434,15 +342,14 @@ const defaultProjectSlug = projects[0]?.slug ?? "";
     } else {
       showGrid();
     }
-    selectProjectShowcase(slug ?? defaultProjectSlug);
   }
 
-  gridCards.forEach((card) => {
-    card.addEventListener("click", () => {
-      const slug = card.dataset.projectLink;
+  gridTiles.forEach((tile) => {
+    tile.addEventListener("click", () => {
+      const slug = tile.dataset.projectLink;
       if (!slug) return;
       showProject(slug, true);
-      window.history.pushState(null, "", `?project=${slug}`);
+      setSectionState({ key: "project", value: slug });
     });
   });
 
@@ -450,16 +357,7 @@ const defaultProjectSlug = projects[0]?.slug ?? "";
     link.addEventListener("click", (event) => {
       event.preventDefault();
       showGrid(true);
-      window.history.pushState(null, "", window.location.pathname);
-    });
-  });
-
-  tabItems.forEach((item) => {
-    item.addEventListener("click", () => {
-      const slug = item.dataset.projectTab;
-      if (!slug) return;
-      selectProjectShowcase(slug, true);
-      setSectionState({ key: "project", value: slug });
+      clearSectionState({ key: "project" });
     });
   });
 
