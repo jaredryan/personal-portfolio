@@ -1,4 +1,5 @@
 ---
+import { Icon } from "astro-icon/components";
 import type { ExperienceEntry } from "../data/experience";
 import Breadcrumbs from "./Breadcrumbs.astro";
 import ContactDrawer from "./ContactDrawer.astro";
@@ -26,7 +27,10 @@ const spineItems: SpineItem[] = entries.map((entry) => ({
 <section class="experience-section page-shell" aria-labelledby="experience-heading">
   <Breadcrumbs trail={[{ label: "Dashboard", href: "/" }, { label: "Experience" }]} />
   <div class="page-header-row">
-    <h2 id="experience-heading" class="page-title" tabindex="-1">Experience</h2>
+    <div class="page-title-group">
+      <Icon name="lucide:briefcase" aria-hidden="true" />
+      <h2 id="experience-heading" class="page-title" tabindex="-1">Experience</h2>
+    </div>
     <ContactTrigger />
   </div>
 
@@ -106,6 +110,21 @@ const spineItems: SpineItem[] = entries.map((entry) => ({
 
   .page-header-row .page-title {
     margin-bottom: 0;
+  }
+
+  /* Matches the small icon+heading treatment Projects' bento title tile
+     uses (same size/color/gap) so the two pages read as one system. */
+  .page-title-group {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .page-title-group :global(svg) {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: var(--color-primary);
+    flex-shrink: 0;
   }
 
   .experience-layout {
