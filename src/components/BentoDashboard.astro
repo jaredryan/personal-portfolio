@@ -6,6 +6,23 @@ import { experience } from "../data/experience";
 import { projects } from "../data/projects";
 ---
 <section id="dashboard" class="bento page-shell" aria-label="Overview">
+  <script is:inline>
+    // Synchronous + is:inline so this runs before the cards below paint —
+    // same FOUC-avoidance trick BaseLayout's theme script uses. Picks the
+    // more expressive "first" entrance once per browser session (tracked in
+    // sessionStorage) and falls back to the muted "repeat" entrance for
+    // every dashboard load after that.
+    (function () {
+      var section = document.currentScript.parentElement;
+      var STORAGE_KEY = "bentoEntrancePlayed";
+      var alreadyPlayed = false;
+      try {
+        alreadyPlayed = sessionStorage.getItem(STORAGE_KEY) === "1";
+        sessionStorage.setItem(STORAGE_KEY, "1");
+      } catch (e) {}
+      section.classList.add(alreadyPlayed ? "bento--enter-repeat" : "bento--enter-first");
+    })();
+  </script>
   <HeroCard />
   <ExperiencePreview entries={experience} />
   <ProjectsPreview projects={projects} />
@@ -101,5 +118,48 @@ import { projects } from "../data/projects";
     .bento :global(.projects-preview) {
       grid-area: projects;
     }
+  }
+
+  /* Entrance "settle" animation, transform + opacity only (no layout
+     properties, so nothing reflows). Two variants toggled by the inline
+     script above via a class on .bento itself:
+       - bento--enter-first: session's first dashboard load. Hero leads,
+         Experience/Projects follow on a short stagger. More expressive but
+         still quick — see bento-settle-first below.
+       - bento--enter-repeat: every later dashboard load this session. A
+         single quick fade/nudge, no stagger, reusing the same
+         motion-fade-up keyframe the rest of the site uses for content
+         swaps (see utils/motion.ts).
+     prefers-reduced-motion is already handled globally (global.css clamps
+     every animation-duration to ~0), so no separate override is needed
+     here — both variants collapse to a near-instant, transform-free swap
+     for those users automatically. */
+  @keyframes bento-settle-first {
+    from {
+      opacity: 0;
+      transform: translateY(10px) scale(0.985);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  .bento--enter-first :global(.hero-card) {
+    animation: bento-settle-first 420ms ease-out both;
+  }
+
+  .bento--enter-first :global(.experience-preview) {
+    animation: bento-settle-first 420ms ease-out 70ms both;
+  }
+
+  .bento--enter-first :global(.projects-preview) {
+    animation: bento-settle-first 420ms ease-out 140ms both;
+  }
+
+  .bento--enter-repeat :global(.hero-card),
+  .bento--enter-repeat :global(.experience-preview),
+  .bento--enter-repeat :global(.projects-preview) {
+    animation: motion-fade-up 260ms ease-out both;
   }
 </style>
