@@ -8,7 +8,16 @@ const { label, lines } = Astro.props;
 ---
 <div class="typewriter" data-lines={JSON.stringify(lines)}>
   <span class="typewriter__label">{label}</span>
-  <span class="typewriter__line"><span class="typewriter__text" aria-live="polite">{lines[0]}</span><span class="typewriter__cursor" aria-hidden="true">|</span></span>
+  <div class="typewriter__stage">
+    {lines.map((line) => (
+      // Trailing "|" mirrors the live cursor glyph appended after a fully
+      // typed line during its hold — without it, the sizer under-reserves
+      // by exactly the cursor's width and the real cursor can wrap onto an
+      // extra line the grid track never accounted for.
+      <span class="typewriter__sizer-line" aria-hidden="true">{line}|</span>
+    ))}
+    <span class="typewriter__line"><span class="typewriter__text" aria-live="polite">{lines[0]}</span><span class="typewriter__cursor" aria-hidden="true">|</span></span>
+  </div>
 </div>
 
 <style>
@@ -16,7 +25,7 @@ const { label, lines } = Astro.props;
      type and a hint of tinted surface, confined to this one element. */
   .typewriter {
     display: flex;
-    align-items: baseline;
+    align-items: flex-start;
     gap: var(--space-2);
     font-family: var(--font-mono);
     font-size: 0.9rem;
@@ -31,17 +40,36 @@ const { label, lines } = Astro.props;
     font-weight: 700;
     color: var(--color-text);
     white-space: nowrap;
+    /* Matches the stage's first line box so the label sits flush with the
+       top of the typed text instead of the whole (tallest-phrase) stage. */
+    line-height: 1.5em;
   }
 
-  /* min-width: 0 lets this flex item actually shrink below its text's
-     natural width so long lines wrap instead of overflowing the row.
-     Text and cursor are plain inline spans (not separate flex items)
-     inside here, so they flow and wrap together as one unit — the cursor
-     stays immediately after the last typed character even when the line
-     wraps, instead of parking at the far right of the flex row. */
-  .typewriter__line {
+  /* Grid-overlay sizer: every phrase (hidden) and the live typed line all
+     share grid-area 1/1, so the track height the grid reserves is the
+     tallest single phrase's wrapped height — not the sum of every phrase's
+     height, and not a hardcoded line-count guess. This is what stops the
+     bento cards below from bouncing as the ticker cycles through phrases
+     of different lengths. */
+  .typewriter__stage {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .typewriter__stage > * {
+    grid-area: 1 / 1;
     min-width: 0;
     overflow-wrap: anywhere;
+  }
+
+  /* Occupies layout (for height reservation) but never paints and is
+     pulled from the accessibility tree, so screen readers only ever hear
+     the single live `aria-live` line, not every phrase at once. */
+  .typewriter__sizer-line {
+    visibility: hidden;
   }
 
   .typewriter__cursor {
