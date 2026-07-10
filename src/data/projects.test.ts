@@ -22,7 +22,7 @@ describe("projects", () => {
       // nest-invaders' asset folder is named snack-attack (routing slug and
       // asset-folder name are intentionally independent for this project).
       const assetFolder = project.slug === "nest-invaders" ? "snack-attack" : project.slug;
-      expect(project.screenshots.cover).toBe(`/projects/${assetFolder}/cover.png`);
+      expect(project.screenshots.cover).toBe(`/projects/${assetFolder}/cover.webp`);
       expect(project.screenshots.images.length).toBeGreaterThanOrEqual(2);
     }
   });

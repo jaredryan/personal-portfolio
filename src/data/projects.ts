@@ -52,8 +52,8 @@ export const projects: Project[] = [
       { label: "GitHub", href: "https://github.com/jaredryan/Campfire", kind: "github" },
     ],
     screenshots: {
-      cover: "/projects/campfire/cover.png",
-      images: ["/projects/campfire/01.png", "/projects/campfire/02.png", "/projects/campfire/03.png"],
+      cover: "/projects/campfire/cover.webp",
+      images: ["/projects/campfire/01.webp", "/projects/campfire/02.webp", "/projects/campfire/03.webp"],
     },
   },
   {
@@ -77,8 +77,8 @@ export const projects: Project[] = [
       { label: "Private repo", href: "", kind: "private" },
     ],
     screenshots: {
-      cover: "/projects/lpa-tracker/cover.png",
-      images: ["/projects/lpa-tracker/01.png", "/projects/lpa-tracker/02.png", "/projects/lpa-tracker/03.png"],
+      cover: "/projects/lpa-tracker/cover.webp",
+      images: ["/projects/lpa-tracker/01.webp", "/projects/lpa-tracker/02.webp", "/projects/lpa-tracker/03.webp"],
     },
   },
   {
@@ -101,11 +101,11 @@ export const projects: Project[] = [
       { label: "GitHub", href: "https://github.com/jaredryan/when-bunnies-attack", kind: "github" },
     ],
     screenshots: {
-      cover: "/projects/when-bunnies-attack/cover.png",
+      cover: "/projects/when-bunnies-attack/cover.webp",
       images: [
-        "/projects/when-bunnies-attack/01.png",
-        "/projects/when-bunnies-attack/02.png",
-        "/projects/when-bunnies-attack/03.png",
+        "/projects/when-bunnies-attack/01.webp",
+        "/projects/when-bunnies-attack/02.webp",
+        "/projects/when-bunnies-attack/03.webp",
       ],
     },
   },
@@ -130,8 +130,8 @@ export const projects: Project[] = [
       { label: "GitHub", href: "https://github.com/jaredryan/snack-attack/tree/standaloneGame", kind: "github" },
     ],
     screenshots: {
-      cover: "/projects/snack-attack/cover.png",
-      images: ["/projects/snack-attack/01.png", "/projects/snack-attack/02.png"],
+      cover: "/projects/snack-attack/cover.webp",
+      images: ["/projects/snack-attack/01.webp", "/projects/snack-attack/02.webp"],
     },
   },
   {
@@ -158,8 +158,8 @@ export const projects: Project[] = [
       },
     ],
     screenshots: {
-      cover: "/projects/unity-roguelike/cover.png",
-      images: ["/projects/unity-roguelike/01.png", "/projects/unity-roguelike/02.png"],
+      cover: "/projects/unity-roguelike/cover.webp",
+      images: ["/projects/unity-roguelike/01.webp", "/projects/unity-roguelike/02.webp"],
     },
   },
 ];
