@@ -123,13 +123,17 @@ import { projects } from "../data/projects";
   /* Entrance "settle" animation, transform + opacity only (no layout
      properties, so nothing reflows). Two variants toggled by the inline
      script above via a class on .bento itself:
-       - bento--enter-first: session's first dashboard load. Hero leads,
-         Experience/Projects follow on a short stagger. More expressive but
-         still quick — see bento-settle-first below.
+       - bento--enter-first: session's first dashboard load only — never
+         repeats for a returning visitor, so this is the one place the
+         dashboard is allowed a bit more personality. Hero leads,
+         Experience/Projects follow on a clearer stagger, with a touch of
+         overshoot in the easing (see bento-settle-first below) rather than
+         a flat settle.
        - bento--enter-repeat: every later dashboard load this session. A
          single quick fade/nudge, no stagger, reusing the same
          motion-fade-up keyframe the rest of the site uses for content
-         swaps (see utils/motion.ts).
+         swaps (see utils/motion.ts) — this is the restraint that keeps the
+         more expressive first-load version from becoming annoying.
      prefers-reduced-motion is already handled globally (global.css clamps
      every animation-duration to ~0), so no separate override is needed
      here — both variants collapse to a near-instant, transform-free swap
@@ -137,7 +141,7 @@ import { projects } from "../data/projects";
   @keyframes bento-settle-first {
     from {
       opacity: 0;
-      transform: translateY(10px) scale(0.985);
+      transform: translateY(18px) scale(0.985);
     }
     to {
       opacity: 1;
@@ -146,15 +150,15 @@ import { projects } from "../data/projects";
   }
 
   .bento--enter-first :global(.hero-card) {
-    animation: bento-settle-first 420ms ease-out both;
+    animation: bento-settle-first 480ms cubic-bezier(0.22, 1.15, 0.36, 1) both;
   }
 
   .bento--enter-first :global(.experience-preview) {
-    animation: bento-settle-first 420ms ease-out 70ms both;
+    animation: bento-settle-first 480ms cubic-bezier(0.22, 1.15, 0.36, 1) 100ms both;
   }
 
   .bento--enter-first :global(.projects-preview) {
-    animation: bento-settle-first 420ms ease-out 140ms both;
+    animation: bento-settle-first 480ms cubic-bezier(0.22, 1.15, 0.36, 1) 200ms both;
   }
 
   .bento--enter-repeat :global(.hero-card),
