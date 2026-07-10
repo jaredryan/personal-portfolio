@@ -123,6 +123,7 @@ const linkButtonClass: Record<Project["links"][number]["kind"], string> = {
 
   .project-detail__media {
     width: 100%;
+    max-width: 62ch;
   }
 
   .project-detail__copy {
@@ -151,11 +152,15 @@ const linkButtonClass: Record<Project["links"][number]["kind"], string> = {
     margin-bottom: 6px;
   }
 
-  /* Two-column once there's enough room for a 350px media column and a
-     400px copy column side by side (350+400+24 gap ≈ 774px) — below that,
-     stack. Also switches the header from a centered stack (title, one-
-     liner, actions) to a row with actions aligned top-right. */
-  @media (min-width: 800px) {
+  /* Two-column once there's enough room for a media column and a copy
+     column side by side. 900px deliberately matches ProjectsSection's own
+     breakpoint for switching from the mobile grid/detail flow to the
+     desktop switcher+showcase — the two need to flip together, otherwise
+     this component's two-column layout kicks in a beat before the outer
+     chrome does, squeezing both columns inside the still-mobile-width
+     container. Also switches the header from a centered stack (title,
+     one-liner, actions) to a row with actions aligned top-right. */
+  @media (min-width: 900px) {
     .project-detail__header {
       flex-direction: row;
       align-items: flex-start;
@@ -181,12 +186,66 @@ const linkButtonClass: Record<Project["links"][number]["kind"], string> = {
 
     .project-detail__media {
       width: 50%;
+      max-width: none;
       flex-shrink: 0;
     }
 
     .project-detail__copy {
       flex: 1;
       min-width: 280px;
+    }
+  }
+
+  /* Tall-tablet override: at iPad-portrait-ish widths with enough vertical
+     room, the two-column layout above squeezes the media column and wastes
+     the extra height, so this reverts to the same stacked layout phones
+     use — just with a lot more room for the carousel to breathe. Starts at
+     the same 900px the two-column block above does (below that, the base
+     stacked rules already apply on their own). Needs both width and height
+     together: width alone can't distinguish an iPad-portrait window from a
+     same-width but shorter laptop/tablet-landscape one, which should keep
+     the two-column layout. */
+  @media (min-width: 900px) and (max-width: 1180px) and (min-height: 850px) {
+    .project-detail__header {
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      gap: var(--space-4);
+    }
+
+    .project-detail__intro {
+      align-items: center;
+      text-align: center;
+    }
+
+    .project-detail__links {
+      flex-shrink: 1;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .project-detail__main {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .project-detail__media {
+      width: 100%;
+      max-width: 62ch;
+      flex-shrink: 1;
+    }
+
+    /* Capped and centered, unlike the media above which keeps the full
+       container width — the Built/Interesting because paragraphs aren't
+       wrapped in .prose like the one-liner is, so left uncapped at these
+       wider-than-phone containers they'd run to an uncomfortable line
+       length. */
+    .project-detail__copy {
+      flex: 0 1 auto;
+      min-width: 0;
+      width: 100%;
+      max-width: 640px;
+      margin-inline: auto;
     }
   }
 
