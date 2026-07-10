@@ -12,7 +12,7 @@ interface Props {
 }
 
 const { projects } = Astro.props;
-const defaultProject = projects.find((p) => p.slug === "lpa-tracker") ?? projects[0];
+const defaultProject = projects[0];
 ---
 <div class="projects-preview" id="projects-preview">
   <div class="projects-preview__header">

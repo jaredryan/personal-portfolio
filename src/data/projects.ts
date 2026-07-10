@@ -32,31 +32,6 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    slug: "lpa-tracker",
-    title: "LPA Tracker Demo",
-    icon: "lucide:file-search",
-    switcherLabel: "LPA Tracker",
-    oneLiner:
-      "AI document intelligence demo for extracting fund provisions, supporting review, and turning deadlines into tasks.",
-    built:
-      "Built a document review workspace around uploaded fund documents, extracted provisions, definitions, deadlines, and task follow-up. The current demo is seeded and review-focused, with the AI/OCR pipeline intentionally deferred.",
-    interestingBecause:
-      "It turns dense legal documents into a structured workflow where findings can be reviewed, edited, sourced, and acted on.",
-    previewPills: ["Next.js", "TypeScript", "PostgreSQL", "Prisma", "Auth.js", "Document Workflows"],
-    detailPills: [
-      "Next.js", "TypeScript", "PostgreSQL", "Prisma", "Neon", "Auth.js",
-      "Tailwind", "shadcn/ui", "Document Workflows", "Built with AI",
-    ],
-    links: [
-      { label: "Demo available on request", href: "", kind: "request" },
-      { label: "Private repo", href: "", kind: "private" },
-    ],
-    screenshots: {
-      cover: "/projects/lpa-tracker/cover.svg",
-      images: ["/projects/lpa-tracker/01.svg", "/projects/lpa-tracker/02.svg", "/projects/lpa-tracker/03.svg"],
-    },
-  },
-  {
     slug: "campfire",
     title: "Campfire",
     icon: "lucide:flame",
@@ -77,8 +52,86 @@ export const projects: Project[] = [
       { label: "GitHub", href: "https://github.com/jaredryan/Campfire", kind: "github" },
     ],
     screenshots: {
-      cover: "/projects/campfire/cover.svg",
-      images: ["/projects/campfire/01.svg", "/projects/campfire/02.svg", "/projects/campfire/03.svg"],
+      cover: "/projects/campfire/cover.png",
+      images: ["/projects/campfire/01.png", "/projects/campfire/02.png", "/projects/campfire/03.png"],
+    },
+  },
+  {
+    slug: "lpa-tracker",
+    title: "LPA Tracker Demo",
+    icon: "lucide:file-search",
+    switcherLabel: "LPA Tracker",
+    oneLiner:
+      "AI document intelligence demo for extracting fund provisions, supporting review, and turning deadlines into tasks.",
+    built:
+      "Built a document review workspace around uploaded fund documents, extracted provisions, definitions, deadlines, and task follow-up. The current demo is seeded and review-focused, with the AI/OCR pipeline intentionally deferred.",
+    interestingBecause:
+      "It turns dense legal documents into a structured workflow where findings can be reviewed, edited, sourced, and acted on.",
+    previewPills: ["Next.js", "TypeScript", "PostgreSQL", "Prisma", "Auth.js", "Document Workflows"],
+    detailPills: [
+      "Next.js", "TypeScript", "PostgreSQL", "Prisma", "Neon", "Auth.js",
+      "Tailwind", "shadcn/ui", "Document Workflows", "Built with AI",
+    ],
+    links: [
+      { label: "Demo available on request", href: "", kind: "request" },
+      { label: "Private repo", href: "", kind: "private" },
+    ],
+    screenshots: {
+      cover: "/projects/lpa-tracker/cover.png",
+      images: ["/projects/lpa-tracker/01.png", "/projects/lpa-tracker/02.png", "/projects/lpa-tracker/03.png"],
+    },
+  },
+  {
+    slug: "when-bunnies-attack",
+    title: "When Bunnies Attack",
+    icon: "lucide:rabbit",
+    switcherLabel: "Bunnies",
+    oneLiner: "Playful text-based React RPG with exploration, inventory, combat, branching choices, and bunnies.",
+    built:
+      "Built a compact RPG system with exploration actions, environment interactions, inventory use, battle flow, dialogue, and state-driven progression.",
+    interestingBecause:
+      "It turns a tiny joke premise into a real interaction-design exercise across game state, choice, and UI feedback.",
+    previewPills: ["React", "JavaScript", "Combat Logic", "Exploration", "Inventory", "Branching Dialogue"],
+    detailPills: [
+      "React", "JavaScript", "CSS", "Game State", "Inventory", "Combat Logic",
+      "Exploration", "Branching Dialogue", "Responsive UI",
+    ],
+    links: [
+      { label: "Demo", href: "https://whenbunniesattack.netlify.app/", kind: "demo" },
+      { label: "GitHub", href: "https://github.com/jaredryan/when-bunnies-attack", kind: "github" },
+    ],
+    screenshots: {
+      cover: "/projects/when-bunnies-attack/cover.png",
+      images: [
+        "/projects/when-bunnies-attack/01.png",
+        "/projects/when-bunnies-attack/02.png",
+        "/projects/when-bunnies-attack/03.png",
+      ],
+    },
+  },
+  {
+    slug: "nest-invaders",
+    title: "Snack Attack",
+    icon: "lucide:chef-hat",
+    switcherLabel: "Snack Attack",
+    oneLiner:
+      "Galaga-inspired React arcade shooter with waves, levels, collision logic, scoring, and responsive controls.",
+    built:
+      "Built a standalone arcade game with enemy movement, shooting, collision checks, level progression, scoring, and touch-friendly responsive UI.",
+    interestingBecause:
+      "It uses a lightweight React app structure to deliver a complete browser-playable arcade loop.",
+    previewPills: ["React", "JavaScript", "Game Loops", "Collision Logic", "Responsive Controls", "Animation"],
+    detailPills: [
+      "React", "JavaScript", "Game Loops", "Collision Logic", "Responsive UI",
+      "Responsive Controls", "CSS", "Animation",
+    ],
+    links: [
+      { label: "Demo", href: "https://snackattackgame.netlify.app/", kind: "demo" },
+      { label: "GitHub", href: "https://github.com/jaredryan/snack-attack/tree/standaloneGame", kind: "github" },
+    ],
+    screenshots: {
+      cover: "/projects/snack-attack/cover.png",
+      images: ["/projects/snack-attack/01.png", "/projects/snack-attack/02.png"],
     },
   },
   {
@@ -105,69 +158,8 @@ export const projects: Project[] = [
       },
     ],
     screenshots: {
-      cover: "/projects/unity-roguelike/cover.svg",
-      images: [
-        "/projects/unity-roguelike/01.svg",
-        "/projects/unity-roguelike/02.svg",
-        "/projects/unity-roguelike/03.svg",
-      ],
-    },
-  },
-  {
-    slug: "nest-invaders",
-    title: "Snack Attack",
-    icon: "lucide:chef-hat",
-    switcherLabel: "Snack Attack",
-    oneLiner:
-      "Galaga-inspired React arcade shooter with waves, levels, collision logic, scoring, and responsive controls.",
-    built:
-      "Built a standalone arcade game with enemy movement, shooting, collision checks, level progression, scoring, and touch-friendly responsive UI.",
-    interestingBecause:
-      "It uses a lightweight React app structure to deliver a complete browser-playable arcade loop.",
-    previewPills: ["React", "JavaScript", "Game Loops", "Collision Logic", "Responsive Controls", "Animation"],
-    detailPills: [
-      "React", "JavaScript", "Game Loops", "Collision Logic", "Responsive UI",
-      "Responsive Controls", "CSS", "Animation",
-    ],
-    links: [
-      { label: "Demo", href: "https://snackattackgame.netlify.app/", kind: "demo" },
-      { label: "GitHub", href: "https://github.com/jaredryan/snack-attack/tree/standaloneGame", kind: "github" },
-    ],
-    screenshots: {
-      cover: "/projects/nest-invaders/cover.svg",
-      images: [
-        "/projects/nest-invaders/01.svg",
-        "/projects/nest-invaders/02.svg",
-        "/projects/nest-invaders/03.svg",
-      ],
-    },
-  },
-  {
-    slug: "when-bunnies-attack",
-    title: "When Bunnies Attack",
-    icon: "lucide:rabbit",
-    switcherLabel: "Bunnies",
-    oneLiner: "Playful text-based React RPG with exploration, inventory, combat, branching choices, and bunnies.",
-    built:
-      "Built a compact RPG system with exploration actions, environment interactions, inventory use, battle flow, dialogue, and state-driven progression.",
-    interestingBecause:
-      "It turns a tiny joke premise into a real interaction-design exercise across game state, choice, and UI feedback.",
-    previewPills: ["React", "JavaScript", "Combat Logic", "Exploration", "Inventory", "Branching Dialogue"],
-    detailPills: [
-      "React", "JavaScript", "CSS", "Game State", "Inventory", "Combat Logic",
-      "Exploration", "Branching Dialogue", "Responsive UI",
-    ],
-    links: [
-      { label: "Demo", href: "https://whenbunniesattack.netlify.app/", kind: "demo" },
-      { label: "GitHub", href: "https://github.com/jaredryan/when-bunnies-attack", kind: "github" },
-    ],
-    screenshots: {
-      cover: "/projects/when-bunnies-attack/cover.svg",
-      images: [
-        "/projects/when-bunnies-attack/01.svg",
-        "/projects/when-bunnies-attack/02.svg",
-        "/projects/when-bunnies-attack/03.svg",
-      ],
+      cover: "/projects/unity-roguelike/cover.png",
+      images: ["/projects/unity-roguelike/01.png", "/projects/unity-roguelike/02.png"],
     },
   },
 ];

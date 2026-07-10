@@ -43,7 +43,11 @@ const linkButtonClass: Record<Project["links"][number]["kind"], string> = {
 
   <div class="project-detail__main">
     <div class="project-detail__media">
-      <ProjectCarousel images={project.screenshots.images} alt={project.title} icon={project.icon} />
+      <ProjectCarousel
+        images={[project.screenshots.cover, ...project.screenshots.images]}
+        alt={project.title}
+        icon={project.icon}
+      />
     </div>
 
     <div class="project-detail__copy">

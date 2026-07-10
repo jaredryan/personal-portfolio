@@ -3083,7 +3083,7 @@ declare -A titles=(
   [lpa-tracker]="LPA Tracker"
   [campfire]="Campfire"
   [unity-roguelike]="Unity 2D Roguelike"
-  [nest-invaders]="Snack Attack"
+  [snack-attack]="Snack Attack"
   [when-bunnies-attack]="When Bunnies Attack"
 )
 
