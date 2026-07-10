@@ -28,6 +28,12 @@ export type Project = {
     cover: string;
     images: string[];
   };
+  /** Optional playable embed — when set, a Play button appears on the
+   * screenshot carousel and opens this URL in a large lightbox iframe.
+   * Reserved for the three actual game projects; omit for everything else. */
+  playableEmbedUrl?: string;
+  playableLabel?: string;
+  playableIframeTitle?: string;
 };
 
 export const projects: Project[] = [
@@ -108,6 +114,9 @@ export const projects: Project[] = [
         "/projects/when-bunnies-attack/03.webp",
       ],
     },
+    playableEmbedUrl: "https://whenbunniesattack.netlify.app/",
+    playableLabel: "Play When Bunnies Attack",
+    playableIframeTitle: "When Bunnies Attack — playable game",
   },
   {
     slug: "nest-invaders",
@@ -133,6 +142,9 @@ export const projects: Project[] = [
       cover: "/projects/snack-attack/cover.webp",
       images: ["/projects/snack-attack/01.webp", "/projects/snack-attack/02.webp"],
     },
+    playableEmbedUrl: "https://snackattackgame.netlify.app/",
+    playableLabel: "Play Snack Attack",
+    playableIframeTitle: "Snack Attack — playable game",
   },
   {
     slug: "unity-roguelike",
@@ -161,5 +173,9 @@ export const projects: Project[] = [
       cover: "/projects/unity-roguelike/cover.webp",
       images: ["/projects/unity-roguelike/01.webp", "/projects/unity-roguelike/02.webp"],
     },
+    // No playableEmbedUrl: play.unity.com's embed gets stuck behind its own
+    // cookie-consent gate inside an iframe, so Play would be a dead end.
+    // Demo link above still points there directly. Re-add once there's a
+    // cleaner embed source (e.g. self-hosted).
   },
 ];

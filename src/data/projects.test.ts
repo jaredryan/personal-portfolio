@@ -26,4 +26,19 @@ describe("projects", () => {
       expect(project.screenshots.images.length).toBeGreaterThanOrEqual(2);
     }
   });
+
+  it("only wires a playable embed for game projects with an embeddable demo", () => {
+    // unity-roguelike is intentionally excluded — play.unity.com's embed
+    // gets stuck behind its own cookie-consent gate inside an iframe.
+    const gameSlugs = ["when-bunnies-attack", "nest-invaders"];
+    for (const project of projects) {
+      if (gameSlugs.includes(project.slug)) {
+        expect(project.playableEmbedUrl?.length).toBeGreaterThan(0);
+        expect(project.playableLabel?.length).toBeGreaterThan(0);
+        expect(project.playableIframeTitle?.length).toBeGreaterThan(0);
+      } else {
+        expect(project.playableEmbedUrl).toBeUndefined();
+      }
+    }
+  });
 });

@@ -49,7 +49,7 @@ const hasHeadshot = fs.existsSync(path.join(process.cwd(), "public", headshotSrc
     )}
   </div>
 
-  <TypewriterTicker label={profile.currentlyLabel} lines={profile.currentlyLines} />
+  <TypewriterTicker label={profile.currentlyLabel} lines={profile.currentlyLines} bonusLines={profile.bonusLines} />
 </article>
 
 <style>

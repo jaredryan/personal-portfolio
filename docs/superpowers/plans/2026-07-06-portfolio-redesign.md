@@ -249,6 +249,7 @@ git commit -m "chore: scaffold Astro + TypeScript project with latest stable dep
   --space-3: 0.75rem;
   --space-4: 1rem;
   --space-6: 1.5rem;
+  --space-7: 1.75rem;
   --space-8: 2rem;
   --space-12: 3rem;
 

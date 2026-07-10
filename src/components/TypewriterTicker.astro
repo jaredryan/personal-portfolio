@@ -2,14 +2,27 @@
 interface Props {
   label: string;
   lines: string[];
+  /** Hidden lines queued in on click/tap/keyboard-activation — never part
+   * of the automatic rotation, so they still need to be included below in
+   * the sizer pass (otherwise showing one would jitter the reserved
+   * height), but not in the visible/live rotation markup. */
+  bonusLines?: string[];
 }
 
-const { label, lines } = Astro.props;
+const { label, lines, bonusLines = [] } = Astro.props;
+const sizerLines = [...lines, ...bonusLines];
+const buttonLabel = `${label.replace(/:$/, "")} ticker — activate for a bonus line`;
 ---
-<div class="typewriter" data-lines={JSON.stringify(lines)}>
-  <span class="typewriter__label">{label}</span>
+<button
+  type="button"
+  class="typewriter"
+  data-lines={JSON.stringify(lines)}
+  data-bonus-lines={JSON.stringify(bonusLines)}
+  aria-label={buttonLabel}
+>
+  <span class="typewriter__label" aria-hidden="true">{label}</span>
   <div class="typewriter__stage">
-    {lines.map((line) => (
+    {sizerLines.map((line) => (
       // Trailing "|" mirrors the live cursor glyph appended after a fully
       // typed line during its hold — without it, the sizer under-reserves
       // by exactly the cursor's width and the real cursor can wrap onto an
@@ -18,12 +31,22 @@ const { label, lines } = Astro.props;
     ))}
     <span class="typewriter__line"><span class="typewriter__text" aria-live="polite">{lines[0]}</span><span class="typewriter__cursor" aria-hidden="true">|</span></span>
   </div>
-</div>
+</button>
 
 <style>
   /* A quiet "status/log" treatment, not a fake terminal — just monospace
-     type and a hint of tinted surface, confined to this one element. */
+     type and a hint of tinted surface, confined to this one element.
+     Real <button> underneath a hidden click easter egg — deliberately not
+     styled as an obvious button (no hover state, no border change) so it
+     stays a quiet, slightly-hidden affordance rather than an advertised
+     control. cursor: pointer is the only hint. */
   .typewriter {
+    appearance: none;
+    width: 100%;
+    margin: 0;
+    border: none;
+    text-align: left;
+    cursor: pointer;
     display: flex;
     align-items: flex-start;
     gap: var(--space-2);
@@ -34,6 +57,17 @@ const { label, lines } = Astro.props;
     padding: var(--space-2) var(--space-3);
     background: var(--color-surface-alt);
     border-radius: var(--radius-sm);
+  }
+
+  /* Subtle acknowledgement pulse for the first two accepted clicks only —
+     a brief teal tint, not a persistent style change. */
+  @keyframes typewriter-pulse {
+    0%, 100% { background-color: var(--color-surface-alt); }
+    40% { background-color: color-mix(in srgb, var(--color-accent-teal) 18%, var(--color-surface-alt)); }
+  }
+
+  .typewriter--pulse {
+    animation: typewriter-pulse 700ms ease-out;
   }
 
   .typewriter__label {
@@ -89,10 +123,11 @@ const { label, lines } = Astro.props;
 </style>
 
 <script>
-  const root = document.querySelector<HTMLElement>(".typewriter");
+  const root = document.querySelector<HTMLButtonElement>(".typewriter");
   const textEl = root?.querySelector<HTMLElement>(".typewriter__text");
   const cursorEl = root?.querySelector<HTMLElement>(".typewriter__cursor");
   const lines: string[] = JSON.parse(root?.dataset.lines ?? "[]");
+  const bonusLines: string[] = JSON.parse(root?.dataset.bonusLines ?? "[]");
 
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -102,6 +137,10 @@ const { label, lines } = Astro.props;
     const HOLD_MS = 1800;
     let lineIndex = 0;
     let timeoutId: ReturnType<typeof setTimeout>;
+    // Queued bonus lines wait here until the current line finishes its
+    // natural type/hold/delete cycle — never interrupts what's mid-typing.
+    const queuedBonusLines: string[] = [];
+    let bonusClickCount = 0;
 
     function typeLine(line: string, charIndex: number) {
       textEl!.textContent = line.slice(0, charIndex);
@@ -112,13 +151,22 @@ const { label, lines } = Astro.props;
       }
     }
 
+    function advanceToNextLine() {
+      const bonusLine = queuedBonusLines.shift();
+      if (bonusLine !== undefined) {
+        timeoutId = setTimeout(() => typeLine(bonusLine, 0), TYPE_MS);
+        return;
+      }
+      lineIndex = (lineIndex + 1) % lines.length;
+      timeoutId = setTimeout(() => typeLine(lines[lineIndex], 0), TYPE_MS);
+    }
+
     function deleteLine(line: string, charIndex: number) {
       textEl!.textContent = line.slice(0, charIndex);
       if (charIndex > 0) {
         timeoutId = setTimeout(() => deleteLine(line, charIndex - 1), DELETE_MS);
       } else {
-        lineIndex = (lineIndex + 1) % lines.length;
-        timeoutId = setTimeout(() => typeLine(lines[lineIndex], 0), TYPE_MS);
+        advanceToNextLine();
       }
     }
 
@@ -129,6 +177,19 @@ const { label, lines } = Astro.props;
       if (!document.hidden) {
         typeLine(lines[lineIndex], 0);
       }
+    });
+
+    // First two accepted activations queue a bonus line and give a subtle
+    // acknowledgement pulse; third and later activations are silently
+    // ignored per spec.
+    root.addEventListener("click", () => {
+      bonusClickCount += 1;
+      if (bonusClickCount > 2) return;
+      const bonusLine = bonusLines[bonusClickCount - 1];
+      if (bonusLine) queuedBonusLines.push(bonusLine);
+      root.classList.remove("typewriter--pulse");
+      void root.offsetWidth;
+      root.classList.add("typewriter--pulse");
     });
   } else if (cursorEl && prefersReducedMotion) {
     cursorEl.style.display = "none";

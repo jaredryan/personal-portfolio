@@ -48,6 +48,9 @@ const linkButtonClass: Record<Project["links"][number]["kind"], string> = {
         alt={project.title}
         icon={project.icon}
         autoRotateMs={0}
+        playableEmbedUrl={project.playableEmbedUrl}
+        playableLabel={project.playableLabel}
+        playableIframeTitle={project.playableIframeTitle}
       />
     </div>
 
@@ -115,15 +118,11 @@ const linkButtonClass: Record<Project["links"][number]["kind"], string> = {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--space-4);
+    gap: var(--space-6);
   }
 
-  /* Constrained so the carousel stays prominent without dominating the
-     panel — the expand/lightbox button exists precisely so the inline
-     copy doesn't need to be huge. */
   .project-detail__media {
     width: 100%;
-    max-width: 480px;
   }
 
   .project-detail__copy {
@@ -181,7 +180,7 @@ const linkButtonClass: Record<Project["links"][number]["kind"], string> = {
     }
 
     .project-detail__media {
-      width: min(50%, 480px);
+      width: 50%;
       flex-shrink: 0;
     }
 

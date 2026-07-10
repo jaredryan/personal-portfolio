@@ -12,9 +12,17 @@ interface Props {
    * name is already announced by the tab/heading), so it's aria-hidden
    * rather than adding a redundant label. */
   icon?: string;
+  /** When set, a Play button appears next to Expand and opens the lightbox
+   * in "game" mode with a live iframe of this URL instead of a screenshot.
+   * The iframe is not created until Play is clicked. */
+  playableEmbedUrl?: string;
+  playableLabel?: string;
+  playableIframeTitle?: string;
 }
 
-const { images, alt, autoRotateMs = 6000, icon } = Astro.props;
+const { images, alt, autoRotateMs = 6000, icon, playableEmbedUrl, playableLabel, playableIframeTitle } = Astro.props;
+const playLabel = playableLabel ?? `Play ${alt}`;
+const playIframeTitle = playableIframeTitle ?? `${alt} — playable game`;
 ---
 <div class="carousel" data-carousel data-autorotate-ms={autoRotateMs}>
   <div class="carousel__viewport">
@@ -30,9 +38,16 @@ const { images, alt, autoRotateMs = 6000, icon } = Astro.props;
         height="600"
       />
     ))}
-    <button type="button" class="carousel__expand" data-carousel-expand aria-label="Expand screenshot">
-      <Icon name="lucide:arrow-up-right" aria-hidden="true" />
-    </button>
+    <div class="carousel__viewport-actions">
+      {playableEmbedUrl && (
+        <button type="button" class="carousel__action-btn" data-carousel-play data-embed-url={playableEmbedUrl} aria-label={playLabel}>
+          <Icon name="lucide:play" aria-hidden="true" />
+        </button>
+      )}
+      <button type="button" class="carousel__action-btn" data-carousel-expand aria-label="Expand screenshot">
+        <Icon name="lucide:arrow-up-right" aria-hidden="true" />
+      </button>
+    </div>
   </div>
 
   <div class="carousel__lightbox" data-carousel-lightbox hidden>
@@ -42,13 +57,18 @@ const { images, alt, autoRotateMs = 6000, icon } = Astro.props;
         <Icon name="lucide:chevron-left" aria-hidden="true" />
       </button>
     )}
-    <div class="carousel__lightbox-panel" role="dialog" aria-modal="true" aria-label={`${alt} screenshot, expanded view`}>
+    <div class="carousel__lightbox-panel" data-lightbox-panel role="dialog" aria-modal="true" aria-label={`${alt} screenshot, expanded view`} data-label-screenshot={`${alt} screenshot, expanded view`} data-label-game={playLabel}>
       <button type="button" class="carousel__lightbox-close" data-lightbox-close aria-label="Close expanded view">
         <Icon name="lucide:x" aria-hidden="true" />
       </button>
       <img data-lightbox-img alt="" />
       {images.length > 1 && (
         <p class="carousel__lightbox-caption" data-lightbox-caption aria-live="polite"></p>
+      )}
+      {playableEmbedUrl && (
+        <div class="carousel__lightbox-game" data-lightbox-game hidden>
+          <iframe data-lightbox-iframe title={playIframeTitle} allow="gamepad; fullscreen" allowfullscreen></iframe>
+        </div>
       )}
     </div>
     {images.length > 1 && (
@@ -128,10 +148,16 @@ const { images, alt, autoRotateMs = 6000, icon } = Astro.props;
     opacity: 0;
   }
 
-  .carousel__expand {
+  .carousel__viewport-actions {
     position: absolute;
     top: var(--space-2);
     right: var(--space-2);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .carousel__action-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -144,12 +170,12 @@ const { images, alt, autoRotateMs = 6000, icon } = Astro.props;
     cursor: pointer;
   }
 
-  .carousel__expand :global(svg) {
+  .carousel__action-btn :global(svg) {
     width: 1.125rem;
     height: 1.125rem;
   }
 
-  .carousel__expand:hover {
+  .carousel__action-btn:hover {
     border-color: var(--color-accent-teal);
     color: var(--color-accent-teal);
   }
@@ -206,6 +232,61 @@ const { images, alt, autoRotateMs = 6000, icon } = Astro.props;
     height: auto;
     border-radius: var(--radius-md);
     object-fit: contain;
+  }
+
+  /* Game mode swaps the screenshot for a large iframe. Unlike the image
+     (which is sized by its own intrinsic aspect ratio via object-fit), a
+     game has no natural size, so the panel itself becomes the one explicit
+     box — game/iframe below just stretch to fill it via flex. Giving the
+     panel and the iframe each their own independent vw/vh calculation
+     (as this used to do) let them drift a pixel apart at some viewport
+     sizes, leaving the iframe's own background visible as a seam along one
+     edge. Sized generously (bigger than the screenshot panel's cap) since
+     gameplay needs real room. */
+  .carousel__lightbox-panel--game {
+    display: flex;
+    width: min(1000px, 90vw);
+    height: min(700px, 82vh);
+  }
+
+  .carousel__lightbox-game {
+    width: 100%;
+    height: 100%;
+    flex: 1;
+  }
+
+  .carousel__lightbox-game iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: var(--radius-md);
+  }
+
+  /* Below tablet width, let the lightbox use basically the full screen —
+     the fixed vw/vh caps above leave far more unused edge space than a
+     small phone viewport can spare. The outer lightbox padding is zeroed
+     out too, so --space-7 (on the panel itself, on all sides) is the only
+     margin, sized just large enough that the close button's overhang never
+     gets clipped by the screen edge. */
+  @media (max-width: 767px) {
+    .carousel__lightbox {
+      padding: 0;
+    }
+
+    .carousel__lightbox-panel {
+      max-width: calc(100vw - (var(--space-7) * 2));
+      max-height: calc(100vh - (var(--space-7) * 2));
+    }
+
+    .carousel__lightbox-panel img {
+      max-height: calc(100vh - (var(--space-7) * 2));
+    }
+
+    .carousel__lightbox-panel--game {
+      width: calc(100vw - (var(--space-7) * 2));
+      height: calc(100vh - (var(--space-7) * 2));
+    }
   }
 
   .carousel__lightbox-close {
@@ -355,15 +436,21 @@ const { images, alt, autoRotateMs = 6000, icon } = Astro.props;
     const panel = carousel.closest<HTMLElement>("[data-project-detail], [data-project-detail-showcase]");
     const captionText = carousel.querySelector<HTMLElement>("[data-carousel-caption-text]");
     const expandBtn = carousel.querySelector<HTMLButtonElement>("[data-carousel-expand]");
+    const playBtn = carousel.querySelector<HTMLButtonElement>("[data-carousel-play]");
     const lightbox = carousel.querySelector<HTMLElement>("[data-carousel-lightbox]");
+    const lightboxPanel = lightbox?.querySelector<HTMLElement>("[data-lightbox-panel]");
     const lightboxImg = lightbox?.querySelector<HTMLImageElement>("[data-lightbox-img]");
     const lightboxClose = lightbox?.querySelector<HTMLButtonElement>("[data-lightbox-close]");
     const lightboxBackdrop = lightbox?.querySelector<HTMLButtonElement>("[data-lightbox-backdrop]");
     const lightboxPrev = lightbox?.querySelector<HTMLButtonElement>("[data-lightbox-prev]");
     const lightboxNext = lightbox?.querySelector<HTMLButtonElement>("[data-lightbox-next]");
     const lightboxCaption = lightbox?.querySelector<HTMLElement>("[data-lightbox-caption]");
+    const lightboxGame = lightbox?.querySelector<HTMLElement>("[data-lightbox-game]");
+    const lightboxIframe = lightboxGame?.querySelector<HTMLIFrameElement>("[data-lightbox-iframe]");
+    const playableEmbedUrl = playBtn?.dataset.embedUrl;
     let current = 0;
     let timerId: ReturnType<typeof setInterval> | undefined;
+    let lightboxOpener: HTMLButtonElement | null = null;
 
     function isPanelVisible(): boolean {
       return !panel || !panel.hidden;
@@ -441,8 +528,12 @@ const { images, alt, autoRotateMs = 6000, icon } = Astro.props;
       if (lightboxCaption) lightboxCaption.textContent = `Preview ${current + 1} of ${slides.length}`;
     }
 
+    function isGameModeActive(): boolean {
+      return !!lightboxGame && !lightboxGame.hidden;
+    }
+
     function lightboxShow(direction: "next" | "previous") {
-      if (slides.length < 2) return;
+      if (slides.length < 2 || isGameModeActive()) return;
       show(direction === "next" ? current + 1 : current - 1, direction);
       syncLightbox();
     }
@@ -474,10 +565,40 @@ const { images, alt, autoRotateMs = 6000, icon } = Astro.props;
       }
     }
 
-    function openLightbox() {
-      if (!lightbox || !lightboxImg) return;
+    // Toggles which lightbox content is visible without touching `hidden` on
+    // the lightbox root itself — screenshot mode shows the image plus its
+    // nav arrows/dots-adjacent caption, game mode shows only the iframe and
+    // its close button, per the spec's requirement that game mode hide every
+    // screenshot-specific control.
+    function setLightboxMode(mode: "screenshot" | "game") {
+      const isGame = mode === "game";
+      if (lightboxImg) lightboxImg.hidden = isGame;
+      if (lightboxGame) lightboxGame.hidden = !isGame;
+      if (lightboxCaption) lightboxCaption.hidden = isGame;
+      if (lightboxPrev) lightboxPrev.hidden = isGame;
+      if (lightboxNext) lightboxNext.hidden = isGame;
+      if (lightboxPanel) {
+        // The panel is the one element that gets an explicit size in game
+        // mode (see CSS) — the iframe just stretches to fill it via flex,
+        // so the two can never drift a pixel apart.
+        lightboxPanel.classList.toggle("carousel__lightbox-panel--game", isGame);
+        const label = isGame ? lightboxPanel.dataset.labelGame : lightboxPanel.dataset.labelScreenshot;
+        if (label) lightboxPanel.setAttribute("aria-label", label);
+      }
+    }
+
+    function openLightbox(mode: "screenshot" | "game", opener: HTMLButtonElement | null) {
+      if (!lightbox) return;
+      lightboxOpener = opener;
       lightbox.hidden = false;
-      syncLightbox();
+      setLightboxMode(mode);
+      if (mode === "game") {
+        // Iframe only gets a src (and therefore only starts loading the
+        // game) the moment Play is clicked — never on page load.
+        if (lightboxIframe && playableEmbedUrl) lightboxIframe.src = playableEmbedUrl;
+      } else if (lightboxImg) {
+        syncLightbox();
+      }
       stopAutoRotate();
       document.addEventListener("keydown", onLightboxKeydown);
       lightboxClose?.focus();
@@ -486,12 +607,17 @@ const { images, alt, autoRotateMs = 6000, icon } = Astro.props;
     function closeLightbox() {
       if (!lightbox) return;
       lightbox.hidden = true;
+      // Unload the game rather than leaving it running (and making sound)
+      // off-screen behind the closed lightbox.
+      if (lightboxIframe) lightboxIframe.src = "";
+      setLightboxMode("screenshot");
       document.removeEventListener("keydown", onLightboxKeydown);
       startAutoRotate();
-      expandBtn?.focus();
+      (lightboxOpener ?? expandBtn)?.focus();
     }
 
-    expandBtn?.addEventListener("click", openLightbox);
+    expandBtn?.addEventListener("click", () => openLightbox("screenshot", expandBtn));
+    playBtn?.addEventListener("click", () => openLightbox("game", playBtn));
     lightboxClose?.addEventListener("click", closeLightbox);
     lightboxBackdrop?.addEventListener("click", closeLightbox);
     lightboxPrev?.addEventListener("click", () => lightboxShow("previous"));

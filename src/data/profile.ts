@@ -10,6 +10,11 @@ export type Profile = {
   };
   currentlyLabel: string;
   currentlyLines: string[];
+  /** Hidden bonus lines queued into the typewriter ticker when its clickable
+   * area is activated — never part of the normal automatic rotation. First
+   * activation queues bonusLines[0], second queues bonusLines[1], third and
+   * later activations are no-ops. */
+  bonusLines: string[];
 };
 
 export const profile: Profile = {
@@ -33,5 +38,9 @@ export const profile: Profile = {
     "When I don’t have the energy, same chair — Netflix, Webtoons, and pretending one more episode was planned.",
     "I’m serious about clean code, but not very serious about pretending to be serious.",
     "Somehow, even meal prep turned into a modular system of bases, sauces, vegetables, and macros.",
+  ],
+  bonusLines: [
+    "Congrats, you found the hidden state. And you thought you could pull one over on me.",
+    "Once again: congratulations.",
   ],
 };
