@@ -107,12 +107,36 @@ Jared's idea: instead of the current spine (Experience) / tab-switcher (Projects
 
 **Status: a real, sketchable idea for a future session. Not built, not scoped into a plan yet.**
 
+### More signature-interaction ideas
+
+Follow-up to "wow factor" idea #1 above — asked for more directions in the same vein (genuinely tied to Jared's actual content, not a generic decorative effect):
+
+1. **A rare "bonus" typewriter line, surfaced by clicking the ticker text.** The ticker already has personality nobody's forced to read. Someone who lingers or taps the text could occasionally surface a 7th line that never appears in the normal rotation — a small reward for attentive readers specifically (which, for a portfolio, are the recruiters who matter most). Cheap to build, user-triggered so it doesn't fight the "no autoplay" rule, and it's extending something already written rather than adding a new mechanic.
+2. **Give empty/error states the ticker's own voice instead of generic copy.** Almost no portfolio bothers with this — if a Demo link were ever down, or there's any dead-end state, having it sound like Jared wrote it ("First things first: this link's not built yet") instead of a generic 404 reinforces personality without any new UI. Very low effort, genuinely distinctive because basically nobody does it.
+3. **Make the "meal prep turned into a modular system" ticker line structurally literal somewhere, subtly.** That line is really a joke about Jared — he turns everything into reusable systems. No fully-formed version of this yet — the instinct is some UI element that visibly reveals its own "modularity" on interaction, not decoration for its own sake but a wink that's actually about the trait the joke describes. Needs more thought before it's buildable; a direction, not a spec.
+
+Reaffirmed: of everything discussed in this whole document, the **playable game embeds** (idea #3 under "wow factor" above) are still the one with the best effort-to-impact ratio — these three are "nice detail," that one's "actually different from every other portfolio a recruiter will see today."
+
+### Playable game embeds — concrete walkthrough
+
+Jared had trouble picturing the game-embed idea abstractly, so this is the concrete version, mapped onto the exact current UI:
+
+- **Where it lives:** the media box in a project's detail view — same spot as the current screenshot carousel, same ~480px, 16:10 box. No new layout, no new page real estate.
+- **The trigger:** there's already one small icon button in the corner of the screenshot (the expand-to-lightbox arrow). For the three game projects only (Bunnies, Snack Attack, Unity 2D Roguelike — the ones with no backend), a second small button would sit next to it: a ▶ Play icon, same visual family, same size.
+- **The flip:** click Play, and the *same box* — same position, same dimensions, no layout jump — swaps its content from the static screenshot carousel to a live iframe of the actual game. Like flipping a card over, not opening something new. Whatever URL the "Demo" link already points to (presumably the live hosted build) is what loads inline. A small "◀ Back to screenshots" control in that same corner returns to the normal carousel.
+- **The framing detail that sells it:** since it's now live and interactive instead of a picture, something small should signal that shift — maybe the box gets a slightly different border treatment while in play mode, or a one-line hint appears under it the first time ("Click into the game, then use the arrow keys") — matching how the rest of the site's copy already explains itself in plain terms.
+- **Explicitly out of scope:** Campfire and LPA Tracker never get a Play button — they're real apps with auth/data, not appropriate to embed. This is realistically desktop-only too — WebGL games generally don't have real touch controls, so mobile keeps linking out to the Demo URL like it does today rather than pretending to offer inline play it can't deliver.
+- **Net effect:** Campfire/LPA Tracker look exactly as they do today. The three games get one extra button that turns an existing screenshot into an actual playable window, without the page changing shape around it.
+
 ---
 
 ## Open ideas for later (nothing below this line is built)
 
 - Projects page redesigned as a 3×2 bento grid (concept above) — replaces the tab-switcher + showcase panel.
-- Live/interactive embeds for the three no-backend games (Bunnies, Snack Attack, Unity 2D Roguelike).
+- Live/interactive embeds for the three no-backend games (Bunnies, Snack Attack, Unity 2D Roguelike) — see concrete walkthrough above.
 - One-time coordinated bento-card settle-in animation on page load.
+- Rare bonus typewriter line surfaced by clicking the ticker text.
+- Voice-consistent empty/error states, matching the ticker's tone.
+- "Modular system" joke made structurally literal somewhere in the UI — undeveloped direction, needs more thought.
 - Optional palette exploration: narrow to blue (primary/links) + coral (sole accent), dropping or restricting sand, if more visual signature is ever wanted.
 - Screenshot curation pass: pick/crop each project's images deliberately for how they read at thumbnail size (relevant prerequisite if the bento-grid idea above is ever built).
