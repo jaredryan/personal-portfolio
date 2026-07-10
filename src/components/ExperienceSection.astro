@@ -149,6 +149,15 @@ const spineItems: SpineItem[] = entries.map((entry) => ({
     object-fit: cover;
   }
 
+  /* Fixed light backing (not the theme-reactive surface-alt above) — some
+     logo marks are dark line-art on a transparent PNG with no color info of
+     their own, so they'd read fine in light mode but nearly vanish against
+     the dark-mode tile. A permanent light plate keeps every logo image
+     legible in both themes regardless of the mark's own color. */
+  img.experience-spine__logo {
+    background: #EEF6F8;
+  }
+
   .experience-spine__text {
     display: flex;
     flex-direction: column;
