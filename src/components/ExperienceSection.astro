@@ -269,8 +269,18 @@ const spineItems: SpineItem[] = entries.map((entry) => ({
 
   /* Hover feedback lives on the <details> element itself (the whole card),
      matching how spine items and project cards show hover on their own
-     full extent. */
-  .experience-accordion__item:hover,
+     full extent. Scoped to devices with real, precise hover — touch/iPadOS
+     can leave :hover "stuck" on an element after a tap until some later,
+     unrelated touch clears it (a long-documented WebKit quirk), which on
+     this list showed up as a second, already-closed card looking
+     highlighted alongside whichever one was actually just interacted with. */
+  @media (hover: hover) and (pointer: fine) {
+    .experience-accordion__item:hover {
+      border-color: var(--color-accent-teal);
+      background: var(--color-surface-alt);
+    }
+  }
+
   .experience-accordion__item:focus-within {
     border-color: var(--color-accent-teal);
     background: var(--color-surface-alt);
