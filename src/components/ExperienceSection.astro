@@ -65,7 +65,11 @@ const spineItems: SpineItem[] = entries.map((entry) => ({
 
     <div class="experience-accordion">
       {entries.map((entry) => (
-        <details class="experience-accordion__item" data-accordion-role={entry.slug} open={entry.slug === defaultSlug}>
+        <details
+          class:list={["experience-accordion__item", { "is-expanded": entry.slug === defaultSlug }]}
+          data-accordion-role={entry.slug}
+          open={entry.slug === defaultSlug}
+        >
           <summary>
             {entry.logo ? (
               <img class="experience-spine__logo" src={entry.logo} alt="" width="28" height="28" loading="lazy" />
@@ -77,6 +81,7 @@ const spineItems: SpineItem[] = entries.map((entry) => ({
               {entry.kind === "work" && <span class="experience-spine__org">{orgName(entry)}</span>}
               <span class="experience-spine__dates">{dateLabel(entry)}</span>
             </span>
+            <Icon name="lucide:chevron-down" aria-hidden="true" class="experience-accordion__chevron" />
           </summary>
           <div class="experience-accordion__panel" data-accordion-panel>
             <div class="experience-accordion__panel-inner">
@@ -292,6 +297,24 @@ const spineItems: SpineItem[] = entries.map((entry) => ({
     display: none;
   }
 
+  /* Pushed to the far right of the header; rotation is toggled via the
+     is-expanded class (kept in sync with the panel's own open/close
+     animation in script, not the native `open` attribute — see
+     openAccordionItem/closeAccordionItem) so it turns in lockstep with the
+     panel instead of snapping at the end of the close animation. */
+  .experience-accordion__chevron {
+    margin-left: auto;
+    flex-shrink: 0;
+    width: 1.125rem;
+    height: 1.125rem;
+    color: var(--color-text-muted);
+    transition: transform 240ms ease-out;
+  }
+
+  .experience-accordion__item.is-expanded .experience-accordion__chevron {
+    transform: rotate(180deg);
+  }
+
   /* grid-template-rows 1fr -> 0fr is the standard CSS-only technique for
      animating to/from "auto" height without JS measuring scrollHeight.
      Default is 1fr (fully shown) so a no-JS/JS-failure fallback renders
@@ -307,6 +330,20 @@ const spineItems: SpineItem[] = entries.map((entry) => ({
 
   .experience-accordion__panel.is-collapsing {
     grid-template-rows: 0fr;
+  }
+
+  /* Suppresses the transition for one synchronous style write (see
+     openAccordionItem in the script below). Without this, a panel's very
+     first open — going straight from "not yet rendered" to its full auto
+     height the instant <details> reveals it — has a real committed
+     expanded value already in place, so forcing is-collapsing on right
+     after that to fake a 0fr starting point gets caught by the transition
+     rule and animates on its own, which then gets cut short a couple
+     frames later when the class is removed again. Disabling the transition
+     for that one write makes the reset instant and silent, exactly like a
+     panel that's already sitting at 0fr from a prior close. */
+  .experience-accordion__panel.no-transition {
+    transition: none;
   }
 
   .experience-accordion__panel-inner {
@@ -348,9 +385,17 @@ const spineItems: SpineItem[] = entries.map((entry) => ({
   function openAccordionItem(item: HTMLDetailsElement) {
     const panel = item.querySelector<HTMLElement>("[data-accordion-panel]");
     item.open = true;
+    item.classList.add("is-expanded");
     if (!panel) return;
+    // no-transition makes this reset-to-collapsed step instant instead of
+    // itself animating (see the class's own comment above, in <style>) —
+    // required so a panel's very first open collapses to 0fr silently, the
+    // same way a panel that's already sitting at 0fr from a prior close
+    // does, before the real open transition below runs.
+    panel.classList.add("no-transition");
     panel.classList.add("is-collapsing");
     void panel.offsetHeight;
+    panel.classList.remove("no-transition");
     requestAnimationFrame(() => {
       panel.classList.remove("is-collapsing");
     });
@@ -358,6 +403,10 @@ const spineItems: SpineItem[] = entries.map((entry) => ({
 
   function closeAccordionItem(item: HTMLDetailsElement) {
     const panel = item.querySelector<HTMLElement>("[data-accordion-panel]");
+    // Removed immediately (not deferred to transitionend like `open`) so the
+    // chevron rotates back down in sync with the collapse animation starting,
+    // rather than waiting for the whole panel to finish closing.
+    item.classList.remove("is-expanded");
     if (!panel) {
       item.open = false;
       return;
@@ -394,19 +443,6 @@ const spineItems: SpineItem[] = entries.map((entry) => ({
       // appear, not fade in, on first paint.
       if (isTarget && focusPanel) playEnterAnimation(panel);
     });
-    // Syncing every item (not just the target) is what keeps the mobile
-    // accordion single-selection: any other item that was previously open
-    // gets closed here, so at most one role is ever expanded at a time —
-    // matching the desktop career-spine model where exactly one is selected.
-    // Only items whose state is actually changing get animated; items
-    // already in the right state (e.g. the default on initial load) are
-    // left untouched so nothing animates on first paint.
-    accordionItems.forEach((item) => {
-      const isTarget = item.dataset.accordionRole === target;
-      if (isTarget && !item.open) openAccordionItem(item);
-      else if (!isTarget && item.open) closeAccordionItem(item);
-    });
-
     if (focusPanel) moveFocusTo(`#experience-detail-heading-${target}`);
   }
 
@@ -439,14 +475,16 @@ const spineItems: SpineItem[] = entries.map((entry) => ({
       const slug = item.dataset.accordionRole;
       if (!slug) return;
       if (item.open) {
-        // Matches the prior native behavior: clicking the open item closes
-        // it, leaving nothing expanded.
+        // Sections behave independently — closing one only affects itself,
+        // any other expanded sections stay open.
         closeAccordionItem(item);
         return;
       }
-      // selectRole() closes every other accordion item so only one stays
-      // open, and keeps the desktop spine/detail panel (both present in the
-      // DOM at once, just hidden by CSS at this breakpoint) in sync too.
+      // Opening this item does not close any other open accordion item —
+      // multiple Experience entries can stay expanded simultaneously.
+      // selectRole() still keeps the desktop spine/detail panel (present in
+      // the DOM at once, just hidden by CSS at this breakpoint) in sync.
+      openAccordionItem(item);
       selectRole(slug);
       setSectionState({ key: "role", value: slug });
     });
