@@ -96,8 +96,11 @@ const spineItems: SpineItem[] = entries.map((entry) => ({
 </section>
 
 <style>
+  /* 100% of <main>, not 100svh of the viewport — <main> is already sized to
+     leave room for the footer (BaseLayout.astro's flex-column body), so
+     matching it means short pages fill up to the footer, not past it. */
   .experience-section {
-    min-height: 100svh;
+    min-height: 100%;
   }
 
   /* Matches the small icon+heading treatment Projects' bento title tile
