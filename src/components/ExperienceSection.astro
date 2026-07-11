@@ -66,9 +66,8 @@ const spineItems: SpineItem[] = entries.map((entry) => ({
     <div class="experience-accordion">
       {entries.map((entry) => (
         <details
-          class:list={["experience-accordion__item", { "is-expanded": entry.slug === defaultSlug }]}
+          class="experience-accordion__item"
           data-accordion-role={entry.slug}
-          open={entry.slug === defaultSlug}
         >
           <summary>
             {entry.logo ? (
@@ -370,6 +369,15 @@ const spineItems: SpineItem[] = entries.map((entry) => ({
   import { moveFocusTo } from "../utils/focus";
   import { playEnterAnimation } from "../utils/motion";
 
+  // On a reload, the browser tries to restore whatever scroll position the
+  // page had before — and can do so after our own deep-link scroll runs,
+  // yanking it back. A delay to try to win that race would be a guess;
+  // this removes the race instead, since we're already deriving scroll
+  // position from the URL ourselves.
+  if ("scrollRestoration" in history) {
+    history.scrollRestoration = "manual";
+  }
+
   const spineItems = document.querySelectorAll<HTMLButtonElement>("[data-spine-role]");
   const detailPanels = document.querySelectorAll<HTMLElement>("[data-role-detail]");
   const accordionItems = document.querySelectorAll<HTMLDetailsElement>("[data-accordion-role]");
@@ -428,6 +436,52 @@ const spineItems: SpineItem[] = entries.map((entry) => ({
     panel.addEventListener("transitionend", onEnd);
   }
 
+  // Scrolls a just-opened accordion item into view, but only if its header
+  // genuinely isn't visible — not unconditionally on every open, which
+  // would yank the page down even when the item was already fully on
+  // screen. Waits for the open transition to finish first, since the
+  // item's final position/height isn't settled until then.
+  // Checks the summary specifically (not just the item's top edge) and
+  // requires it to be FULLY on screen with a little breathing room at the
+  // bottom — not merely fitting exactly flush against the viewport's lower
+  // edge, which is technically "visible" but reads as crammed/easy to miss.
+  function scrollAccordionItemIntoViewIfNeeded(item: HTMLDetailsElement) {
+    const COMFORTABLE_BOTTOM_MARGIN = 24;
+    const summary = item.querySelector<HTMLElement>("summary");
+    const rect = (summary ?? item).getBoundingClientRect();
+    const alreadyVisible = rect.top >= 0 && rect.bottom <= window.innerHeight - COMFORTABLE_BOTTOM_MARGIN;
+    if (!alreadyVisible) {
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      item.scrollIntoView({ block: "start", behavior: prefersReducedMotion ? "auto" : "smooth" });
+    }
+  }
+
+  // Same check as above, but waits for the item's open transition to finish
+  // first — its final height (and so its neighbors' positions) isn't
+  // settled until then.
+  function scrollAccordionItemIntoViewAfterOpen(item: HTMLDetailsElement) {
+    const panel = item.querySelector<HTMLElement>("[data-accordion-panel]");
+    if (!panel) return;
+    const onOpenTransitionEnd = (event: TransitionEvent) => {
+      if (event.propertyName !== "grid-template-rows") return;
+      panel.removeEventListener("transitionend", onOpenTransitionEnd);
+      scrollAccordionItemIntoViewIfNeeded(item);
+    };
+    panel.addEventListener("transitionend", onOpenTransitionEnd);
+  }
+
+  // Safari doesn't reliably honor focus()'s preventScroll option, so it can
+  // still jump the page on its own even when we ask it not to — undoing
+  // that afterward (rather than trusting preventScroll alone) keeps this
+  // correct regardless of whether the browser actually supports it.
+  function focusWithoutScrolling(el: HTMLElement) {
+    const { scrollX, scrollY } = window;
+    el.focus({ preventScroll: true });
+    if (window.scrollX !== scrollX || window.scrollY !== scrollY) {
+      window.scrollTo(scrollX, scrollY);
+    }
+  }
+
   function selectRole(slug: string, focusPanel = false) {
     const validSlugs = Array.from(detailPanels).map((p) => p.dataset.roleDetail);
     const target = validSlugs.includes(slug) ? slug : defaultSlug;
@@ -446,9 +500,44 @@ const spineItems: SpineItem[] = entries.map((entry) => ({
     if (focusPanel) moveFocusTo(`#experience-detail-heading-${target}`);
   }
 
+  // Brings the mobile accordion's open/closed state in line with the URL's
+  // role param. Only relevant for a deep link — with no role param, every
+  // item stays closed (the server-rendered default), same as landing on
+  // any other fresh accordion.
+  function syncAccordionToTarget(target: string, isDeepLink: boolean) {
+    if (!isDeepLink) return;
+    accordionItems.forEach((item) => {
+      const shouldBeOpen = item.dataset.accordionRole === target;
+      if (item.open === shouldBeOpen) return;
+      const panel = item.querySelector<HTMLElement>("[data-accordion-panel]");
+      item.open = shouldBeOpen;
+      item.classList.toggle("is-expanded", shouldBeOpen);
+      if (panel) {
+        panel.classList.add("no-transition");
+        panel.classList.toggle("is-collapsing", !shouldBeOpen);
+        void panel.offsetHeight;
+        panel.classList.remove("no-transition");
+      }
+      if (shouldBeOpen) {
+        // Unconditional, unlike the live-click path — a deep link is an
+        // explicit "take me here", like navigating to a URL fragment, so it
+        // should always reposition the page, not just when the item
+        // happens not to already be in view.
+        const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        item.scrollIntoView({ block: "start", behavior: prefersReducedMotion ? "auto" : "smooth" });
+        const summary = item.querySelector<HTMLElement>("summary");
+        if (summary) focusWithoutScrolling(summary);
+      }
+    });
+  }
+
   function syncFromUrl() {
     const slug = getQueryParam("role");
-    selectRole(slug ?? defaultSlug);
+    const validSlugs = Array.from(detailPanels).map((p) => p.dataset.roleDetail);
+    const isDeepLink = Boolean(slug && validSlugs.includes(slug));
+    const target = isDeepLink ? slug! : defaultSlug;
+    selectRole(target);
+    syncAccordionToTarget(target, isDeepLink);
   }
 
   spineItems.forEach((item) => {
@@ -461,7 +550,22 @@ const spineItems: SpineItem[] = entries.map((entry) => ({
   });
 
   accordionItems.forEach((item) => {
-    const summary = item.querySelector("summary");
+    const summary = item.querySelector<HTMLElement>("summary");
+
+    // Browsers focus a clickable element on mousedown — before click ever
+    // fires — and can scroll the page as part of that focus change. That
+    // scroll targets wherever the newly-revealed panel content ends up,
+    // not the card itself, so the header (and the border/chevron that
+    // show it's expanded) can end up scrolled off above the viewport.
+    // Suppressing the native focus transfer here stops that scroll before
+    // it starts; the click handler below re-establishes real focus itself
+    // (without scrolling) so the card's focus/hover highlight still shows.
+    // Keyboard activation (Tab, then Enter/Space) never fires mousedown,
+    // so this has no effect on keyboard users.
+    summary?.addEventListener("mousedown", (event) => {
+      event.preventDefault();
+    });
+
     // Intercept the click rather than listening for "toggle" — native
     // <details> toggles (and hides its content) the instant the summary is
     // clicked, before any JS runs, which is exactly the "jumps open, then
@@ -485,6 +589,17 @@ const spineItems: SpineItem[] = entries.map((entry) => ({
       // selectRole() still keeps the desktop spine/detail panel (present in
       // the DOM at once, just hidden by CSS at this breakpoint) in sync.
       openAccordionItem(item);
+      // Re-establish focus ourselves — the mousedown listener above
+      // suppressed the browser's own focus transfer, so without this the
+      // card would lose its focus/hover highlight after a click. This
+      // targets the summary, not the card itself (see the matching comment
+      // in syncAccordionToTarget for why: giving <details> a tabindex to
+      // make it focusable breaks native Tab access to its own summary).
+      // The highlight still reads as "this whole card" either way, since
+      // it's driven by :focus-within on the card, not by which exact
+      // descendant holds focus.
+      if (summary) focusWithoutScrolling(summary);
+      scrollAccordionItemIntoViewAfterOpen(item);
       selectRole(slug);
       setSectionState({ key: "role", value: slug });
     });

@@ -69,6 +69,44 @@ h1, h2, h3, h4,
   letter-spacing: -0.03em;
 }
 
+/* Explicit sizes for the actual heading elements only — not the
+   class-based lookalikes above, which already set their own font-size (or
+   deliberately inherit it) and were never relying on a browser default.
+   Same computed px values the UA default already produced at every
+   breakpoint (verified live), except h1 on narrow mobile just below. */
+h1 {
+  font-size: var(--font-size-h1);
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+}
+
+h3 {
+  font-size: var(--font-size-h3);
+}
+
+/* Below the same 760px threshold the rest of the site already treats as
+   "mobile/compact" (see the "spacious" bump above), every heading level
+   steps down together — not just h1 fixing its own wrap. Progressively
+   smaller headline text on small screens is standard practice, not just a
+   wrap-avoidance patch: desktop-scale headings read as oversized against a
+   narrow mobile reading column. h1's step (2rem -> 1.75rem) is also what
+   keeps the Hero card's "Jared Ryan" on one line at narrow widths. */
+@media (max-width: 759.98px) {
+  h1 {
+    font-size: 1.75rem;
+  }
+
+  h2 {
+    font-size: 1.25rem;
+  }
+
+  h3 {
+    font-size: 1rem;
+  }
+}
+
 p {
   margin: 0;
 }
@@ -125,6 +163,13 @@ a, button {
   outline: none;
   box-shadow: var(--focus-ring);
   border-radius: var(--radius-sm);
+}
+
+/* Set by utils/focus.ts's moveFocus() for pointer/touch-triggered
+   programmatic focus — see that file for why this is needed on top of
+   :focus-visible. */
+.focus-ring-suppressed:focus-visible {
+  box-shadow: none;
 }
 
 section[id] {

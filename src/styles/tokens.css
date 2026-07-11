@@ -24,6 +24,16 @@
   --font-body: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
   --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Menlo, Consolas, "Liberation Mono", monospace;
 
+  /* Explicit heading scale — same multiples browsers use as their default
+     UA-stylesheet h1/h2/h3 sizes (2em/1.5em/1.17em), just declared here so
+     rendering doesn't depend on each browser's own default (Firefox, for
+     one, shrinks nested h1s based on sectioning depth; Chrome/Safari don't
+     — an actual cross-browser inconsistency, not just a style preference).
+     --font-size-h1 also gets a narrower mobile override further down. */
+  --font-size-h1: 2rem;
+  --font-size-h2: 1.5rem;
+  --font-size-h3: 1.17rem;
+
   --space-1: 0.25rem;
   --space-2: 0.5rem;
   --space-3: 0.75rem;

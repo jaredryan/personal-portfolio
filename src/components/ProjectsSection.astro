@@ -267,6 +267,7 @@ const gridProjects = gridOrder
 <script>
   import { clearSectionState, getQueryParam, setSectionState } from "../utils/urlState";
   import { playEnterAnimation } from "../utils/motion";
+  import { moveFocus } from "../utils/focus";
 
   const gridView = document.getElementById("projects-grid-view");
   const detailView = document.getElementById("projects-detail-view");
@@ -286,15 +287,13 @@ const gridProjects = gridOrder
     // page load/URL sync — the static HTML should just appear on first paint.
     if (focusPanel) playEnterAnimation(panel);
     if (focusPanel) {
-      // Focus the panel itself (aria-labelledby its own heading, so it
-      // still announces sensibly) without letting focus() scroll on its
-      // own, then explicitly scroll the whole page to the top on the next
-      // frame — scrollIntoView on the heading landed below the screenshot
-      // in the single-column layout, and scrollIntoView on the panel still
-      // only scrolled to the panel's own top, leaving the breadcrumb at
-      // the very edge of the viewport.
-      if (!panel.hasAttribute("tabindex")) panel.setAttribute("tabindex", "-1");
-      panel.focus({ preventScroll: true });
+      // Focus the heading itself, not the whole panel — a small, meaningful
+      // target instead of a page-sized container, so any focus-visible ring
+      // stays localized. Scroll is handled separately below (not via
+      // scrollIntoView, which either landed below the screenshot in the
+      // single-column layout or left the breadcrumb at the viewport edge).
+      const heading = document.getElementById(`project-detail-heading-${slug}`);
+      if (heading) moveFocus(heading);
       const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       requestAnimationFrame(() => {
         window.scrollTo({ top: 0, left: 0, behavior: prefersReducedMotion ? "auto" : "smooth" });
@@ -319,10 +318,7 @@ const gridProjects = gridOrder
       // natural "back to the grid" landing.
       const heading = document.querySelector<HTMLElement>("#projects-heading");
       window.scrollTo({ top: 0, behavior: "auto" });
-      if (heading) {
-        if (!heading.hasAttribute("tabindex")) heading.setAttribute("tabindex", "-1");
-        heading.focus({ preventScroll: true });
-      }
+      if (heading) moveFocus(heading);
     }
   }
 

@@ -20,16 +20,18 @@ const buttonLabel = `${label.replace(/:$/, "")} ticker — activate for a bonus 
   data-bonus-lines={JSON.stringify(bonusLines)}
   aria-label={buttonLabel}
 >
-  <span class="typewriter__label" aria-hidden="true">{label}</span>
   <div class="typewriter__stage">
     {sizerLines.map((line) => (
       // Trailing "|" mirrors the live cursor glyph appended after a fully
       // typed line during its hold — without it, the sizer under-reserves
       // by exactly the cursor's width and the real cursor can wrap onto an
-      // extra line the grid track never accounted for.
-      <span class="typewriter__sizer-line" aria-hidden="true">{line}|</span>
+      // extra line the grid track never accounted for. The label is
+      // repeated inline here (hidden) so the sizer wraps exactly like the
+      // live line — label + sentence sharing one inline flow, not a
+      // separate column.
+      <span class="typewriter__sizer-line" aria-hidden="true"><span class="typewriter__label">{label}</span>{line}|</span>
     ))}
-    <span class="typewriter__line"><span class="typewriter__text" aria-live="polite">{lines[0]}</span><span class="typewriter__cursor" aria-hidden="true">|</span></span>
+    <span class="typewriter__line"><span class="typewriter__label" aria-hidden="true">{label}</span><span class="typewriter__text" aria-live="polite">{lines[0]}</span><span class="typewriter__cursor" aria-hidden="true">|</span></span>
   </div>
 </button>
 
@@ -47,9 +49,7 @@ const buttonLabel = `${label.replace(/:$/, "")} ticker — activate for a bonus 
     border: none;
     text-align: left;
     cursor: pointer;
-    display: flex;
-    align-items: flex-start;
-    gap: var(--space-2);
+    display: block;
     font-family: var(--font-mono);
     font-size: 0.9rem;
     color: var(--color-text-muted);
@@ -74,9 +74,7 @@ const buttonLabel = `${label.replace(/:$/, "")} ticker — activate for a bonus 
     font-weight: 700;
     color: var(--color-text);
     white-space: nowrap;
-    /* Matches the stage's first line box so the label sits flush with the
-       top of the typed text instead of the whole (tallest-phrase) stage. */
-    line-height: 1.5em;
+    margin-right: var(--space-2);
   }
 
   /* Grid-overlay sizer: every phrase (hidden) and the live typed line all
@@ -84,13 +82,13 @@ const buttonLabel = `${label.replace(/:$/, "")} ticker — activate for a bonus 
      tallest single phrase's wrapped height — not the sum of every phrase's
      height, and not a hardcoded line-count guess. This is what stops the
      bento cards below from bouncing as the ticker cycles through phrases
-     of different lengths. */
+     of different lengths. Each grid item is blockified by the grid layout,
+     so the label + sentence inside it wrap as normal inline text using the
+     stage's full width — not a separate flex column. */
   .typewriter__stage {
     position: relative;
     display: grid;
     grid-template-columns: minmax(0, 1fr);
-    flex: 1 1 auto;
-    min-width: 0;
   }
 
   .typewriter__stage > * {

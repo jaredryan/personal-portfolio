@@ -52,17 +52,29 @@ const { trail } = Astro.props;
   .breadcrumbs li {
     display: flex;
     align-items: center;
-    gap: var(--space-2);
+    gap: var(--space-1);
   }
 
+  /* Ancestor crumbs read as links (primary-blue + underline) at every
+     breakpoint, not just on hover — otherwise they look like passive
+     location labels. Padding enlarges the touch target to a comfortable
+     size without the visible text becoming button-sized; deliberately no
+     compensating negative margin, so adjacent crumbs' hit areas stay
+     separated by the padding plus the row's existing gap, never touching. */
   .breadcrumbs a {
-    color: var(--color-text-muted);
-    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    color: var(--color-primary);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    text-decoration-thickness: 1.5px;
+    padding: 0.2rem 0.35rem 0.2rem 0;
+    border-radius: var(--radius-sm);
   }
 
-  .breadcrumbs a:hover {
+  .breadcrumbs a:hover,
+  .breadcrumbs a:focus-visible {
     color: var(--color-accent-teal);
-    text-decoration: underline;
   }
 
   .breadcrumbs [aria-current="page"] {
