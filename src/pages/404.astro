@@ -24,7 +24,11 @@ import { Icon } from "astro-icon/components";
 
 <style>
   .not-found {
-    min-height: 100svh;
+    /* No min-height needed — this element is <main> itself, and
+       BaseLayout.astro's body { flex } already sizes <main> to fill
+       exactly the space left over after the footer, footer-aware. An
+       explicit 100svh here would override that and push the footer below
+       the fold on a page with barely any content. */
     display: flex;
     align-items: center;
     justify-content: center;

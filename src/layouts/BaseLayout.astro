@@ -107,10 +107,11 @@ const ogImageAlt = `${profile.name} — ${profile.role}`;
 
 <style>
   /* Flex-column body so a tall viewport with short page content still gets
-     the footer pinned to the true bottom of the screen (via footer's
-     margin-top: auto below) instead of it trailing right after the
-     content. :global() on main because it's defined per-page (slotted in),
-     not by this component, so a plain scoped selector wouldn't reach it. */
+     the footer pinned to the true bottom of the screen instead of it
+     trailing right after the content — main's flex: 1 grows to fill
+     exactly the space left over (viewport minus footer). :global() because
+     main/its children are defined per-page (slotted in), not by this
+     component, so a plain scoped selector wouldn't reach them. */
   body {
     display: flex;
     flex-direction: column;
@@ -119,6 +120,16 @@ const ogImageAlt = `${profile.name} — ${profile.role}`;
 
   body :global(main) {
     flex: 1;
+  }
+
+  /* Every page's top-level section fills up to (not past) the footer by
+     default — 100% of main's own already-footer-aware height, not 100svh
+     of the viewport, which would double-count the footer's height on top
+     of a full viewport. A page can override this back to min-height: auto
+     if its content needs to be sized some other way instead (see
+     BentoDashboard.astro's desktop tier for why). */
+  body :global(main > *) {
+    min-height: 100%;
   }
 
   .site-footer {

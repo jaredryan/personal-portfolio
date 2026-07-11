@@ -90,13 +90,6 @@ const gridProjects = gridOrder
 </section>
 
 <style>
-  /* 100% of <main>, not 100svh of the viewport — <main> is already sized to
-     leave room for the footer (BaseLayout.astro's flex-column body), so
-     matching it means short pages fill up to the footer, not past it. */
-  .projects-section {
-    min-height: 100%;
-  }
-
   .projects-bento {
     display: grid;
     grid-template-columns: 1fr;

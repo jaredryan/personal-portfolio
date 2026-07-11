@@ -93,11 +93,13 @@ import { projects } from "../data/projects";
 
   @media (min-width: 950px) and (min-aspect-ratio: 4/5) {
     .bento {
-      /* No min-height here on purpose — forcing the grid taller than its
+      /* Overrides BaseLayout.astro's default main > * { min-height: 100% }
+         back to auto here on purpose — forcing the grid taller than its
          content (to "fill the viewport") decouples the row tracks from
          Hero + Projects' actual height, so Experience's height: 100% (which
          spans both rows) ends up taller than Hero + gap + Projects instead
          of matching it. Sizing purely from content keeps them in sync. */
+      min-height: auto;
       grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
       grid-template-rows: auto 1fr;
       grid-template-areas:
