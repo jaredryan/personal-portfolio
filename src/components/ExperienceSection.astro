@@ -25,13 +25,13 @@ const spineItems: SpineItem[] = entries.map((entry) => ({
 }));
 ---
 <section class="experience-section page-shell" aria-labelledby="experience-heading">
-  <Breadcrumbs trail={[{ label: "Dashboard", href: "/" }, { label: "Experience" }]} />
-  <div class="page-header-row">
-    <div class="page-title-group">
-      <Icon name="lucide:briefcase" aria-hidden="true" />
-      <h2 id="experience-heading" class="page-title" tabindex="-1">Experience</h2>
-    </div>
+  <div class="page-utility-row">
+    <Breadcrumbs trail={[{ label: "Dashboard", href: "/" }, { label: "Experience" }]} />
     <ContactTrigger />
+  </div>
+  <div class="page-title-group">
+    <Icon name="lucide:briefcase" aria-hidden="true" />
+    <h2 id="experience-heading" class="page-title" tabindex="-1">Experience</h2>
   </div>
 
   <!-- Groups both layout variants as one unit, distinct from the
@@ -96,28 +96,19 @@ const spineItems: SpineItem[] = entries.map((entry) => ({
     min-height: 100svh;
   }
 
-  /* Contact is a secondary utility action, far-right on the same row as
-     the page title — not crowding the breadcrumb row above it. The row
-     itself carries the spacing .page-title normally holds on its own,
-     since the title is now a flex item sharing the row with the button. */
-  .page-header-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--space-4);
-    margin-bottom: var(--space-6);
-  }
-
-  .page-header-row .page-title {
-    margin-bottom: 0;
-  }
-
   /* Matches the small icon+heading treatment Projects' bento title tile
-     uses (same size/color/gap) so the two pages read as one system. */
+     uses (same size/color/gap) so the two pages read as one system. The
+     row carries the spacing .page-title normally holds on its own, since
+     the title is now a flex item sharing the row with the icon. */
   .page-title-group {
     display: flex;
     align-items: center;
     gap: var(--space-2);
+    margin-bottom: var(--space-6);
+  }
+
+  .page-title-group .page-title {
+    margin-bottom: 0;
   }
 
   .page-title-group :global(svg) {

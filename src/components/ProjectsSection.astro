@@ -24,7 +24,7 @@ const gridProjects = gridOrder
 ---
 <section class="projects-section page-shell" aria-label="Projects">
   <div id="projects-grid-view">
-    <div class="projects-utility-row">
+    <div class="page-utility-row">
       <Breadcrumbs trail={[{ label: "Dashboard", href: "/" }, { label: "Projects" }]} />
       <ContactTrigger />
     </div>
@@ -71,7 +71,7 @@ const gridProjects = gridOrder
         aria-labelledby={`project-detail-heading-${project.slug}`}
         hidden
       >
-        <div class="projects-utility-row">
+        <div class="page-utility-row">
           <Breadcrumbs
             trail={[
               { label: "Dashboard", href: "/" },
@@ -92,14 +92,6 @@ const gridProjects = gridOrder
 <style>
   .projects-section {
     min-height: 100svh;
-  }
-
-  .projects-utility-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--space-4);
-    margin-bottom: var(--space-6);
   }
 
   .projects-bento {
