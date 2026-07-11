@@ -3,13 +3,24 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import BentoDashboard from "../components/BentoDashboard.astro";
 import { profile } from "../data/profile";
 
+const profileURL = new URL("/", Astro.site).toString();
+
 const structuredData = {
   "@context": "https://schema.org",
-  "@type": "Person",
-  name: profile.name,
-  jobTitle: profile.role,
-  url: profile.links.github,
-  sameAs: [profile.links.github, profile.links.linkedin].filter(Boolean),
+  "@type": "ProfilePage",
+  "@id": `${profileURL}#profile`,
+  url: profileURL,
+  name: `${profile.name} — ${profile.role}`,
+  mainEntity: {
+    "@type": "Person",
+    "@id": `${profileURL}#person`,
+    name: profile.name,
+    url: profileURL,
+    jobTitle: profile.role,
+    description: "Full-stack engineer focused on polished, practical software for complex real-world workflows.",
+    image: new URL("/images/headshot.jpg", Astro.site).toString(),
+    sameAs: [profile.links.github, profile.links.linkedin].filter(Boolean),
+  },
 };
 ---
 <BaseLayout

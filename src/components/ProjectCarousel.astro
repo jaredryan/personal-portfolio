@@ -91,7 +91,9 @@ const playIframeTitle = playableIframeTitle ?? `${alt} — playable game`;
           aria-selected={index === 0 ? "true" : "false"}
           aria-label={`Show screenshot ${index + 1}`}
           data-dot-index={index}
-        />
+        >
+          <div class="carousel__dot-visual"></div>
+        </button>
       ))}
     </div>
     <button type="button" class="carousel__next" aria-label="Next screenshot">
@@ -394,17 +396,41 @@ const playIframeTitle = playableIframeTitle ?? `${alt} — playable game`;
     gap: var(--space-2);
   }
 
+  /* 24x24px hit target (WCAG 2.2's minimum) wrapping the visible dot — the
+     dot itself (.carousel__dot-visual below) stays its original small size,
+     centered inside. Fixed size also guarantees adjacent dots' hit areas
+     never overlap regardless of gap. */
   .carousel__dot {
-    width: 0.6rem;
-    height: 0.6rem;
-    border-radius: 50%;
-    border: 1px solid var(--color-border);
-    background: var(--color-surface-alt);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--space-6);
+    height: var(--space-6);
+    border: none;
+    background: none;
     cursor: pointer;
     padding: 0;
   }
 
-  .carousel__dot[aria-selected="true"] {
+  .carousel__dot-visual {
+    width: var(--space-4);
+    height: var(--space-4);
+    border-radius: 50%;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface-alt);
+    transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease;
+  }
+
+  /* :not([aria-selected="true"]) keeps the selected (coral) dot dominant
+     even while it's hovered/focused — matches the same selected-vs-hover
+     precedent as .projects-preview__thumb. */
+  .carousel__dot:not([aria-selected="true"]):hover .carousel__dot-visual,
+  .carousel__dot:not([aria-selected="true"]):focus-visible .carousel__dot-visual {
+    border-color: var(--color-accent-teal);
+    background: var(--color-accent-teal);
+  }
+
+  .carousel__dot[aria-selected="true"] .carousel__dot-visual {
     background: var(--color-accent-coral);
     border-color: var(--color-accent-coral);
   }
