@@ -40,17 +40,27 @@ const { title, description, ogImage, structuredData } = Astro.props;
 
     <script is:inline>
       // Theme priority, checked in order: 1) saved localStorage preference,
-      // 2) OS/browser prefers-color-scheme: dark, 3) light. Runs synchronously
-      // before first paint to avoid a flash of the wrong theme.
+      // 2) OS/browser prefers-color-scheme (dark or light, either one
+      // honored as an explicit signal), 3) dark — used only when neither of
+      // the above is available at all (e.g. localStorage blocked, or the
+      // rare browser/OS that reports no preference either way). Runs
+      // synchronously before first paint to avoid a flash of the wrong theme.
       (function () {
         try {
           var stored = localStorage.getItem("theme");
-          var theme = stored === "light" || stored === "dark"
-            ? stored
-            : (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+          var theme;
+          if (stored === "light" || stored === "dark") {
+            theme = stored;
+          } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+            theme = "dark";
+          } else if (window.matchMedia("(prefers-color-scheme: light)").matches) {
+            theme = "light";
+          } else {
+            theme = "dark";
+          }
           document.documentElement.setAttribute("data-theme", theme);
         } catch (e) {
-          document.documentElement.setAttribute("data-theme", "light");
+          document.documentElement.setAttribute("data-theme", "dark");
         }
       })();
     </script>
