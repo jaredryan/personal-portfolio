@@ -4,23 +4,41 @@ import BentoDashboard from "../components/BentoDashboard.astro";
 import { profile } from "../data/profile";
 
 const profileURL = new URL("/", Astro.site).toString();
+const websiteId = `${profileURL}#website`;
+const profileId = `${profileURL}#profile`;
+const personId = `${profileURL}#person`;
 
 const structuredData = {
   "@context": "https://schema.org",
-  "@type": "ProfilePage",
-  "@id": `${profileURL}#profile`,
-  url: profileURL,
-  name: `${profile.name} — ${profile.role}`,
-  mainEntity: {
-    "@type": "Person",
-    "@id": `${profileURL}#person`,
-    name: profile.name,
-    url: profileURL,
-    jobTitle: profile.role,
-    description: "Full-stack engineer focused on polished, practical software for complex real-world workflows.",
-    image: new URL("/images/headshot.jpg", Astro.site).toString(),
-    sameAs: [profile.links.github, profile.links.linkedin].filter(Boolean),
-  },
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": websiteId,
+      url: profileURL,
+      name: profile.name,
+      inLanguage: "en-US",
+      publisher: { "@id": personId },
+      about: { "@id": personId },
+    },
+    {
+      "@type": "ProfilePage",
+      "@id": profileId,
+      url: profileURL,
+      name: `${profile.name} — ${profile.role}`,
+      isPartOf: { "@id": websiteId },
+      mainEntity: { "@id": personId },
+    },
+    {
+      "@type": "Person",
+      "@id": personId,
+      name: profile.name,
+      url: profileURL,
+      jobTitle: profile.role,
+      description: "Full-stack engineer focused on polished, practical software for complex real-world workflows.",
+      image: new URL("/images/headshot.jpg", Astro.site).toString(),
+      sameAs: [profile.links.github, profile.links.linkedin].filter(Boolean),
+    },
+  ],
 };
 ---
 <BaseLayout
