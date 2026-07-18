@@ -19,29 +19,30 @@ export type ExperienceEntry = {
 };
 
 export const experience: ExperienceEntry[] = [
-  {
-    slug: "gold-ocean",
-    kind: "work",
-    tabLabel: "Gold Ocean Holdings",
-    title: "Senior Software Engineer",
-    company: "Gold Ocean Holdings",
-    logo: "/images/logos/gold-ocean.png",
-    start: 2023,
-    end: "Present",
-    location: "Remote",
-    oneLiner:
-      "Led engineering team improvements and built real estate acquisition screening workflows across listings, investment criteria, and recommendations.",
-    metricChips: ["6+ engineer team", "15% productivity lift", "20% better filtering", "1hr+ saved/listing"],
-    pills: [
-      "Engineering Leadership", "Process Improvement", "Real Estate Tech",
-      "Data Workflows", "Recommendation Logic", "Python", "Node.js",
-    ],
-    bullets: [
-      "Managed a team of 6+ engineers, increasing productivity by 15% through structured improvement plans, career tracking, and pairing sessions.",
-      "Built real estate acquisition screening workflows across listing review, investment criteria, and recommendation logic.",
-      "Refined acquisition recommendation models to filter 20% more properties and save 1hr+ of manual evaluation for each listing filtered.",
-    ],
-  },
+  // TODO: temporarily disabled, re-enable when ready
+  // {
+  //   slug: "gold-ocean",
+  //   kind: "work",
+  //   tabLabel: "Gold Ocean Holdings",
+  //   title: "Senior Software Engineer",
+  //   company: "Gold Ocean Holdings",
+  //   logo: "/images/logos/gold-ocean.png",
+  //   start: 2023,
+  //   end: "Present",
+  //   location: "Remote",
+  //   oneLiner:
+  //     "Led engineering team improvements and built real estate acquisition screening workflows across listings, investment criteria, and recommendations.",
+  //   metricChips: ["6+ engineer team", "15% productivity lift", "20% better filtering", "1hr+ saved/listing"],
+  //   pills: [
+  //     "Engineering Leadership", "Process Improvement", "Real Estate Tech",
+  //     "Data Workflows", "Recommendation Logic", "Python", "Node.js",
+  //   ],
+  //   bullets: [
+  //     "Managed a team of 6+ engineers, increasing productivity by 15% through structured improvement plans, career tracking, and pairing sessions.",
+  //     "Built real estate acquisition screening workflows across listing review, investment criteria, and recommendation logic.",
+  //     "Refined acquisition recommendation models to filter 20% more properties and save 1hr+ of manual evaluation for each listing filtered.",
+  //   ],
+  // },
   {
     slug: "mantl",
     kind: "work",

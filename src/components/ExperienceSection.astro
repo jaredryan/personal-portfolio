@@ -13,7 +13,7 @@ interface Props {
 }
 
 const { entries } = Astro.props;
-const defaultSlug = "gold-ocean";
+const defaultSlug = entries[0]?.slug ?? "";
 
 const spineItems: SpineItem[] = entries.map((entry) => ({
   slug: entry.slug,
@@ -387,7 +387,7 @@ const spineItems: SpineItem[] = entries.map((entry) => ({
   const spineItems = document.querySelectorAll<HTMLButtonElement>("[data-spine-role]");
   const detailPanels = document.querySelectorAll<HTMLElement>("[data-role-detail]");
   const accordionItems = document.querySelectorAll<HTMLDetailsElement>("[data-accordion-role]");
-  const defaultSlug = "gold-ocean";
+  const defaultSlug = spineItems[0]?.dataset.spineRole ?? "";
 
   // Animate <details> open/close instead of relying on the browser's
   // instant native toggle. Opening: force the panel to its collapsed (0fr)
