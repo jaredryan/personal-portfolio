@@ -355,6 +355,12 @@ const journeyRows = profileNarrative.chapters.map((chapter, index) => ({
     line-height: 1.65;
   }
 
+  /* Restrained editorial callout, not a second heading: a thin inline-start
+     rule in the same coral already used to mark something notable
+     elsewhere on this page (the chapter-number rings, the eyebrow dot) —
+     reusing that accent rather than introducing a new one. Border-only, no
+     background tint or padding-block, so it reads as a pull-quote cue
+     belonging to the paragraph flow, not a boxed/alert-style container. */
   .profile-opening__lead {
     font-family: var(--font-heading);
     font-weight: 700;
@@ -362,6 +368,8 @@ const journeyRows = profileNarrative.chapters.map((chapter, index) => ({
     line-height: 1.35;
     letter-spacing: -0.01em;
     margin: 0;
+    border-inline-start: 3px solid var(--color-accent-coral);
+    padding-inline-start: var(--space-4);
   }
 
   @media (min-width: 640px) {
