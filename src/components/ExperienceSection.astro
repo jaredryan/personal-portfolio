@@ -96,28 +96,6 @@ const spineItems: SpineItem[] = entries.map((entry) => ({
 </section>
 
 <style>
-  /* Matches the small icon+heading treatment Projects' bento title tile
-     uses (same size/color/gap) so the two pages read as one system. The
-     row carries the spacing .page-title normally holds on its own, since
-     the title is now a flex item sharing the row with the icon. */
-  .page-title-group {
-    display: flex;
-    align-items: center;
-    gap: var(--space-2);
-    margin-bottom: var(--space-6);
-  }
-
-  .page-title-group .page-title {
-    margin-bottom: 0;
-  }
-
-  .page-title-group :global(svg) {
-    width: 1.25rem;
-    height: 1.25rem;
-    color: var(--color-primary);
-    flex-shrink: 0;
-  }
-
   .experience-layout {
     display: none;
     gap: var(--space-6);
@@ -247,6 +225,11 @@ const spineItems: SpineItem[] = entries.map((entry) => ({
 
   .experience-detail__panel h3 {
     margin-top: var(--space-1);
+  }
+
+  .experience-detail__dates {
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
   }
 
   .experience-accordion {

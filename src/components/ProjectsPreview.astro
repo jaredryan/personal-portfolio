@@ -39,8 +39,9 @@ const defaultProject = projects[0];
             data-preview-project={project.slug}
             aria-pressed={project.slug === defaultProject.slug ? "true" : "false"}
             aria-label={`Preview ${project.title}`}
+            style={{ "--thumb-accent": project.accentColor, "--thumb-accent-dark": project.accentColorDark }}
           >
-            <img src={project.screenshots.cover} alt="" width="120" height="75" />
+            <Icon name={project.icon} aria-hidden="true" is:inline />
           </button>
         ))}
       </div>
@@ -129,39 +130,95 @@ const defaultProject = projects[0];
     border: 1px solid var(--color-border);
   }
 
+  /* flex, not a fixed-column grid — a hardcoded column count (this used to
+     be repeat(5, 1fr)) silently wraps to a second row the moment a 6th
+     project is added, which is exactly what happened. flex:1 per thumb
+     below fills the row edge-to-edge with however many projects exist,
+     with no column count to keep in sync as the roster grows. */
   .projects-preview__thumbs {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    display: flex;
     gap: var(--space-1);
   }
 
+  /* Each project's own accentColor (src/data/projects.ts) drives both the
+     icon and its tile background — full-saturation icon over a light
+     color-mix tint of the same hue, the same pattern .pill/.metric-chip use
+     for their background/border, just applied to a per-project color
+     instead of one shared token. Resting border is a slightly stronger mix
+     of that same color for definition; selected/hover still override it
+     below with the site's existing coral/teal state colors, unchanged. */
   .projects-preview__thumb {
-    border: 2px solid transparent;
+    flex: 1;
+    min-width: 0;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid color-mix(in srgb, var(--thumb-accent) 45%, transparent);
     border-radius: var(--radius-sm);
     padding: 0;
-    background: none;
+    background: color-mix(in srgb, var(--thumb-accent) 10%, var(--color-surface));
+    color: var(--thumb-accent);
     cursor: pointer;
     overflow: hidden;
   }
 
-  .projects-preview__thumb img {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 16 / 10;
-    object-fit: cover;
-    border-radius: calc(var(--radius-sm) - 2px);
+  /* Dark-theme counterpart to the resting-state colors above — a color
+     tuned to separate from a light surface doesn't necessarily separate
+     from a dark one, so each project supplies its own accentColorDark
+     (src/data/projects.ts) rather than reusing accentColor unchanged. */
+  :global([data-theme="dark"]) .projects-preview__thumb {
+    border-color: color-mix(in srgb, var(--thumb-accent-dark) 45%, transparent);
+    background: color-mix(in srgb, var(--thumb-accent-dark) 20%, var(--color-surface));
+    color: var(--thumb-accent-dark);
   }
 
+  .projects-preview__thumb :global(svg) {
+    width: 1.125rem;
+    height: 1.125rem;
+  }
+
+  /* astro-icon normally renders repeated icons as a <symbol>+<use> sprite
+     for dedup — the <symbol>'s path is never itself painted, only a <use>
+     shadow-clone of it is, and that clone isn't reachable by any CSS
+     selector, so this rule would silently no-op against the default output.
+     The `is:inline` prop on <Icon> above renders the raw <path> directly
+     instead (no sprite), which is what makes this actually reach the
+     rendered pixels. Lucide bakes stroke-width="2" onto the path itself
+     (not the <svg> root), so it has to be targeted directly here — setting
+     stroke-width on an ancestor doesn't win over an already-specified
+     attribute on the path itself. 1.5px, not 1px — at this icon size (18px,
+     scaled down from Lucide's 24-unit viewBox) a full 1px stroke leaves
+     small interior details (e.g. the gamepad icon's face) too faint to
+     read; 1.5px keeps those legible while still reading thinner than
+     Lucide's chunkier default 2px, closer to the row's 1px borders. */
+  .projects-preview__thumbs :global(path) {
+    stroke-width: 1.5px;
+  }
+
+  /* Outline, not a border-color swap — against six different per-project
+     border colors, recoloring the border to coral wasn't reliably standing
+     out. An offset outline ring is a separate visual layer on top of
+     whatever the resting border already is, so it reads clearly regardless
+     of which project's own accent color is underneath. */
   .projects-preview__thumb[aria-pressed="true"] {
-    border-color: var(--color-accent-coral);
+    outline: 2px solid var(--color-accent-coral);
+    outline-offset: 1px;
   }
 
   /* :not([aria-pressed="true"]) keeps the selected (coral) state visually
      dominant even while that same thumbnail is hovered/focused — selected
-     and hover are deliberately distinct signals. */
+     and hover are deliberately distinct signals. Hover/focus deliberately
+     overrides the per-project accent with the site's one universal
+     interactive-hover treatment (same teal border + icon + surface-alt fill
+     as .hero-card__icon-btn and .experience-preview__row) — the colorful
+     per-project identity is a resting-state signal; hovering any of them
+     reads the same, consistent way regardless of which project it is. */
   .projects-preview__thumb:not([aria-pressed="true"]):hover,
   .projects-preview__thumb:not([aria-pressed="true"]):focus-visible {
     border-color: var(--color-accent-teal);
+    background: var(--color-surface-alt);
+    color: var(--color-accent-teal);
   }
 
   .projects-preview__info {

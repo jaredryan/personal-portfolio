@@ -13,7 +13,7 @@ const { entry } = Astro.props;
   <p class="experience-detail-content__oneliner prose">{entry.oneLiner}</p>
   {entry.kind === "work" && entry.metricChips.length > 0 && <MetricChips chips={entry.metricChips} />}
   {entry.bullets.length > 0 && (
-    <ul class="experience-detail-content__bullets">
+    <ul class="experience-detail-content__bullets custom-bullets">
       {entry.bullets.map((bullet) => <li>{bullet}</li>)}
     </ul>
   )}
@@ -36,9 +36,8 @@ const { entry } = Astro.props;
   }
 
   .experience-detail-content__bullets {
-    margin: 0;
-    padding-left: 1.2rem;
     color: var(--color-text-muted);
+    font-size: 1rem;
     display: flex;
     flex-direction: column;
     gap: var(--space-2);

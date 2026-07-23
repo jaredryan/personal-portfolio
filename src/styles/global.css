@@ -4,6 +4,21 @@
   box-sizing: border-box;
 }
 
+/* Explicit root size, never left to the browser's own default — 100% is
+   the same value a UA ships anyway, but written down here means the value
+   is authored, not assumed. Paired with text-size-adjust: 100% to opt out
+   of WebKit/Blink's automatic font-boost heuristic (it inflates text based
+   on a column-width-vs-viewport heuristic that can fire inconsistently
+   across breakpoints — e.g. a wide short landscape phone column vs a
+   narrower one elsewhere on the same page) — this only disables that
+   automatic *inflation*, not the user's own OS/browser text-size
+   accessibility setting or pinch-zoom, both of which still work normally. */
+html {
+  font-size: 100%;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
 /* "Spacious" viewport mode — tall tablets and tall/large desktop monitors
    with real vertical room to spare. Width alone can't distinguish this from
    a same-width but shorter laptop window (which should stay exactly as-is),
@@ -48,6 +63,7 @@ body {
   background-size: 24px 24px;
   color: var(--color-text);
   font-family: var(--font-body);
+  font-size: 1rem;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
@@ -58,7 +74,7 @@ main {
 
 h1, h2, h3, h4,
 .page-title,
-.project-card__title,
+.project-tile__title,
 .projects-preview__title,
 .experience-preview__row-line1,
 .experience-preview__detail-title,
@@ -109,6 +125,7 @@ h3 {
 
 p {
   margin: 0;
+  font-size: 1rem;
 }
 
 a {
@@ -244,10 +261,64 @@ section[id] {
   flex-shrink: 0;
 }
 
+/* Shared bullet-list treatment for genuine bulleted body copy (Experience's
+   "Built"-style detail bullets, both the desktop panel and mobile
+   accordion). Every native <ul> marker is opted out of and redrawn here
+   explicitly instead — the browser's own disc glyph varies in size/baseline
+   alignment across engines, so this keeps every bulleted list rendering
+   identically regardless of browser. is:global-equivalent by living in this
+   sitewide stylesheet rather than a component's scoped <style>, since
+   ExperiencePreview.astro appends its <li> bullets via
+   document.createElement at runtime — those never carry Astro's
+   per-component scope attribute, so only a truly global rule reaches them. */
+.custom-bullets {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.custom-bullets > li {
+  position: relative;
+  padding-left: 1.1rem;
+}
+
+.custom-bullets > li::before {
+  content: "";
+  position: absolute;
+  left: 0.3em;
+  top: 0.65em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--color-text-muted);
+}
+
 /* Page-level heading with breathing room before whatever follows it —
    headings should never touch their own body content. */
 .page-title {
   margin-bottom: var(--space-6);
+}
+
+/* Small icon+heading row shared by Experience and Projects' page headers —
+   same size/color/gap on both so the two pages read as one system. The row
+   carries the spacing .page-title normally holds on its own, since the
+   title is now a flex item sharing the row with the icon. */
+.page-title-group {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-6);
+}
+
+.page-title-group .page-title {
+  margin-bottom: 0;
+}
+
+.page-title-group svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--color-primary);
+  flex-shrink: 0;
 }
 
 /* Signature "you are here" marker: a coral left-edge bar used consistently

@@ -87,7 +87,18 @@ const ogImageAlt = `${profile.name} — ${profile.role}`;
   <body>
     <slot />
     <footer class="site-footer">
-      <p class="site-footer__copyright">© {new Date().getFullYear()} {profile.name}</p>
+      <div class="site-footer__meta">
+        <p class="site-footer__copyright">© {new Date().getFullYear()} {profile.name}</p>
+        <p class="site-footer__source">
+          Built with Astro ·{" "}
+          <a
+            href="https://github.com/jaredryan/personal-portfolio"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="View this portfolio's source code on GitHub"
+          >View source</a>
+        </p>
+      </div>
       <nav class="site-footer__links" aria-label="Footer">
         <a href={profile.links.email} aria-label={`Email ${profile.name}`}>
           <Icon name="lucide:mail" aria-hidden="true" />
@@ -143,8 +154,43 @@ const ogImageAlt = `${profile.name} — ${profile.role}`;
     font-size: 0.85rem;
   }
 
+  /* Row that wraps, not a fixed two-line stack — on desktop the copyright
+     and source note sit on one line ("© … · Built with Astro · View
+     source"); if that combined line doesn't fit (narrow mobile, alongside
+     the icon row), it wraps down to its own line instead of overflowing.
+     The source text's own leading "·" keeps it readable either way. */
+  .site-footer__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    column-gap: var(--space-3);
+  }
+
   .site-footer__copyright {
     margin: 0;
+  }
+
+  /* Quiet second line under the copyright — site-level metadata, not a
+     contact action, so it lives in the one piece of chrome present on every
+     route (unlike the Contact drawer, which only exists on Experience and
+     Projects). Distinct from .site-footer__links' GitHub icon just to the
+     right: that one is Jared's overall GitHub profile, this links to this
+     specific portfolio repo. */
+  .site-footer__source {
+    margin: 0;
+    font-size: 0.75rem;
+  }
+
+  .site-footer__source a {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.15em;
+  }
+
+  .site-footer__source a:hover,
+  .site-footer__source a:focus-visible {
+    color: var(--color-accent-teal);
   }
 
   .site-footer__links {

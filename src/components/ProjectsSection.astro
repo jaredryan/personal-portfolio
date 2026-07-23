@@ -12,12 +12,18 @@ interface Props {
 
 const { projects } = Astro.props;
 
-// Curated display order for the bento grid only — alternates the two
-// palest/lowest-contrast covers (Campfire, LPA Tracker) with the darker,
-// higher-contrast ones (the three games) so the grid doesn't cluster its
-// two palest tiles next to each other. Everything else (detail view, deep
-// links, breadcrumb) keys off slug, so this order has no effect elsewhere.
-const gridOrder = ["campfire", "when-bunnies-attack", "lpa-tracker", "nest-invaders", "unity-roguelike"];
+// Curated display order for the bento grid only — alternates the three
+// pale/lower-contrast covers (Campfire, Ryan Legal PC, LPA Tracker) with the
+// three darker, higher-contrast ones (the games) so the grid doesn't cluster
+// same-toned tiles next to each other. Ryan Legal PC also sits deliberately
+// in the first half, ahead of two of the three games, to read as real
+// professional/client work rather than trailing behind the game projects.
+// Everything else (detail view, deep links, breadcrumb) keys off slug, so
+// this order has no effect elsewhere.
+const gridOrder = [
+  "campfire", "when-bunnies-attack", "ryan-legal-pc",
+  "nest-invaders", "lpa-tracker", "unity-roguelike",
+];
 const gridProjects = gridOrder
   .map((slug) => projects.find((p) => p.slug === slug))
   .filter((p): p is Project => Boolean(p));
@@ -29,16 +35,14 @@ const gridProjects = gridOrder
       <ContactTrigger />
     </div>
 
-    <!-- Bento grid: the "Projects" title tile (item 1) plus one tile per
-         project. 6 items divides cleanly into 2 or 3 columns — the title
-         tile isn't just decorative, it's what makes 5 (an awkward number
-         for any grid) resolve into a clean, gap-free layout. -->
-    <div class="projects-bento">
-      <div class="projects-title-tile">
-        <Icon name="lucide:layout-grid" aria-hidden="true" />
-        <h2 id="projects-heading" tabindex="-1">Projects</h2>
-      </div>
+    <div class="page-title-group">
+      <Icon name="lucide:layout-grid" aria-hidden="true" />
+      <h2 id="projects-heading" class="page-title" tabindex="-1">Projects</h2>
+    </div>
 
+    <!-- Bento grid: one tile per project. 6 divides cleanly into 2 or 3
+         columns on its own, so there's no filler tile needed here. -->
+    <div class="projects-bento">
       {gridProjects.map((project) => (
         <button
           type="button"
@@ -108,56 +112,6 @@ const gridProjects = gridOrder
     }
   }
 
-  /* Mobile/default: reads as a plain heading, not a card — a solid tile
-     would just be dead weight taking up a full row by itself in a single-
-     column layout. Becomes a real bento tile once the grid is 2+ columns
-     below, where it shares a row with actual content instead of
-     monopolizing one. */
-  .projects-title-tile {
-    display: flex;
-    align-items: center;
-    gap: var(--space-2);
-    margin-bottom: var(--space-2);
-  }
-
-  .projects-title-tile h2 {
-    margin: 0;
-  }
-
-  .projects-title-tile :global(svg) {
-    width: 1.25rem;
-    height: 1.25rem;
-    color: var(--color-primary);
-    flex-shrink: 0;
-  }
-
-  @media (min-width: 700px) {
-    .projects-title-tile {
-      margin-bottom: 0;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      gap: var(--space-3);
-      background: var(--color-primary);
-      border: 1px solid var(--color-primary);
-      border-radius: var(--radius-md);
-      box-shadow: var(--shadow-card);
-      padding: var(--space-4);
-    }
-
-    .projects-title-tile h2 {
-      color: white;
-      font-size: 1.5rem;
-    }
-
-    .projects-title-tile :global(svg) {
-      width: 2rem;
-      height: 2rem;
-      color: white;
-    }
-  }
-
   .project-tile {
     width: 100%;
     text-align: left;
@@ -216,6 +170,7 @@ const gridProjects = gridOrder
 
   .project-tile__title {
     font-weight: 700;
+    font-size: 1rem;
     color: var(--color-text);
   }
 

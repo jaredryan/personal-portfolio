@@ -9,6 +9,19 @@ export type Project = {
   title: string;
   /** Lucide icon name for the compact project switcher tab. */
   icon: string;
+  /** Hex seed color for this project's dashboard-preview switcher icon —
+   * drawn at full saturation for the icon itself, mixed lightly into the
+   * card surface for the icon's background tile (mirrors the pill/chip
+   * color-mix pattern elsewhere). A per-project identity color, not reused
+   * from the site's core palette — six projects need six distinct ones.
+   * Light theme only — see accentColorDark for the dark-theme variant. */
+  accentColor: string;
+  /** Dark-theme counterpart to accentColor. Not simply reused: a color
+   * tuned to separate from a light (near-white) surface doesn't necessarily
+   * separate from a dark (near-black) one — e.g. a deep navy reads fine on
+   * white but nearly disappears against the dark theme's own navy surface.
+   * Tuned independently per project. */
+  accentColorDark: string;
   /** Short label for the compact project switcher tab — deliberately
    * shorter than title (e.g. "Bunnies" vs "When Bunnies Attack") so the
    * tab row stays compact. */
@@ -41,6 +54,8 @@ export const projects: Project[] = [
     slug: "campfire",
     title: "Campfire",
     icon: "lucide:flame",
+    accentColor: "#DD5426",
+    accentColorDark: "#FF6B3D",
     switcherLabel: "Campfire",
     oneLiner:
       "Personal growth journaling app with habits, streaks, reflection, and lightweight RPG-inspired progression.",
@@ -66,6 +81,8 @@ export const projects: Project[] = [
     slug: "lpa-tracker",
     title: "LPA Tracker Demo",
     icon: "lucide:file-search",
+    accentColor: "#B8942A",
+    accentColorDark: "#FFC94D",
     switcherLabel: "LPA Tracker",
     oneLiner:
       "AI document intelligence demo for extracting fund provisions, supporting review, and turning deadlines into tasks.",
@@ -88,9 +105,38 @@ export const projects: Project[] = [
     },
   },
   {
+    slug: "ryan-legal-pc",
+    title: "Ryan Legal, PC",
+    icon: "lucide:scale",
+    accentColor: "#1E275E",
+    accentColorDark: "#4169E1",
+    switcherLabel: "Ryan Legal",
+    oneLiner:
+      "Content-first Astro website for a California law firm, organizing six practice areas with clear contact and payment paths.",
+    built:
+      "Built a professional law firm website around six practice areas, attorney experience, and case history, with a Netlify Function contact form and LawPay payment flow.",
+    interestingBecause:
+      "It turns decades of legal work into a clear, navigable site that feels credible without becoming dense or generic.",
+    previewPills: ["Astro", "TypeScript", "Content Architecture", "SEO", "Client Work"],
+    detailPills: [
+      "Astro", "TypeScript", "Content Architecture", "SEO", "Client Work",
+      "Accessibility", "Responsive Design", "Resend",
+    ],
+    links: [
+      { label: "Demo", href: "https://ryanlegalpc.com/", kind: "demo" },
+      { label: "Private repo", href: "", kind: "private" },
+    ],
+    screenshots: {
+      cover: "/projects/ryan-legal-pc/cover.webp",
+      images: ["/projects/ryan-legal-pc/01.webp", "/projects/ryan-legal-pc/02.webp"],
+    },
+  },
+  {
     slug: "when-bunnies-attack",
     title: "When Bunnies Attack",
     icon: "lucide:rabbit",
+    accentColor: "#3F8F3F",
+    accentColorDark: "#4ADE80",
     switcherLabel: "Bunnies",
     oneLiner: "Playful text-based React RPG with exploration, inventory, combat, branching choices, and bunnies.",
     built:
@@ -122,6 +168,8 @@ export const projects: Project[] = [
     slug: "nest-invaders",
     title: "Snack Attack",
     icon: "lucide:chef-hat",
+    accentColor: "#DC2626",
+    accentColorDark: "#FF5252",
     switcherLabel: "Snack Attack",
     oneLiner:
       "Galaga-inspired React arcade shooter with waves, levels, collision logic, scoring, and responsive controls.",
@@ -150,6 +198,8 @@ export const projects: Project[] = [
     slug: "unity-roguelike",
     title: "Unity 2D Roguelike Game",
     icon: "lucide:gamepad-2",
+    accentColor: "#A5692B",
+    accentColorDark: "#E0954A",
     switcherLabel: "Unity 2D",
     oneLiner:
       "Unity 2D gameplay prototype extended with menus, multi-input support, difficulty tuning, and save behavior.",

@@ -58,7 +58,7 @@ const { entries } = Astro.props;
     <p class="experience-preview__detail-oneliner" data-detail-oneliner></p>
     <div class="experience-preview__detail-chips" data-detail-chips></div>
     <div class="experience-preview__detail-bullets-wrap" data-detail-bullets-wrap>
-      <ul class="experience-preview__detail-bullets" data-detail-bullets></ul>
+      <ul class="experience-preview__detail-bullets custom-bullets" data-detail-bullets></ul>
     </div>
     <div class="experience-preview__detail-pills" data-detail-pills></div>
     <a class="experience-preview__seemore" data-detail-seemore href="/experience">See more →</a>
@@ -274,8 +274,6 @@ const { entries } = Astro.props;
   }
 
   .experience-preview__detail-bullets {
-    margin: 0;
-    padding-left: 1.1rem;
     color: var(--color-text-muted);
     font-size: 0.9rem;
     display: flex;

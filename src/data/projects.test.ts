@@ -2,10 +2,11 @@ import { describe, expect, it } from "vitest";
 import { projects } from "./projects";
 
 describe("projects", () => {
-  it("has all five projects with required fields, slugs first, screenshots wired up", () => {
+  it("has all six projects with required fields, slugs first, screenshots wired up", () => {
     expect(projects.map((p) => p.slug)).toEqual([
       "campfire",
       "lpa-tracker",
+      "ryan-legal-pc",
       "when-bunnies-attack",
       "nest-invaders",
       "unity-roguelike",
