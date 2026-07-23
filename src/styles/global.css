@@ -66,6 +66,13 @@ body {
   font-size: 1rem;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  /* Defense-in-depth repeat of html's own text-size-adjust: 100% — inherited
+     already, but WebKit's text-autosize boost heuristic specifically targets
+     paragraph-length content blocks like this one, so it gets the value
+     declared directly on it too rather than relying solely on inheritance
+     from a distant ancestor. */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 main {
@@ -122,26 +129,6 @@ h3 {
   h3 {
     font-size: 1rem;
   }
-
-  /* Paragraph/body text was missing from this breakpoint entirely — headings
-     above already step down correctly here, but p (and the same explicit
-     body-text list further below) had no mobile override at all, so it
-     stayed flat at the desktop 1rem while everything around it shrank. */
-  p,
-  .hero-card__role,
-  .hero-card__paragraph,
-  .project-detail__oneliner,
-  .project-detail__editorial p:last-child,
-  .btn,
-  .profile-opening__para,
-  .profile-journey__text p,
-  .profile-closing__text,
-  .experience-detail-content__oneliner,
-  .experience-preview__detail-oneliner,
-  .contact-drawer__nav a,
-  .not-found__body {
-    font-size: 0.9375rem;
-  }
 }
 
 p {
@@ -170,6 +157,32 @@ p {
 .contact-drawer__nav a,
 .not-found__body {
   font-size: 1rem;
+}
+
+/* Mobile/landscape-phone override for both rules above — placed after them
+   on purpose. Same selectors, same specificity as the unconditional rules
+   above; CSS ties break on source order, not on which side is inside a
+   media query, so this has to come after them to actually win once the
+   query matches. It previously sat before both (see git history) and was
+   silently overridden by them at every width, media query notwithstanding —
+   the query matched and this rule "won" on paper, but the plain p rule
+   below it in the cascade always overrode it in practice. */
+@media (max-width: 759.98px) {
+  p,
+  .hero-card__role,
+  .hero-card__paragraph,
+  .project-detail__oneliner,
+  .project-detail__editorial p:last-child,
+  .btn,
+  .profile-opening__para,
+  .profile-journey__text p,
+  .profile-closing__text,
+  .experience-detail-content__oneliner,
+  .experience-preview__detail-oneliner,
+  .contact-drawer__nav a,
+  .not-found__body {
+    font-size: 0.9375rem;
+  }
 }
 
 a {

@@ -83,6 +83,27 @@ const ogImageAlt = `${profile.name} — ${profile.role}`;
         }
       })();
     </script>
+
+    <script is:inline>
+      // global.css already sets -webkit-text-size-adjust: 100% to opt every
+      // element out of WebKit's text-autosize "boost" heuristic (it inflates
+      // paragraph-length text based on a column-width heuristic, but leaves
+      // short heading-like text alone — which is why only body copy balloons,
+      // never headings). Some WebKit versions don't fully re-honor that value
+      // after an actual device rotation: the boost heuristic re-runs on
+      // orientationchange and can reapply even though the CSS value on disk
+      // never changed. Toggling the property off and immediately back forces
+      // a style recalculation that drops the stale boost.
+      (function () {
+        function resetTextSizeAdjust() {
+          var root = document.documentElement;
+          root.style.webkitTextSizeAdjust = "none";
+          void root.offsetHeight;
+          root.style.webkitTextSizeAdjust = "100%";
+        }
+        window.addEventListener("orientationchange", resetTextSizeAdjust);
+      })();
+    </script>
   </head>
   <body>
     <slot />
