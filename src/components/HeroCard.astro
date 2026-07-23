@@ -8,9 +8,9 @@ import TypewriterTicker from "./TypewriterTicker.astro";
 
 // Optional headshot: rendered only if the asset actually exists at build
 // time, so there's never a broken-image icon or an empty alt-text node —
-// drop a file at public/images/headshot.jpg to turn it on, no code change
+// drop a file at public/images/headshot.webp to turn it on, no code change
 // needed.
-const headshotSrc = "/images/headshot.jpg";
+const headshotSrc = "/images/headshot.webp";
 const hasHeadshot = fs.existsSync(path.join(process.cwd(), "public", headshotSrc));
 ---
 <article class="hero-card">

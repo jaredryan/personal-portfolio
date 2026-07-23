@@ -33,6 +33,12 @@ type RawTile = {
   plate?: boolean;
   /** Placeholder tint, used only while no real image exists yet. */
   accent?: Accent;
+  /** Responsive srcset — only worth the extra request for a genuinely large
+   * photo (Ryan Lin REI's 992w original); the logo files are already a few
+   * KB each as a single lossless WebP, so a second size would cost more in
+   * request overhead than it'd ever save. */
+  srcset?: string;
+  sizes?: string;
 };
 type CollageTile = RawTile & { hasImage: boolean; hasDarkImage: boolean };
 
@@ -60,15 +66,15 @@ const projectCover = (slug: string) => projects.find((p) => p.slug === slug)!.sc
 const chapter1Tiles: RawTile[] = [
   {
     name: "UC Berkeley",
-    src: "/images/journey/uc-berkeley-light.png",
-    srcDark: "/images/journey/uc-berkeley-dark.png",
+    src: "/images/journey/uc-berkeley-light.webp",
+    srcDark: "/images/journey/uc-berkeley-dark.webp",
     logo: true,
     accent: "primary",
   },
   {
     name: "V School",
-    src: "/images/journey/v-school.png",
-    srcDark: "/images/journey/v-school-dark.png",
+    src: "/images/journey/v-school.webp",
+    srcDark: "/images/journey/v-school-dark.webp",
     logo: true,
     accent: "teal",
   },
@@ -81,15 +87,24 @@ const chapter1Tiles: RawTile[] = [
   },
   {
     name: "MANTL",
-    src: "/images/journey/mantl-light.png",
-    srcDark: "/images/journey/mantl-dark.png",
+    src: "/images/journey/mantl-light.webp",
+    srcDark: "/images/journey/mantl-dark.webp",
     logo: true,
     accent: "sand",
   },
 ];
 
 const chapter2Tiles: RawTile[] = [
-  { name: "Ryan Lin REI, LLC", src: "/images/journey/ryan-lin-rei.jpg", accent: "sand" },
+  {
+    name: "Ryan Lin REI, LLC",
+    src: "/images/journey/ryan-lin-rei.webp",
+    srcset: "/images/journey/ryan-lin-rei-640.webp 640w, /images/journey/ryan-lin-rei.webp 992w",
+    // Matches this tile's actual rendered width at each breakpoint: roughly
+    // half the content column (minus the journey rail) at >=900px, close to
+    // the full page-shell width below that (see .profile-journey__row).
+    sizes: "(min-width: 900px) 600px, 90vw",
+    accent: "sand",
+  },
 ];
 
 // Chapter 3 already has real screenshots (no placeholder needed), so its
@@ -148,11 +163,11 @@ const chapterMedia: { layout: "quad" | "single" | "feature"; tiles: CollageTile[
                     {tile.hasImage ? (
                       tile.hasDarkImage ? (
                         <>
-                          <img class="profile-collage-tile__img profile-collage-tile__img--light" src={tile.src} alt={tile.name} loading="lazy" />
-                          <img class="profile-collage-tile__img profile-collage-tile__img--dark" src={tile.srcDark} alt={tile.name} loading="lazy" />
+                          <img class="profile-collage-tile__img profile-collage-tile__img--light" src={tile.src} srcset={tile.srcset} sizes={tile.sizes} alt={tile.name} loading="lazy" />
+                          <img class="profile-collage-tile__img profile-collage-tile__img--dark" src={tile.srcDark} srcset={tile.srcset} sizes={tile.sizes} alt={tile.name} loading="lazy" />
                         </>
                       ) : (
-                        <img class="profile-collage-tile__img" src={tile.src} alt={tile.name} loading="lazy" />
+                        <img class="profile-collage-tile__img" src={tile.src} srcset={tile.srcset} sizes={tile.sizes} alt={tile.name} loading="lazy" />
                       )
                     ) : (
                       <span class="profile-collage-tile__placeholder">{tile.name}</span>

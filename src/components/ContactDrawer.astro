@@ -18,7 +18,7 @@ const { currentPage } = Astro.props;
 
 // Same existence check as HeroCard's headshot — only render the image if
 // the real file has actually been dropped in, no broken-image icon.
-const headshotSrc = "/images/headshot.jpg";
+const headshotSrc = "/images/headshot.webp";
 const hasHeadshot = fs.existsSync(path.join(process.cwd(), "public", headshotSrc));
 
 const navItems = [

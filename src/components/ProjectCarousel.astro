@@ -1,4 +1,6 @@
 ---
+import fs from "node:fs";
+import path from "node:path";
 import { Icon } from "astro-icon/components";
 
 interface Props {
@@ -23,12 +25,33 @@ interface Props {
 const { images, alt, autoRotateMs = 6000, icon, playableEmbedUrl, playableLabel, playableIframeTitle } = Astro.props;
 const playLabel = playableLabel ?? `Play ${alt}`;
 const playIframeTitle = playableIframeTitle ?? `${alt} — playable game`;
+
+// Large gallery screenshots (the ~2940px originals) have a same-directory
+// "-md.webp" sibling generated at build-prep time (1400px wide) — used for
+// normal in-panel display via srcset, while `src` itself stays reserved for
+// the lightbox's fullscreen view (see data-full-src below and this
+// component's script, which reads that attribute rather than the resolved
+// <img>.src — with srcset present, .src reflects whichever candidate the
+// browser actually picked, which would otherwise leak the smaller image
+// into the lightbox). The project cover (also passed in as this carousel's
+// first slide from ProjectDetailView) is already right-sized on its own and
+// has no "-md" sibling, so this checks the file actually exists before
+// using it rather than assuming every slide follows the same convention.
+function mdSrc(src: string): string | null {
+  const candidate = src.replace(/\.webp$/, "-md.webp");
+  return fs.existsSync(path.join(process.cwd(), "public", candidate)) ? candidate : null;
+}
 ---
 <div class="carousel" data-carousel data-autorotate-ms={autoRotateMs}>
   <div class="carousel__viewport">
-    {images.map((src, index) => (
+    {images.map((src, index) => {
+      const md = mdSrc(src);
+      return (
       <img
-        src={src}
+        src={md ?? src}
+        srcset={md ? `${md} 1400w, ${src} 2940w` : undefined}
+        sizes={md ? "(min-width: 1280px) 700px, 90vw" : undefined}
+        data-full-src={md ? src : undefined}
         alt={`${alt} — screenshot ${index + 1} of ${images.length}`}
         class="carousel__slide"
         data-slide-index={index}
@@ -37,7 +60,8 @@ const playIframeTitle = playableIframeTitle ?? `${alt} — playable game`;
         width="960"
         height="600"
       />
-    ))}
+      );
+    })}
     <div class="carousel__viewport-actions">
       {playableEmbedUrl && (
         <button type="button" class="carousel__action-btn" data-carousel-play data-embed-url={playableEmbedUrl} aria-label={playLabel}>
@@ -549,7 +573,10 @@ const playIframeTitle = playableIframeTitle ?? `${alt} — playable game`;
     function syncLightbox() {
       const activeSlide = slides[current];
       if (!lightboxImg || !activeSlide) return;
-      lightboxImg.src = activeSlide.src;
+      // data-full-src, not .src — with srcset present, .src reflects
+      // whichever candidate the browser picked for the small in-panel
+      // display, not necessarily the original full-resolution file.
+      lightboxImg.src = activeSlide.dataset.fullSrc ?? activeSlide.src;
       lightboxImg.alt = activeSlide.alt;
       if (lightboxCaption) lightboxCaption.textContent = `Preview ${current + 1} of ${slides.length}`;
     }
