@@ -124,7 +124,7 @@ export const projects: Project[] = [
     ],
     links: [
       { label: "Live site", href: "https://ryanlegalpc.com/", kind: "demo" },
-      { label: "Private repo", href: "", kind: "private" },
+      { label: "Source", href: "https://github.com/jaredryan/ryan-legal-pc", kind: "github" },
     ],
     screenshots: {
       cover: "/projects/ryan-legal-pc/cover.webp",
