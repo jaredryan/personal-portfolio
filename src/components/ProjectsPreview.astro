@@ -31,7 +31,7 @@ const defaultProject = projects[0];
         width="640"
         height="400"
       />
-      <div class="projects-preview__thumbs">
+      <div class="projects-preview__thumbs" style={{ "--thumb-count": projects.length }}>
         {projects.map((project) => (
           <button
             type="button"
@@ -111,13 +111,21 @@ const defaultProject = projects[0];
     border: 1px solid var(--color-border);
   }
 
-  /* flex, not a fixed-column grid — a hardcoded column count (this used to
-     be repeat(5, 1fr)) silently wraps to a second row the moment a 6th
-     project is added, which is exactly what happened. flex:1 per thumb
-     below fills the row edge-to-edge with however many projects exist,
-     with no column count to keep in sync as the roster grows. */
+  /* Grid, not flex — a fixed column count (this used to be repeat(5, 1fr))
+     silently wrapped to a second row the moment a 6th project was added, so
+     --thumb-count (set inline above from projects.length) keeps the column
+     count in sync as the roster grows instead of hardcoding it. Grid rather
+     than flex:1 per thumb specifically because flex:1 + aspect-ratio is a
+     known WebKit jitter source: flex first resolves each tile's width, then
+     aspect-ratio recomputes height from that still-settling value, and on
+     real iPadOS/iOS (not reproducible in desktop devtools' emulation, which
+     doesn't run WebKit's layout engine at all) the two passes disagreed by a
+     subpixel and the tiles visibly wobbled every ~0.5s. A grid track's width
+     is resolved once, up front, so aspect-ratio here has a single stable
+     input instead of one still being resolved. */
   .projects-preview__thumbs {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(var(--thumb-count), minmax(0, 1fr));
     gap: var(--space-1);
   }
 
@@ -129,7 +137,6 @@ const defaultProject = projects[0];
      of that same color for definition; selected/hover still override it
      below with the site's existing coral/teal state colors, unchanged. */
   .projects-preview__thumb {
-    flex: 1;
     min-width: 0;
     aspect-ratio: 1;
     display: flex;

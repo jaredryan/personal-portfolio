@@ -80,6 +80,7 @@ h1, h2, h3, h4,
 .experience-preview__detail-title,
 .experience-spine__role {
   font-family: var(--font-heading);
+  font-weight: 700;
   line-height: 1.2;
   margin: 0;
   letter-spacing: -0.03em;
@@ -125,6 +126,34 @@ h3 {
 
 p {
   margin: 0;
+  font-size: 1rem;
+}
+
+/* Body-text elements that render actual sentences but don't have their own
+   font-size — the `<a>`/button ones among these don't inherit the `p` rule
+   above, and every one of them was previously depending on some ancestor's
+   inherited value rather than declaring its own, which is exactly the
+   implicit sizing this rule exists to remove (see feedback memory: explicit
+   font-size is required on every text element, not just headings). One
+   rule, not fifteen copies of `font-size: 1rem`, since they're all the same
+   value for the same reason. */
+.hero-card__role,
+.hero-card__paragraph,
+.hero-card__resume,
+.project-detail__oneliner,
+.project-detail__editorial p:last-child,
+.btn,
+.profile-opening__para,
+.profile-journey__text p,
+.profile-closing__text,
+.profile-closing__primary,
+.profile-closing__secondary,
+.experience-detail-content__oneliner,
+.experience-preview__detail-oneliner,
+.contact-drawer__resume,
+.contact-drawer__nav a,
+.not-found__body,
+.not-found__cta {
   font-size: 1rem;
 }
 
