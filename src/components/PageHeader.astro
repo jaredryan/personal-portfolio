@@ -1,0 +1,30 @@
+---
+// Shared breadcrumb + eyebrow + icon + h1 header used by every full page
+// (Profile, Experience, Projects) — one definition so the three stay in
+// lockstep instead of drifting via near-identical copies. Each page gets
+// exactly one h1 (this one); page-specific content headings start at h2.
+import { Icon } from "astro-icon/components";
+import Breadcrumbs from "./Breadcrumbs.astro";
+import ContactTrigger from "./ContactTrigger.astro";
+
+interface Props {
+  breadcrumbLabel: string;
+  eyebrow: string;
+  heading: string;
+  headingId: string;
+  icon: string;
+}
+
+const { breadcrumbLabel, eyebrow, heading, headingId, icon } = Astro.props;
+---
+<div class="page-utility-row">
+  <Breadcrumbs trail={[{ label: "Dashboard", href: "/" }, { label: breadcrumbLabel }]} />
+  <ContactTrigger />
+</div>
+<header class="page-header">
+  <p class="eyebrow">{eyebrow}</p>
+  <div class="page-title-group">
+    <Icon name={icon} aria-hidden="true" />
+    <h1 id={headingId} class="page-title" tabindex="-1">{heading}</h1>
+  </div>
+</header>

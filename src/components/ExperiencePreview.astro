@@ -24,7 +24,7 @@ const { entries } = Astro.props;
       <Icon name="lucide:arrow-left" aria-hidden="true" />
       Experience
     </button>
-    <a class="experience-preview__expand" href="/experience" aria-label="Open full Experience page">
+    <a class="bento-expand-link" href="/experience" aria-label="Open full Experience page">
       <Icon name="lucide:arrow-up-right" aria-hidden="true" />
     </a>
   </div>
@@ -136,25 +136,6 @@ const { entries } = Astro.props;
 
   .experience-preview__back:hover {
     color: var(--color-accent-teal);
-  }
-
-  .experience-preview__expand {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 1.75rem;
-    height: 1.75rem;
-    border-radius: var(--radius-sm);
-    color: var(--color-accent-coral-text);
-  }
-
-  .experience-preview__expand :global(svg) {
-    width: 1.125rem;
-    height: 1.125rem;
-  }
-
-  .experience-preview__expand:hover {
-    background: var(--color-surface-alt);
   }
 
   .experience-preview__list {

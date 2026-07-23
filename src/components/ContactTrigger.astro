@@ -1,5 +1,11 @@
 ---
 import { Icon } from "astro-icon/components";
+
+interface Props {
+  label?: string;
+}
+
+const { label = "Contact" } = Astro.props;
 ---
 <button
   type="button"
@@ -10,7 +16,7 @@ import { Icon } from "astro-icon/components";
   aria-label="Open contact options"
 >
   <Icon name="lucide:mail" aria-hidden="true" />
-  Contact
+  {label}
 </button>
 
 <style>

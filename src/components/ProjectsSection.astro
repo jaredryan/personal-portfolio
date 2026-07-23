@@ -1,9 +1,9 @@
 ---
-import { Icon } from "astro-icon/components";
 import type { Project } from "../data/projects";
 import Breadcrumbs from "./Breadcrumbs.astro";
 import ContactDrawer from "./ContactDrawer.astro";
 import ContactTrigger from "./ContactTrigger.astro";
+import PageHeader from "./PageHeader.astro";
 import ProjectDetailView from "./ProjectDetailView.astro";
 
 interface Props {
@@ -30,15 +30,13 @@ const gridProjects = gridOrder
 ---
 <section class="projects-section page-shell" aria-label="Projects">
   <div id="projects-grid-view">
-    <div class="page-utility-row">
-      <Breadcrumbs trail={[{ label: "Dashboard", href: "/" }, { label: "Projects" }]} />
-      <ContactTrigger />
-    </div>
-
-    <div class="page-title-group">
-      <Icon name="lucide:layout-grid" aria-hidden="true" />
-      <h2 id="projects-heading" class="page-title" tabindex="-1">Projects</h2>
-    </div>
+    <PageHeader
+      breadcrumbLabel="Projects"
+      eyebrow="Projects"
+      heading="What I’ve built lately"
+      headingId="projects-heading"
+      icon="lucide:layout-grid"
+    />
 
     <!-- Bento grid: one tile per project. 6 divides cleanly into 2 or 3
          columns on its own, so there's no filler tile needed here. -->

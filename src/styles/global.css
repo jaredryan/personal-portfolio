@@ -293,16 +293,55 @@ section[id] {
   background: var(--color-text-muted);
 }
 
+/* Shared "open full page" arrow-link control used by every expandable
+   dashboard bento card header (Hero, Experience preview, Projects preview)
+   — one definition so all three stay in visual lockstep instead of drifting
+   via near-duplicate component-scoped copies. is:global-equivalent by
+   living here rather than in each component's own scoped <style>. */
+.bento-expand-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  flex-shrink: 0;
+  border-radius: var(--radius-sm);
+  color: var(--color-accent-coral-text);
+}
+
+.bento-expand-link svg {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+.bento-expand-link:hover {
+  background: var(--color-surface-alt);
+}
+
 /* Page-level heading with breathing room before whatever follows it —
    headings should never touch their own body content. */
 .page-title {
   margin-bottom: var(--space-6);
 }
 
-/* Small icon+heading row shared by Experience and Projects' page headers —
-   same size/color/gap on both so the two pages read as one system. The row
-   carries the spacing .page-title normally holds on its own, since the
-   title is now a flex item sharing the row with the icon. */
+/* Eyebrow + icon/h1 wrapper shared by every full page's header (Profile,
+   Experience, Projects) — see PageHeader.astro. */
+.page-header {
+  margin-bottom: var(--space-8);
+}
+
+.page-header .eyebrow {
+  margin-bottom: var(--space-2);
+}
+
+.page-header .page-title-group {
+  margin-bottom: 0;
+}
+
+/* Small icon+heading row shared by every page header — same size/color/gap
+   on all of them so the pages read as one system. The row carries the
+   spacing .page-title normally holds on its own, since the title is now a
+   flex item sharing the row with the icon. */
 .page-title-group {
   display: flex;
   align-items: center;

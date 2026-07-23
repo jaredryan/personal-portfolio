@@ -1,0 +1,573 @@
+---
+import fs from "node:fs";
+import path from "node:path";
+import { Icon } from "astro-icon/components";
+import ContactDrawer from "./ContactDrawer.astro";
+import ContactTrigger from "./ContactTrigger.astro";
+import PageHeader from "./PageHeader.astro";
+import { profile } from "../data/profile";
+import { profileNarrative } from "../data/profileNarrative";
+import { projects } from "../data/projects";
+
+// Same existence check HeroCard/ContactDrawer use for the optional headshot
+// — a collage tile renders the real photo the instant one is dropped at the
+// given path, no code change needed, and falls back to a typeset name tile
+// until then (see CLAUDE.md's placeholder-not-blocker guidance).
+function assetExists(relPath: string): boolean {
+  return fs.existsSync(path.join(process.cwd(), "public", relPath));
+}
+
+type Accent = "primary" | "teal" | "coral" | "sand";
+type RawTile = {
+  name: string;
+  src: string;
+  /** Theme-swapped variant (same technique as ThemeToggle's sun/moon icons)
+   * — only meaningful once `src` itself resolves to a real file. */
+  srcDark?: string;
+  /** True for a wordmark/logo (contain + padded background) as opposed to a
+   * photograph/screenshot (cover, edge-to-edge — the default). */
+  logo?: boolean;
+  /** Fixed light backing regardless of theme, for a logo that only has one
+   * (dark-on-transparent) version — same fix already applied to the
+   * Experience page's own company logos (img.experience-preview__logo). */
+  plate?: boolean;
+  /** Placeholder tint, used only while no real image exists yet. */
+  accent?: Accent;
+};
+type CollageTile = RawTile & { hasImage: boolean; hasDarkImage: boolean };
+
+function resolveTile(tile: RawTile): CollageTile {
+  return {
+    ...tile,
+    hasImage: assetExists(tile.src),
+    hasDarkImage: Boolean(tile.srcDark) && assetExists(tile.srcDark!),
+  };
+}
+
+function tileClasses(tile: CollageTile): string {
+  const classes = ["profile-collage-tile"];
+  if (tile.hasImage) {
+    if (tile.logo) classes.push("profile-collage-tile--logo");
+    if (tile.plate) classes.push("profile-collage-tile--plate");
+  } else if (tile.accent) {
+    classes.push(`profile-collage-tile--${tile.accent}`);
+  }
+  return classes.join(" ");
+}
+
+const projectCover = (slug: string) => projects.find((p) => p.slug === slug)!.screenshots.cover;
+
+const chapter1Tiles: RawTile[] = [
+  {
+    name: "UC Berkeley",
+    src: "/images/journey/uc-berkeley-light.png",
+    srcDark: "/images/journey/uc-berkeley-dark.png",
+    logo: true,
+    accent: "primary",
+  },
+  {
+    name: "V School",
+    src: "/images/journey/v-school.png",
+    srcDark: "/images/journey/v-school-dark.png",
+    logo: true,
+    accent: "teal",
+  },
+  {
+    name: "IBM",
+    src: "/images/journey/ibm-light.svg",
+    srcDark: "/images/journey/ibm-dark.svg",
+    logo: true,
+    accent: "coral",
+  },
+  {
+    name: "MANTL",
+    src: "/images/journey/mantl-light.png",
+    srcDark: "/images/journey/mantl-dark.png",
+    logo: true,
+    accent: "sand",
+  },
+];
+
+const chapter2Tiles: RawTile[] = [
+  { name: "Ryan Lin REI, LLC", src: "/images/journey/ryan-lin-rei.jpg", accent: "sand" },
+];
+
+// Chapter 3 already has real screenshots (no placeholder needed), so its
+// tiles skip resolveTile/assetExists and just declare hasImage: true directly.
+const chapter3Tiles: CollageTile[] = [
+  { name: "Campfire", src: projectCover("campfire"), hasImage: true, hasDarkImage: false },
+  { name: "Ryan Legal, PC", src: projectCover("ryan-legal-pc"), hasImage: true, hasDarkImage: false },
+  { name: "LPA Tracker", src: projectCover("lpa-tracker"), hasImage: true, hasDarkImage: false },
+];
+
+// One media block per journey chapter, in chapter order. Layout follows the
+// number of real named entities each chapter's own copy mentions — 4 for
+// chapter 1 (an even quad), 1 for chapter 2 (a single standalone frame,
+// fitting since it's already the narrative's own outlier), 3 for chapter 3
+// (a featured top tile + two supporting tiles). Chapter 1 and 2 render as
+// typeset placeholders until real photos land at the paths above; chapter 3
+// ships as real images now.
+const chapterMedia: { layout: "quad" | "single" | "feature"; tiles: CollageTile[] }[] = [
+  { layout: "quad", tiles: chapter1Tiles.map(resolveTile) },
+  { layout: "single", tiles: chapter2Tiles.map(resolveTile) },
+  { layout: "feature", tiles: chapter3Tiles },
+];
+---
+<section class="profile-section page-shell" aria-labelledby="profile-heading">
+  <PageHeader
+    breadcrumbLabel="Profile"
+    eyebrow={profileNarrative.pageLabel}
+    heading={profileNarrative.heading}
+    headingId="profile-heading"
+    icon="lucide:compass"
+  />
+
+  <div class="profile-content">
+    <div class="profile-intro">
+      {profileNarrative.intro.map((paragraph) => (
+        <p class="prose">{paragraph}</p>
+      ))}
+    </div>
+
+    <section class="profile-journey-section" aria-labelledby="profile-journey-heading">
+      <h2 id="profile-journey-heading">{profileNarrative.journeyHeading}</h2>
+      <ol class="profile-journey">
+        {profileNarrative.chapters.map((chapter, index) => (
+          <li class="profile-journey__chapter">
+            <span class="profile-journey__number" aria-hidden="true">{chapter.number}</span>
+            <div class="profile-journey__row">
+              <div class="profile-journey__text">
+                <h3>{chapter.heading}</h3>
+                {chapter.body.map((paragraph) => (
+                  <p class="prose">{paragraph}</p>
+                ))}
+              </div>
+              <div class="profile-journey__media" data-layout={chapterMedia[index].layout}>
+                {chapterMedia[index].tiles.map((tile) => (
+                  <div class={tileClasses(tile)}>
+                    {tile.hasImage ? (
+                      tile.hasDarkImage ? (
+                        <>
+                          <img class="profile-collage-tile__img profile-collage-tile__img--light" src={tile.src} alt={tile.name} loading="lazy" />
+                          <img class="profile-collage-tile__img profile-collage-tile__img--dark" src={tile.srcDark} alt={tile.name} loading="lazy" />
+                        </>
+                      ) : (
+                        <img class="profile-collage-tile__img" src={tile.src} alt={tile.name} loading="lazy" />
+                      )
+                    ) : (
+                      <span class="profile-collage-tile__placeholder">{tile.name}</span>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <section class="profile-values-section" aria-labelledby="profile-values-heading">
+      <h2 id="profile-values-heading">{profileNarrative.valuesHeading}</h2>
+      <div class="profile-values">
+        {profileNarrative.values.map((value) => (
+          <div class="profile-value">
+            <Icon name={value.icon} aria-hidden="true" class="profile-value__icon" />
+            <h3>{value.heading}</h3>
+            <p>{value.body}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="profile-closing" aria-label="Get in touch">
+      <p class="prose">{profileNarrative.closing}</p>
+      <div class="profile-closing__actions">
+        <a class="profile-closing__primary" href="/projects">{profileNarrative.closingActions.viewProjects}</a>
+        <a class="profile-closing__secondary" href="/experience">{profileNarrative.closingActions.viewExperience}</a>
+        <a class="profile-closing__secondary" href={profile.links.resume} download>{profileNarrative.closingActions.resume}</a>
+        <ContactTrigger label={profileNarrative.closingActions.contact} />
+      </div>
+    </section>
+  </div>
+
+  <ContactDrawer currentPage="profile" />
+</section>
+
+<style>
+  .profile-content {
+    /* Shared with .profile-journey__chapter's marker column and
+       .profile-intro's matching left offset below — one source of truth so
+       the intro row's columns line up exactly with the journey rows' text/
+       media columns instead of drifting out of sync with each other. */
+    --journey-rail: 2rem;
+    --journey-rail-gap: var(--space-4);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-12);
+    /* Muted page-entry motion: transform + opacity only, no layout shift.
+       prefers-reduced-motion is handled globally (global.css clamps every
+       animation-duration to ~0), so no local override is needed here — same
+       convention BentoDashboard.astro's entrance animation relies on. */
+    animation: profile-enter 420ms ease-out both;
+  }
+
+  @keyframes profile-enter {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .profile-intro {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  /* Same two-column breakpoint/gap as .profile-journey__row below, so the
+     intro reads as part of the same system rather than a narrower column
+     that happens to sit above it. Two paragraphs side by side, not
+     text+media, so there's no alternation or mobile-reorder to handle here
+     — plain source order works at every width.
+
+     padding-left shifts the whole row right by exactly the journey rows'
+     marker-column width + gap (--journey-rail + --journey-rail-gap, see
+     .profile-content) — without it, the intro's two columns split 50/50
+     across the full content width while the journey rows split 50/50
+     across (full width − rail), so the two sections' column edges (and the
+     gap between them) don't land on the same x position. Padding here
+     narrows the intro's available width to match, so flex: 1 1 0 below
+     produces identically-sized, identically-positioned columns. */
+  @media (min-width: 900px) {
+    .profile-intro {
+      flex-direction: row;
+      align-items: flex-start;
+      gap: var(--space-6);
+      padding-left: calc(var(--journey-rail) + var(--journey-rail-gap));
+    }
+
+    .profile-intro p {
+      flex: 1 1 0;
+      min-width: 0;
+    }
+  }
+
+  .profile-journey-section h2,
+  .profile-values-section h2 {
+    margin-bottom: var(--space-6);
+  }
+
+  /* Restrained "chapter rail": a vertical line running through the center of
+     each chapter's numbered marker. The line is a single absolutely
+     positioned element on the list itself (not per-chapter), so it reads as
+     one continuous path rather than three disconnected segments. Always a
+     single column, at every viewport width — the brief explicitly rules out
+     an alternating left/right layout, so this never introduces one. */
+  .profile-journey {
+    position: relative;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+
+  .profile-journey::before {
+    content: "";
+    position: absolute;
+    top: 0.25rem;
+    bottom: 0.25rem;
+    /* Centers on the 2rem marker column: (2rem - 2px) / 2. */
+    left: calc(1rem - 1px);
+    width: 2px;
+    background: var(--color-border);
+  }
+
+  .profile-journey__chapter {
+    display: grid;
+    grid-template-columns: var(--journey-rail) 1fr;
+    column-gap: var(--journey-rail-gap);
+    row-gap: var(--space-2);
+  }
+
+  /* Grid auto-placement (default "sparse" packing) puts the number in the
+     open column-1 cell on row 1, then each explicitly column-2 element
+     (heading, then each paragraph) fills the next free row in column 2 —
+     no manual row indices needed, and it keeps the number pinned next to
+     the heading regardless of how many paragraphs follow. */
+  .profile-journey__number {
+    grid-column: 1;
+    position: relative;
+    width: var(--journey-rail);
+    height: var(--journey-rail);
+    border-radius: 50%;
+    background: var(--color-bg);
+    border: 2px solid var(--color-accent-coral);
+    color: var(--color-accent-coral-text);
+    font-size: 0.7rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  /* The row wrapper is the only other direct child of .profile-journey__chapter
+     (marker occupies column 1 explicitly) — default grid auto-placement puts
+     it in column 2 with no explicit rule needed. */
+  .profile-journey__row {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .profile-journey__text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    min-width: 0;
+  }
+
+  /* Image tile shows before the text on narrow screens regardless of which
+     chapter this is — the desktop alternation below only ever changes
+     left/right order, never this mobile stacking order. */
+  .profile-journey__media {
+    order: -1;
+  }
+
+  @media (min-width: 900px) {
+    .profile-journey__row {
+      flex-direction: row;
+      align-items: flex-start;
+      gap: var(--space-6);
+    }
+
+    .profile-journey__text,
+    .profile-journey__media {
+      flex: 1 1 0;
+      min-width: 0;
+      order: 0;
+    }
+
+    /* Row 2 (the "less conventional stretch" chapter, already the
+       narrative's own outlier) alternates to media-left/text-right —
+       source order in the DOM is unchanged, so reading/tab order stays
+       text-then-media regardless of this purely visual flip. */
+    .profile-journey__chapter:nth-child(2) .profile-journey__row {
+      flex-direction: row-reverse;
+    }
+  }
+
+  .profile-journey__media[data-layout="quad"],
+  .profile-journey__media[data-layout="feature"] {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: var(--space-2);
+    aspect-ratio: 1;
+  }
+
+  /* "feature" layout: first tile spans the full top row, the remaining two
+     split the bottom row — used where a chapter names one flagship entity
+     plus two supporting ones (chapter 3: Campfire, then Ryan Legal PC and
+     LPA Tracker). */
+  .profile-journey__media[data-layout="feature"] .profile-collage-tile:first-child {
+    grid-column: 1 / -1;
+  }
+
+  .profile-journey__media[data-layout="single"] .profile-collage-tile {
+    aspect-ratio: 16 / 10;
+  }
+
+  .profile-collage-tile {
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+    overflow: hidden;
+    min-height: 0;
+    min-width: 0;
+  }
+
+  .profile-collage-tile__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Logo/wordmark tiles: the mark is never cropped (contain, not cover) and
+     sits on a padded background, unlike the photographic screenshot tiles
+     (chapter 3) which fill the tile edge-to-edge via the cover rule above. */
+  .profile-collage-tile--logo {
+    background: var(--color-surface-alt);
+    padding: var(--space-4);
+  }
+
+  .profile-collage-tile--logo .profile-collage-tile__img {
+    object-fit: contain;
+  }
+
+  .profile-collage-tile--plate {
+    background: #EEF6F8;
+  }
+
+  /* Theme-swapped logo variant — same show/hide technique ThemeToggle.astro
+     uses for its sun/moon icons. Only rendered when a tile actually supplies
+     both a light and dark asset (see hasDarkImage). */
+  .profile-collage-tile__img--dark {
+    display: none;
+  }
+
+  :global([data-theme="dark"]) .profile-collage-tile__img--light {
+    display: none;
+  }
+
+  :global([data-theme="dark"]) .profile-collage-tile__img--dark {
+    display: block;
+  }
+
+  .profile-collage-tile__placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-2);
+    text-align: center;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 0.95rem;
+    line-height: 1.2;
+  }
+
+  /* Placeholder tint rotates through the site's own accent tokens (same
+     color-mix formula .pill/.projects-preview__thumb already use) rather
+     than each entity's real brand color — keeps every "not sourced yet"
+     tile inside this page's own palette instead of a mismatched preview of
+     colors that aren't final. */
+  .profile-collage-tile--primary .profile-collage-tile__placeholder {
+    background: color-mix(in srgb, var(--color-primary) 12%, var(--color-surface-alt));
+    color: var(--color-primary);
+  }
+
+  .profile-collage-tile--teal .profile-collage-tile__placeholder {
+    background: color-mix(in srgb, var(--color-accent-teal) 16%, var(--color-surface-alt));
+    color: var(--color-accent-teal);
+  }
+
+  .profile-collage-tile--coral .profile-collage-tile__placeholder {
+    background: color-mix(in srgb, var(--color-accent-coral) 16%, var(--color-surface-alt));
+    color: var(--color-accent-coral-text);
+  }
+
+  .profile-collage-tile--sand .profile-collage-tile__placeholder {
+    background: color-mix(in srgb, var(--color-accent-sand) 28%, var(--color-surface-alt));
+    color: var(--color-text);
+  }
+
+  /* Sequential entrance for the three chapters, staggered by 80ms — one
+     orchestrated moment, not three independently-triggered animations.
+     Transform + opacity only; reduced-motion is handled globally. */
+  .profile-journey__chapter {
+    animation: profile-enter 420ms ease-out both;
+  }
+
+  .profile-journey__chapter:nth-child(1) { animation-delay: 60ms; }
+  .profile-journey__chapter:nth-child(2) { animation-delay: 140ms; }
+  .profile-journey__chapter:nth-child(3) { animation-delay: 220ms; }
+
+  .profile-values {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--space-4);
+  }
+
+  /* Same raised-card recipe as the bento dashboard's own cards (background,
+     border, radius, shadow) — reused rather than inventing a new surface
+     tone, so these read as "the same kind of card," just smaller. */
+  .profile-value {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    padding: var(--space-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    animation: profile-enter 420ms ease-out both;
+  }
+
+  .profile-value:nth-child(1) { animation-delay: 60ms; }
+  .profile-value:nth-child(2) { animation-delay: 140ms; }
+  .profile-value:nth-child(3) { animation-delay: 220ms; }
+
+  .profile-value__icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    color: var(--color-primary);
+  }
+
+  .profile-value p {
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+  }
+
+  .profile-closing {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .profile-closing__actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  /* Same visual recipe as .hero-card__resume — the site's one "primary
+     filled action" pattern, reused rather than redefined. */
+  .profile-closing__primary {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    background: var(--color-primary);
+    border: 1px solid var(--color-primary);
+    border-radius: var(--radius-sm);
+    padding: var(--space-2) var(--space-4);
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+  }
+
+  .profile-closing__primary:hover {
+    background: var(--color-accent-teal);
+    border-color: var(--color-accent-teal);
+  }
+
+  /* Same visual recipe as .contact-trigger — the site's one "secondary
+     outlined action" pattern. The fourth closing action (Contact me) reuses
+     ContactTrigger itself, which already renders this exact look. */
+  .profile-closing__secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    background: var(--color-surface);
+    border: 1px solid var(--color-primary);
+    border-radius: var(--radius-sm);
+    padding: var(--space-2) var(--space-4);
+    font-weight: 600;
+    color: var(--color-primary);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .profile-closing__secondary:hover,
+  .profile-closing__secondary:focus-visible {
+    border-color: var(--color-accent-teal);
+    color: var(--color-accent-teal);
+  }
+</style>

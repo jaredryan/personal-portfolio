@@ -69,8 +69,8 @@ export const projects: Project[] = [
       "Tailwind", "shadcn/ui", "Product Design", "Built with AI",
     ],
     links: [
-      { label: "Demo", href: "https://campfirejournal.vercel.app/", kind: "demo" },
-      { label: "GitHub", href: "https://github.com/jaredryan/Campfire", kind: "github" },
+      { label: "Live site", href: "https://campfirejournal.vercel.app/", kind: "demo" },
+      { label: "Source", href: "https://github.com/jaredryan/Campfire", kind: "github" },
     ],
     screenshots: {
       cover: "/projects/campfire/cover.webp",
@@ -123,7 +123,7 @@ export const projects: Project[] = [
       "Accessibility", "Responsive Design", "Resend",
     ],
     links: [
-      { label: "Demo", href: "https://ryanlegalpc.com/", kind: "demo" },
+      { label: "Live site", href: "https://ryanlegalpc.com/", kind: "demo" },
       { label: "Private repo", href: "", kind: "private" },
     ],
     screenshots: {
@@ -149,8 +149,8 @@ export const projects: Project[] = [
       "Exploration", "Branching Dialogue", "Responsive UI",
     ],
     links: [
-      { label: "Demo", href: "https://whenbunniesattack.netlify.app/", kind: "demo" },
-      { label: "GitHub", href: "https://github.com/jaredryan/when-bunnies-attack", kind: "github" },
+      { label: "Play", href: "https://whenbunniesattack.netlify.app/", kind: "demo" },
+      { label: "Source", href: "https://github.com/jaredryan/when-bunnies-attack", kind: "github" },
     ],
     screenshots: {
       cover: "/projects/when-bunnies-attack/cover.webp",
@@ -183,8 +183,8 @@ export const projects: Project[] = [
       "Responsive Controls", "CSS", "Animation",
     ],
     links: [
-      { label: "Demo", href: "https://snackattackgame.netlify.app/", kind: "demo" },
-      { label: "GitHub", href: "https://github.com/jaredryan/snack-attack/tree/standaloneGame", kind: "github" },
+      { label: "Play", href: "https://snackattackgame.netlify.app/", kind: "demo" },
+      { label: "Source", href: "https://github.com/jaredryan/snack-attack/tree/standaloneGame", kind: "github" },
     ],
     screenshots: {
       cover: "/projects/snack-attack/cover.webp",
@@ -214,7 +214,7 @@ export const projects: Project[] = [
     ],
     links: [
       {
-        label: "Demo",
+        label: "Play",
         href: "https://play.unity.com/en/games/520d503e-5403-4bab-b4c5-02becc961884/2d-roguelike-tutorial",
         kind: "demo",
       },

@@ -1,10 +1,9 @@
 ---
 import { Icon } from "astro-icon/components";
 import type { ExperienceEntry } from "../data/experience";
-import Breadcrumbs from "./Breadcrumbs.astro";
 import ContactDrawer from "./ContactDrawer.astro";
-import ContactTrigger from "./ContactTrigger.astro";
 import ExperienceDetailContent from "./ExperienceDetailContent.astro";
+import PageHeader from "./PageHeader.astro";
 import SpineNav, { type SpineItem } from "./SpineNav.astro";
 import { dateLabel, monogram, orgName } from "../utils/experienceDisplay";
 
@@ -25,14 +24,13 @@ const spineItems: SpineItem[] = entries.map((entry) => ({
 }));
 ---
 <section class="experience-section page-shell" aria-labelledby="experience-heading">
-  <div class="page-utility-row">
-    <Breadcrumbs trail={[{ label: "Dashboard", href: "/" }, { label: "Experience" }]} />
-    <ContactTrigger />
-  </div>
-  <div class="page-title-group">
-    <Icon name="lucide:briefcase" aria-hidden="true" />
-    <h2 id="experience-heading" class="page-title" tabindex="-1">Experience</h2>
-  </div>
+  <PageHeader
+    breadcrumbLabel="Experience"
+    eyebrow="Experience"
+    heading="Positions and Education"
+    headingId="experience-heading"
+    icon="lucide:briefcase"
+  />
 
   <!-- Groups both layout variants as one unit, distinct from the
        breadcrumb/title row above — on tall/large screens (see the
@@ -51,9 +49,9 @@ const spineItems: SpineItem[] = entries.map((entry) => ({
             hidden={entry.slug !== defaultSlug}
           >
             <span class="eyebrow">{entry.kind === "work" ? "Work" : "Education"}</span>
-            <h3 id={`experience-detail-heading-${entry.slug}`} tabindex="-1">
+            <h2 id={`experience-detail-heading-${entry.slug}`} tabindex="-1">
               {entry.title} {entry.company ? `· ${entry.company}` : ""}
-            </h3>
+            </h2>
             <p class="experience-detail__dates">
               {dateLabel(entry)}{entry.location ? ` · ${entry.location}` : ""}
             </p>
@@ -223,7 +221,7 @@ const spineItems: SpineItem[] = entries.map((entry) => ({
     gap: var(--space-3);
   }
 
-  .experience-detail__panel h3 {
+  .experience-detail__panel h2 {
     margin-top: var(--space-1);
   }
 
