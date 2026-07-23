@@ -7,10 +7,17 @@ describe("profileNarrative", () => {
     expect(profileNarrative.heading).toBe("The path behind the work");
   });
 
+  it("has the supplied opening lead, shown nowhere else in the intro copy", () => {
+    expect(profileNarrative.openingLead).toBe("Building useful software is the work I want to keep doing.");
+    for (const paragraph of profileNarrative.intro) {
+      expect(paragraph).not.toContain(profileNarrative.openingLead);
+    }
+  });
+
   it("has the supplied intro copy, verbatim", () => {
     expect(profileNarrative.intro).toEqual([
       "I’m a product-minded full-stack engineer who likes turning ambiguous ideas into software that feels clear, useful, and finished. My best work sits between product thinking and implementation: understanding the workflow, shaping the experience, building the system, and staying with it through the details that make it reliable.",
-      "That path has not been perfectly linear. I spent the first part of my career in professional software roles, then several years building and operating a residential real estate portfolio. Stepping outside a conventional engineering role gave me a broader view of ownership—and made it clearer that building useful software is the work I want to keep doing.",
+      "That path has not been perfectly linear. I spent the first part of my career in professional software roles, then several years building and operating a residential real estate portfolio. Stepping outside a conventional engineering role gave me a broader view of ownership—and a clearer sense of the work I wanted to return to.",
     ]);
   });
 
@@ -44,17 +51,14 @@ describe("profileNarrative", () => {
       {
         heading: "Product judgment",
         body: "I look beyond the requested feature to the workflow around it: what problem it solves, where it creates friction, and what should stay simple.",
-        icon: "lucide:target",
       },
       {
         heading: "End-to-end ownership",
         body: "I’m comfortable carrying an idea from ambiguity through design, implementation, deployment, and refinement—and taking responsibility for the tradeoffs along the way.",
-        icon: "lucide:layers",
       },
       {
         heading: "Practical communication",
         body: "I translate between technical systems, business needs, and the people using the product, without making any of them feel like an afterthought.",
-        icon: "lucide:message-circle",
       },
     ]);
   });

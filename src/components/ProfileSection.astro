@@ -1,7 +1,6 @@
 ---
 import fs from "node:fs";
 import path from "node:path";
-import { Icon } from "astro-icon/components";
 import ContactDrawer from "./ContactDrawer.astro";
 import ContactTrigger from "./ContactTrigger.astro";
 import PageHeader from "./PageHeader.astro";
@@ -16,6 +15,12 @@ import { projects } from "../data/projects";
 function assetExists(relPath: string): boolean {
   return fs.existsSync(path.join(process.cwd(), "public", relPath));
 }
+
+// Same asset already used by HeroCard's identity row and ContactDrawer's
+// profile block — the opening lead reuses it rather than requiring a new
+// portrait (see CLAUDE.md's placeholder-not-blocker guidance).
+const headshotSrc = "/images/headshot.webp";
+const hasHeadshot = assetExists(headshotSrc);
 
 type Accent = "primary" | "teal" | "coral" | "sand";
 type RawTile = {
@@ -39,6 +44,10 @@ type RawTile = {
    * request overhead than it'd ever save. */
   srcset?: string;
   sizes?: string;
+  /** Caption rendered beneath this tile when it's shown as a standalone
+   * editorial figure (chapter 2's "single" layout only — quad/feature tiles
+   * ignore this). */
+  caption?: string;
 };
 type CollageTile = RawTile & { hasImage: boolean; hasDarkImage: boolean };
 
@@ -99,11 +108,11 @@ const chapter2Tiles: RawTile[] = [
     name: "Ryan Lin REI, LLC",
     src: "/images/journey/ryan-lin-rei.webp",
     srcset: "/images/journey/ryan-lin-rei-640.webp 640w, /images/journey/ryan-lin-rei.webp 992w",
-    // Matches this tile's actual rendered width at each breakpoint: roughly
-    // half the content column (minus the journey rail) at >=900px, close to
-    // the full page-shell width below that (see .profile-journey__row).
-    sizes: "(min-width: 900px) 600px, 90vw",
+    // Matches this figure's actual rendered width at each breakpoint — see
+    // .profile-journey__media[data-layout="single"]'s max-width rules below.
+    sizes: "(min-width: 900px) 480px, min(448px, 90vw)",
     accent: "sand",
+    caption: "Residential real estate operations, 2022–present",
   },
 ];
 
@@ -122,11 +131,22 @@ const chapter3Tiles: CollageTile[] = [
 // (a featured top tile + two supporting tiles). Chapter 1 and 2 render as
 // typeset placeholders until real photos land at the paths above; chapter 3
 // ships as real images now.
+//
+// Visual weight is deliberately unequal across the three, matching the
+// story's own arc: chapter 1's logos are supporting orientation, chapter 2's
+// photo is documentary evidence, chapter 3's collage is the strongest
+// evidence of current direction and gets the richest treatment (see the
+// per-layout sizing rules in the <style> block below).
 const chapterMedia: { layout: "quad" | "single" | "feature"; tiles: CollageTile[] }[] = [
   { layout: "quad", tiles: chapter1Tiles.map(resolveTile) },
   { layout: "single", tiles: chapter2Tiles.map(resolveTile) },
   { layout: "feature", tiles: chapter3Tiles },
 ];
+
+const journeyRows = profileNarrative.chapters.map((chapter, index) => ({
+  chapter,
+  media: chapterMedia[index],
+}));
 ---
 <section class="profile-section page-shell" aria-labelledby="profile-heading">
   <PageHeader
@@ -138,16 +158,30 @@ const chapterMedia: { layout: "quad" | "single" | "feature"; tiles: CollageTile[
   />
 
   <div class="profile-content">
-    <div class="profile-intro">
-      {profileNarrative.intro.map((paragraph) => (
-        <p class="prose">{paragraph}</p>
-      ))}
+    <div class="profile-opening">
+      <div class="profile-opening__left">
+        {hasHeadshot && (
+          <img
+            class="profile-opening__photo"
+            src={headshotSrc}
+            alt="Jared Ryan"
+            width="112"
+            height="112"
+            loading="eager"
+          />
+        )}
+        <p class="profile-opening__para">{profileNarrative.intro[0]}</p>
+      </div>
+      <div class="profile-opening__right">
+        <p class="profile-opening__lead">{profileNarrative.openingLead}</p>
+        <p class="profile-opening__para">{profileNarrative.intro[1]}</p>
+      </div>
     </div>
 
     <section class="profile-journey-section" aria-labelledby="profile-journey-heading">
       <h2 id="profile-journey-heading">{profileNarrative.journeyHeading}</h2>
       <ol class="profile-journey">
-        {profileNarrative.chapters.map((chapter, index) => (
+        {journeyRows.map(({ chapter, media }) => (
           <li class="profile-journey__chapter">
             <span class="profile-journey__number" aria-hidden="true">{chapter.number}</span>
             <div class="profile-journey__row">
@@ -157,40 +191,68 @@ const chapterMedia: { layout: "quad" | "single" | "feature"; tiles: CollageTile[
                   <p class="prose">{paragraph}</p>
                 ))}
               </div>
-              <div class="profile-journey__media" data-layout={chapterMedia[index].layout}>
-                {chapterMedia[index].tiles.map((tile) => (
-                  <div class={tileClasses(tile)}>
-                    {tile.hasImage ? (
-                      tile.hasDarkImage ? (
-                        <>
-                          <img class="profile-collage-tile__img profile-collage-tile__img--light" src={tile.src} srcset={tile.srcset} sizes={tile.sizes} alt={tile.name} loading="lazy" />
-                          <img class="profile-collage-tile__img profile-collage-tile__img--dark" src={tile.srcDark} srcset={tile.srcset} sizes={tile.sizes} alt={tile.name} loading="lazy" />
-                        </>
-                      ) : (
-                        <img class="profile-collage-tile__img" src={tile.src} srcset={tile.srcset} sizes={tile.sizes} alt={tile.name} loading="lazy" />
-                      )
-                    ) : (
-                      <span class="profile-collage-tile__placeholder">{tile.name}</span>
-                    )}
+
+              {media.layout === "single" ? (
+                <div class="profile-journey__media" data-layout="single">
+                  {media.tiles.map((tile) => (
+                    <figure class="profile-journey__figure">
+                      <div class="profile-journey__figure-frame">
+                        {tile.hasImage ? (
+                          <img
+                            class="profile-journey__figure-img"
+                            src={tile.src}
+                            srcset={tile.srcset}
+                            sizes={tile.sizes}
+                            alt="Aerial view of a single-family rental property"
+                            loading="lazy"
+                          />
+                        ) : (
+                          <span class="profile-collage-tile__placeholder">{tile.name}</span>
+                        )}
+                      </div>
+                      {tile.caption && <figcaption class="profile-journey__caption">{tile.caption}</figcaption>}
+                    </figure>
+                  ))}
+                </div>
+              ) : (
+                <div class="profile-journey__media" data-layout={media.layout}>
+                  <div class="profile-journey__tile-grid">
+                    {media.tiles.map((tile) => (
+                      <div class={tileClasses(tile)}>
+                        {tile.hasImage ? (
+                          tile.hasDarkImage ? (
+                            <>
+                              <img class="profile-collage-tile__img profile-collage-tile__img--light" src={tile.src} srcset={tile.srcset} sizes={tile.sizes} alt={tile.name} loading="lazy" />
+                              <img class="profile-collage-tile__img profile-collage-tile__img--dark" src={tile.srcDark} srcset={tile.srcset} sizes={tile.sizes} alt={tile.name} loading="lazy" />
+                            </>
+                          ) : (
+                            <img class="profile-collage-tile__img" src={tile.src} srcset={tile.srcset} sizes={tile.sizes} alt={tile.name} loading="lazy" />
+                          )
+                        ) : (
+                          <span class="profile-collage-tile__placeholder">{tile.name}</span>
+                        )}
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
+                </div>
+              )}
             </div>
           </li>
         ))}
       </ol>
     </section>
 
-    <section class="profile-values-section" aria-labelledby="profile-values-heading">
-      <h2 id="profile-values-heading">{profileNarrative.valuesHeading}</h2>
-      <div class="profile-values">
-        {profileNarrative.values.map((value) => (
-          <div class="profile-value">
-            <Icon name={value.icon} aria-hidden="true" class="profile-value__icon" />
-            <h3>{value.heading}</h3>
-            <p>{value.body}</p>
-          </div>
-        ))}
+    <section class="profile-summary-section" aria-labelledby="profile-values-heading">
+      <div class="profile-summary-band">
+        <h2 id="profile-values-heading">{profileNarrative.valuesHeading}</h2>
+        <div class="profile-summary-columns">
+          {profileNarrative.values.map((value) => (
+            <div class="profile-summary-column">
+              <h3>{value.heading}</h3>
+              <p>{value.body}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
 
@@ -210,10 +272,7 @@ const chapterMedia: { layout: "quad" | "single" | "feature"; tiles: CollageTile[
 
 <style>
   .profile-content {
-    /* Shared with .profile-journey__chapter's marker column and
-       .profile-intro's matching left offset below — one source of truth so
-       the intro row's columns line up exactly with the journey rows' text/
-       media columns instead of drifting out of sync with each other. */
+    /* Shared with .profile-journey__chapter's marker column below. */
     --journey-rail: 2rem;
     --journey-rail-gap: var(--space-4);
     display: flex;
@@ -237,42 +296,124 @@ const chapterMedia: { layout: "quad" | "single" | "feature"; tiles: CollageTile[
     }
   }
 
-  .profile-intro {
+  /* ---------------------------------------------------------------------
+     Opening — full-width two-column introduction directly beneath the
+     shared PageHeader, once there's room (see the two-column media query
+     below). Left column: modest circular portrait beside paragraph 1.
+     Right column: the elevated sentence, then paragraph 2. Below the
+     two-column breakpoint, collapse is classic text wrap rather than a
+     stacked photo-then-paragraph block: the portrait floats to the inline
+     start of paragraph 1 and the text wraps around it, same as any
+     figure-in-a-paragraph pattern — DOM order (photo, paragraph 1,
+     elevated sentence, paragraph 2) is untouched either way, only the CSS
+     positioning changes. */
+  .profile-opening {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+
+  /* flow-root (not the block default) so this container's own height
+     properly includes the floated photo — without it, a block box can
+     collapse to shorter than its floated children per spec, which would
+     let the float visually spill into .profile-opening__right below. */
+  .profile-opening__left {
+    display: flow-root;
+  }
+
+  .profile-opening__right {
     display: flex;
     flex-direction: column;
     gap: var(--space-3);
+    /* Belt-and-suspenders alongside .profile-opening__left's flow-root
+       above: guarantees the elevated sentence always starts below the
+       floated portrait, never beside it, even if a future change removes
+       the flow-root containment. clear has no effect once this becomes a
+       grid item at the two-column breakpoint, so it's safe to leave on. */
+    clear: both;
   }
 
-  /* Same two-column breakpoint/gap as .profile-journey__row below, so the
-     intro reads as part of the same system rather than a narrower column
-     that happens to sit above it. Two paragraphs side by side, not
-     text+media, so there's no alternation or mobile-reorder to handle here
-     — plain source order works at every width.
+  /* One fixed size for the whole floated/wrapped range (below the
+     two-column breakpoint) rather than stepping down at narrower widths —
+     kept at the same size the row layout used to grow into at 640px, so it
+     no longer visibly shrinks as the viewport narrows past 640px/400px. */
+  .profile-opening__photo {
+    float: inline-start;
+    margin-inline-end: var(--space-4);
+    margin-bottom: var(--space-3);
+    width: 96px;
+    height: 96px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid var(--color-border);
+  }
 
-     padding-left shifts the whole row right by exactly the journey rows'
-     marker-column width + gap (--journey-rail + --journey-rail-gap, see
-     .profile-content) — without it, the intro's two columns split 50/50
-     across the full content width while the journey rows split 50/50
-     across (full width − rail), so the two sections' column edges (and the
-     gap between them) don't land on the same x position. Padding here
-     narrows the intro's available width to match, so flex: 1 1 0 below
-     produces identically-sized, identically-positioned columns. */
-  @media (min-width: 900px) {
-    .profile-intro {
-      flex-direction: row;
-      align-items: flex-start;
+  /* Same body typography as the journey narrative (Register 2) rather than
+     the tighter default paragraph line-height. */
+  .profile-opening__para {
+    line-height: 1.65;
+  }
+
+  .profile-opening__lead {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.15rem;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+
+  @media (min-width: 640px) {
+    .profile-opening__lead {
+      font-size: 1.375rem;
+    }
+  }
+
+  /* Two-column desktop layout: left column becomes a row (portrait top-
+     aligned beside paragraph 1, which takes the remaining space, no longer
+     floated — float/clear are ignored on flex items per spec, but display:
+     flex here is what actually drives the row); right column stays a stack
+     (elevated sentence, then paragraph 2). */
+  @media (min-width: 900px) and (min-aspect-ratio: 3/4) {
+    .profile-opening {
+      display: grid;
+      /* Left column takes whatever space is left over; the right column is
+         sized to exactly match .profile-journey__row's own right-hand
+         column below — that row's available width is the page-shell width
+         minus the rail+gap, split in half minus half the column-gap, so
+         reproducing that same formula here (against this container's own
+         100%, not a padding-shifted width) lands the two right edges/
+         widths exactly together without moving or narrowing the left
+         column at all. */
+      grid-template-columns:
+        minmax(0, 1fr)
+        calc(50% - (var(--journey-rail) + var(--journey-rail-gap) + var(--space-6)) / 2);
+      align-items: start;
       gap: var(--space-6);
-      padding-left: calc(var(--journey-rail) + var(--journey-rail-gap));
     }
 
-    .profile-intro p {
-      flex: 1 1 0;
+    .profile-opening__left {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      gap: var(--space-4);
+    }
+
+    .profile-opening__photo {
+      float: none;
+      margin: 0;
+      width: 112px;
+      height: 112px;
+    }
+
+    .profile-opening__para {
       min-width: 0;
     }
   }
 
   .profile-journey-section h2,
-  .profile-values-section h2 {
+  .profile-summary-band h2 {
     margin-bottom: var(--space-6);
   }
 
@@ -308,7 +449,12 @@ const chapterMedia: { layout: "quad" | "single" | "feature"; tiles: CollageTile[
     grid-template-columns: var(--journey-rail) 1fr;
     column-gap: var(--journey-rail-gap);
     row-gap: var(--space-2);
+    animation: profile-enter 420ms ease-out both;
   }
+
+  .profile-journey__chapter:nth-child(1) { animation-delay: 60ms; }
+  .profile-journey__chapter:nth-child(2) { animation-delay: 140ms; }
+  .profile-journey__chapter:nth-child(3) { animation-delay: 220ms; }
 
   /* Grid auto-placement (default "sparse" packing) puts the number in the
      open column-1 cell on row 1, then each explicitly column-2 element
@@ -334,13 +480,22 @@ const chapterMedia: { layout: "quad" | "single" | "feature"; tiles: CollageTile[
 
   /* The row wrapper is the only other direct child of .profile-journey__chapter
      (marker occupies column 1 explicitly) — default grid auto-placement puts
-     it in column 2 with no explicit rule needed. */
+     it in column 2 with no explicit rule needed.
+
+     Source/reading order inside is always number -> heading -> narrative ->
+     media (see the markup above); below the two-column breakpoint this is
+     also the visual order — no `order` property reorders media ahead of
+     text the way the previous version did. */
   .profile-journey__row {
     display: flex;
     flex-direction: column;
     gap: var(--space-4);
   }
 
+  /* Register 2 (journey narrative): a modest step up from ordinary body
+     copy, with a slightly more generous line-height than interface text and
+     a heading that's clearly distinct from — but not competing with — the
+     opening lead above. */
   .profile-journey__text {
     display: flex;
     flex-direction: column;
@@ -348,55 +503,117 @@ const chapterMedia: { layout: "quad" | "single" | "feature"; tiles: CollageTile[
     min-width: 0;
   }
 
-  /* Image tile shows before the text on narrow screens regardless of which
-     chapter this is — the desktop alternation below only ever changes
-     left/right order, never this mobile stacking order. */
+  .profile-journey__text h3 {
+    font-size: 1.35rem;
+    line-height: 1.15;
+  }
+
+  .profile-journey__text p {
+    line-height: 1.65;
+  }
+
+  @media (max-width: 759.98px) {
+    .profile-journey__text h3 {
+      font-size: 1.15rem;
+    }
+  }
+
+  /* -----------------------------------------------------------------------
+     Media — stacked (default) sizing. Each chapter gets its own absolute,
+     width-independent cap (max-width + aspect-ratio) rather than a square
+     tied to the full column width, so none of them can turn into a "wall"
+     of imagery on a wide-but-still-single-column tablet. Heights are
+     deliberately unequal and increase from chapter 1 -> 3, matching the
+     story's own arc (supporting orientation -> documentary evidence ->
+     strongest current-direction evidence).
+     ----------------------------------------------------------------------- */
   .profile-journey__media {
-    order: -1;
+    width: 100%;
   }
 
-  @media (min-width: 900px) {
-    .profile-journey__row {
-      flex-direction: row;
-      align-items: flex-start;
-      gap: var(--space-6);
-    }
-
-    .profile-journey__text,
-    .profile-journey__media {
-      flex: 1 1 0;
-      min-width: 0;
-      order: 0;
-    }
-
-    /* Row 2 (the "less conventional stretch" chapter, already the
-       narrative's own outlier) alternates to media-left/text-right —
-       source order in the DOM is unchanged, so reading/tab order stays
-       text-then-media regardless of this purely visual flip. */
-    .profile-journey__chapter:nth-child(2) .profile-journey__row {
-      flex-direction: row-reverse;
-    }
-  }
-
-  .profile-journey__media[data-layout="quad"],
-  .profile-journey__media[data-layout="feature"] {
+  .profile-journey__tile-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
     gap: var(--space-2);
-    aspect-ratio: 1;
+    width: 100%;
+    height: 100%;
   }
 
-  /* "feature" layout: first tile spans the full top row, the remaining two
-     split the bottom row — used where a chapter names one flagship entity
-     plus two supporting ones (chapter 3: Campfire, then Ryan Legal PC and
-     LPA Tracker). */
+  /* Chapter 1 — stacked/mobile only: capped independent of column width so
+     it can never become a "wall" of logos on a wide-but-still-single-column
+     tablet, but no longer forced into a tiny square either. Width caps at
+     chapter 3's own max-width (34rem); aspect-ratio: 16/10 (chapter 2's
+     ratio) lets it scale fluidly with the viewport up to chapter 2's own
+     effective height (28rem at 16/10 = 17.5rem), where max-height then
+     takes over as a guardrail — same "aspect-ratio + max-height guardrail"
+     pattern the two-column media query already uses below, just applied
+     here in stacked mode. This cap is removed entirely in two-column mode
+     (see that media query), where the grid instead fills the whole media
+     column. */
+  .profile-journey__media[data-layout="quad"] {
+    max-width: 34rem;
+    max-height: 17.5rem;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    min-height: 0;
+    position: relative;
+  }
+
+  /* Chapter 2 — moderate landscape figure, shorter than a square block at
+     every width. */
+  .profile-journey__media[data-layout="single"] {
+    max-width: 28rem;
+  }
+
+  .profile-journey__figure {
+    margin: 0;
+  }
+
+  .profile-journey__figure-frame {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-md);
+    /* Subtle separation only — deliberately lighter than the logo tiles'
+       chrome so a real photograph doesn't read as another placeholder
+       tile/symbol. */
+    border: 1px solid var(--color-border);
+    aspect-ratio: 16 / 10;
+  }
+
+  .profile-journey__figure-frame > * {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .profile-journey__figure-img {
+    object-fit: cover;
+  }
+
+  .profile-journey__caption {
+    margin: var(--space-2) 0 0;
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    text-align: left;
+  }
+
+  /* Chapter 3 — richest of the three, still bounded on tablets/phones so it
+     can never overflow or dominate a short viewport. */
+  .profile-journey__media[data-layout="feature"] {
+    position: relative;
+    max-width: 34rem;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    min-height: 0;
+  }
+
+  /* Scoped to "feature" only (chapter 3) — the first tile spans the full top
+     row there, but chapter 1's quad grid uses the same .profile-journey__tile-grid
+     wrapper and must stay a plain, unspanned 2x2. */
   .profile-journey__media[data-layout="feature"] .profile-collage-tile:first-child {
     grid-column: 1 / -1;
-  }
-
-  .profile-journey__media[data-layout="single"] .profile-collage-tile {
-    aspect-ratio: 16 / 10;
   }
 
   .profile-collage-tile {
@@ -415,7 +632,9 @@ const chapterMedia: { layout: "quad" | "single" | "feature"; tiles: CollageTile[
 
   /* Logo/wordmark tiles: the mark is never cropped (contain, not cover) and
      sits on a padded background, unlike the photographic screenshot tiles
-     (chapter 3) which fill the tile edge-to-edge via the cover rule above. */
+     (chapter 3) which fill the tile edge-to-edge via the cover rule above.
+     Tiles now fill the full media column on desktop (see the two-column
+     media query below), so there's room for proper breathing room again. */
   .profile-collage-tile--logo {
     background: var(--color-surface-alt);
     padding: var(--space-4);
@@ -454,7 +673,7 @@ const chapterMedia: { layout: "quad" | "single" | "feature"; tiles: CollageTile[
     text-align: center;
     font-family: var(--font-heading);
     font-weight: 800;
-    font-size: 0.95rem;
+    font-size: 0.85rem;
     line-height: 1.2;
   }
 
@@ -483,51 +702,179 @@ const chapterMedia: { layout: "quad" | "single" | "feature"; tiles: CollageTile[
     color: var(--color-text);
   }
 
-  /* Sequential entrance for the three chapters, staggered by 80ms — one
-     orchestrated moment, not three independently-triggered animations.
-     Transform + opacity only; reduced-motion is handled globally. */
-  .profile-journey__chapter {
-    animation: profile-enter 420ms ease-out both;
+  /* -----------------------------------------------------------------------
+     Two-column layout. Gated by width AND shape (not width alone) — same
+     idiom BentoDashboard/ExperienceSection already use elsewhere on this
+     site so a wide-but-still-portrait tablet doesn't get squeezed into a
+     layout meant for landscape viewports. 900px is where a 1fr/1fr split of
+     the rail-offset content column first clears a comfortable ~380px
+     reading width per side; 3/4 keeps a tall, narrow-ish window (portrait
+     tablets/some split-screen layouts) out of the two-column tier even past
+     that width floor.
+
+     The actual height fix lives here too: instead of an aspect-ratio tied
+     to the (variable-width) media column, the row becomes a grid with
+     `align-items: stretch` and the text column's own content sets the auto
+     row height. Chapters 2 and 3's media wrappers contribute no intrinsic
+     height of their own (their visible content is absolutely positioned
+     inside a zero-height wrapper — see .profile-journey__figure-frame and
+     .profile-journey__tile-grid overrides below), so the resolved row
+     height comes from the text column alone, and stretch then fills the
+     media column to match it exactly — media can no longer end up taller
+     OR shorter than its own chapter's text purely because the column got
+     wider or narrower. min/max-height below are guardrails for unusually
+     short/long chapter text, not the primary sizing mechanism. */
+  @media (min-width: 900px) and (min-aspect-ratio: 3/4) {
+    .profile-journey__row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      grid-template-areas: "text media";
+      align-items: stretch;
+      column-gap: var(--space-6);
+    }
+
+    .profile-journey__text {
+      grid-area: text;
+    }
+
+    .profile-journey__media {
+      grid-area: media;
+      min-width: 0;
+      min-height: 0;
+    }
+
+    /* Chapter 2 (the narrative's own outlier) alternates to media-left/
+       text-right purely via grid-template-areas — DOM order is unchanged
+       (text still precedes media in the markup), so reading/tab order stays
+       text-then-media regardless of this purely visual flip. */
+    .profile-journey__chapter:nth-child(2) .profile-journey__row {
+      grid-template-areas: "media text";
+    }
+
+    /* Chapter 1 now fills the full media column instead of floating as a
+       small centered block — width comes from the grid area (default
+       justify-self: stretch, once the stacked-mode cap below is lifted);
+       height comes from align-self: stretch, matching the text-defined row
+       height exactly like chapters 2/3 (see the tile-grid override below
+       for how it avoids contributing its own intrinsic height). */
+    .profile-journey__media[data-layout="quad"] {
+      max-width: none;
+      aspect-ratio: auto;
+      align-self: stretch;
+    }
+
+    /* Chapters 2 and 3: let the row's own stretched height govern instead
+       of a width-derived aspect-ratio. */
+    .profile-journey__media[data-layout="single"] {
+      max-width: none;
+      align-self: stretch;
+      min-height: 10rem;
+      max-height: 26rem;
+    }
+
+    .profile-journey__figure {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      gap: var(--space-2);
+    }
+
+    .profile-journey__figure-frame {
+      flex: 1 1 auto;
+      min-height: 0;
+      aspect-ratio: auto;
+    }
+
+    .profile-journey__media[data-layout="feature"] {
+      max-width: none;
+      aspect-ratio: auto;
+      align-self: stretch;
+      min-height: 12rem;
+      /* Comfortably above chapter 3's own text height at every tested
+         two-column width (including the narrowest, where its 3-paragraph
+         body wraps tallest) — a true guardrail against pathological content
+         lengths, not a value that's meant to actually bind day to day. */
+      max-height: 42rem;
+    }
+
+    /* Explicitly scoped to feature AND quad (both now stretch-fill their
+       column) rather than a bare .profile-journey__tile-grid selector —
+       both wrappers are position: relative with a resolved size from
+       align-self: stretch, so inset: 0 here fills each one's own parent
+       correctly. A bare, unscoped selector previously caused this rule to
+       escape to a distant positioned ancestor instead (see git history) —
+       keep this list explicit rather than reverting to that. */
+    .profile-journey__media[data-layout="feature"] .profile-journey__tile-grid,
+    .profile-journey__media[data-layout="quad"] .profile-journey__tile-grid {
+      position: absolute;
+      inset: 0;
+    }
   }
 
-  .profile-journey__chapter:nth-child(1) { animation-delay: 60ms; }
-  .profile-journey__chapter:nth-child(2) { animation-delay: 140ms; }
-  .profile-journey__chapter:nth-child(3) { animation-delay: 220ms; }
+  /* -----------------------------------------------------------------------
+     Summary — "What I bring now" as a restrained alternate-background band
+     rather than three individual icon cards. Register 3 of the page's type
+     system: more compact than the journey narrative, reading as synthesis
+     rather than another chapter.
+     ----------------------------------------------------------------------- */
+  .profile-summary-band {
+    background: var(--color-surface-alt);
+    border-radius: var(--radius-md);
+    padding: var(--space-8) var(--space-6);
+  }
 
-  .profile-values {
+  .profile-summary-columns {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: var(--space-4);
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
   }
 
-  /* Same raised-card recipe as the bento dashboard's own cards (background,
-     border, radius, shadow) — reused rather than inventing a new surface
-     tone, so these read as "the same kind of card," just smaller. */
-  .profile-value {
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-card);
-    padding: var(--space-5);
+  .profile-summary-column {
     display: flex;
     flex-direction: column;
     gap: var(--space-2);
+    padding-top: var(--space-5);
+    border-top: 1px solid var(--color-border);
     animation: profile-enter 420ms ease-out both;
   }
 
-  .profile-value:nth-child(1) { animation-delay: 60ms; }
-  .profile-value:nth-child(2) { animation-delay: 140ms; }
-  .profile-value:nth-child(3) { animation-delay: 220ms; }
-
-  .profile-value__icon {
-    width: 1.5rem;
-    height: 1.5rem;
-    color: var(--color-primary);
+  .profile-summary-column:first-child {
+    padding-top: 0;
+    border-top: none;
   }
 
-  .profile-value p {
+  .profile-summary-column:nth-child(1) { animation-delay: 60ms; }
+  .profile-summary-column:nth-child(2) { animation-delay: 140ms; }
+  .profile-summary-column:nth-child(3) { animation-delay: 220ms; }
+
+  .profile-summary-column h3 {
+    font-size: 1.05rem;
+  }
+
+  .profile-summary-column p {
+    margin: 0;
     color: var(--color-text-muted);
-    font-size: 0.95rem;
+    font-size: 0.925rem;
+    line-height: 1.5;
+  }
+
+  @media (min-width: 760px) {
+    .profile-summary-columns {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+    }
+
+    .profile-summary-column {
+      padding-top: 0;
+      padding-inline: var(--space-6);
+      border-top: none;
+      border-left: 1px solid var(--color-border);
+    }
+
+    .profile-summary-column:first-child {
+      padding-left: 0;
+      border-left: none;
+    }
   }
 
   .profile-closing {
