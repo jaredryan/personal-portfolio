@@ -53,7 +53,7 @@ const defaultProject = projects[0];
       <ul class="pill-list pill-list--preview" id="projects-preview-pills">
         {defaultProject.previewPills.map((pill) => <li class="pill">{pill}</li>)}
       </ul>
-      <a class="projects-preview__seemore" data-preview-seemore href={`/projects?project=${defaultProject.slug}`}>See more →</a>
+      <a class="bento-seemore" data-preview-seemore href={`/projects?project=${defaultProject.slug}`}>See more →</a>
     </div>
   </div>
 </div>
@@ -226,27 +226,7 @@ const defaultProject = projects[0];
     font-size: 0.9rem;
   }
 
-  /* Matches .experience-preview__seemore exactly — same contextual-deep-link
-     pattern: coral base color, subtle surface-alt hover, distinct from the
-     header's expand arrow which always points at the base /projects route. */
-  .projects-preview__seemore {
-    align-self: flex-start;
-    margin-top: var(--space-2);
-    display: inline-flex;
-    align-items: center;
-    padding: var(--space-1) var(--space-2);
-    border-radius: var(--radius-sm);
-    color: var(--color-accent-coral-text);
-    font-weight: 600;
-    text-decoration: none;
-    font-size: 0.9rem;
-    cursor: pointer;
-  }
-
-  .projects-preview__seemore:hover,
-  .projects-preview__seemore:focus-visible {
-    background: var(--color-surface-alt);
-  }
+  /* .bento-seemore (global.css) covers the "See more" link's styling. */
 
   /* min-aspect-ratio matches BentoDashboard's own desktop-tier condition —
      the media/info row-split assumes the full desktop-width column. In the

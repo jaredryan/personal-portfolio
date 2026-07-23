@@ -27,3 +27,6 @@ pnpm-debug.log*
 .vscode/
 
 .claude/worktrees/
+
+# Playwright MCP tool scratch output (screenshots, console logs)
+.playwright-mcp/

@@ -253,44 +253,6 @@ const linkButtonClass: Record<Project["links"][number]["kind"], string> = {
     }
   }
 
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    border-radius: var(--radius-sm);
-    padding: var(--space-2) var(--space-4);
-    font-weight: 600;
-    text-decoration: none;
-    border: 1px solid transparent;
-  }
-
-  .btn--primary {
-    background: var(--color-primary);
-    border-color: var(--color-primary);
-    color: white;
-  }
-
-  .btn--primary:hover {
-    background: var(--color-accent-teal);
-    border-color: var(--color-accent-teal);
-  }
-
-  .btn--secondary {
-    background: var(--color-surface);
-    border-color: var(--color-border);
-    color: var(--color-text);
-  }
-
-  .btn--secondary:hover {
-    border-color: var(--color-accent-teal);
-    color: var(--color-accent-teal);
-  }
-
-  .btn--quiet {
-    background: var(--color-surface-alt);
-    border-color: var(--color-border);
-    color: var(--color-text-muted);
-    font-style: italic;
-    font-weight: 400;
-    cursor: default;
-  }
+  /* .btn/.btn--primary/.btn--secondary/.btn--quiet (global.css) cover the
+     demo/GitHub/private/request links above. */
 </style>

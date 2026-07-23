@@ -259,9 +259,9 @@ const journeyRows = profileNarrative.chapters.map((chapter, index) => ({
     <section class="profile-closing" aria-label="Get in touch">
       <p class="profile-closing__text prose">{profileNarrative.closing}</p>
       <div class="profile-closing__actions">
-        <a class="profile-closing__primary" href="/projects">{profileNarrative.closingActions.viewProjects}</a>
-        <a class="profile-closing__secondary" href="/experience">{profileNarrative.closingActions.viewExperience}</a>
-        <a class="profile-closing__secondary" href={profile.links.resume} download>{profileNarrative.closingActions.resume}</a>
+        <a class="btn btn--primary" href="/projects">{profileNarrative.closingActions.viewProjects}</a>
+        <a class="btn btn--outline" href="/experience">{profileNarrative.closingActions.viewExperience}</a>
+        <a class="btn btn--outline" href={profile.links.resume} download>{profileNarrative.closingActions.resume}</a>
         <ContactTrigger label={profileNarrative.closingActions.contact} />
       </div>
     </section>
@@ -653,7 +653,7 @@ const journeyRows = profileNarrative.chapters.map((chapter, index) => ({
   }
 
   .profile-collage-tile--plate {
-    background: #EEF6F8;
+    background: var(--color-logo-plate);
   }
 
   /* Theme-swapped logo variant — same show/hide technique ThemeToggle.astro
@@ -898,46 +898,7 @@ const journeyRows = profileNarrative.chapters.map((chapter, index) => ({
     gap: var(--space-2);
   }
 
-  /* Same visual recipe as .hero-card__resume — the site's one "primary
-     filled action" pattern, reused rather than redefined. */
-  .profile-closing__primary {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-2);
-    background: var(--color-primary);
-    border: 1px solid var(--color-primary);
-    border-radius: var(--radius-sm);
-    padding: var(--space-2) var(--space-4);
-    text-decoration: none;
-    color: white;
-    font-weight: 600;
-  }
-
-  .profile-closing__primary:hover {
-    background: var(--color-accent-teal);
-    border-color: var(--color-accent-teal);
-  }
-
-  /* Same visual recipe as .contact-trigger — the site's one "secondary
-     outlined action" pattern. The fourth closing action (Contact me) reuses
-     ContactTrigger itself, which already renders this exact look. */
-  .profile-closing__secondary {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-2);
-    background: var(--color-surface);
-    border: 1px solid var(--color-primary);
-    border-radius: var(--radius-sm);
-    padding: var(--space-2) var(--space-4);
-    font-weight: 600;
-    color: var(--color-primary);
-    text-decoration: none;
-    white-space: nowrap;
-  }
-
-  .profile-closing__secondary:hover,
-  .profile-closing__secondary:focus-visible {
-    border-color: var(--color-accent-teal);
-    color: var(--color-accent-teal);
-  }
+  /* .btn/.btn--primary/.btn--outline (global.css) cover the closing actions
+     above — the fourth (Contact me) reuses ContactTrigger, which renders
+     the same .btn--outline look. */
 </style>

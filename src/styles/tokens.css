@@ -19,6 +19,14 @@
      already clears 6.66:1, so it's just aliased below, unchanged. */
   --color-accent-coral-text: #AE5040;
 
+  /* Deliberately theme-invariant, not aliased to --color-surface-alt even
+     though they're numerically identical in light mode right now — this is
+     a fixed light backing plate for dark-on-transparent logo marks (they'd
+     vanish against dark theme's own surface-alt), so it must not follow the
+     theme switch the way --color-surface-alt does. Only ever defined here,
+     not repeated in [data-theme="dark"] below. */
+  --color-logo-plate: #EEF6F8;
+
   --font-sans: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --font-heading: "Sora Variable", ui-sans-serif, system-ui, sans-serif;
   --font-body: "Inter Variable", ui-sans-serif, system-ui, sans-serif;

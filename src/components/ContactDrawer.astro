@@ -55,18 +55,18 @@ const navItems = [
   </div>
 
   <div class="contact-drawer__actions">
-    <a class="contact-drawer__resume" href={profile.links.resume} download>
+    <a class="btn btn--primary" href={profile.links.resume} download>
       <Icon name="lucide:download" aria-hidden="true" />
       Résumé
     </a>
-    <a class="contact-drawer__icon-btn" href={profile.links.email} aria-label="Email Jared Ryan">
+    <a class="icon-btn" href={profile.links.email} aria-label="Email Jared Ryan">
       <Icon name="lucide:mail" aria-hidden="true" />
     </a>
-    <a class="contact-drawer__icon-btn" href={profile.links.github} target="_blank" rel="noreferrer" aria-label="Jared Ryan on GitHub">
+    <a class="icon-btn" href={profile.links.github} target="_blank" rel="noreferrer" aria-label="Jared Ryan on GitHub">
       <Icon name="simple-icons:github" aria-hidden="true" />
     </a>
     {profile.links.linkedin && (
-      <a class="contact-drawer__icon-btn" href={profile.links.linkedin} target="_blank" rel="noreferrer" aria-label="Jared Ryan on LinkedIn">
+      <a class="icon-btn" href={profile.links.linkedin} target="_blank" rel="noreferrer" aria-label="Jared Ryan on LinkedIn">
         <Icon name="simple-icons:linkedin" aria-hidden="true" />
       </a>
     )}
@@ -183,51 +183,8 @@ const navItems = [
     gap: var(--space-2);
   }
 
-  .contact-drawer__resume {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-2);
-    background: var(--color-primary);
-    border: 1px solid var(--color-primary);
-    border-radius: var(--radius-sm);
-    padding: var(--space-2) var(--space-4);
-    text-decoration: none;
-    color: white;
-    font-weight: 600;
-  }
-
-  .contact-drawer__resume :global(svg) {
-    width: 1.125rem;
-    height: 1.125rem;
-  }
-
-  .contact-drawer__resume:hover {
-    background: var(--color-accent-teal);
-    border-color: var(--color-accent-teal);
-  }
-
-  .contact-drawer__icon-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 2.5rem;
-    height: 2.5rem;
-    background: var(--color-surface-alt);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    color: var(--color-text);
-  }
-
-  .contact-drawer__icon-btn :global(svg) {
-    width: 1.125rem;
-    height: 1.125rem;
-  }
-
-  .contact-drawer__icon-btn:hover,
-  .contact-drawer__icon-btn:focus-visible {
-    border-color: var(--color-accent-teal);
-    color: var(--color-accent-teal);
-  }
+  /* .btn/.btn--primary (global.css) cover the Résumé button above; .icon-btn
+     (global.css) covers the email/GitHub/LinkedIn buttons above. */
 
   .contact-drawer__nav ul {
     list-style: none;

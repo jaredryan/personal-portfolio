@@ -31,9 +31,22 @@ const buttonLabel = `${label.replace(/:$/, "")} ticker — activate for a bonus 
       // separate column.
       <span class="typewriter__sizer-line" aria-hidden="true"><span class="typewriter__label">{label}</span>{line}|</span>
     ))}
-    <span class="typewriter__line"><span class="typewriter__label" aria-hidden="true">{label}</span><span class="typewriter__text" aria-live="polite">{lines[0]}</span><span class="typewriter__cursor" aria-hidden="true">|</span></span>
+    <span class="typewriter__line"><span class="typewriter__label" aria-hidden="true">{label}</span><span class="typewriter__text">{lines[0]}</span><span class="typewriter__cursor" aria-hidden="true">|</span></span>
   </div>
 </button>
+{/* Sibling of the button, not nested inside it — a live region's
+   announcements shouldn't depend on how a browser/AT combination handles
+   dynamic content inside an interactive element with its own aria-label.
+   Separate from .typewriter__text above on purpose: that one repaints every
+   ~35ms per character during typing, so putting aria-live there (as before)
+   had a screen reader announce every partial fragment of every phrase. This
+   one only ever receives a complete line's text (see the script's typeLine,
+   at the moment a line finishes typing), so screen reader users hear one
+   full phrase per cycle instead of a stream of partial ones.
+   .typewriter__text itself stays in the accessibility tree (readable on its
+   own, e.g. in browse mode, or for reduced-motion users where the animation
+   loop below never runs) — it just isn't "live". */}
+<span class="visually-hidden" aria-live="polite" data-typewriter-announcer></span>
 
 <style>
   /* A quiet "status/log" treatment, not a fake terminal — just monospace
@@ -124,6 +137,7 @@ const buttonLabel = `${label.replace(/:$/, "")} ticker — activate for a bonus 
   const root = document.querySelector<HTMLButtonElement>(".typewriter");
   const textEl = root?.querySelector<HTMLElement>(".typewriter__text");
   const cursorEl = root?.querySelector<HTMLElement>(".typewriter__cursor");
+  const announcerEl = root?.parentElement?.querySelector<HTMLElement>("[data-typewriter-announcer]");
   const lines: string[] = JSON.parse(root?.dataset.lines ?? "[]");
   const bonusLines: string[] = JSON.parse(root?.dataset.bonusLines ?? "[]");
 
@@ -145,6 +159,9 @@ const buttonLabel = `${label.replace(/:$/, "")} ticker — activate for a bonus 
       if (charIndex < line.length) {
         timeoutId = setTimeout(() => typeLine(line, charIndex + 1), TYPE_MS);
       } else {
+        // The one point per cycle where a screen reader should hear
+        // anything — the complete phrase, not each character that built it.
+        if (announcerEl) announcerEl.textContent = line;
         timeoutId = setTimeout(() => deleteLine(line, line.length), HOLD_MS);
       }
     }

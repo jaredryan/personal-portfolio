@@ -17,7 +17,7 @@ import { Icon } from "astro-icon/components";
         <br />
         Either way, the dashboard is the safest path back.
       </p>
-      <a class="not-found__cta" href="/">Dashboard</a>
+      <a class="btn btn--primary not-found__cta" href="/">Dashboard</a>
     </div>
   </main>
 </BaseLayout>
@@ -64,22 +64,11 @@ import { Icon } from "astro-icon/components";
     max-width: 40ch;
   }
 
+  /* .btn/.btn--primary (global.css) supply the base look; this page's CTA
+     just wants a bit more breathing room and separation from the body copy
+     above it than the shared recipe's default padding/spacing gives. */
   .not-found__cta {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
     margin-top: var(--space-2);
-    background: var(--color-primary);
-    border: 1px solid var(--color-primary);
-    border-radius: var(--radius-sm);
-    padding: var(--space-2) var(--space-6);
-    color: white;
-    font-weight: 600;
-    text-decoration: none;
-  }
-
-  .not-found__cta:hover {
-    background: var(--color-accent-teal);
-    border-color: var(--color-accent-teal);
+    padding-inline: var(--space-6);
   }
 </style>

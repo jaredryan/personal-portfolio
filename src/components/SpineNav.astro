@@ -38,9 +38,9 @@ const { items, defaultSlug, dataAttr, ariaLabel } = Astro.props;
       aria-pressed={item.slug === defaultSlug ? "true" : "false"}
     >
       {item.logoSrc ? (
-        <img class="spine__logo" src={item.logoSrc} alt="" width="28" height="28" loading="lazy" />
+        <img class="logo-tile" src={item.logoSrc} alt="" width="28" height="28" loading="lazy" />
       ) : (
-        <span class="spine__logo" aria-hidden="true">{item.monogram}</span>
+        <span class="logo-tile" aria-hidden="true">{item.monogram}</span>
       )}
       <span class="spine__text">
         <span class="spine__line1">{item.line1}</span>
@@ -83,40 +83,8 @@ const { items, defaultSlug, dataAttr, ariaLabel } = Astro.props;
     background: var(--color-surface-alt);
   }
 
-  .spine__item[aria-pressed="true"]::before {
-    content: "";
-    position: absolute;
-    inset-block: var(--space-2);
-    left: 0;
-    width: 3px;
-    border-radius: 999px;
-    background: var(--color-accent-coral);
-  }
-
-  .spine__logo {
-    flex-shrink: 0;
-    width: 28px;
-    height: 28px;
-    border-radius: var(--radius-sm);
-    background: var(--color-surface-alt);
-    border: 1px solid var(--color-border);
-    color: var(--color-primary);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.7rem;
-    font-weight: 700;
-    object-fit: cover;
-  }
-
-  /* Fixed light backing (not the theme-reactive surface-alt above) — some
-     logo marks are dark line-art on a transparent PNG with no color info of
-     their own, so they'd read fine in light mode but nearly vanish against
-     the dark-mode tile. A permanent light plate keeps every logo image
-     legible in both themes regardless of the mark's own color. */
-  img.spine__logo {
-    background: #EEF6F8;
-  }
+  /* The coral "you are here" bar itself lives in global.css, shared with
+     .is-selected. */
 
   .spine__text {
     display: flex;

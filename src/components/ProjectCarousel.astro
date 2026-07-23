@@ -106,13 +106,12 @@ function mdSrc(src: string): string | null {
     <button type="button" class="carousel__prev" aria-label="Previous screenshot">
       <Icon name="lucide:chevron-left" aria-hidden="true" />
     </button>
-    <div class="carousel__dots" role="tablist" aria-label="Screenshot selector">
+    <div class="carousel__dots" role="group" aria-label="Screenshot selector">
       {images.map((_, index) => (
         <button
           type="button"
           class="carousel__dot"
-          role="tab"
-          aria-selected={index === 0 ? "true" : "false"}
+          aria-current={index === 0 ? "true" : undefined}
           aria-label={`Show screenshot ${index + 1}`}
           data-dot-index={index}
         >
@@ -445,16 +444,16 @@ function mdSrc(src: string): string | null {
     transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease;
   }
 
-  /* :not([aria-selected="true"]) keeps the selected (coral) dot dominant
-     even while it's hovered/focused — matches the same selected-vs-hover
-     precedent as .projects-preview__thumb. */
-  .carousel__dot:not([aria-selected="true"]):hover .carousel__dot-visual,
-  .carousel__dot:not([aria-selected="true"]):focus-visible .carousel__dot-visual {
+  /* :not([aria-current]) keeps the selected (coral) dot dominant even while
+     it's hovered/focused — matches the same selected-vs-hover precedent as
+     .projects-preview__thumb. */
+  .carousel__dot:not([aria-current]):hover .carousel__dot-visual,
+  .carousel__dot:not([aria-current]):focus-visible .carousel__dot-visual {
     border-color: var(--color-accent-teal);
     background: var(--color-accent-teal);
   }
 
-  .carousel__dot[aria-selected="true"] .carousel__dot-visual {
+  .carousel__dot[aria-current] .carousel__dot-visual {
     background: var(--color-accent-coral);
     border-color: var(--color-accent-coral);
   }
@@ -520,7 +519,8 @@ function mdSrc(src: string): string | null {
       current = nextIndex;
 
       dots.forEach((dot, i) => {
-        dot.setAttribute("aria-selected", String(i === current));
+        if (i === current) dot.setAttribute("aria-current", "true");
+        else dot.removeAttribute("aria-current");
       });
       if (captionText) captionText.textContent = `Preview ${current + 1} of ${slides.length}`;
 
@@ -591,10 +591,44 @@ function mdSrc(src: string): string | null {
       syncLightbox();
     }
 
+    // The panel declares aria-modal="true" (it's a real modal overlay), so
+    // Tab must actually stay contained within it — mirrors ContactDrawer's
+    // trap. Filters out anything hidden (e.g. the prev/next arrows and
+    // caption while game mode is active) rather than relying on querying
+    // only currently-visible markup, since the same elements exist in the
+    // DOM across both modes and just toggle `hidden`.
+    function getLightboxFocusable(): HTMLElement[] {
+      if (!lightbox) return [];
+      return Array.from(
+        lightbox.querySelectorAll<HTMLElement>("a[href], button:not([disabled]), iframe"),
+      ).filter((el) => !el.hidden && el.offsetParent !== null);
+    }
+
     function onLightboxKeydown(event: KeyboardEvent) {
-      if (event.key === "Escape") closeLightbox();
-      else if (event.key === "ArrowLeft") lightboxShow("previous");
-      else if (event.key === "ArrowRight") lightboxShow("next");
+      if (event.key === "Escape") {
+        closeLightbox();
+        return;
+      }
+      if (event.key === "ArrowLeft") {
+        lightboxShow("previous");
+        return;
+      }
+      if (event.key === "ArrowRight") {
+        lightboxShow("next");
+        return;
+      }
+      if (event.key !== "Tab") return;
+      const focusable = getLightboxFocusable();
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
     }
 
     let touchStartX = 0;

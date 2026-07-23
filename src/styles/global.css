@@ -139,21 +139,16 @@ p {
    value for the same reason. */
 .hero-card__role,
 .hero-card__paragraph,
-.hero-card__resume,
 .project-detail__oneliner,
 .project-detail__editorial p:last-child,
 .btn,
 .profile-opening__para,
 .profile-journey__text p,
 .profile-closing__text,
-.profile-closing__primary,
-.profile-closing__secondary,
 .experience-detail-content__oneliner,
 .experience-preview__detail-oneliner,
-.contact-drawer__resume,
 .contact-drawer__nav a,
-.not-found__body,
-.not-found__cta {
+.not-found__body {
   font-size: 1rem;
 }
 
@@ -322,6 +317,34 @@ section[id] {
   background: var(--color-text-muted);
 }
 
+/* Shared 28px logo/monogram tile — used by SpineNav's desktop items,
+   ExperienceSection's mobile accordion summary, and ExperiencePreview's
+   dashboard rows, which previously each carried a byte-identical copy of
+   this block. is:global-equivalent by living here; the img-specific
+   override supplies a fixed light backing plate (--color-logo-plate, not
+   the theme-reactive --color-surface-alt) since real logo files vary —
+   some are transparent, some carry their own flat background — and a dark
+   line-art mark would otherwise vanish against dark theme's own surface. */
+.logo-tile {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-alt);
+  border: 1px solid var(--color-border);
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  object-fit: cover;
+}
+
+img.logo-tile {
+  background: var(--color-logo-plate);
+}
+
 /* Shared "open full page" arrow-link control used by every expandable
    dashboard bento card header (Hero, Experience preview, Projects preview)
    — one definition so all three stay in visual lockstep instead of drifting
@@ -345,6 +368,139 @@ section[id] {
 
 .bento-expand-link:hover {
   background: var(--color-surface-alt);
+}
+
+/* Shared contextual "See more" deep-link used by Experience and Projects
+   preview cards — coral base color, subtle surface-alt hover, distinct
+   from .bento-expand-link above (which always points at the section's base
+   route regardless of what's selected; this one follows the currently
+   previewed role/project). Coral, not teal, on hover: "See more" is
+   conceptually an expand/open action like the header's expand icon (also
+   coral), so it keeps its base color and only gains a background instead
+   of switching hue. */
+.bento-seemore {
+  align-self: flex-start;
+  margin-top: var(--space-2);
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+  color: var(--color-accent-coral-text);
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.bento-seemore:hover,
+.bento-seemore:focus-visible {
+  background: var(--color-surface-alt);
+}
+
+/* Shared social/contact icon-only link button — used by HeroCard's and
+   ContactDrawer's email/GitHub/LinkedIn rows, which previously each carried
+   a byte-identical copy of this block. */
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  background: var(--color-surface-alt);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  color: var(--color-text);
+}
+
+.icon-btn svg {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+.icon-btn:hover,
+.icon-btn:focus-visible {
+  border-color: var(--color-accent-teal);
+  color: var(--color-accent-teal);
+}
+
+/* Shared button/link-as-button family — originally ProjectDetailView's own
+   demo/GitHub/private/request link styling, promoted here since the same
+   "filled primary action" and "primary-colored outline action" recipes were
+   independently hand-copied across five other components (Hero/ContactDrawer
+   résumé links, Profile's closing actions, the 404 CTA, ContactTrigger).
+   cursor: pointer covers .btn used on a <button> (ContactTrigger); anchors
+   already get this from the browser for free, so it's a harmless no-op
+   there. .btn--quiet overrides it back to `default` below, since that
+   variant marks a link that's intentionally not clickable. */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2) var(--space-4);
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+/* Same icon scale as .icon-btn/.bento-expand-link above — one consistent
+   size for every icon-plus-label button on the site. */
+.btn svg {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+.btn--primary {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: white;
+}
+
+.btn--primary:hover,
+.btn--primary:focus-visible {
+  background: var(--color-accent-teal);
+  border-color: var(--color-accent-teal);
+}
+
+/* Neutral bordered variant (e.g. a "View on GitHub" link) — distinct from
+   .btn--outline below, which is bordered in the brand primary color rather
+   than the neutral border token. */
+.btn--secondary {
+  background: var(--color-surface);
+  border-color: var(--color-border);
+  color: var(--color-text);
+}
+
+.btn--secondary:hover,
+.btn--secondary:focus-visible {
+  border-color: var(--color-accent-teal);
+  color: var(--color-accent-teal);
+}
+
+/* Primary-colored outline variant (e.g. "Contact", "View Experience") —
+   was hand-copied identically between ContactTrigger and ProfileSection's
+   closing actions before being promoted here. */
+.btn--outline {
+  background: var(--color-surface);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  white-space: nowrap;
+}
+
+.btn--outline:hover,
+.btn--outline:focus-visible {
+  border-color: var(--color-accent-teal);
+  color: var(--color-accent-teal);
+}
+
+.btn--quiet {
+  background: var(--color-surface-alt);
+  border-color: var(--color-border);
+  color: var(--color-text-muted);
+  font-style: italic;
+  font-weight: 400;
+  cursor: default;
 }
 
 /* Page-level heading with breathing room before whatever follows it —
@@ -391,12 +547,19 @@ section[id] {
 
 /* Signature "you are here" marker: a coral left-edge bar used consistently
    on selected/active rows and cards across the bento dashboard and full
-   Experience/Projects pages (spine items, list rows, thumbnails). */
-.is-selected {
+   Experience/Projects pages (spine items, list rows, thumbnails).
+   SpineNav's own selected state is driven entirely by the `aria-pressed`
+   attribute already (one source of truth, no separate class to keep in
+   sync via JS), so it's included here by attribute selector rather than
+   switching it over to this class — the point is sharing the declaration,
+   not forcing every consumer onto the same selection mechanism. */
+.is-selected,
+.spine__item[aria-pressed="true"] {
   position: relative;
 }
 
-.is-selected::before {
+.is-selected::before,
+.spine__item[aria-pressed="true"]::before {
   content: "";
   position: absolute;
   inset-block: var(--space-2);

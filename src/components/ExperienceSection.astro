@@ -69,9 +69,9 @@ const spineItems: SpineItem[] = entries.map((entry) => ({
         >
           <summary>
             {entry.logo ? (
-              <img class="experience-spine__logo" src={entry.logo} alt="" width="28" height="28" loading="lazy" />
+              <img class="logo-tile" src={entry.logo} alt="" width="28" height="28" loading="lazy" />
             ) : (
-              <span class="experience-spine__logo" aria-hidden="true">{monogram(entry)}</span>
+              <span class="logo-tile" aria-hidden="true">{monogram(entry)}</span>
             )}
             <span class="experience-spine__text">
               <span class="experience-spine__role">{entry.title}</span>
@@ -144,42 +144,9 @@ const spineItems: SpineItem[] = entries.map((entry) => ({
     }
   }
 
-  /* .experience-spine__logo/__text/__role/__org/__dates below are still
-     used by the mobile accordion's <summary> (its own markup, further
-     down) — the desktop nav itself now lives in SpineNav.astro, which has
-     its own equivalent (spine__logo etc.) styles, but the accordion's
-     markup wasn't touched, so its classes and their styles stay here. */
-  .experience-spine__logo {
-    flex-shrink: 0;
-    width: 28px;
-    height: 28px;
-    border-radius: var(--radius-sm);
-    background: var(--color-surface-alt);
-    /* Real logo files vary — some are transparent, some carry their own
-       flat/grey background baked in — so a consistent frame around every
-       tile reads as "this is an icon container" regardless of what's
-       inside, instead of individual logos looking like stray boxes against
-       the card. */
-    border: 1px solid var(--color-border);
-    color: var(--color-primary);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.7rem;
-    font-weight: 700;
-    /* object-fit only matters for the <img> variant (real logo) — harmless
-       no-op on the monogram <span> fallback. */
-    object-fit: cover;
-  }
-
-  /* Fixed light backing (not the theme-reactive surface-alt above) — some
-     logo marks are dark line-art on a transparent PNG with no color info of
-     their own, so they'd read fine in light mode but nearly vanish against
-     the dark-mode tile. A permanent light plate keeps every logo image
-     legible in both themes regardless of the mark's own color. */
-  img.experience-spine__logo {
-    background: #EEF6F8;
-  }
+  /* .logo-tile (global.css) covers the mobile accordion's <summary> logo
+     tile below — the desktop nav itself now lives in SpineNav.astro, which
+     shares the same class. */
 
   .experience-spine__text {
     display: flex;

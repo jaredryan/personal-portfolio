@@ -9,7 +9,7 @@ const { label = "Contact" } = Astro.props;
 ---
 <button
   type="button"
-  class="contact-trigger"
+  class="btn btn--outline"
   data-contact-trigger
   aria-haspopup="dialog"
   aria-controls="contact-drawer"
@@ -18,31 +18,3 @@ const { label = "Contact" } = Astro.props;
   <Icon name="lucide:mail" aria-hidden="true" />
   {label}
 </button>
-
-<style>
-  .contact-trigger {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-2);
-    background: var(--color-surface);
-    border: 1px solid var(--color-primary);
-    border-radius: var(--radius-sm);
-    padding: var(--space-2) var(--space-4);
-    font-weight: 600;
-    font-size: 1rem;
-    color: var(--color-primary);
-    cursor: pointer;
-    white-space: nowrap;
-  }
-
-  .contact-trigger :global(svg) {
-    width: 1.125rem;
-    height: 1.125rem;
-  }
-
-  .contact-trigger:hover,
-  .contact-trigger:focus-visible {
-    border-color: var(--color-accent-teal);
-    color: var(--color-accent-teal);
-  }
-</style>

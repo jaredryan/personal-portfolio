@@ -39,9 +39,9 @@ const { entries } = Astro.props;
           aria-label={entry.companyShort ? `${entry.title} · ${orgName(entry)}` : undefined}
         >
           {entry.logo ? (
-            <img class="experience-preview__logo" src={entry.logo} alt="" width="28" height="28" loading="lazy" />
+            <img class="logo-tile" src={entry.logo} alt="" width="28" height="28" loading="lazy" />
           ) : (
-            <span class="experience-preview__logo" aria-hidden="true">{monogram(entry)}</span>
+            <span class="logo-tile" aria-hidden="true">{monogram(entry)}</span>
           )}
           <span class="experience-preview__row-text">
             <span class="experience-preview__row-line1">{spineLine1(entry)}</span>
@@ -61,7 +61,7 @@ const { entries } = Astro.props;
       <ul class="experience-preview__detail-bullets custom-bullets" data-detail-bullets></ul>
     </div>
     <div class="experience-preview__detail-pills" data-detail-pills></div>
-    <a class="experience-preview__seemore" data-detail-seemore href="/experience">See more →</a>
+    <a class="bento-seemore" data-detail-seemore href="/experience">See more →</a>
   </div>
 </div>
 
@@ -168,38 +168,7 @@ const { entries } = Astro.props;
     background: var(--color-surface-alt);
   }
 
-  .experience-preview__logo {
-    flex-shrink: 0;
-    width: 28px;
-    height: 28px;
-    border-radius: var(--radius-sm);
-    background: var(--color-surface-alt);
-    /* Real logo files vary — some are transparent, some carry their own
-       flat/grey background baked in — so a consistent frame around every
-       tile reads as "this is an icon container" regardless of what's
-       inside, instead of individual logos looking like stray boxes against
-       the card. */
-    border: 1px solid var(--color-border);
-    color: var(--color-primary);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.7rem;
-    font-weight: 700;
-    /* object-fit only matters for the <img> variant (real logo) — harmless
-       no-op on the monogram <span> fallback. */
-    object-fit: cover;
-  }
-
-  /* Fixed light backing (not the theme-reactive surface-alt above) — some
-     logo marks are dark line-art on a transparent PNG with no color info of
-     their own, so they'd read fine in light mode but nearly vanish against
-     the dark-mode tile. Matches the same fix already applied to this logo
-     on the full Experience page (SpineNav.astro, ExperienceSection.astro's
-     mobile accordion) — this dashboard preview just hadn't gotten it. */
-  img.experience-preview__logo {
-    background: #EEF6F8;
-  }
+  /* .logo-tile (global.css) covers this row's logo/monogram tile. */
 
   .experience-preview__row-text {
     display: flex;
@@ -262,27 +231,7 @@ const { entries } = Astro.props;
     gap: var(--space-1);
   }
 
-  .experience-preview__seemore {
-    align-self: flex-start;
-    margin-top: var(--space-2);
-    display: inline-flex;
-    align-items: center;
-    padding: var(--space-1) var(--space-2);
-    border-radius: var(--radius-sm);
-    color: var(--color-accent-coral-text);
-    font-weight: 600;
-    text-decoration: none;
-    font-size: 0.9rem;
-    cursor: pointer;
-  }
-
-  /* Coral, not teal, on hover — "See more" is conceptually an expand/open
-     action like the header's expand icon (also coral), so it keeps its
-     base color and only gains a background instead of switching hue. */
-  .experience-preview__seemore:hover,
-  .experience-preview__seemore:focus-visible {
-    background: var(--color-surface-alt);
-  }
+  /* .bento-seemore (global.css) covers the "See more" link's styling. */
 </style>
 
 <script>
