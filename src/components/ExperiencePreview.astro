@@ -1,7 +1,7 @@
 ---
 import { Icon } from "astro-icon/components";
 import type { ExperienceEntry } from "../data/experience";
-import { dateLabel, monogram, spineLine1 } from "../utils/experienceDisplay";
+import { dateLabel, monogram, orgName, spineLine1 } from "../utils/experienceDisplay";
 // Imported for their is:global CSS only — this component builds pill/chip
 // markup by hand via document.createElement, but the styles live in these
 // components' bundles and are only included on a page when the component
@@ -32,7 +32,12 @@ const { entries } = Astro.props;
   <ul class="experience-preview__list" data-preview-list>
     {entries.map((entry) => (
       <li>
-        <button type="button" class="experience-preview__row" data-preview-role={entry.slug}>
+        <button
+          type="button"
+          class="experience-preview__row"
+          data-preview-role={entry.slug}
+          aria-label={entry.companyShort ? `${entry.title} · ${orgName(entry)}` : undefined}
+        >
           {entry.logo ? (
             <img class="experience-preview__logo" src={entry.logo} alt="" width="28" height="28" loading="lazy" />
           ) : (

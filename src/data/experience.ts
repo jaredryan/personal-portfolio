@@ -4,6 +4,10 @@ export type ExperienceEntry = {
   tabLabel: string;
   title: string;
   company?: string;
+  /** Shorter company label for the condensed Dashboard > Experience card.
+   * Falls back to `company` everywhere else (main Experience page, detail
+   * panels, accordion) via orgName(). */
+  companyShort?: string;
   institution?: string;
   start?: number;
   end?: number | "Present";
@@ -19,30 +23,30 @@ export type ExperienceEntry = {
 };
 
 export const experience: ExperienceEntry[] = [
-  // TODO: temporarily disabled, re-enable when ready
-  // {
-  //   slug: "gold-ocean",
-  //   kind: "work",
-  //   tabLabel: "Gold Ocean Holdings",
-  //   title: "Senior Software Engineer",
-  //   company: "Gold Ocean Holdings",
-  //   logo: "/images/logos/gold-ocean.png",
-  //   start: 2023,
-  //   end: "Present",
-  //   location: "Remote",
-  //   oneLiner:
-  //     "Led engineering team improvements and built real estate acquisition screening workflows across listings, investment criteria, and recommendations.",
-  //   metricChips: ["6+ engineer team", "15% productivity lift", "20% better filtering", "1hr+ saved/listing"],
-  //   pills: [
-  //     "Engineering Leadership", "Process Improvement", "Real Estate Tech",
-  //     "Data Workflows", "Recommendation Logic", "Python", "Node.js",
-  //   ],
-  //   bullets: [
-  //     "Managed a team of 6+ engineers, increasing productivity by 15% through structured improvement plans, career tracking, and pairing sessions.",
-  //     "Built real estate acquisition screening workflows across listing review, investment criteria, and recommendation logic.",
-  //     "Refined acquisition recommendation models to filter 20% more properties and save 1hr+ of manual evaluation for each listing filtered.",
-  //   ],
-  // },
+  {
+    slug: "ryan-lin",
+    kind: "work",
+    tabLabel: "Ryan Lin REI, LLC",
+    title: "Real Estate Investor & Operator",
+    company: "Ryan Lin Real Estate Investments, LLC",
+    companyShort: "Ryan Lin REI, LLC",
+    logo: "/images/logos/ryan-lin.svg",
+    start: 2022,
+    end: "Present",
+    location: "Florida",
+    oneLiner:
+      "Built and operated a $1M+ residential real estate portfolio across acquisition, leasing, renovations, and financing.",
+    metricChips: ["$1M+ assets under management", "9 tenancies managed", "Full acquisition-to-refinance ownership"],
+    pills: [
+      "Acquisition Underwriting", "Financial Modeling", "Business Operations",
+      "Customer Relations", "Vendor Management", "Entity Administration",
+    ],
+    bullets: [
+      "Built and applied a structured acquisition-underwriting process incorporating location research, comparable rents, financing, renovation costs, cash-flow projections, and return criteria, leading to $1M+ in real estate assets under management.",
+      "Managed the full leasing lifecycle across 9 tenancies, including marketing, showings, lease execution, rent collection, tenant communication, maintenance, turnovers, and lease enforcement.",
+      "Oversaw substantial renovations and complex company and property operations, including entity formation, partnership agreements, contractor management, insurance claims, hard-money financing, refinancing, and property-manager selection.",
+    ],
+  },
   {
     slug: "mantl",
     kind: "work",
