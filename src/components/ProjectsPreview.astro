@@ -136,6 +136,20 @@ const defaultProject = projects[0];
      instead of one shared token. Resting border is a slightly stronger mix
      of that same color for definition; selected/hover still override it
      below with the site's existing coral/teal state colors, unchanged. */
+  /* transform: translateZ(0) + backface-visibility: hidden promote each
+     thumb to its own stable compositing layer. Grid resolves this tile's
+     width to a fraction of a resizing container (repeat(var(--thumb-count),
+     minmax(0, 1fr))), which aspect-ratio then turns into its height — that
+     fractional CSS-px width doesn't necessarily land on a whole device
+     pixel, and on real iOS (Safari and iOS Chrome are both WebKit; not
+     reproducible in desktop devtools' viewport emulation or Playwright's
+     Chromium, which don't run the same real-device scroll-compositing path)
+     the tile gets re-snapped to a device pixel independently on every
+     compositing frame during scroll, visibly shimmering by 1px. Forcing a
+     dedicated layer here means it's rasterized once at a fixed subpixel
+     position instead of being re-snapped relative to the scrolling
+     ancestor each frame — the standard fix for this class of WebKit
+     scroll-jitter bug. */
   .projects-preview__thumb {
     min-width: 0;
     aspect-ratio: 1;
@@ -149,6 +163,8 @@ const defaultProject = projects[0];
     color: var(--thumb-accent);
     cursor: pointer;
     overflow: hidden;
+    transform: translateZ(0);
+    backface-visibility: hidden;
   }
 
   /* Dark-theme counterpart to the resting-state colors above — a color

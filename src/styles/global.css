@@ -122,6 +122,26 @@ h3 {
   h3 {
     font-size: 1rem;
   }
+
+  /* Paragraph/body text was missing from this breakpoint entirely — headings
+     above already step down correctly here, but p (and the same explicit
+     body-text list further below) had no mobile override at all, so it
+     stayed flat at the desktop 1rem while everything around it shrank. */
+  p,
+  .hero-card__role,
+  .hero-card__paragraph,
+  .project-detail__oneliner,
+  .project-detail__editorial p:last-child,
+  .btn,
+  .profile-opening__para,
+  .profile-journey__text p,
+  .profile-closing__text,
+  .experience-detail-content__oneliner,
+  .experience-preview__detail-oneliner,
+  .contact-drawer__nav a,
+  .not-found__body {
+    font-size: 0.9375rem;
+  }
 }
 
 p {
