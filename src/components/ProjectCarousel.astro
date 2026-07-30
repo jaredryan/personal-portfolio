@@ -146,6 +146,11 @@ function mdSrc(src: string): string | null {
        incoming slide can overlap mid-transition — the viewport itself now
        owns the aspect ratio that used to live on the (in-flow) <img>. */
     aspect-ratio: 16 / 10;
+    /* Tells the browser this element only needs native panning vertically —
+       a horizontal drag is left for the pointer-event swipe handlers below
+       instead of the browser trying to interpret it as a page gesture,
+       which is what lets pointerup reliably fire with the full delta. */
+    touch-action: pan-y;
   }
 
   .carousel__slide {
@@ -405,6 +410,7 @@ function mdSrc(src: string): string | null {
     border-radius: 999px;
     width: 2.25rem;
     height: 2.25rem;
+    color: var(--color-text-muted);
     cursor: pointer;
   }
 
@@ -412,6 +418,14 @@ function mdSrc(src: string): string | null {
   .carousel__next :global(svg) {
     width: 1.125rem;
     height: 1.125rem;
+  }
+
+  .carousel__prev:hover,
+  .carousel__prev:focus-visible,
+  .carousel__next:hover,
+  .carousel__next:focus-visible {
+    border-color: var(--color-accent-teal);
+    color: var(--color-accent-teal);
   }
 
   .carousel__dots {
@@ -483,6 +497,7 @@ function mdSrc(src: string): string | null {
     // simultaneously, only one of which is ever actually visible at a
     // given viewport width.
     const panel = carousel.closest<HTMLElement>("[data-project-detail], [data-project-detail-showcase]");
+    const viewport = carousel.querySelector<HTMLElement>(".carousel__viewport");
     const captionText = carousel.querySelector<HTMLElement>("[data-carousel-caption-text]");
     const expandBtn = carousel.querySelector<HTMLButtonElement>("[data-carousel-expand]");
     const playBtn = carousel.querySelector<HTMLButtonElement>("[data-carousel-play]");
@@ -652,6 +667,43 @@ function mdSrc(src: string): string | null {
       }
     }
 
+    // Swipe support for the main (non-lightbox) preview viewport — Pointer
+    // Events cover touch, mouse drag, and pen with one code path. Requires a
+    // clearly horizontal gesture (same ratio check as the lightbox above) so
+    // an ordinary vertical scroll over the carousel is never hijacked; since
+    // this never calls preventDefault, a vertical drag always scrolls the
+    // page normally regardless of what's detected here. touch-action: pan-y
+    // (see CSS) tells the browser to leave horizontal gestures to us instead
+    // of treating them as page panning, so pointerup reliably fires with the
+    // full gesture's delta.
+    let viewportPointerId: number | null = null;
+    let viewportStartX = 0;
+    let viewportStartY = 0;
+
+    function onViewportPointerDown(event: PointerEvent) {
+      if (event.pointerType === "mouse" && event.button !== 0) return;
+      viewportPointerId = event.pointerId;
+      viewportStartX = event.clientX;
+      viewportStartY = event.clientY;
+    }
+
+    function onViewportPointerUp(event: PointerEvent) {
+      if (viewportPointerId === null || event.pointerId !== viewportPointerId) return;
+      viewportPointerId = null;
+      const deltaX = event.clientX - viewportStartX;
+      const deltaY = event.clientY - viewportStartY;
+      const SWIPE_THRESHOLD = 40;
+      if (Math.abs(deltaX) > SWIPE_THRESHOLD && Math.abs(deltaX) > Math.abs(deltaY)) {
+        const direction = deltaX < 0 ? "next" : "previous";
+        show(direction === "next" ? current + 1 : current - 1, direction);
+        startAutoRotate();
+      }
+    }
+
+    function onViewportPointerCancel() {
+      viewportPointerId = null;
+    }
+
     // Toggles which lightbox content is visible without touching `hidden` on
     // the lightbox root itself — screenshot mode shows the image plus its
     // nav arrows/dots-adjacent caption, game mode shows only the iframe and
@@ -711,6 +763,9 @@ function mdSrc(src: string): string | null {
     lightboxNext?.addEventListener("click", () => lightboxShow("next"));
     lightbox?.addEventListener("touchstart", onLightboxTouchStart, { passive: true });
     lightbox?.addEventListener("touchend", onLightboxTouchEnd, { passive: true });
+    viewport?.addEventListener("pointerdown", onViewportPointerDown);
+    viewport?.addEventListener("pointerup", onViewportPointerUp);
+    viewport?.addEventListener("pointercancel", onViewportPointerCancel);
 
     prevBtn?.addEventListener("click", () => {
       show(current - 1, "previous");

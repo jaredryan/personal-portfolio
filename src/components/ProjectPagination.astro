@@ -1,0 +1,227 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  prevSlug: string;
+  prevTitle: string;
+  nextSlug: string;
+  nextTitle: string;
+  currentTitle: string;
+  isFirst: boolean;
+  isLast: boolean;
+  position: number;
+  total: number;
+}
+
+const { prevSlug, prevTitle, nextSlug, nextTitle, currentTitle, isFirst, isLast, position, total } = Astro.props;
+---
+<nav class="project-pagination" aria-label="Project navigation">
+  <!-- data-project-link is the same attribute ProjectsSection.astro's bento
+       tiles use — its script wires up every element carrying it, so these
+       buttons navigate/animate/update the URL exactly like a grid tile
+       click, with no extra script needed here. The round chevron chip is a
+       plain <span>, not a nested <button> — ProjectCarousel's own
+       .carousel__prev/.carousel__next visual, just reused as one piece of a
+       single larger clickable control instead of a standalone button, so
+       the whole row (chip + name) is one generous tap target. -->
+  <button type="button" class="project-pagination__link project-pagination__link--prev" data-project-link={prevSlug}>
+    <span class="project-pagination__arrow" aria-hidden="true">
+      <Icon name="lucide:chevron-left" />
+    </span>
+    <span class="project-pagination__text">
+      <span class="project-pagination__kicker">{isFirst ? "Last project" : "Previous"}</span>
+      <span class="project-pagination__title">{prevTitle}</span>
+    </span>
+  </button>
+
+  <div class="project-pagination__counter">
+    <p class="project-pagination__counter-count">Project {position} of {total}</p>
+    <p class="project-pagination__title">{currentTitle}</p>
+  </div>
+
+  <button type="button" class="project-pagination__link project-pagination__link--next" data-project-link={nextSlug}>
+    <span class="project-pagination__text">
+      <span class="project-pagination__kicker">{isLast ? "Back to first" : "Next"}</span>
+      <span class="project-pagination__title">{nextTitle}</span>
+    </span>
+    <span class="project-pagination__arrow" aria-hidden="true">
+      <Icon name="lucide:chevron-right" />
+    </span>
+  </button>
+</nav>
+
+<style>
+  /* Grid, not flex + space-between — with 1fr/auto/1fr tracks the counter
+     sits exactly centered regardless of how the two project names differ in
+     length, rather than drifting toward whichever side has more text. */
+  .project-pagination {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: var(--space-4);
+    margin-top: var(--space-8);
+    /* Matches .page-shell's own padding-block (global.css) — the same
+       clamp() that creates the gap between this page's content and the
+       footer, so the whitespace above this nav and the whitespace below the
+       whole page read as the same rhythm rather than two unrelated values. */
+    padding-top: clamp(1rem, 3vw, 2rem);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .project-pagination__link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+    min-width: 0;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  .project-pagination__link--prev {
+    justify-self: start;
+  }
+
+  .project-pagination__link--next {
+    justify-self: end;
+  }
+
+  .project-pagination__arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 2.25rem;
+    height: 2.25rem;
+    background: var(--color-surface-alt);
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    color: var(--color-text-muted);
+  }
+
+  .project-pagination__arrow svg {
+    width: 1.125rem;
+    height: 1.125rem;
+  }
+
+  .project-pagination__link:hover .project-pagination__arrow,
+  .project-pagination__link:focus-visible .project-pagination__arrow {
+    border-color: var(--color-accent-teal);
+    color: var(--color-accent-teal);
+  }
+
+  .project-pagination__link:hover .project-pagination__title,
+  .project-pagination__link:focus-visible .project-pagination__title,
+  .project-pagination__link:hover .project-pagination__kicker,
+  .project-pagination__link:focus-visible .project-pagination__kicker {
+    color: var(--color-accent-teal);
+  }
+
+  .project-pagination__text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    gap: 2px;
+    text-align: left;
+  }
+
+  .project-pagination__link--next .project-pagination__text {
+    align-items: flex-end;
+    text-align: right;
+  }
+
+  .project-pagination__kicker {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--color-text-muted);
+  }
+
+  .project-pagination__title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--color-text);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%;
+  }
+
+  /* Flex column so the counter carries the same two-line "kicker over
+     title" shape as the prev/next buttons instead of sitting as a single
+     lightweight line between two much heavier ones. */
+  .project-pagination__counter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-self: center;
+    flex-shrink: 0;
+    gap: 2px;
+    min-width: 0;
+    text-align: center;
+  }
+
+  .project-pagination__counter-count {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    white-space: nowrap;
+    height: 1.125rem;
+  }
+
+  /* Only the counter breaks onto its own row above — Previous and Next stay
+     side by side on the row below rather than stacking, since they still fit
+     comfortably once the counter is out of the way. */
+  @media (max-width: 650px) {
+    .project-pagination {
+      grid-template-columns: 1fr 1fr;
+      grid-template-areas:
+        "counter counter"
+        "prev next";
+      row-gap: var(--space-3);
+    }
+
+    .project-pagination__counter {
+      grid-area: counter;
+    }
+
+    .project-pagination__link--prev {
+      grid-area: prev;
+    }
+
+    .project-pagination__link--next {
+      grid-area: next;
+    }
+  }
+
+  /* Below this, Previous and Next no longer fit comfortably side by side —
+     each becomes its own full-width row instead, Previous stacked above
+     Next. Both rows share the same grid track (so they're identically
+     wide), but keep opposite text alignment: Previous's arrow-then-text
+     order reads naturally from the left edge, while Next's text-then-arrow
+     order is pushed to the right edge, echoing the left/right relationship
+     the two keep at wider sizes rather than collapsing to a shared center. */
+  @media (max-width: 510px) {
+    .project-pagination {
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        "counter"
+        "prev"
+        "next";
+    }
+
+    .project-pagination__link--prev,
+    .project-pagination__link--next {
+      justify-self: stretch;
+    }
+
+    .project-pagination__link--prev {
+      justify-content: flex-start;
+    }
+
+    .project-pagination__link--next {
+      justify-content: flex-end;
+    }
+  }
+</style>

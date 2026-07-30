@@ -14,6 +14,12 @@ export interface SpineItem {
   line1: string;
   line2?: string;
   line3?: string;
+  /** Short logo+name-only label for a compact selector tier (e.g.
+   * ExperienceSection's portrait-iPad breakpoint) — rendered alongside
+   * line1/2/3 but hidden by default; the consuming page's own media query
+   * toggles which set is visible via :global(), same pattern as
+   * ProjectsSection's tall-tablet override of ProjectDetailView's layout. */
+  compactLabel?: string;
 }
 
 interface Props {
@@ -46,6 +52,7 @@ const { items, defaultSlug, dataAttr, ariaLabel } = Astro.props;
         <span class="spine__line1">{item.line1}</span>
         {item.line2 && <span class="spine__line2">{item.line2}</span>}
         {item.line3 && <span class="spine__line3">{item.line3}</span>}
+        {item.compactLabel && <span class="spine__compact-label">{item.compactLabel}</span>}
       </span>
     </button>
   ))}
@@ -108,5 +115,15 @@ const { items, defaultSlug, dataAttr, ariaLabel } = Astro.props;
   .spine__line3 {
     font-size: 0.75rem;
     color: var(--color-text-muted);
+  }
+
+  /* Hidden by default — a consuming page's own media query reveals this
+     (and hides line1/2/3 instead) for a compact selector tier. Nothing
+     renders this on its own since most callers never pass compactLabel. */
+  .spine__compact-label {
+    display: none;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-text);
   }
 </style>

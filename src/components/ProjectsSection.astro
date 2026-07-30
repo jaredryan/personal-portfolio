@@ -1,10 +1,12 @@
 ---
+import { Icon } from "astro-icon/components";
 import type { Project } from "../data/projects";
 import Breadcrumbs from "./Breadcrumbs.astro";
 import ContactDrawer from "./ContactDrawer.astro";
 import ContactTrigger from "./ContactTrigger.astro";
 import PageHeader from "./PageHeader.astro";
 import ProjectDetailView from "./ProjectDetailView.astro";
+import ProjectPagination from "./ProjectPagination.astro";
 
 interface Props {
   projects: Project[];
@@ -38,6 +40,28 @@ const gridProjects = gridOrder
       icon="lucide:layout-grid"
     />
 
+    <!-- Compact horizontal selector — mirrors BentoDashboard's project-preview
+         thumb row (same icon-tile-on-accent-color recipe), but only visible
+         at the narrow width where .projects-bento below becomes a swipeable
+         rail (see that media query). Its own script keeps aria-pressed in
+         sync with whichever tile is currently snapped/centered as the user
+         swipes, so it doubles as both a jump-to-project control and a "you
+         are on card N of 6" indicator while swiping. -->
+    <div class="projects-rail-nav" role="group" aria-label="Jump to project">
+      {gridProjects.map((project, index) => (
+        <button
+          type="button"
+          class="projects-rail-nav__dot"
+          data-rail-target={project.slug}
+          aria-pressed={index === 0 ? "true" : "false"}
+          aria-label={`Show ${project.title}`}
+          style={{ "--dot-accent": project.accentColor, "--dot-accent-dark": project.accentColorDark }}
+        >
+          <Icon name={project.icon} aria-hidden="true" is:inline />
+        </button>
+      ))}
+    </div>
+
     <!-- Bento grid: one tile per project. 6 divides cleanly into 2 or 3
          columns on its own, so there's no filler tile needed here. -->
     <div class="projects-bento">
@@ -65,27 +89,43 @@ const gridProjects = gridOrder
   </div>
 
   <div id="projects-detail-view" hidden>
-    {projects.map((project) => (
-      <div
-        class="project-detail"
-        id={`project-detail-${project.slug}`}
-        data-project-detail={project.slug}
-        aria-labelledby={`project-detail-heading-${project.slug}`}
-        hidden
-      >
-        <div class="page-utility-row">
-          <Breadcrumbs
-            trail={[
-              { label: "Dashboard", href: "/" },
-              { label: "Projects", href: "/projects", clearProject: true },
-              { label: project.title },
-            ]}
+    {projects.map((project, index) => {
+      const total = projects.length;
+      const prevProject = projects[(index - 1 + total) % total];
+      const nextProject = projects[(index + 1) % total];
+      return (
+        <div
+          class="project-detail"
+          id={`project-detail-${project.slug}`}
+          data-project-detail={project.slug}
+          aria-labelledby={`project-detail-heading-${project.slug}`}
+          hidden
+        >
+          <div class="page-utility-row">
+            <Breadcrumbs
+              trail={[
+                { label: "Dashboard", href: "/" },
+                { label: "Projects", href: "/projects", clearProject: true },
+                { label: project.title },
+              ]}
+            />
+            <ContactTrigger />
+          </div>
+          <ProjectDetailView project={project} headingId={`project-detail-heading-${project.slug}`} />
+          <ProjectPagination
+            prevSlug={prevProject.slug}
+            prevTitle={prevProject.title}
+            nextSlug={nextProject.slug}
+            nextTitle={nextProject.title}
+            currentTitle={project.title}
+            isFirst={index === 0}
+            isLast={index === total - 1}
+            position={index + 1}
+            total={total}
           />
-          <ContactTrigger />
         </div>
-        <ProjectDetailView project={project} headingId={`project-detail-heading-${project.slug}`} />
-      </div>
-    ))}
+      );
+    })}
   </div>
 
   <ContactDrawer currentPage="projects" />
@@ -98,6 +138,54 @@ const gridProjects = gridOrder
     gap: var(--space-4);
   }
 
+  /* Below the 2-column breakpoint, replace the vertical card stack with a
+     native horizontal scroll-snap rail. Centered peek, not edge-aligned:
+     padding-inline on the scroll container reserves as much space on each
+     side as a card's own margin (see the project-tile flex-basis below),
+     so scroll-snap-align: center can settle every card — including the
+     first and last — dead center in the viewport, with an equal sliver of
+     its neighbor(s) showing on both sides. No dots/arrows needed here for
+     the swipe itself (native scroll-snap paging handles that); the
+     .projects-rail-nav row above provides the "which of 6" indicator and
+     jump targets instead. Order is untouched — same `gridProjects` array,
+     just laid out horizontally instead of stacked. */
+  @media (max-width: 699.98px) {
+    .projects-bento {
+      display: flex;
+      overflow-x: auto;
+      overflow-y: visible;
+      scroll-snap-type: x mandatory;
+      scroll-padding-inline: 7.5%;
+      padding-inline: 7.5%;
+      -webkit-overflow-scrolling: touch;
+      /* Full-bleed breakout: .page-shell (global.css) centers this section
+         in a width capped short of the viewport by its own 2rem gutter, so
+         without this the peeking neighbor card ran out of room and hit
+         plain page background a bit before the actual screen edge instead
+         of continuing to it. margin-inline: 50% - 50vw re-centers this
+         element on the viewport itself rather than the page-shell, and
+         width: 100vw then lets it span edge to edge — the standard
+         "break out of a centered container" trick. scroll/padding-inline
+         above now resolve against that full 100vw, so the peek still
+         reads the same, just anchored to the true edge. */
+      margin-inline: calc(50% - 50vw);
+      width: 100vw;
+    }
+
+    .projects-bento .project-tile {
+      flex: 0 0 100%;
+      scroll-snap-align: center;
+    }
+  }
+
+  @media (max-width: 580px) {
+    .projects-bento {
+      scroll-padding-inline: 5%;
+      padding-inline: 5%;
+      gap: var(--space-2);
+    }
+  }
+
   @media (min-width: 700px) {
     .projects-bento {
       grid-template-columns: repeat(2, 1fr);
@@ -108,6 +196,71 @@ const gridProjects = gridOrder
     .projects-bento {
       grid-template-columns: repeat(3, 1fr);
     }
+  }
+
+  /* Hidden except at the same narrow width the rail above applies at —
+     doesn't make sense as a "jump to card" control once .projects-bento is
+     back to a static multi-column grid. */
+  .projects-rail-nav {
+    display: none;
+  }
+
+  @media (max-width: 699.98px) {
+    .projects-rail-nav {
+      display: flex;
+      flex-direction: row;
+      gap: var(--space-1);
+      margin-bottom: var(--space-4);
+    }
+  }
+
+  /* Same per-project accentColor/accentColorDark recipe as
+     ProjectsPreview.astro's own thumb row (BentoDashboard) — full-saturation
+     icon over a light color-mix tint, so this reads as the same visual
+     language rather than a new one-off control. flex + a min/max-width band
+     (rather than the even-division grid this used to be) keeps each dot a
+     sensible tap-target size regardless of how wide the page-shell is —
+     grid's minmax(0, 1fr) tracks let every dot balloon to 1/6 of the full
+     page width, several times larger than ProjectsPreview.astro's own thumb
+     row ever gets. Unconditional (not scoped to a media query) since this
+     row is already display:none above 699.98px. */
+  .projects-rail-nav__dot {
+    aspect-ratio: 1;
+    flex: 1 1 0;
+    min-width: 36px;
+    max-width: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid color-mix(in srgb, var(--dot-accent) 45%, transparent);
+    border-radius: var(--radius-sm);
+    padding: 0;
+    background: color-mix(in srgb, var(--dot-accent) 10%, var(--color-surface));
+    color: var(--dot-accent);
+    cursor: pointer;
+  }
+
+  :global([data-theme="dark"]) .projects-rail-nav__dot {
+    border-color: color-mix(in srgb, var(--dot-accent-dark) 45%, transparent);
+    background: color-mix(in srgb, var(--dot-accent-dark) 20%, var(--color-surface));
+    color: var(--dot-accent-dark);
+  }
+
+  .projects-rail-nav__dot :global(svg) {
+    width: 1.125rem;
+    height: 1.125rem;
+  }
+
+  .projects-rail-nav__dot[aria-pressed="true"] {
+    outline: 2px solid var(--color-accent-coral);
+    outline-offset: 1px;
+  }
+
+  .projects-rail-nav__dot:not([aria-pressed="true"]):hover,
+  .projects-rail-nav__dot:not([aria-pressed="true"]):focus-visible {
+    border-color: var(--color-accent-teal);
+    background: var(--color-surface-alt);
+    color: var(--color-accent-teal);
   }
 
   .project-tile {
@@ -221,8 +374,51 @@ const gridProjects = gridOrder
   const gridView = document.getElementById("projects-grid-view");
   const detailView = document.getElementById("projects-detail-view");
   const detailPanels = document.querySelectorAll<HTMLElement>("[data-project-detail]");
-  const gridTiles = document.querySelectorAll<HTMLButtonElement>("[data-project-link]");
+  // Matches both the bento grid tiles and ProjectPagination's prev/next
+  // buttons — both carry this same attribute, so one wiring pass covers
+  // every way a user can navigate to a project.
+  const projectLinkButtons = document.querySelectorAll<HTMLButtonElement>("[data-project-link]");
   const clearLinks = document.querySelectorAll<HTMLAnchorElement>("[data-clear-project]");
+
+  // Keeps .projects-rail-nav's aria-pressed dot in sync with whichever
+  // .project-tile is currently snapped/centered in the swipeable rail (only
+  // actually a rail below 699.98px — see that media query — but harmless to
+  // run unconditionally at any width, since .projects-bento just isn't a
+  // scroll container above that width and the observer never fires). An
+  // IntersectionObserver rooted at the rail itself, rather than tracking
+  // scroll position by hand, since scroll-snap already guarantees one tile
+  // settles at >=50% visible and this only needs to know which one.
+  const railNav = document.querySelector<HTMLElement>(".projects-rail-nav");
+  const railDots = railNav ? Array.from(railNav.querySelectorAll<HTMLButtonElement>("[data-rail-target]")) : [];
+  const bento = document.querySelector<HTMLElement>(".projects-bento");
+  const bentoTiles = bento ? Array.from(bento.querySelectorAll<HTMLElement>("[data-project-link]")) : [];
+
+  if (bento && railDots.length && bentoTiles.length) {
+    const railObserver = new IntersectionObserver(
+      (entries) => {
+        const mostVisible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (!mostVisible) return;
+        const slug = (mostVisible.target as HTMLElement).dataset.projectLink;
+        railDots.forEach((dot) => {
+          dot.setAttribute("aria-pressed", String(dot.dataset.railTarget === slug));
+        });
+      },
+      { root: bento, threshold: [0.5, 0.6, 0.7, 0.8, 0.9, 1] },
+    );
+    bentoTiles.forEach((tile) => railObserver.observe(tile));
+
+    railDots.forEach((dot) => {
+      dot.addEventListener("click", () => {
+        const slug = dot.dataset.railTarget;
+        const target = bentoTiles.find((tile) => tile.dataset.projectLink === slug);
+        if (!target) return;
+        const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        target.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth", inline: "center", block: "nearest" });
+      });
+    });
+  }
 
   function showProject(slug: string, focusPanel = false) {
     const panel = document.getElementById(`project-detail-${slug}`);
@@ -281,9 +477,9 @@ const gridProjects = gridOrder
     }
   }
 
-  gridTiles.forEach((tile) => {
-    tile.addEventListener("click", () => {
-      const slug = tile.dataset.projectLink;
+  projectLinkButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const slug = button.dataset.projectLink;
       if (!slug) return;
       showProject(slug, true);
       setSectionState({ key: "project", value: slug });

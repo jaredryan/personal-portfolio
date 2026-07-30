@@ -33,3 +33,23 @@ export function monogram(entry: ExperienceEntry): string {
   if (words.length >= 2) return (words[0][0] + words[1][0]).toUpperCase();
   return name.slice(0, 2).toUpperCase();
 }
+
+/** Hand-picked minimal label for the portrait-iPad compact selector (see
+ * SpineNav's compactLabel slot) — short enough to fit a narrow column and,
+ * for the two IBM entries, disambiguated by role level ("· II"/"· I")
+ * since orgName() alone would show "IBM" for both. Not derived generically
+ * from the data (unlike orgNameShort) because the shortening rules here are
+ * bespoke per entry, not a mechanical transform. */
+const compactLabels: Record<string, string> = {
+  "ryan-lin": "Ryan Lin REI",
+  "mantl": "MANTL",
+  "ibm-ca": "IBM · II",
+  "ibm-tx": "IBM · I",
+  "ntr": "NTR",
+  "v-school": "V School",
+  "uc-berkeley": "Berkeley",
+};
+
+export function compactLabel(entry: ExperienceEntry): string {
+  return compactLabels[entry.slug] ?? orgNameShort(entry);
+}

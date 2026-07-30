@@ -5,7 +5,7 @@ import ContactDrawer from "./ContactDrawer.astro";
 import ExperienceDetailContent from "./ExperienceDetailContent.astro";
 import PageHeader from "./PageHeader.astro";
 import SpineNav, { type SpineItem } from "./SpineNav.astro";
-import { dateLabel, monogram, orgName } from "../utils/experienceDisplay";
+import { compactLabel, dateLabel, monogram, orgName } from "../utils/experienceDisplay";
 
 interface Props {
   entries: ExperienceEntry[];
@@ -21,6 +21,7 @@ const spineItems: SpineItem[] = entries.map((entry) => ({
   line1: entry.title,
   line2: entry.kind === "work" ? orgName(entry) : undefined,
   line3: dateLabel(entry),
+  compactLabel: compactLabel(entry),
 }));
 ---
 <section class="experience-section page-shell" aria-labelledby="experience-heading">
@@ -138,9 +139,9 @@ const spineItems: SpineItem[] = entries.map((entry) => ({
      Engineer) started wrapping onto an extra line it didn't need at 100%
      scale. 280px gives it the room back; there's plenty of width to spare
      at these sizes anyway. */
-  @media (min-width: 900px) and (min-height: 850px) {
+  @media (min-width: 1050px) {
     .experience-layout {
-      grid-template-columns: minmax(180px, 280px) minmax(0, 1fr);
+      grid-template-columns: minmax(180px, 300px) minmax(0, 1fr);
     }
   }
 
@@ -311,6 +312,70 @@ const spineItems: SpineItem[] = entries.map((entry) => ({
     opacity: 0;
   }
 
+  /* Compact tier — 600-899.98px, gated by width alone, not height: unlike
+     the old version of this tier, a horizontal strip across the top has no
+     cramped-narrow-column problem, so it works equally well on a portrait
+     iPad (tall) and a landscape phone sharing this width range (there's no
+     need to tell them apart the way global.css's "spacious" mode does).
+     Below 600px there often isn't enough vertical room left for both the
+     spine strip and a full detail panel without extra scrolling to find a
+     given entry, so the accordion takes over there instead. Placed after
+     both .experience-layout's and .experience-accordion's own unconditional
+     rules above (not earlier in the file) — same specificity, single class
+     each, so the one later in source order is what actually wins; putting
+     this block any earlier let the plain `.experience-accordion { display:
+     flex }` rule below silently cancel this tier's `display: none` back out
+     even while the media query matched (caught live: both the strip and the
+     accordion rendered at once). */
+  @media (min-width: 600px) and (max-width: 899.98px) and (min-height: 750px) {
+    .experience-layout {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+    }
+
+    .experience-accordion {
+      display: none;
+    }
+
+    /* :global() reaches SpineNav's own scoped classes — same cross-component
+       override technique ProjectsSection.astro uses on ProjectDetailView's
+       root (.project-detail :global(.project-detail__layout)). Row instead
+       of SpineNav's own default column, so the items form a strip across
+       the top with the detail panel stacked below instead of beside it. */
+    .experience-layout :global(.spine) {
+      flex-direction: row;
+      gap: var(--space-2);
+    }
+
+    /* flex: 1 1 0 + min-width: max-content is the "equal width unless
+       content needs more" recipe — every item grows to share any leftover
+       row width equally, but none can be squeezed narrower than its own
+       logo + compact label. */
+    .experience-layout :global(.spine__item) {
+      flex: 1 1 0;
+      min-width: max-content;
+      justify-content: center;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+
+    .experience-layout :global(.spine__line1),
+    .experience-layout :global(.spine__line2),
+    .experience-layout :global(.spine__line3) {
+      display: none;
+    }
+
+    .experience-layout :global(.spine__compact-label) {
+      display: block;
+    }
+
+    .experience-layout :global(.logo-tile) {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
   @media (min-width: 900px) {
     .experience-accordion {
       display: none;
@@ -320,7 +385,6 @@ const spineItems: SpineItem[] = entries.map((entry) => ({
 
 <script>
   import { getQueryParam, setSectionState } from "../utils/urlState";
-  import { moveFocusTo } from "../utils/focus";
   import { playEnterAnimation } from "../utils/motion";
 
   // On a reload, the browser tries to restore whatever scroll position the
@@ -451,7 +515,15 @@ const spineItems: SpineItem[] = entries.map((entry) => ({
       // appear, not fade in, on first paint.
       if (isTarget && focusPanel) playEnterAnimation(panel);
     });
-    if (focusPanel) moveFocusTo(`#experience-detail-heading-${target}`);
+    // focusWithoutScrolling, not a scrollIntoView-based helper — a spine
+    // click should never move the page (the clicked item and the detail
+    // panel it controls are already both on screen at every width this
+    // layout applies to), only move keyboard/screen-reader focus onto the
+    // newly shown heading.
+    if (focusPanel) {
+      const heading = document.getElementById(`experience-detail-heading-${target}`);
+      if (heading) focusWithoutScrolling(heading);
+    }
   }
 
   // Brings the mobile accordion's open/closed state in line with the URL's

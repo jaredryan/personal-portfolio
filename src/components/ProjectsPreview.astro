@@ -150,6 +150,10 @@ const defaultProject = projects[0];
      position instead of being re-snapped relative to the scrolling
      ancestor each frame — the standard fix for this class of WebKit
      scroll-jitter bug. */
+  /* Uncapped, the grid's minmax(0, 1fr) tracks let each thumb grow to fill
+     however wide its column happens to be — fine at desktop widths where
+     this row sits in a ~42% container, but the same rule left mobile's
+     full-width row (see the flex override below) with oversized tiles. */
   .projects-preview__thumb {
     min-width: 0;
     aspect-ratio: 1;
@@ -165,6 +169,26 @@ const defaultProject = projects[0];
     overflow: hidden;
     transform: translateZ(0);
     backface-visibility: hidden;
+  }
+
+  /* Below 700px this row runs the full width of the mobile bento card
+     rather than a ~42% desktop column, so the same even-division grid
+     would blow each tile up far past a sensible tap-target size. Flex
+     row + a min/max-width band lets tiles grow together but caps them,
+     instead of always claiming an equal 1/N share of however wide the
+     row is. Matches ProjectsSection.astro's .projects-rail-nav, which
+     hits the same problem at full page-shell width. */
+  @media (max-width: 699.98px) {
+    .projects-preview__thumbs {
+      display: flex;
+      flex-direction: row;
+    }
+
+    .projects-preview__thumb {
+      flex: 1 1 0;
+      min-width: 36px;
+      max-width: 48px;
+    }
   }
 
   /* Dark-theme counterpart to the resting-state colors above — a color
