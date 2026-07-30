@@ -171,20 +171,28 @@ const defaultProject = projects[0];
     backface-visibility: hidden;
   }
 
-  /* Below 700px this row runs the full width of the mobile bento card
-     rather than a ~42% desktop column, so the same even-division grid
-     would blow each tile up far past a sensible tap-target size. Flex
+  /* Below the desktop tier (see BentoDashboard.astro's own tier media
+     queries) this card's media column runs much wider than the desktop
+     tier's ~42% column — full card width on mobile, and roughly half the
+     page-shell width in the tablet/medium tier where Experience and
+     Projects sit side by side — so the same even-division grid would blow
+     each tile up far past a sensible tap-target size in both tiers. Flex
      row + a min/max-width band lets tiles grow together but caps them,
-     instead of always claiming an equal 1/N share of however wide the
-     row is. Matches ProjectsSection.astro's .projects-rail-nav, which
-     hits the same problem at full page-shell width. */
-  @media (max-width: 699.98px) {
+     instead of always claiming an equal 1/N share of however wide the row
+     is. Matches ProjectsSection.astro's .projects-rail-nav, which hits the
+     same problem at full page-shell width. Deliberately excludes the
+     desktop tier (950px+ and landscape-ish) — its narrower 42% column
+     doesn't need the cap, and this component's mobile/tablet body layout
+     (media stacked above info, not the desktop tier's side-by-side row)
+     is what the flex row here assumes. */
+  @media (max-width: 699.98px), (min-width: 700px) and (max-width: 949px), (min-width: 950px) and (max-aspect-ratio: 4/5) {
     .projects-preview__thumbs {
       display: flex;
       flex-direction: row;
     }
 
     .projects-preview__thumb {
+      width: 100%;
       flex: 1 1 0;
       min-width: 36px;
       max-width: 48px;

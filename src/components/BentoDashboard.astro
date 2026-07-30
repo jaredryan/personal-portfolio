@@ -28,6 +28,57 @@ import { projects } from "../data/projects";
   <ProjectsPreview projects={projects} />
 </section>
 
+<script>
+  // Desktop-tier height sync for the Experience card. In that tier (see the
+  // .bento media query below) Experience spans both grid rows and needs to
+  // match Hero + gap + Projects' natural stacked height exactly — but a
+  // plain CSS height: 100% can't express that. It's circular: 100% is
+  // indefinite until the grid resolves the very row it's meant to fill, so
+  // the grid falls back to Experience's own intrinsic content size to help
+  // decide that row's height. A long detail view then inflates the row
+  // instead of being capped by it, growing Experience taller than Hero +
+  // Projects rather than matching them (ExperiencePreview.astro's own
+  // height: 600px at that width is only a pre-JS fallback for this reason).
+  // Measuring Hero + Projects directly and setting an explicit inline pixel
+  // height on Experience sidesteps the circularity entirely.
+  const section = document.getElementById("dashboard");
+  const hero = section?.querySelector<HTMLElement>(".hero-card");
+  const projectsCard = section?.querySelector<HTMLElement>(".projects-preview");
+  const experience = section?.querySelector<HTMLElement>(".experience-preview");
+
+  if (section && hero && projectsCard && experience) {
+    // Rebind to new consts: TS doesn't carry this null-narrowing into the
+    // nested function below (it can't prove the closure runs before these
+    // could change), so the closure needs variables that are non-null from
+    // their own declaration, not narrowed after the fact.
+    const sectionEl = section;
+    const heroEl = hero;
+    const projectsEl = projectsCard;
+    const experienceEl = experience;
+    const desktopQuery = window.matchMedia("(min-width: 950px) and (min-aspect-ratio: 4/5)");
+
+    function syncExperienceHeight() {
+      if (!desktopQuery.matches) {
+        // Below the desktop tier, ExperiencePreview.astro's own CSS heights
+        // (phone default / 700px+ tablet value) apply — don't fight them.
+        experienceEl.style.removeProperty("height");
+        return;
+      }
+      const rowGap = parseFloat(getComputedStyle(sectionEl).rowGap) || 0;
+      const total = heroEl.getBoundingClientRect().height + rowGap + projectsEl.getBoundingClientRect().height;
+      experienceEl.style.height = `${total}px`;
+    }
+
+    // Observes Hero/Projects, not Experience itself — observing the card
+    // this script is busy resizing would set up a feedback loop.
+    const resizeObserver = new ResizeObserver(syncExperienceHeight);
+    resizeObserver.observe(heroEl);
+    resizeObserver.observe(projectsEl);
+    desktopQuery.addEventListener("change", syncExperienceHeight);
+    syncExperienceHeight();
+  }
+</script>
+
 <style>
   /*
    * Source order above is Hero, ExperiencePreview, ProjectsPreview — this is
@@ -95,10 +146,12 @@ import { projects } from "../data/projects";
     .bento {
       /* Overrides BaseLayout.astro's default main > * { min-height: 100% }
          back to auto here on purpose — forcing the grid taller than its
-         content (to "fill the viewport") decouples the row tracks from
-         Hero + Projects' actual height, so Experience's height: 100% (which
-         spans both rows) ends up taller than Hero + gap + Projects instead
-         of matching it. Sizing purely from content keeps them in sync. */
+         content (to "fill the viewport") would decouple Hero/Projects'
+         rendered height from their actual content, which this file's
+         height-sync script above measures directly via
+         getBoundingClientRect() to size Experience (which spans both grid
+         rows). Sizing the grid purely from content keeps that measurement
+         meaningful instead of reading an artificially stretched height. */
       min-height: auto;
       grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
       grid-template-rows: auto 1fr;
@@ -113,8 +166,13 @@ import { projects } from "../data/projects";
     }
 
     .bento :global(.experience-preview) {
+      /* No height here (previously height: 100%, the same circular grid
+         sizing this file's height-sync script above exists to fix) —
+         Experience's height at this tier now comes from that script's
+         inline style, with ExperiencePreview.astro's own scoped height:
+         600px as its pre-JS fallback. */
       grid-area: experience;
-      height: 100%;
+      min-width: 305px;
     }
 
     .bento :global(.projects-preview) {

@@ -88,22 +88,35 @@ const { entries } = Astro.props;
     display: flex;
     flex-direction: column;
     gap: var(--space-3);
+    /* Fixed height, not just a cap, on the single-column phone tier — it's
+       what makes the overflow: hidden + flex: 1 truncation on
+       .experience-preview__detail-bullets-wrap below actually kick in (that
+       only has an effect once its ancestor chain has a definite height to
+       fill) and keeps "See more" pinned to the same spot at the bottom of
+       the card for every entry, long or short, instead of the whole card
+       growing or shrinking as the user clicks between them. Deliberately
+       shorter than the tablet/desktop value below — a full-width phone card
+       reads as an oversized wall of empty space at that larger height. */
+    height: 460px;
+    overflow: hidden;
   }
 
-  /* min-aspect-ratio matches BentoDashboard's own desktop-tier condition —
-     this card's height: 100% only makes sense when the dashboard grid
-     actually spans it across both rows (the desktop tier). In the
-     tablet-portrait tier this card sits side by side with Projects
-     instead, at roughly half width, where forcing full-column height
-     would just stretch/clip it for no reason. */
-  @media (min-width: 950px) and (min-aspect-ratio: 4/5) {
+  /* From the tablet tier up (this card side-by-side with Projects, roughly
+     half width — matches BentoDashboard's own 700px tablet-tier floor)
+     through the rest of the desktop-landscape tier below, more vertical
+     room reads better than the phone default above. This value also stands
+     as the desktop tier's pre-JS fallback: see the height-sync script in
+     BentoDashboard.astro, which overrides it there with an inline px height
+     computed from Hero + gap + Projects' actual rendered height. That JS
+     step is necessary, not cosmetic — a plain height: 100% here is circular
+     for a grid item spanning both rows (see that script's comment): with no
+     definite height to resolve 100% against yet, the grid falls back to
+     this card's own intrinsic content size to help size the very row it's
+     supposed to fill, so a long detail view could inflate Experience taller
+     than Hero + Projects instead of being capped to match them. */
+  @media (min-width: 700px) {
     .experience-preview {
-      /* height: 100% (not a fixed max-height) — the grid gives this card
-         the combined height of Hero + gap + Projects (see BentoDashboard's
-         grid-row: 1 / span 2), so it always matches the left column instead
-         of the two drifting out of sync as either side's content changes. */
-      height: 100%;
-      overflow: hidden;
+      height: 600px;
     }
   }
 
