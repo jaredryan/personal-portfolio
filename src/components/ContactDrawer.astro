@@ -23,9 +23,9 @@ const hasHeadshot = fs.existsSync(path.join(process.cwd(), "public", headshotSrc
 
 const navItems = [
   { href: "/", label: "Dashboard", key: "dashboard" },
-  { href: "/profile", label: "Profile", key: "profile" },
-  { href: "/projects", label: "Projects", key: "projects" },
-  { href: "/experience", label: "Experience", key: "experience" },
+  { href: "/profile/", label: "Profile", key: "profile" },
+  { href: "/projects/", label: "Projects", key: "projects" },
+  { href: "/experience/", label: "Experience", key: "experience" },
 ] as const;
 ---
 <div class="contact-drawer-backdrop" data-contact-backdrop hidden></div>

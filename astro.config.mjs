@@ -11,6 +11,7 @@ const cssTargets = browserslistToTargets(browserslist());
 
 export default defineConfig({
   site: 'https://jaredryan.netlify.app',
+  trailingSlash: 'always',
   integrations: [
     icon(),
     // Excludes the 404 page — it's an error response, not a page worth indexing.
