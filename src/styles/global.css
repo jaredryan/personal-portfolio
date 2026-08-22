@@ -250,10 +250,11 @@ section[id] {
   scroll-margin-top: var(--space-8);
 }
 
-/* Reusable breadcrumb + Contact row — shared by Experience and Projects
-   (grid and detail) so the navigation/utility chrome reads as one system.
-   flex-start (not center) so a wrapped multi-line breadcrumb trail stays
-   pinned to the top of the row instead of re-centering against Contact. */
+/* Reusable breadcrumb + menu-trigger row — shared by Experience and
+   Projects (grid and detail) so the navigation/utility chrome reads as one
+   system. flex-start (not center) so a wrapped multi-line breadcrumb trail
+   stays pinned to the top of the row instead of re-centering against the
+   trigger. */
 .page-utility-row {
   display: flex;
   align-items: flex-start;
@@ -430,9 +431,12 @@ img.logo-tile {
   background: var(--color-surface-alt);
 }
 
-/* Shared social/contact icon-only link button — used by HeroCard's and
-   ContactDrawer's email/GitHub/LinkedIn rows, which previously each carried
-   a byte-identical copy of this block. */
+/* Shared social/contact icon-only button — used by HeroCard's and
+   ContactDrawer's email/GitHub/LinkedIn links, plus MenuTrigger's hamburger
+   button, which previously each carried a byte-identical copy of this
+   block. cursor: pointer matters here specifically for the MenuTrigger
+   case: the anchor-tag consumers already get pointer for free, but a plain
+   <button> doesn't. */
 .icon-btn {
   display: inline-flex;
   align-items: center;
@@ -443,6 +447,7 @@ img.logo-tile {
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   color: var(--color-text);
+  cursor: pointer;
 }
 
 .icon-btn svg {

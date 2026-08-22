@@ -4,11 +4,11 @@ import path from "node:path";
 import { Icon } from "astro-icon/components";
 import { profile } from "../data/profile";
 
-// This component renders the drawer/backdrop only — the trigger button is
-// a separate <ContactTrigger /> component, since ProjectsSection.astro has
-// two of them (mobile grid header, desktop header; only one is ever
-// visible at a given viewport width), all opening this one shared drawer.
-// The script below queries all [data-contact-trigger] buttons on the page.
+// This component renders the drawer/backdrop only — the trigger buttons are
+// separate components: <MenuTrigger /> (every page header, plain nav
+// intent) and <ContactTrigger /> (only the Profile page's bottom "Contact
+// me" CTA now), both opening this one shared drawer. The script below
+// queries all [data-contact-trigger] buttons on the page.
 
 interface Props {
   currentPage: "profile" | "experience" | "projects";
@@ -20,6 +20,13 @@ const { currentPage } = Astro.props;
 // the real file has actually been dropped in, no broken-image icon.
 const headshotSrc = "/images/headshot.webp";
 const hasHeadshot = fs.existsSync(path.join(process.cwd(), "public", headshotSrc));
+
+// Deterministic two-line role, not incidental width-based wrapping — split
+// on the first space so "Product-Minded Full-Stack Engineer" always breaks
+// after "Product-Minded" regardless of drawer width.
+const roleBreak = profile.role.indexOf(" ");
+const roleLine1 = roleBreak === -1 ? profile.role : profile.role.slice(0, roleBreak);
+const roleLine2 = roleBreak === -1 ? "" : profile.role.slice(roleBreak + 1);
 
 const navItems = [
   { href: "/", label: "Dashboard", key: "dashboard" },
@@ -44,32 +51,36 @@ const navItems = [
     <Icon name="lucide:x" aria-hidden="true" />
   </button>
 
-  <div class="contact-drawer__profile">
-    {hasHeadshot && (
-      <img class="contact-drawer__headshot" src={headshotSrc} alt="Jared Ryan" width="64" height="64" />
-    )}
-    <div>
-      <p class="contact-drawer__name">{profile.name}</p>
-      <p class="contact-drawer__role">{profile.role}</p>
-    </div>
-  </div>
+  <div class="contact-drawer__contact" data-contact-section>
+    <p class="eyebrow">Contact</p>
 
-  <div class="contact-drawer__actions">
-    <a class="btn btn--primary" href={profile.links.resume} download>
-      <Icon name="lucide:download" aria-hidden="true" />
-      Résumé
-    </a>
-    <a class="icon-btn" href={profile.links.email} aria-label="Email Jared Ryan">
-      <Icon name="lucide:mail" aria-hidden="true" />
-    </a>
-    <a class="icon-btn" href={profile.links.github} target="_blank" rel="noreferrer" aria-label="Jared Ryan on GitHub">
-      <Icon name="simple-icons:github" aria-hidden="true" />
-    </a>
-    {profile.links.linkedin && (
-      <a class="icon-btn" href={profile.links.linkedin} target="_blank" rel="noreferrer" aria-label="Jared Ryan on LinkedIn">
-        <Icon name="simple-icons:linkedin" aria-hidden="true" />
+    <div class="contact-drawer__profile">
+      {hasHeadshot && (
+        <img class="contact-drawer__headshot" src={headshotSrc} alt="Jared Ryan" width="64" height="64" />
+      )}
+      <div>
+        <p class="contact-drawer__name">{profile.name}</p>
+        <p class="contact-drawer__role">{roleLine1}{roleLine2 && <><br />{roleLine2}</>}</p>
+      </div>
+    </div>
+
+    <div class="contact-drawer__actions">
+      <a class="btn btn--primary" href={profile.links.resume} download>
+        <Icon name="lucide:download" aria-hidden="true" />
+        Résumé
       </a>
-    )}
+      <a class="icon-btn" href={profile.links.email} aria-label="Email Jared Ryan">
+        <Icon name="lucide:mail" aria-hidden="true" />
+      </a>
+      <a class="icon-btn" href={profile.links.github} target="_blank" rel="noreferrer" aria-label="Jared Ryan on GitHub">
+        <Icon name="simple-icons:github" aria-hidden="true" />
+      </a>
+      {profile.links.linkedin && (
+        <a class="icon-btn" href={profile.links.linkedin} target="_blank" rel="noreferrer" aria-label="Jared Ryan on LinkedIn">
+          <Icon name="simple-icons:linkedin" aria-hidden="true" />
+        </a>
+      )}
+    </div>
   </div>
 
   <nav class="contact-drawer__nav" aria-label="Site sections">
@@ -104,7 +115,7 @@ const navItems = [
     right: 0;
     bottom: 0;
     z-index: 110;
-    width: min(390px, 90vw);
+    width: min(330px, 90vw);
     background: var(--color-surface);
     border-left: 1px solid var(--color-border);
     box-shadow: var(--shadow-card);
@@ -148,15 +159,40 @@ const navItems = [
     color: var(--color-accent-teal);
   }
 
+  /* Wraps the "Contact" eyebrow + profile + actions as one section so it
+     can be highlighted as a unit — see .is-contact-intent below — without
+     touching the section's normal (non-highlighted) position: padding and
+     the matching negative margin cancel out until the modifier adds them. */
+  .contact-drawer__contact {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    border-radius: var(--radius-md);
+    transition: background 200ms ease-out;
+  }
+
+  /* Set only when the drawer was opened via the explicit Contact trigger
+     (ContactTrigger's data-contact-intent), cleared on close — see the
+     script below. Cyan border matches every other hover/highlight border
+     in the app (.icon-btn, .btn--outline, the drawer nav hover below); the
+     surface-alt background is this section's own restrained fill, not
+     borrowed from elsewhere. */
+  .contact-drawer.is-contact-intent .contact-drawer__contact {
+    background: var(--color-surface-alt);
+    border: 1px solid var(--color-accent-teal);
+    padding: var(--space-3);
+    margin: calc(var(--space-3) * -1);
+  }
+
   .contact-drawer__profile {
     display: flex;
     align-items: center;
-    gap: var(--space-4);
+    gap: var(--space-6);
   }
 
   .contact-drawer__headshot {
-    width: 64px;
-    height: 64px;
+    width: 80px;
+    height: 80px;
     flex-shrink: 0;
     border-radius: 50%;
     object-fit: cover;
@@ -166,14 +202,15 @@ const navItems = [
   .contact-drawer__name {
     font-family: var(--font-heading);
     font-weight: 700;
-    font-size: 1.1rem;
+    font-size: 1.25rem;
   }
 
   .contact-drawer__role {
     margin-top: var(--space-1);
     color: var(--color-primary);
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 1rem;
+    line-height: 1.375em;
   }
 
   .contact-drawer__actions {
@@ -198,30 +235,40 @@ const navItems = [
   .contact-drawer__nav a {
     display: block;
     padding: var(--space-2) var(--space-5);
+    border: 1px solid transparent;
     border-radius: var(--radius-sm);
     color: var(--color-text);
     text-decoration: none;
     font-weight: 600;
   }
 
+  /* Same recipe as the site's other interactive buttons (.icon-btn,
+     .btn--outline): border + text color only, no background swap. Text
+     color already carries the contrast requirement on its own — layering a
+     background shift on top too was pushing it further than any other
+     hover state in the app. */
   .contact-drawer__nav a:hover,
   .contact-drawer__nav a:focus-visible {
-    background: var(--color-surface-alt);
+    border-color: var(--color-accent-teal);
     color: var(--color-accent-teal);
   }
 
+  /* Orange counterpart to the hover treatment above, for the current page —
+     declared after :hover so it wins on equal specificity and the "you are
+     here" marker never gets masked by a hover pass over it. */
   .contact-drawer__nav a[aria-current="page"] {
+    border-color: var(--color-accent-coral);
     color: var(--color-accent-coral-text);
   }
 </style>
 
 <script>
-  // Each page renders exactly one drawer, but Projects has two trigger
-  // buttons (mobile grid header, desktop header — only one is ever
-  // visible/reachable at a given viewport width, per the existing
-  // .projects-mobile/.projects-desktop CSS toggle). Track whichever one
-  // was actually clicked so focus returns to that specific button, not
-  // just "the first trigger in the DOM" (which could be the hidden one).
+  // Each page renders exactly one drawer, but Projects has multiple trigger
+  // buttons in the DOM at once (the grid view's MenuTrigger plus one per
+  // project detail view — only one of those is ever visible/reachable at a
+  // time, per ProjectsSection's grid/detail `hidden` toggle). Track
+  // whichever one was actually clicked so focus returns to that specific
+  // button, not just "the first trigger in the DOM" (which could be hidden).
   const triggers = document.querySelectorAll<HTMLButtonElement>("[data-contact-trigger]");
   const drawer = document.querySelector<HTMLElement>("[data-contact-drawer]");
   const backdrop = document.querySelector<HTMLElement>("[data-contact-backdrop]");
@@ -258,6 +305,14 @@ const navItems = [
   function openDrawer(event: Event) {
     if (!drawer || !backdrop) return;
     lastTrigger = event.currentTarget as HTMLElement;
+    // Only the explicit Contact trigger (ContactTrigger.astro) carries
+    // data-contact-intent — the hamburger menu trigger doesn't, so opening
+    // via the menu leaves the CONTACT section in its normal, unemphasized
+    // state. This is transient intent, not a persisted selection: it's
+    // cleared in closeDrawer() below so a later hamburger-open always
+    // starts from the normal state regardless of how the drawer was last
+    // opened.
+    drawer.classList.toggle("is-contact-intent", lastTrigger.hasAttribute("data-contact-intent"));
     drawer.hidden = false;
     backdrop.hidden = false;
     // Force layout before adding the open class so the transform/opacity
@@ -279,6 +334,7 @@ const navItems = [
     if (!drawer || !backdrop) return;
     document.removeEventListener("keydown", onKeydown);
     (lastTrigger ?? triggers[0])?.focus();
+    drawer.classList.remove("is-contact-intent");
     // If close happens before the opening frame ever ran (e.g. closed
     // immediately after opening), .is-open was never added, so removing it
     // triggers no transition and transitionend would never fire — cancel

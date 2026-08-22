@@ -1,0 +1,28 @@
+---
+// Opens the same shared drawer as <ContactTrigger />, but as plain site
+// navigation rather than a contact action — no data-contact-intent, so
+// ContactDrawer's script doesn't emphasize the CONTACT section when this is
+// what opened it. See ContactDrawer.astro's top-of-file comment for how the
+// two trigger kinds share one drawer instance.
+import { Icon } from "astro-icon/components";
+---
+<button
+  type="button"
+  class="icon-btn menu-trigger"
+  data-contact-trigger
+  aria-haspopup="dialog"
+  aria-controls="contact-drawer"
+  aria-label="Open navigation menu"
+>
+  <Icon name="lucide:menu" aria-hidden="true" />
+</button>
+
+<style>
+  /* Card background (matches the dashboard bento cards, e.g. HeroCard's
+     var(--color-surface)) instead of .icon-btn's default surface-alt — this
+     trigger sits on the page background, not inside a surface-alt panel
+     like the drawer's own email/GitHub/LinkedIn icon buttons do. */
+  .menu-trigger {
+    background: var(--color-surface);
+  }
+</style>

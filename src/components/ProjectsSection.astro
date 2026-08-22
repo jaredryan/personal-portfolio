@@ -3,7 +3,7 @@ import { Icon } from "astro-icon/components";
 import type { Project } from "../data/projects";
 import Breadcrumbs from "./Breadcrumbs.astro";
 import ContactDrawer from "./ContactDrawer.astro";
-import ContactTrigger from "./ContactTrigger.astro";
+import MenuTrigger from "./MenuTrigger.astro";
 import PageHeader from "./PageHeader.astro";
 import ProjectDetailView from "./ProjectDetailView.astro";
 import ProjectPagination from "./ProjectPagination.astro";
@@ -109,7 +109,7 @@ const gridProjects = gridOrder
                 { label: project.title },
               ]}
             />
-            <ContactTrigger />
+            <MenuTrigger />
           </div>
           <ProjectDetailView project={project} headingId={`project-detail-heading-${project.slug}`} />
           <ProjectPagination

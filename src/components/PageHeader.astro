@@ -5,7 +5,7 @@
 // exactly one h1 (this one); page-specific content headings start at h2.
 import { Icon } from "astro-icon/components";
 import Breadcrumbs from "./Breadcrumbs.astro";
-import ContactTrigger from "./ContactTrigger.astro";
+import MenuTrigger from "./MenuTrigger.astro";
 
 interface Props {
   breadcrumbLabel: string;
@@ -19,7 +19,7 @@ const { breadcrumbLabel, eyebrow, heading, headingId, icon } = Astro.props;
 ---
 <div class="page-utility-row">
   <Breadcrumbs trail={[{ label: "Dashboard", href: "/" }, { label: breadcrumbLabel }]} />
-  <ContactTrigger />
+  <MenuTrigger />
 </div>
 <header class="page-header">
   <p class="eyebrow">{eyebrow}</p>
